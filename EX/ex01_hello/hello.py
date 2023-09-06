@@ -1,4 +1,8 @@
+"""Test program for printing a string."""
+
+
 def main():
+    """Print a string."""
     print("Hello, World!")
 
 
