@@ -3,10 +3,6 @@
 
 def main():
     """EX02 Poem."""
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/main
     """
     Ask for user's inputs and print out a poem in one line using f string and newline (\n)
 
