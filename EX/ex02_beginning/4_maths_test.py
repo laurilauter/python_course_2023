@@ -39,6 +39,7 @@ def main():
     b = int(input("Enter the value of b: "))
     c = int(input("Enter the value of c: "))
     d = int(input("Enter the value of d: "))
+    tricky_average = 0
     tricky_average = ((a * 1) + (b * 2) + (c * 3) + (d * 4)) / 4
     if str(tricky_average)[-1] == "0":
         tricky_average = int(tricky_average)
@@ -77,6 +78,8 @@ def main():
     y = int(input("Enter the value of y: "))
     u = int(input("Enter the value of u: "))
     t = int(input("Enter the value of t: "))
+    above_the_line = 0
+    below_the_line = 0
     above_the_line = (x * t) + (y * u)
     below_the_line = y * t
     print(f"{above_the_line}/{below_the_line}")
@@ -109,6 +112,7 @@ def main():
     """
     ects = int(input("Enter the amount of ECTS: "))
     weeks = int(input("Enter the number of weeks: "))
+    hours_per_week = 0
     hours_per_week = ects * 26 // weeks
     if weeks == 0 or weeks * 7 * 24 < ects * 26:
         hours_per_week = -1
