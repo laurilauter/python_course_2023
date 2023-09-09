@@ -39,10 +39,8 @@ def main():
     b = int(input("Enter the value of b: "))
     c = int(input("Enter the value of c: "))
     d = int(input("Enter the value of d: "))
-    tricky_average = None
-    if a != 0 and b != 0 and c != 0 and d != 0:
-        tricky_average = ((a * 1) + (b * 2) + (c * 3) + (d * 4)) / 4
-    #tricky_average = ((a * 1) + (b * 2) + (c * 3) + (d * 4)) / 4
+
+    tricky_average = ((a * 1) + (b * 2) + (c * 3) + (d * 4)) / 4
     if str(tricky_average)[-1] == "0":
         tricky_average = int(tricky_average)
     print(tricky_average)
