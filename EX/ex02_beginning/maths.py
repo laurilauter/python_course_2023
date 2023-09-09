@@ -1,4 +1,4 @@
-"""EX02 Maths docstring here."""
+"""EX02 Maths."""
 
 
 def main():
@@ -104,7 +104,7 @@ def main():
     Example 3
     ects = 1
     weeks = 0
-    
+
     output
     -1
     """
