@@ -31,7 +31,11 @@ def main():
     """Divide k by l. Print out the floor value. Use an arithmetic operator."""
     k = int(input("Enter the value for k:"))
     ll = int(input("Enter the value for l:"))
+<<<<<<< HEAD
     print(k // ll)
+=======
+    print(k / ll)
+>>>>>>> origin/main
 
     """Calculate m raised to the power of n. Print out the result."""
     m = int(input("Enter the value for m:"))
