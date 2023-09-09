@@ -1,4 +1,4 @@
-"""EX02 Maths."""
+"""EX02 Maths docstring here."""
 
 
 def main():
