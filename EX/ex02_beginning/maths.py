@@ -110,9 +110,10 @@ def main():
     """
     ects = int(input("Enter the amount of ECTS: "))
     weeks = int(input("Enter the number of weeks: "))
-    hours_per_week = ects * 26 // weeks
-    if weeks == 0 or weeks * 7 * 24 < ects * 26:
-        hours_per_week = -1
+
+    hours_per_week = -1
+    if weeks > 0 and weeks * 7 * 24 // (ects * 26) > 0:
+        hours_per_week = ects * 26 // weeks
     print(hours_per_week)
 
 
