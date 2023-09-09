@@ -10,7 +10,6 @@ def main():
     The sum is 72€
     We use four banknotes to cover it. The banknotes are 20€, 50€, 1€ and 1€.
     """
-
     amount = int(input("Enter a sum: "))
     banknote_types = [100, 50, 20, 10, 5, 1]
     banknotes = 0
