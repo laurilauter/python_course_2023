@@ -2,8 +2,8 @@
 
 
 def main():
-    """EX02 Maths."""
-    """
+    """EX02 Maths.
+
     Find the average of a, b, c and d, but first the numbers must be multiplied. a multiplied by 1, b multiplied by 2,
     c multiplied by 3 and d multiplied by 4.
     After the multiplication find the average of the numbers and print it out.
