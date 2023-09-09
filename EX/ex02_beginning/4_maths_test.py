@@ -3,7 +3,6 @@
 
 def main():
     """EX02 Maths."""
-
     """
     Find the average of a, b, c and d, but first the numbers must be multiplied. a multiplied by 1, b multiplied by 2,
     c multiplied by 3 and d multiplied by 4.
@@ -110,9 +109,9 @@ def main():
     """
     ects = int(input("Enter the amount of ECTS: "))
     weeks = int(input("Enter the number of weeks: "))
-    hours_per_week = -1
-    if weeks != 0 or weeks * 7 * 24 > ects * 26:
-        hours_per_week = ects * 26 // weeks
+    hours_per_week = ects * 26 // weeks
+    if weeks == 0 or weeks * 7 * 24 < ects * 26:
+        hours_per_week = -1
     print(hours_per_week)
 
 
