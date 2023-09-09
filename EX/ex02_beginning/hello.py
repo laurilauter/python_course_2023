@@ -3,16 +3,14 @@
 
 def main():
     """EX02 Hello."""
-
     """
     Print Hello
     Example output:
-    
+
     What is your name? Mari
     Hello, Mari! Enter a random number: 5
     Great! Now enter a second random number: 4
     5 + 4 is 9
-    
     """
     # ask for a name
     name = input("What is your name?")
