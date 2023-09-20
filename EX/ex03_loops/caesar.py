@@ -29,6 +29,9 @@ def encode(message: str, shift: int) -> str:
     alphabet = list(string.ascii_lowercase)
     new_message = ""
 
+    while shift > len(alphabet):
+        shift -= len(alphabet)
+
     for i in message:
         if i.isalpha():
             shifted_location = alphabet.index(i) + shift
@@ -41,6 +44,7 @@ def encode(message: str, shift: int) -> str:
 
 
 if __name__ == '__main__':
+    print(encode("a", 60))  # -> o roqk zaxzrky
     print(encode("i like turtles", 6))  # -> o roqk zaxzrky
     print(encode("o roqk zaxzrky", 20))  # -> i like turtles
     print(encode("example", 1))  # -> fybnqmf
