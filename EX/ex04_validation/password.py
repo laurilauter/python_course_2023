@@ -78,12 +78,15 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
     :return: True if the new password is different enough, False otherwise
     """
     half_of_new_password_length = len(new_pass) // 2
+    #handle odd new password length
+    if len(new_pass) % 2 != 0:
+        half_of_new_password_length += 1
+
     loop_start_pos = 0
     fragment_length_looped = 0
-    # print(loop_start_pos + half_of_new_password_length)
-    # print(len(new_pass))
-    while loop_start_pos + half_of_new_password_length < len(new_pass) - 1:
-        fragment = new_pass[loop_start_pos:loop_start_pos + half_of_new_password_length + 1]
+    # print(half_of_new_password_length)
+    while loop_start_pos + half_of_new_password_length < len(new_pass) + 1:
+        fragment = new_pass[loop_start_pos:loop_start_pos + half_of_new_password_length]
         # print("frag", fragment)
         # print("f in 1", fragment.lower() in new_pass.lower())
         # print("f in 2", fragment.lower() in new_pass[::-1].lower())
@@ -228,6 +231,7 @@ if __name__ == '__main__':
     print(is_different_from_old_password("seinav2rv", "seinakapp"))  # -> False
     print(is_different_from_old_password("merineitsi99", "merineitsi11"))  # -> False
     print(is_different_from_old_password("eva1970", "0791ave"))  # -> False
+
 
     print("\nPassword has your name:")
     print(is_name_in_password("ddccwemelani", "Melani Mets"))  # -> True
