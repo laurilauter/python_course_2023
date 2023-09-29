@@ -11,7 +11,7 @@ def has_at_symbol(email: str):
 def is_valid_username(email):
     fragments = email.split("@")[:-1]  # remove tha last element
     username = "@".join(fragments)  # if there is anything to join, add @ back in
-    symbols = ' ?+-,;:%¤#"&/@'
+    symbols = ' ?+-,;:%¤#"&/@[_'
     for character in username:
         if character in symbols:
             return False
@@ -64,6 +64,7 @@ if __name__ == '__main__':
     print(is_valid_username("marta lumi@taltech.ee"))  # -> False
     print(is_valid_username("marta&lumi@taltech.ee"))  # -> False
     print(is_valid_username("marta@lumi@taltech.ee"))  # -> False
+    print(is_valid_username("karu.[m6mm@mesi.ee"))  # -> False
 
     print("\nFind the email domain name:")
     print(find_domain("karla.karu@saku.ee"))  # -> saku.ee
@@ -86,3 +87,5 @@ if __name__ == '__main__':
     print(create_email_address("jaani.org", "lennakuurma"))  # -> lennakuurma@jaani.org
     print(create_email_address("koobas.com",
                                "karu&pojad"))  # -> Cannot create a valid email address using the given parameters!
+
+    print(create_email_address("taltech.ee", "uni_id"))  # -> Cannot create a valid email address using the given parameters!
