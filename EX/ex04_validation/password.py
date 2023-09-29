@@ -78,21 +78,15 @@ def is_different_from_old_password(old_pass: str, new_pass: str) -> bool:
     :return: True if the new password is different enough, False otherwise
     """
     half_of_new_password_length = len(new_pass) // 2
-    #handle odd new password length
+    #  add 1 to compensate for odd len(new_pass) being less than 50%
     if len(new_pass) % 2 != 0:
         half_of_new_password_length += 1
 
-    loop_start_pos = 0
-    fragment_length_looped = 0
-    # print(half_of_new_password_length)
+    loop_start_pos = 0  # used for pushing the slice forward one step per loop
     while loop_start_pos + half_of_new_password_length < len(new_pass) + 1:
-        fragment = new_pass[loop_start_pos:loop_start_pos + half_of_new_password_length]
-        # print("frag", fragment)
-        # print("f in 1", fragment.lower() in new_pass.lower())
-        # print("f in 2", fragment.lower() in new_pass[::-1].lower())
-        if fragment.lower() in old_pass.lower() or fragment.lower() in old_pass[::-1].lower():
+        fragment = new_pass[loop_start_pos:loop_start_pos + half_of_new_password_length].lower()
+        if fragment in old_pass.lower() or fragment in old_pass[::-1].lower():
             return False
-        fragment_length_looped += 1
         loop_start_pos += 1
     return True
 
@@ -112,7 +106,7 @@ def is_name_in_password(password: str, name: str) -> bool:
     :return: True if the name is present in the password, False otherwise
     """
 
-    def extract_names(initial_name):
+    def extract_names(initial_name: str):
         names_list = []
         raw_names_list = initial_name.split(" ")
         for raw_name in raw_names_list:
@@ -155,7 +149,7 @@ def is_birthday_in_password(password: str, birthdate: str) -> bool:
     :return: True if the birthday is present in the password, False otherwise
     """
 
-    def extract_digits(initial_birthdate):
+    def extract_digits(initial_birthdate: str):
         list_of_digits = []
         day_digits = initial_birthdate.split(".")[0]
         month_digits = initial_birthdate.split(".")[1]
@@ -231,7 +225,6 @@ if __name__ == '__main__':
     print(is_different_from_old_password("seinav2rv", "seinakapp"))  # -> False
     print(is_different_from_old_password("merineitsi99", "merineitsi11"))  # -> False
     print(is_different_from_old_password("eva1970", "0791ave"))  # -> False
-
 
     print("\nPassword has your name:")
     print(is_name_in_password("ddccwemelani", "Melani Mets"))  # -> True
