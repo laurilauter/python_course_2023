@@ -3,18 +3,14 @@
 
 # Write your functions here
 def has_at_symbol(email: str):
-    """
-    Check if email has at symbol
-    """
+    """Check if email has at symbol."""
     if "@" in email:
         return True
     return False
 
 
 def is_valid_username(email):
-    """
-    Check if email has valid username
-    """
+    """Check if email has valid username."""
     fragments = email.split("@")[:-1]  # remove tha last element
     username = "@".join(fragments)  # if there is anything to join, add @ back in
     symbols = ' ?+-,;:%¤#"&/@[_'
@@ -25,18 +21,14 @@ def is_valid_username(email):
 
 
 def find_domain(email):
-    """
-    Extract domain from email
-    """
+    """Extract domain from email."""
     fragments = email.split(".")[-2:]
     domain = fragments[0].split("@")[-1] + "." + fragments[-1]
     return domain
 
 
 def is_valid_domain(email):
-    """
-    Check if email has valid domain
-    """
+    """Check if email has valid domain."""
     domain = find_domain(email)
     fragments = domain.split(".")
     if "." in domain:
@@ -48,23 +40,18 @@ def is_valid_domain(email):
 
 
 def is_valid_email_address(email):
-    """
-    Check if email address is valid
-    """
+    """Check if email address is valid."""
     def check_conditions(email_to_validate):
         list_of_conditions = [has_at_symbol(email_to_validate),
                               is_valid_username(email_to_validate),
                               is_valid_domain(email_to_validate)]
-        print(list_of_conditions)
         return all(list_of_conditions)
 
     return check_conditions(email)
 
 
 def create_email_address(domain, username):
-    """
-    Create email address
-    """
+    """Create email address."""
     email = username + "@" + domain
     if is_valid_email_address(email):
         return email
