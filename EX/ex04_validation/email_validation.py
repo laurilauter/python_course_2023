@@ -92,5 +92,4 @@ if __name__ == '__main__':
     print(create_email_address("jaani.org", "lennakuurma"))  # -> lennakuurma@jaani.org
     print(create_email_address("koobas.com",
                                "karu&pojad"))  # -> Cannot create a valid email address using the given parameters!
-
     print(create_email_address("taltech.ee", "uni_id"))  # -> Cannot create a valid email address using the given parameters!
