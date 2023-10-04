@@ -118,8 +118,9 @@ def divisions(numbers: list) -> int:
     count = 0
     for i in numbers:
         for j in numbers:
-            if j != i and j % i == 0:
-                count += 1
+            if i != j:
+                if i % j == 0:
+                    count += 1
     return count
 
 
@@ -131,10 +132,10 @@ if __name__ == '__main__':
     # print(workday_count(15))  # = > 11
     #
     # print(workday_count(0))  # = > 0
-    print(workday_count(3))  # = > 3
-    print(workday_count(5))  # = > 5
-    print(workday_count(6))  # = > 5
-    print(workday_count(17))  # = > 13
+    # print(workday_count(3))  # = > 3
+    # print(workday_count(5))  # = > 5
+    # print(workday_count(6))  # = > 5
+    # print(workday_count(17))  # = > 13
     # print(workday_count(7))  # = > 5
     # print(workday_count(8))  # = > 6
 
@@ -151,11 +152,11 @@ if __name__ == '__main__':
     # print(last_indices_elements_sum([0, 1, 7, 2]))  # => 7 (just 7)
     # print(last_indices_elements_sum([0, 1, 7, 8]))  # => 0 (indices too large, 0 + 0)
     #
-    # print(divisions([]))  # => 0
-    # print(divisions([5]))  # => 0
-    #
-    # print(divisions([3, 14, 12, 6]))  # => 3 (The pairs are {3, 12}, {3, 6} and {12, 6})
-    # print(divisions([2, 3, 8]))  # => 1 (The only valid pair is {2, 8})
-    # print(divisions([25, 22, 4, 400, 50]))  # => 4 (The pairs are {25, 400}, {25, 50}, {4, 400} and {400, 50})
-    #
-    # print(divisions([5, 7, 1]))  # => 2 (The pairs are {5, 1} and {7, 1})
+    print(divisions([]))  # => 0
+    print(divisions([5]))  # => 0
+
+    print(divisions([3, 14, 12, 6]))  # => 3 (The pairs are {3, 12}, {3, 6} and {12, 6})
+    print(divisions([2, 3, 8]))  # => 1 (The only valid pair is {2, 8})
+    print(divisions([25, 22, 4, 400, 50]))  # => 4 (The pairs are {25, 400}, {25, 50}, {4, 400} and {400, 50})
+
+    print(divisions([5, 7, 1]))  # => 2 (The pairs are {5, 1} and {7, 1})
