@@ -17,8 +17,11 @@ def workday_count(days: int) -> int:
     :param days: given number of days
     :return: workdays in given days
     """
-
-    return days - (days // 7) * 2
+    fullweeks = days // 7
+    remaining_days = days - fullweeks * 7
+    if remaining_days > 5:
+        remaining_days = 5
+    return fullweeks * 5 + remaining_days
 
 
 def sorta_sum(a: int, b: int) -> int:
@@ -77,7 +80,6 @@ def last_indices_elements_sum(nums: list) -> int:
     :param nums: List of non-negative integers.
     :return: Sum of elements at indices of last two elements.
     """
-
     first_element_index = nums[-2]
     if first_element_index > len(nums):
         first_element_value = 0
@@ -113,7 +115,6 @@ def divisions(numbers: list) -> int:
     :param numbers: List of integers
     :return: Amount of pairs
     """
-
     count = 0
     for i in numbers:
         for j in numbers:
@@ -124,29 +125,37 @@ def divisions(numbers: list) -> int:
 
 if __name__ == '__main__':
 
-    print(workday_count(9))  # = > 7
+    # print(workday_count(9))  # = > 7
+    # print(workday_count(3))  # = > 3
+    # print(workday_count(7))  # = > 5
+    # print(workday_count(15))  # = > 11
+    #
+    # print(workday_count(0))  # = > 0
     print(workday_count(3))  # = > 3
-    print(workday_count(7))  # = > 5
-    print(workday_count(15))  # = > 11
+    print(workday_count(5))  # = > 5
+    print(workday_count(6))  # = > 5
+    print(workday_count(17))  # = > 13
+    # print(workday_count(7))  # = > 5
+    # print(workday_count(8))  # = > 6
 
-    print(sorta_sum(3, 4))  #  → 7
-    print(sorta_sum(9, 4))  #  → 20
-    print(sorta_sum(10, 11))  #  → 21
-
-    print(extra_end('Hello'))  # → 'lololo'
-    print(extra_end('ab'))  # → 'ababab'
-    print(extra_end('Hi'))  # → 'HiHiHi'
-
-    print(last_indices_elements_sum([0, 1, 2, 0]))  #  => 2 (0 + 2)
-    print(last_indices_elements_sum([0, 1, 1, 7]))  #  => 1 (just 1)
-    print(last_indices_elements_sum([0, 1, 7, 2]))  #  => 7 (just 7)
-    print(last_indices_elements_sum([0, 1, 7, 8]))  #  => 0 (indices too large, 0 + 0)
-
-    print(divisions([]))  # => 0
-    print(divisions([5]))  # => 0
-
-    print(divisions([3, 14, 12, 6]))  # => 3 (The pairs are {3, 12}, {3, 6} and {12, 6})
-    print(divisions([2, 3, 8]))  # => 1 (The only valid pair is {2, 8})
-    print(divisions([25, 22, 4, 400, 50]))  # => 4 (The pairs are {25, 400}, {25, 50}, {4, 400} and {400, 50})
-
-    print(divisions([5, 7, 1]))  # => 2 (The pairs are {5, 1} and {7, 1})
+    # print(sorta_sum(3, 4))  # → 7
+    # print(sorta_sum(9, 4))  # → 20
+    # print(sorta_sum(10, 11))  # → 21
+    #
+    # print(extra_end('Hello'))  # → 'lololo'
+    # print(extra_end('ab'))  # → 'ababab'
+    # print(extra_end('Hi'))  # → 'HiHiHi'
+    #
+    # print(last_indices_elements_sum([0, 1, 2, 0]))  # => 2 (0 + 2)
+    # print(last_indices_elements_sum([0, 1, 1, 7]))  # => 1 (just 1)
+    # print(last_indices_elements_sum([0, 1, 7, 2]))  # => 7 (just 7)
+    # print(last_indices_elements_sum([0, 1, 7, 8]))  # => 0 (indices too large, 0 + 0)
+    #
+    # print(divisions([]))  # => 0
+    # print(divisions([5]))  # => 0
+    #
+    # print(divisions([3, 14, 12, 6]))  # => 3 (The pairs are {3, 12}, {3, 6} and {12, 6})
+    # print(divisions([2, 3, 8]))  # => 1 (The only valid pair is {2, 8})
+    # print(divisions([25, 22, 4, 400, 50]))  # => 4 (The pairs are {25, 400}, {25, 50}, {4, 400} and {400, 50})
+    #
+    # print(divisions([5, 7, 1]))  # => 2 (The pairs are {5, 1} and {7, 1})
