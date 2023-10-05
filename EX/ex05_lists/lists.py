@@ -10,7 +10,10 @@ def list_of_phones(all_phones: str) -> list:
 
     "Google Pixel,Honor Magic5,Google Pixel" => ["Google Pixel', 'Honor Magic5', 'Google Pixel"]
     """
-    return all_phones.split(", ")
+    phones = []
+    if all_phones:
+        phones = all_phones.split(",")
+    return phones
 
 
 def phone_brands(all_phones: str) -> list:
@@ -23,10 +26,11 @@ def phone_brands(all_phones: str) -> list:
     """
     phones = all_phones.split(",")
     brands = []
-    for phone in phones:
-        brand = phone.split(" ")[0]
-        if brand not in brands:
-            brands.append(brand)
+    if all_phones:
+        for phone in phones:
+            brand = phone.split(" ")[0]
+            if brand not in brands:
+                brands.append(brand)
     return brands
 
 
@@ -40,11 +44,12 @@ def phone_models(all_phones: str) -> list:
     """
     phones = all_phones.split(",")
     models = []
-    for phone in phones:
-        phone_fragments = phone.split(" ")
-        model = phone_fragments[1:]
-        if model not in models:
-            models.append(" ".join(model))
+    if all_phones:
+        for phone in phones:
+            phone_fragments = phone.split(" ")
+            model = phone_fragments[1:]
+            if model not in models:
+                models.append(" ".join(model))
     return models
 
 
@@ -77,6 +82,7 @@ def search_by_model(all_phones: str, search_term: str) -> list:
 if __name__ == '__main__':
 
     print(list_of_phones("Google Pixel,Honor Magic5,Google Pixel"))  # ["Google Pixel', 'Honor Magic5', 'Google Pixel"]
+    print(list_of_phones(""))  # ["Google Pixel', 'Honor Magic5', 'Google Pixel"]
     print(phone_brands(
         "Google Pixel,Honor Magic5,Google Pix,Honor Magic6,IPhone 12,Samsung S10,Honor Magic,IPhone 11"))  # ['Google', 'Honor', 'IPhone', 'Samsung']
     print(phone_brands("Google Pixel,Google Pixel,Google Pixel,Google Pixel"))  # ['Google']
@@ -91,6 +97,3 @@ if __name__ == '__main__':
     print(search_by_model("IPhone X,IPhone 12 Pro,IPhone 14 pro Max", "14"))  # ['14', 'Pixel', 'Magic5']
     print(search_by_model("IPhone X,IPhone 12 Pro,IPhone 14 pro Max", "12 Pro"))  # ['14', 'Pixel', 'Magic5']
     print(search_by_model("IPhone X,IPhone 12 Pro,IPhone 14 pro Max", "iphone"))  # ['14', 'Pixel', 'Magic5']
-
-
-
