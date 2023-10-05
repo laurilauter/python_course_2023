@@ -47,8 +47,10 @@ def phone_models(all_phones: str) -> list:
     if all_phones:
         for phone in phones:
             phone_fragments = phone.split(" ")
-            model = phone_fragments[1:]
-            if model not in models:
+            model = phone_fragments
+            if len(phone_fragments) > 1:
+                model = phone_fragments[1:]
+            if model[0] not in models:
                 models.append(" ".join(model))
     return models
 
@@ -89,6 +91,8 @@ if __name__ == '__main__':
     print(phone_brands(""))  # []
     print(phone_models("IPhone 14,Google Pixel,Honor Magic5,IPhone 14"))  # ['14', 'Pixel', 'Magic5']
     print(phone_models("Samsung Galaxy S23,IPhone 14 Pro Max"))  # ['14', 'Pixel', 'Magic5']
+    print(phone_models(""))  # ['14', 'Pixel', 'Magic5']
+    print(phone_models("one,one,one,one"))  # ['14', 'Pixel', 'Magic5']
 
     print(search_by_brand("IPhone 14,iphone 7,IPHONE 11 Pro, Something", "IPhone"))  # ['14', 'Pixel', 'Magic5']
     print(search_by_brand("IPhone 14,iphone 7,IPHONE 11 Pro, Something", "Pro"))  # ['14', 'Pixel', 'Magic5']
