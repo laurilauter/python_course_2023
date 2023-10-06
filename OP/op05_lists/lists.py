@@ -2,9 +2,7 @@
 
 
 def phone_brand_and_all_models(all_phones: str):
-    """
-    Create a list of structured information about brands and models, that retains duplicate models.
-    """
+    """Create a list of structured information about brands and models, that retains duplicate models."""
     phones = all_phones.split(",")
     phone_collection = []
     if all_phones:
@@ -111,9 +109,8 @@ def phone_list_as_string(phone_list: list) -> str:
     phones_string = ""
     if phone_list:
         for phone in phone_list:
-            phones_string += str(phone[0]) + " "
             for model in phone[1]:
-                phones_string += str(model) + ","
+                phones_string += str(phone[0]) + " " + str(model) + ","
         phones_string = phones_string.rstrip(phones_string[-1])  # remove trailing ,
     return phones_string
 
@@ -130,11 +127,11 @@ if __name__ == '__main__':
     # print(add_phones([['IPhone', ['11']], ['Google', ['Pixel']]], "IPhone 12,Samsung Galaxy S22,IPhone 11"))
     # [['IPhone', ['11', '12']], ['Google', ['Pixel']], ['Samsung', ['Galaxy S22']]]
     #
-    print(number_of_phones(
-        "IPhone 11,Google Pixel,Google Pixel,Google Pixel,Honor Magic5,IPhone 12"))  # [('IPhone', 2), ('Google', 1), ('Honor', 1)]
+    # print(number_of_phones(
+    #     "IPhone 11,Google Pixel,Google Pixel,Google Pixel,Honor Magic5,IPhone 12"))  # [('IPhone', 2), ('Google', 1), ('Honor', 1)]
     #
     # print(number_of_phones("HTC one,HTC one,HTC one,HTC one"))  # [('HTC', 4)]
     #
     # print(number_of_phones(""))  # []
     #
-    # print(phone_list_as_string([['IPhone', ['11']], ['Google', ['Pixel']]]))  # "IPhone 11,Google Pixel"
+    print(phone_list_as_string([['IPhone', ['11']], ['Google', ['Pixel', 'Phone']]]))  # "IPhone 11,Google Pixel"
