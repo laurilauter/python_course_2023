@@ -23,7 +23,6 @@ def phone_brand_and_models(all_phones: str):
             brand, *model = phone.split(" ")  # unpacking phone[0] to brand and the rest to model
             if not any(brand == i[0] for i in phone_collection):  # check if brand in phone_collection
                 phone_collection.append([brand, []])
-                print(model)
             if model:
                 for j in phone_collection:
                     model_string = " ".join(model)
@@ -57,7 +56,8 @@ def add_phones(phone_list, all_phones) -> list:
             if key not in result:
                 result[key] = []
             result[key].extend(value)
-        merged_list = [[key, list(set(value))] for key, value in result.items()]  # using set to get rid of duplicates
+        # merged_list = [[key, list(set(value))] for key, value in result.items()]  # using set to get rid of duplicates
+        merged_list = [[key, value] for key, value in result.items()]
     return merged_list
 
 
@@ -99,7 +99,7 @@ def phone_list_as_string(phone_list: list) -> str:
 
 
 if __name__ == '__main__':
-    print(phone_brand_and_models("Google GM1,Google GM1,Google GM2,IPhone IM1,IPhone IM2,IPhone IM3"))
+    # print(phone_brand_and_models("Google GM1,Google GM1,Google GM2,IPhone IM1,IPhone IM2,IPhone IM3"))
     # print(
     #     phone_brand_and_models("Honor Magic5,Google Pixel2,Google Pixel6,IPhone 7,Google Pixel,Google Pixel,IPhone 14"))
     # # [['Honor', ['Magic5']], ['Google', ['Pixel2', 'Pixel6', 'Pixel']], ['IPhone', ['7', '14']]]
@@ -107,8 +107,8 @@ if __name__ == '__main__':
     # print(phone_brand_and_models("Google Pixel,Google Pixel,Google Pixel,Google Pixel"))  # [['Google', ['Pixel']]]
     # print(phone_brand_and_models(""))  # []
     #
-    # print(add_phones([['IPhone', ['11']], ['Google', ['Pixel']]], "IPhone 12,Samsung Galaxy S22,IPhone 11"))
-    # # [['IPhone', ['11', '12']], ['Google', ['Pixel']], ['Samsung', ['Galaxy S22']]]
+    print(add_phones([['IPhone', ['11']], ['Google', ['Pixel']]], "IPhone 12,Samsung Galaxy S22,IPhone 11"))
+    # [['IPhone', ['11', '12']], ['Google', ['Pixel']], ['Samsung', ['Galaxy S22']]]
     #
     # print(number_of_phones(
     #     "IPhone 11,Google Pixel,Honor Magic5,IPhone 12"))  # [('IPhone', 2), ('Google', 1), ('Honor', 1)]
