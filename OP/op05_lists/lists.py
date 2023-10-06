@@ -16,7 +16,6 @@ def phone_brand_and_models(all_phones: str):
     "Honor Magic5,IPhone 11,IPhone 12,Google Pixel,Samsung Galaxy S22,IPhone 13,IPhone 13,Google Pixel2" =>
     [['Honor', ['Magic5']], ['IPhone', ['11', '12', '13']], ['Google', ['Pixel', 'Pixel2']], ['Samsung', ['Galaxy S22']]]
     """
-
     phones = all_phones.split(",")
     phone_collection = []
     if all_phones:
@@ -50,7 +49,6 @@ def add_phones(phone_list, all_phones) -> list:
 
     [['IPhone', ['11', '12']], ['Google', ['Pixel']], ['Samsung', ['Galaxy S22']]]
     """
-
     result = {}
     merged_list = []
     new_phones = phone_brand_and_models(all_phones)
@@ -96,7 +94,7 @@ def phone_list_as_string(phone_list: list) -> str:
             phones_string += str(phone[0]) + " "
             for model in phone[1]:
                 phones_string += str(model) + ","
-                phones_string = phones_string.rstrip(phones_string[-1])  # remove trailing ,
+        phones_string = phones_string.rstrip(phones_string[-1])  # remove trailing ,
     return phones_string
 
 
