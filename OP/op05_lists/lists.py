@@ -1,6 +1,26 @@
 """Phone inventory."""
 
 
+def phone_brand_and_all_models(all_phones: str):
+    """
+    Create a list of structured information about brands and models, that retains duplicate models.
+    """
+    phones = all_phones.split(",")
+    phone_collection = []
+    if all_phones:
+        for phone in phones:
+            brand, *model = phone.split(" ")  # unpacking phone[0] to brand and the rest to model
+            if not any(brand == i[0] for i in phone_collection):  # check if brand in phone_collection
+                phone_collection.append([brand, []])
+            if model:
+                for j in phone_collection:
+                    model_string = " ".join(model)
+                    if j[0] == brand:  # allow duplicate models
+                        j[1].append(model_string)
+                        break  # no point to look further
+    return phone_collection
+
+
 def phone_brand_and_models(all_phones: str):
     """
     Create a list of structured information about brands and models.
@@ -56,7 +76,6 @@ def add_phones(phone_list, all_phones) -> list:
             if key not in result:
                 result[key] = []
             result[key].extend(value)
-        # merged_list = [[key, list(set(value))] for key, value in result.items()]  # using set to get rid of duplicates
         merged_list = [[key, value] for key, value in result.items()]
     return merged_list
 
@@ -71,7 +90,8 @@ def number_of_phones(all_phones: str) -> list:
     """
     phone_count = []
     if all_phones:
-        phones_to_count = phone_brand_and_models(all_phones)
+        phones_to_count = phone_brand_and_all_models(all_phones)
+        print(phones_to_count)
         for phone in phones_to_count:
             brand = phone[0]
             count = len(phone[1])
@@ -107,11 +127,11 @@ if __name__ == '__main__':
     # print(phone_brand_and_models("Google Pixel,Google Pixel,Google Pixel,Google Pixel"))  # [['Google', ['Pixel']]]
     # print(phone_brand_and_models(""))  # []
     #
-    print(add_phones([['IPhone', ['11']], ['Google', ['Pixel']]], "IPhone 12,Samsung Galaxy S22,IPhone 11"))
+    # print(add_phones([['IPhone', ['11']], ['Google', ['Pixel']]], "IPhone 12,Samsung Galaxy S22,IPhone 11"))
     # [['IPhone', ['11', '12']], ['Google', ['Pixel']], ['Samsung', ['Galaxy S22']]]
     #
-    # print(number_of_phones(
-    #     "IPhone 11,Google Pixel,Honor Magic5,IPhone 12"))  # [('IPhone', 2), ('Google', 1), ('Honor', 1)]
+    print(number_of_phones(
+        "IPhone 11,Google Pixel,Google Pixel,Google Pixel,Honor Magic5,IPhone 12"))  # [('IPhone', 2), ('Google', 1), ('Honor', 1)]
     #
     # print(number_of_phones("HTC one,HTC one,HTC one,HTC one"))  # [('HTC', 4)]
     #
