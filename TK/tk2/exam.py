@@ -97,36 +97,35 @@ def max_duplicate(nums: list) -> int | None:
     :param nums: List of integers
     :return: Maximum element with duplicate. None if no duplicate found.
     """
+    if not nums:
+        return None
+
     largest = max(nums)
-    count = 0
-    result = None
-    for num in nums:
-        if num == largest:
-            count += 1
+    count = nums.count(largest)
     if count > 1:
-        result = largest
-    return result
+        return largest
+    return None
 
 
 if __name__ == '__main__':
 
-    # print(middle_value(6, 2, 4))  # = > 4
-    # print(middle_value(2, 2, 4))  # = > 2
-    # print(middle_value(2, 6, 2))  # = > 2
-    # print(middle_value(88, 88, 88))  # = > 88
-    #
-    # print(lucky_guess(7))  # True
-    # print(lucky_guess(26))  # True
-    # print(lucky_guess(-35))  # False
-    #
-    # print(without_end('Hello'))  #  → 'ell'
-    # print(without_end('java'))  #  → 'av'
-    # print(without_end('coding'))  #  → 'odin'
-    #
+    print(middle_value(6, 2, 4))  # = > 4
+    print(middle_value(2, 2, 4))  # = > 2
+    print(middle_value(2, 6, 2))  # = > 2
+    print(middle_value(88, 88, 88))  # = > 88
+
+    print(lucky_guess(7))  # True
+    print(lucky_guess(26))  # True
+    print(lucky_guess(-35))  # False
+
+    print(without_end('Hello'))  #  → 'ell'
+    print(without_end('java'))  #  → 'av'
+    print(without_end('coding'))  #  → 'odin'
+
     print(non_decreasing_list([0, 1, 2, 3, 98]))  # = > True
     print(non_decreasing_list([50, 49]))  # = > False
     print(non_decreasing_list([12, 12]))  # = > True
 
-    # print(max_duplicate([1, 2, 3]))  # = > None
-    # print(max_duplicate([1, 2, 2]))  # = > 2
-    # print(max_duplicate([1, 2, 2, 1, 1]))  # = > 2
+    print(max_duplicate([1, 2, 3]))  # = > None
+    print(max_duplicate([1, 2, 2]))  # = > 2
+    print(max_duplicate([1, 2, 2, 1, 1]))  # = > 2
