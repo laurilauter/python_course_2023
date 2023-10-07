@@ -78,11 +78,10 @@ def non_decreasing_list(nums: list) -> bool:
     :param nums:
     :return:
     """
-    result = False
-    for i in range(len(nums) - 1):
-        if nums[i + 1] - nums[i] >= 0:
-            return True
-    return result
+    for i in range(1, len(nums)):
+        if nums[i] < nums[i - 1]:
+            return False
+    return True
 
 
 def max_duplicate(nums: list) -> int | None:
@@ -124,10 +123,10 @@ if __name__ == '__main__':
     # print(without_end('java'))  #  → 'av'
     # print(without_end('coding'))  #  → 'odin'
     #
-    # print(non_decreasing_list([0, 1, 2, 3, 98]))  # = > True
-    # print(non_decreasing_list([50, 49]))  # = > False
-    # print(non_decreasing_list([12, 12]))  # = > True
+    print(non_decreasing_list([0, 1, 2, 3, 98]))  # = > True
+    print(non_decreasing_list([50, 49]))  # = > False
+    print(non_decreasing_list([12, 12]))  # = > True
 
-    print(max_duplicate([1, 2, 3]))  # = > None
-    print(max_duplicate([1, 2, 2]))  # = > 2
-    print(max_duplicate([1, 2, 2, 1, 1]))  # = > 2
+    # print(max_duplicate([1, 2, 3]))  # = > None
+    # print(max_duplicate([1, 2, 2]))  # = > 2
+    # print(max_duplicate([1, 2, 2, 1, 1]))  # = > 2
