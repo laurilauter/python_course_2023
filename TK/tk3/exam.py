@@ -64,7 +64,11 @@ def sum_of_a_beach(s: str) -> int:
     sum_of_a_beach("gOfIshsunesunFiSh")             ==>  4
     sum_of_a_beach("cItYTowNcARShoW")               ==>  0
     """
-    pass
+    beach_elements = ["Sand", "Water", "Fish", "Sun"]
+    count = 0
+    for element in beach_elements:
+        count += s.lower().count(element.lower())
+    return count
 
 
 def min_index_value(nums: list) -> int:
@@ -82,7 +86,11 @@ def min_index_value(nums: list) -> int:
     :param nums: List of non-negative integers.
     :return: Minimum value of two elements at positions of the first and the last element value.
     """
-    pass
+    first_index = nums[0]
+    last_index = nums[-1]
+    if first_index >= len(nums) or last_index >= len(nums):
+        return -1
+    return min(nums[first_index], nums[last_index])
 
 
 def mirror_ends(s: str) -> str:
@@ -116,3 +124,13 @@ if __name__ == '__main__':
     print(alarm_clock(3, False)) #  → '08:00'
     print(alarm_clock(6, False)) #  → '10:00'
     print(alarm_clock(6, True)) #  → 'off'
+
+    print(sum_of_a_beach("WAtErSlIde")) # == > 1
+    print(sum_of_a_beach("GolDeNSanDyWateRyBeaChSuNN")) # == > 3
+    print(sum_of_a_beach("gOfIshsunesunFiSh")) # == > 4
+    print(sum_of_a_beach("cItYTowNcARShoW")) # == > 0
+
+    print(min_index_value([1, 2, 3]))
+    print(min_index_value([1, 2, 1]))
+    print(min_index_value([1, 2, 0]))
+    print(min_index_value([1, 2, 0, 3]))
