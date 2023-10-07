@@ -109,7 +109,13 @@ def mirror_ends(s: str) -> str:
     :param s: String
     :return: Mirror image string
     """
-    pass
+    count = 0
+    for i in range(len(s)):
+        if s[i] == s[-1 - count]:
+            count += 1
+        else:
+            break
+    return s[:count]
 
 
 if __name__ == '__main__':
@@ -133,3 +139,7 @@ if __name__ == '__main__':
     print(min_index_value([1, 2, 1]))
     print(min_index_value([1, 2, 0]))
     print(min_index_value([1, 2, 0, 3]))
+
+    print(mirror_ends("abXYZba"))
+    print(mirror_ends("abca"))
+    print(mirror_ends("aba"))
