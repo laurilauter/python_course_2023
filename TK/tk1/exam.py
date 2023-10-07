@@ -50,9 +50,13 @@ def caught_speeding(speed: int, is_birthday: bool) -> int:
     :param is_birthday: Whether it is your birthday (boolean).
     :return: Which category speeding ticket you would get (0, 1, 2).
     """
-    if speed <= 60:
+    birthday_coupon = 0
+    if is_birthday:
+        birthday_coupon = 5
+
+    if speed <= 60 + birthday_coupon:
         return 0
-    elif 61 <= speed <= 80:
+    elif 61 + birthday_coupon <= speed <= 80 + birthday_coupon:
         return 1
     else:
         return 2
@@ -120,23 +124,23 @@ def remove_in_middle(text: str, to_remove: str) -> str:
 
 if __name__ == '__main__':
 
-    print()
-    print(format_time(112))  # = > '1h 52min'.
-    print(format_time(23))  # = > '23min'.
-    print(format_time(180))  # = > '3h'.
+    # print()
+    # print(format_time(112))  # = > '1h 52min'.
+    # print(format_time(23))  # = > '23min'.
+    # print(format_time(180))  # = > '3h'.
 
     print(caught_speeding(60, False))  # = > 0
     print(caught_speeding(65, False))  # = > 1
     print(caught_speeding(65, True))  # = > 0
 
-    print(first_half('HaaHoo'))  # = > 'Haa'
-    print(first_half('HelloThere'))  # = > 'Hello'
-    print(first_half('abcdef'))  # = > 'abc'
+    # print(first_half('HaaHoo'))  # = > 'Haa'
+    # print(first_half('HelloThere'))  # = > 'Hello'
+    # print(first_half('abcdef'))  # = > 'abc'
 
-    print(num_as_index([1, 2, 3]))  #
-    print(num_as_index([4, 5, 6]))  #
-    print(num_as_index([0, 1, 0]))  #
-    print(num_as_index([3, 5, 6, 1, 1]))  #
+    # print(num_as_index([1, 2, 3]))  #
+    # print(num_as_index([4, 5, 6]))  #
+    # print(num_as_index([0, 1, 0]))  #
+    # print(num_as_index([3, 5, 6, 1, 1]))  #
 
     print(remove_in_middle("abc", "def"))  # = > "abc"
     print(remove_in_middle("abcabcabc", "abc"))  # = > "abcabc"
