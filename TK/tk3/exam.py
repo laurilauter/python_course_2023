@@ -2,130 +2,108 @@
 from __future__ import annotations
 
 
-def middle_value(a: int, b: int, c: int) -> int:
+"""TK3."""
+
+
+def common_end(a: list, b: list) -> bool:
     """
-    Return the middle value out of three values.
+    Given 2 lists of ints, a and b, return True if they have the same first element or they have the same last element.
 
-    The middle value is the one where there is another value which is smaller or equal
-    and there is another value which is larger or equal.
+    Both lists will be length 1 or more.
 
-    If the values are 6 2 4, then the middle value is 4.
-
-    middle_value(6, 2, 4) => 4
-    middle_value(2, 2, 4) => 2
-    middle_value(2, 6, 2) => 2
-    middle_value(88, 88, 88) => 88
+    common_end([1, 2, 3], [7, 3]) → True
+    common_end([1, 2, 3], [7, 3, 2]) → False
+    common_end([1, 2, 3], [1, 3]) → True
+    :param a: List of integers.
+    :param b: List of integers.
+    :return: The last or the first elements are the same.
     """
-    sorted_values = [a, b, c]
-    sorted_values.sort()
-    return sorted_values[1]
+    return a[0] == b[0] or a[-1] == b[-1]
 
 
-def lucky_guess(n: int) -> bool:
+def alarm_clock(day: int, vacation: bool) -> str:
     """
-    Determine whether the given number gives you points for this task or not.
+    Return what time the alarm clock should be set.
 
-    The number gives you points if it is:
-    * either 1, 3 or 7
-    * greater or equal than -6 and smaller or equals than 121 and
-      divisible by 13 (-6 and 121 are inclusive)
-    * smaller than 0 and does not contain number 5 or 6
+    Given a day of the week encoded as 0=Mon, 1=Tue, ... 5=Sat, 6=Sun
+    and a boolean indicating if we are on vacation,
+    return a string of the form "08:00" indicating when the alarm clock should ring.
 
-    lucky_guess(7)  # True
-    lucky_guess(26)  # True
-    lucky_guess(-35)  # False
+    Weekdays, the alarm should be "08:00" and on the weekend it should be "10:00".
+    Unless we are on vacation -- then on weekdays it should be "10:00" and weekends it should be "off".
 
-    :param n: given number
-    :return: boolean - points or no points
+    alarm_clock(1, False) → '08:00'
+    alarm_clock(3, False) → '08:00'
+    alarm_clock(6, False) → '10:00'
+    alarm_clock(6, True) → 'off'
+
+    :param day: Day of week.
+    :param vacation: Whether it is vacation.
+    :return: String when to set alarm clock.
     """
-    does_get_points = False
-    if n == 1 or n == 3 or n == 7:
-        return True
-    elif -6 <= n <= 121 and n % 13 == 0:
-        return True
-    elif n < 0 and str(5) not in str(n) and str(6) not in str(n):
-        return True
-    return does_get_points
+    pass
 
 
-def without_end(s: str) -> str:
+def sum_of_a_beach(s: str) -> int:
     """
-    Given a string, return a version without the first and last char, so "Hello" yields "ell".
+    Count how many beach elements are in the string.
 
-    The string length will be at least 2.
+    Beaches are filled with sand, water, fish, and sun.
+    Given a string, calculate how many times the words
+    “Sand”, “Water”, “Fish”, and “Sun” appear without
+    overlapping (regardless of the case).
 
-    without_end('Hello') → 'ell'
-    without_end('java') → 'av'
-    without_end('coding') → 'odin'
+    sum_of_a_beach("WAtErSlIde")                    ==>  1
+    sum_of_a_beach("GolDeNSanDyWateRyBeaChSuNN")    ==>  3
+    sum_of_a_beach("gOfIshsunesunFiSh")             ==>  4
+    sum_of_a_beach("cItYTowNcARShoW")               ==>  0
+    """
+    pass
+
+
+def min_index_value(nums: list) -> int:
+    """
+    Take the first and the last element as indices of two elements and return the smaller of those elements.
+
+    If at least one index is out of range, return -1.
+    All the values are non-negative integers.
+
+    min_index_value([1, 2, 3]) => -1 (3 is out of range)
+    min_index_value([1, 2, 1]) => 2 (both elements point to 2)
+    min_index_value([1, 2, 0]) => 1 (have to take minimum of 2 and 1)
+    min_index_value([1, 2, 0, 3]) => 2 (have to take minimum of 2 and 3)
+
+    :param nums: List of non-negative integers.
+    :return: Minimum value of two elements at positions of the first and the last element value.
+    """
+    pass
+
+
+def mirror_ends(s: str) -> str:
+    """
+    Given a string, look for a mirror image (backwards) string at both the beginning and end of the given string.
+
+    In other words, zero or more characters at the very beginning of the given string,
+    and at the very end of the string in reverse order (possibly overlapping).
+
+    For example, the string "abXYZba" has the mirror end "ab".
+
+    mirror_ends("abXYZba") → "ab"
+    mirror_ends("abca") → "a"
+    mirror_ends("aba") → "aba"
 
     :param s: String
-    :return: String without first and last char.
+    :return: Mirror image string
     """
-    return s[1:-1]
+    pass
 
-
-def non_decreasing_list(nums: list) -> bool:
-    """
-    Given a list of numbers.
-
-    If given list is a non-decreasing list, return True, otherwise False.
-    Non-decreasing means every next element in the list must not be smaller than the previous one.
-
-    non_decreasing_list([0, 1, 2, 3, 98]) => True
-    non_decreasing_list([50, 49]) => False
-    non_decreasing_list([12, 12]) => True
-
-    :param nums:
-    :return:
-    """
-    for i in range(1, len(nums)):
-        if nums[i] < nums[i - 1]:
-            return False
-    return True
-
-
-def max_duplicate(nums: list) -> int | None:
-    """
-    Return the largest element which has at least one duplicate.
-
-    If no element has duplicate element (an element with the same value), return None.
-
-    max_duplicate([1, 2, 3]) => None
-    max_duplicate([1, 2, 2]) => 2
-    max_duplicate([1, 2, 2, 1, 1]) => 2
-
-    :param nums: List of integers
-    :return: Maximum element with duplicate. None if no duplicate found.
-    """
-    if not nums:
-        return None
-
-    largest = max(nums)
-    count = nums.count(largest)
-    if count > 1:
-        return largest
-    return None
 
 
 if __name__ == '__main__':
 
-    print(middle_value(6, 2, 4))  # = > 4
-    print(middle_value(2, 2, 4))  # = > 2
-    print(middle_value(2, 6, 2))  # = > 2
-    print(middle_value(88, 88, 88))  # = > 88
+    print()
+    print(common_end([1, 2, 3], [7, 3])) # → True
+    print(common_end([1, 2, 3], [7, 3, 2])) # → False
+    print(common_end([1, 2, 3], [1, 3])) # → True
 
-    print(lucky_guess(7))  # True
-    print(lucky_guess(26))  # True
-    print(lucky_guess(-35))  # False
 
-    print(without_end('Hello'))  #  → 'ell'
-    print(without_end('java'))  #  → 'av'
-    print(without_end('coding'))  #  → 'odin'
-
-    print(non_decreasing_list([0, 1, 2, 3, 98]))  # = > True
-    print(non_decreasing_list([50, 49]))  # = > False
-    print(non_decreasing_list([12, 12]))  # = > True
-
-    print(max_duplicate([1, 2, 3]))  # = > None
-    print(max_duplicate([1, 2, 2]))  # = > 2
-    print(max_duplicate([1, 2, 2, 1, 1]))  # = > 2
