@@ -113,13 +113,12 @@ def remove_in_middle(text: str, to_remove: str) -> str:
     :param to_remove: substring to be removed.
     :return: string with middle substrings removed.
     """
-    first_index = text.find(to_remove)
-    last_index = text.rfind(to_remove)
-
-    if first_index == last_index:
-        return text
-
-    return text[:first_index] + text[last_index + len(to_remove):]
+    first = text[:len(to_remove)]
+    last = text[:len(to_remove)]
+    middle = text[len(to_remove):-len(to_remove)]
+    while to_remove in middle:
+        middle = middle.replace(to_remove, "")
+    return first + middle + last
 
 
 if __name__ == '__main__':
@@ -129,9 +128,9 @@ if __name__ == '__main__':
     # print(format_time(23))  # = > '23min'.
     # print(format_time(180))  # = > '3h'.
 
-    print(caught_speeding(60, False))  # = > 0
-    print(caught_speeding(65, False))  # = > 1
-    print(caught_speeding(65, True))  # = > 0
+    # print(caught_speeding(60, False))  # = > 0
+    # print(caught_speeding(65, False))  # = > 1
+    # print(caught_speeding(65, True))  # = > 0
 
     # print(first_half('HaaHoo'))  # = > 'Haa'
     # print(first_half('HelloThere'))  # = > 'Hello'
