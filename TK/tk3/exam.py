@@ -116,19 +116,19 @@ def mirror_ends(s: str) -> str:
 if __name__ == '__main__':
 
     print()
-    print(common_end([1, 2, 3], [7, 3])) # → True
-    print(common_end([1, 2, 3], [7, 3, 2])) # → False
-    print(common_end([1, 2, 3], [1, 3])) # → True
+    print(common_end([1, 2, 3], [7, 3]))  # → True
+    print(common_end([1, 2, 3], [7, 3, 2]))  # → False
+    print(common_end([1, 2, 3], [1, 3]))  # → True
 
-    print(alarm_clock(1, False)) #  → '08:00'
-    print(alarm_clock(3, False)) #  → '08:00'
-    print(alarm_clock(6, False)) #  → '10:00'
-    print(alarm_clock(6, True)) #  → 'off'
+    print(alarm_clock(1, False))
+    print(alarm_clock(3, False))
+    print(alarm_clock(6, False))
+    print(alarm_clock(6, True))
 
-    print(sum_of_a_beach("WAtErSlIde")) # == > 1
-    print(sum_of_a_beach("GolDeNSanDyWateRyBeaChSuNN")) # == > 3
-    print(sum_of_a_beach("gOfIshsunesunFiSh")) # == > 4
-    print(sum_of_a_beach("cItYTowNcARShoW")) # == > 0
+    print(sum_of_a_beach("WAtErSlIde"))  # == > 1
+    print(sum_of_a_beach("GolDeNSanDyWateRyBeaChSuNN"))  # == > 3
+    print(sum_of_a_beach("gOfIshsunesunFiSh"))  # == > 4
+    print(sum_of_a_beach("cItYTowNcARShoW"))  # == > 0
 
     print(min_index_value([1, 2, 3]))
     print(min_index_value([1, 2, 1]))
