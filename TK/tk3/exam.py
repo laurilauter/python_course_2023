@@ -1,6 +1,3 @@
-"""TK2."""
-from __future__ import annotations
-
 
 """TK3."""
 
@@ -41,7 +38,16 @@ def alarm_clock(day: int, vacation: bool) -> str:
     :param vacation: Whether it is vacation.
     :return: String when to set alarm clock.
     """
-    pass
+    if vacation:
+        if 0 <= day <= 5:
+            return "10:00"
+        else:
+            return "off"
+    else:
+        if 0 <= day <= 5:
+            return "08:00"
+        else:
+            return "10:00"
 
 
 def sum_of_a_beach(s: str) -> int:
@@ -106,4 +112,7 @@ if __name__ == '__main__':
     print(common_end([1, 2, 3], [7, 3, 2])) # → False
     print(common_end([1, 2, 3], [1, 3])) # → True
 
-
+    print(alarm_clock(1, False)) #  → '08:00'
+    print(alarm_clock(3, False)) #  → '08:00'
+    print(alarm_clock(6, False)) #  → '10:00'
+    print(alarm_clock(6, True)) #  → 'off'
