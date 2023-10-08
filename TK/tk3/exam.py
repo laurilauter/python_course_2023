@@ -43,9 +43,12 @@ def alarm_clock(day: int, vacation: bool) -> str:
         is_weekend = True
 
     alarm = "08:00"
-    if is_weekend and vacation:
-        alarm = "off"
-    elif is_weekend:
+
+    if is_weekend:
+        alarm = "10:00"
+        if is_weekend and vacation:
+            alarm = "off"
+    elif vacation:
         alarm = "10:00"
     return alarm
 
@@ -125,11 +128,14 @@ if __name__ == '__main__':
     # print(common_end([1, 2, 3], [7, 3, 2]))  # → False
     # print(common_end([1, 2, 3], [1, 3]))  # → True
     #
-    print(alarm_clock(1, False))  # 8
-    print(alarm_clock(3, False))  # 8
-    print(alarm_clock(3, True))  # 10
+    print(alarm_clock(0, False))  # 8
+    print(alarm_clock(4, False))  # 8
+    print(alarm_clock(5, False))  # 10
     print(alarm_clock(6, False))  # 10
-    print(alarm_clock(6, True))  # off
+    print(alarm_clock(0, True))  # 8
+    print(alarm_clock(4, True))  # 8
+    print(alarm_clock(5, True))  # 10
+    print(alarm_clock(6, True))  # 10
     #
     # print(sum_of_a_beach("WAtErSlIde"))  # == > 1
     # print(sum_of_a_beach("GolDeNSanDyWateRyBeaChSuNN"))  # == > 3
