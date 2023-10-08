@@ -38,16 +38,16 @@ def alarm_clock(day: int, vacation: bool) -> str:
     :param vacation: Whether it is vacation.
     :return: String when to set alarm clock.
     """
-    if vacation:
-        if 0 <= day <= 5:
-            return "10:00"
-        else:
-            return "off"
-    else:
-        if 0 <= day <= 5:
-            return "08:00"
-        else:
-            return "10:00"
+    is_weekend = False
+    if 4 < day < 7:
+        is_weekend = True
+
+    alarm = "08:00"
+    if is_weekend and vacation:
+        alarm = "off"
+    elif is_weekend:
+        alarm = "10:00"
+    return alarm
 
 
 def sum_of_a_beach(s: str) -> int:
@@ -120,26 +120,27 @@ def mirror_ends(s: str) -> str:
 
 if __name__ == '__main__':
 
-    print()
-    print(common_end([1, 2, 3], [7, 3]))  # → True
-    print(common_end([1, 2, 3], [7, 3, 2]))  # → False
-    print(common_end([1, 2, 3], [1, 3]))  # → True
-
-    print(alarm_clock(1, False))
-    print(alarm_clock(3, False))
-    print(alarm_clock(6, False))
-    print(alarm_clock(6, True))
-
-    print(sum_of_a_beach("WAtErSlIde"))  # == > 1
-    print(sum_of_a_beach("GolDeNSanDyWateRyBeaChSuNN"))  # == > 3
-    print(sum_of_a_beach("gOfIshsunesunFiSh"))  # == > 4
-    print(sum_of_a_beach("cItYTowNcARShoW"))  # == > 0
-
-    print(min_index_value([1, 2, 3]))
-    print(min_index_value([1, 2, 1]))
-    print(min_index_value([1, 2, 0]))
-    print(min_index_value([1, 2, 0, 3]))
-
-    print(mirror_ends("abXYZba"))
-    print(mirror_ends("abca"))
-    print(mirror_ends("aba"))
+    # print()
+    # print(common_end([1, 2, 3], [7, 3]))  # → True
+    # print(common_end([1, 2, 3], [7, 3, 2]))  # → False
+    # print(common_end([1, 2, 3], [1, 3]))  # → True
+    #
+    print(alarm_clock(1, False))  # 8
+    print(alarm_clock(3, False))  # 8
+    print(alarm_clock(3, True))  # 10
+    print(alarm_clock(6, False))  # 10
+    print(alarm_clock(6, True))  # off
+    #
+    # print(sum_of_a_beach("WAtErSlIde"))  # == > 1
+    # print(sum_of_a_beach("GolDeNSanDyWateRyBeaChSuNN"))  # == > 3
+    # print(sum_of_a_beach("gOfIshsunesunFiSh"))  # == > 4
+    # print(sum_of_a_beach("cItYTowNcARShoW"))  # == > 0
+    #
+    # print(min_index_value([1, 2, 3]))
+    # print(min_index_value([1, 2, 1]))
+    # print(min_index_value([1, 2, 0]))
+    # print(min_index_value([1, 2, 0, 3]))
+    #
+    # print(mirror_ends("abXYZba"))
+    # print(mirror_ends("abca"))
+    # print(mirror_ends("aba"))
