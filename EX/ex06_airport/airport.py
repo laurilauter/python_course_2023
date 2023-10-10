@@ -62,8 +62,10 @@ def flights_to_destination(flights: list, destination: str) -> list:
     :return: list of departures (sorted in ascending order) for that destination.
     """
     flight_data = destinations_and_times(flights)
-    return flight_data[destination]
-
+    flight_times = []
+    if destination in flight_data.keys():
+        flight_times = flight_data[destination]
+    return flight_times
 
 
 def flights_schedule(flights: list) -> dict:
@@ -143,7 +145,10 @@ def destinations_by_airline(schedule: dict, airline_names: dict) -> dict:
     for key, value in airline_names.items():
         for flight in schedule.values():
             if key in flight[1]:
-                destination_by_airlines.update({value: {flight[0]}})
+                if value not in destination_by_airlines.keys():
+                    destination_by_airlines[value] = {flight[0]}
+                else:
+                    destination_by_airlines[value].add(flight[0])
     return destination_by_airlines
 
 
@@ -162,12 +167,13 @@ if __name__ == '__main__':
     # {'Tallinn': ['09:00', '10:00'], 'Helsinki': ['10:35']}
     #
     # print(flights_to_destination(flights, "Tallinn"))
-    # # ['08:00', '09:00']
+    # print(flights_to_destination(flights, "Paris"))
+    # ['08:00', '09:00']
     #
     # print(flights_schedule(flights))
     # # {'08:00': ('Tallinn', 'OWL1234'), '10:35': ('Helsinki', 'BHM5678'), '09:00': ('Tallinn', 'OWL1235')}
 
-    schedule = {'08:00': ('Tallinn', 'OWL1234'), '10:35': ('Helsinki', 'BHM5678'), '09:00': ('Tallinn', 'OWL1235')}
+    schedule = {'08:00': ('Tallinn', 'OWL1234'), '10:35': ('Helsinki', 'BHM5678'), '09:00': ('Tallinn', 'OWL1235'), '11:00': ('Riga', 'OWL1234')}
     # print(destinations_list(schedule))
     # # ['Helsinki', 'Tallinn']
     #
