@@ -10,8 +10,7 @@ def to_minutes(time: str) -> int:
     return minutes
 
 
-def update_delayed_flight(schedule: dict[str, tuple[str, str]], delayed_flight_number: str, new_departure_time: str) -> \
-dict[str, tuple[str, str]]:
+def update_delayed_flight(schedule: dict[str, tuple[str, str]], delayed_flight_number: str, new_departure_time: str) -> dict[str, tuple[str, str]]:
     """
     Update the departure time of a delayed flight in the flight schedule.
 
@@ -147,7 +146,6 @@ def busiest_hour(schedule: dict[str, tuple[str, str]]) -> list[str]:
              ["08:00", "15:20"]
              If the schedule is empty, returns an empty list.
     """
-
     busiest_hour_slots = []
     hour_counts = {}
 
@@ -173,7 +171,6 @@ def busiest_hour(schedule: dict[str, tuple[str, str]]) -> list[str]:
     return busiest_hour_slots
 
 
-
 def most_popular_destination(schedule: dict[str, tuple[str, str]], passenger_count: dict[str, int]) -> str:
     """
     Find the destination where the most passengers are going.
@@ -185,7 +182,19 @@ def most_popular_destination(schedule: dict[str, tuple[str, str]], passenger_cou
                             the number of passengers as values.
     :return: A string representing the most popular destination.
     """
-    pass
+    # create initial passengers_to_destination dict
+    passengers_to_destination = {}
+    for value in schedule.values():
+        if value[0] not in passengers_to_destination:
+            passengers_to_destination[value[0]] = 0
+
+    # populate dict with counts
+    for key, value in schedule.items():
+        for flight, count in passenger_count.items():
+            if flight == value[1]:
+                passengers_to_destination[value[0]] += count
+    destination = max(passengers_to_destination, key=passengers_to_destination.get)  # return the corresponding key
+    return destination
 
 
 def least_popular_destination(schedule: dict[str, tuple[str, str]], passenger_count: dict[str, int]) -> str:
@@ -199,7 +208,19 @@ def least_popular_destination(schedule: dict[str, tuple[str, str]], passenger_co
                             the number of passengers as values.
     :return: A string representing the least popular destination.
     """
-    pass
+    # create initial passengers_to_destination dict
+    passengers_to_destination = {}
+    for value in schedule.values():
+        if value[0] not in passengers_to_destination:
+            passengers_to_destination[value[0]] = 0
+
+    # populate dict with counts
+    for key, value in schedule.items():
+        for flight, count in passenger_count.items():
+            if flight == value[1]:
+                passengers_to_destination[value[0]] += count
+    destination = min(passengers_to_destination, key=passengers_to_destination.get)  # return the corresponding key
+    return destination
 
 
 if __name__ == '__main__':
@@ -237,25 +258,26 @@ if __name__ == '__main__':
     # print(connecting_flights(schedule, ("04:00", "Tallinn")))
     # # [('06:30', 'Paris'), ('07:29', 'London')]
 
-    print(busiest_hour(schedule))
-    # ['06:15', '06:30', '07:29', '11:30']
-    # 19:35 does not match because 20:35 is not in the same slot
+    # print(busiest_hour(schedule))
+    # # ['06:15', '06:30', '07:29', '11:30']
+    # # 19:35 does not match because 20:35 is not in the same slot
+    # #
+    # flight number: number of passengers
+    passengers = {
+        "MWL6754": 100,
+        "OWL6754": 85,
+        "OWL6751": 103,
+        "OWL6756": 87,
+        "OWL6759": 118,
+        "OWL6752": 90,
+        "BHM2345": 111,
+        "BHM2346": 102,
+        "BHM2347": 94,
+        "TLN1001": 1
+    }
+
+    print(most_popular_destination(schedule, passengers))
+    # Paris
     #
-    # # flight number: number of passengers
-    # passengers = {
-    #     "MWL6754": 100,
-    #     "OWL6754": 85,
-    #     "OWL6751": 103,
-    #     "OWL6756": 87,
-    #     "OWL6759": 118,
-    #     "OWL6752": 90,
-    #     "BHM2345": 111,
-    #     "BHM2346": 102,
-    #     "BHM2347": 94,
-    #     "TLN1001": 1
-    # }
-    # print(most_popular_destination(schedule, passengers))
-    # # Paris
-    #
-    # print(least_popular_destination(schedule, passengers))
-    # # Tallinn
+    print(least_popular_destination(schedule, passengers))
+    # Tallinn
