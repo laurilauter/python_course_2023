@@ -122,7 +122,8 @@ def connecting_flights(schedule: dict[str, tuple[str, str]], arrival: tuple[str,
 
     for key, value in schedule.items():
         if 45 < to_minutes(key) - arrival_time < 240 and value[0] != arrival[1]:
-            available_connecting_flights.append(value)
+            # why not available_connecting_flights.append(value)
+            available_connecting_flights.append((key, value[1]))
     return available_connecting_flights
 
 
