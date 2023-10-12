@@ -162,7 +162,9 @@ def busiest_hour(schedule: dict[str, tuple[str, str]]) -> list[str]:
                 hour_counts[key] += 1
 
     # Find the busiest slot
-    max_count = max(hour_counts.values())
+    max_count = 0
+    if hour_counts.values():
+        max_count = max(hour_counts.values())
     for hour_start_time, count in hour_counts.items():
         if count == max_count:
             busiest_hour_slots.append(hour_start_time)
@@ -240,27 +242,29 @@ if __name__ == '__main__':
     # print(new_schedule)
     # # {'11:35': ('Helsinki', 'BHM2345')}
     #
-    schedule = {
-        "04:35": ("Maardu", "MWL6754"),
-        "06:15": ("Tallinn", "OWL6754"),
-        "06:30": ("Paris", "OWL6751"),
-        "07:29": ("London", "OWL6756"),
-        "08:00": ("New York", "OWL6759"),
-        "11:30": ("Tokyo", "OWL6752"),
-        "11:35": ("Helsinki", "BHM2345"),
-        "19:35": ("Paris", "BHM2346"),
-        "20:35": ("Helsinki", "BHM2347"),
-        "22:35": ("Tallinn", "TLN1001"),
-    }
+    # schedule = {
+    #     "04:35": ("Maardu", "MWL6754"),
+    #     "06:15": ("Tallinn", "OWL6754"),
+    #     "06:30": ("Paris", "OWL6751"),
+    #     "07:29": ("London", "OWL6756"),
+    #     "08:00": ("New York", "OWL6759"),
+    #     "11:30": ("Tokyo", "OWL6752"),
+    #     "11:35": ("Helsinki", "BHM2345"),
+    #     "19:35": ("Paris", "BHM2346"),
+    #     "20:35": ("Helsinki", "BHM2347"),
+    #     "22:35": ("Tallinn", "TLN1001"),
+    # }
+
+    schedule = {}
     # print(busiest_time(schedule))
     # # ['06', '11']
 
-    print(connecting_flights(schedule, ("04:00", "Tallinn")))
-    # [('06:30', 'Paris'), ('07:29', 'London')]
+    # print(connecting_flights(schedule, ("04:00", "Tallinn")))
+    # # [('06:30', 'Paris'), ('07:29', 'London')]
 
-    # print(busiest_hour(schedule))
-    # # ['06:15', '06:30', '07:29', '11:30']
-    # # 19:35 does not match because 20:35 is not in the same slot
+    print(busiest_hour(schedule))
+    # ['06:15', '06:30', '07:29', '11:30']
+    # 19:35 does not match because 20:35 is not in the same slot
     # #
     # # flight number: number of passengers
     # passengers = {
