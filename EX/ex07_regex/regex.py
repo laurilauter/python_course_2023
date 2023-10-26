@@ -106,6 +106,8 @@ def find_years(text: str) -> list:
     """
     regex = r'(?<!\d)\d{4}(?!\d)'
     matches = re.findall(regex, text)
+    for i in range(0, len(matches)):
+        matches[i] = int(matches[i])
     return matches
 
 
