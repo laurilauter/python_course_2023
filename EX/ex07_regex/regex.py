@@ -35,7 +35,7 @@ def find_words_with_vowels(text: str) -> list:
     :return: list of words that start with a vowel found in given string
     """
     regex = r'[AEIOUÕÜÄÖ][a-zõüäö]+'
-    matches = re.findall(regex, "KanaMunaPelmeenApelsinÕunMandariinKakaoHernesAhven")
+    matches = re.findall(regex, text)
     return matches
 
 
@@ -52,7 +52,9 @@ def find_sentences(text: str) -> list:
     :param text: given string to find sentences from
     :return: list of sentences found in given string
     """
-    pass
+    regex = r'[^.!?]+[.!?]+'
+    matches = re.findall(regex, text)
+    return matches
 
 
 def find_words_from_sentence(sentence: str) -> list:
@@ -130,12 +132,12 @@ if __name__ == '__main__':
 
     print(find_words_with_vowels('KanaMunaPelmeenApelsinÕunMandariinKakaoHernesAhven'))
     # ['Apelsin', 'Õun', 'Ahven']
-    #
-    # print(find_sentences('See on esimene - lause. See on ä teine lause! see ei ole lause. Aga kas see on? jah, oli.'))
-    # # ['See on esimene - lause.', 'See on ä teine lause!', 'Aga kas see on?']
-    #
-    # print(find_sentences('ei ole lause. See on!!! See ka...Ja see... See pole'))
-    # # ['See on!!!', 'See ka...', 'Ja see...']
+
+    print(find_sentences('See on esimene - lause. See on ä teine lause! see ei ole lause. Aga kas see on? jah, oli.'))
+    # ['See on esimene - lause.', 'See on ä teine lause!', 'Aga kas see on?']
+
+    print(find_sentences('ei ole lause. See on!!! See ka...Ja see... See pole'))
+    # ['See on!!!', 'See ka...', 'Ja see...']
     #
     # print(find_words_from_sentence("Super lause ää, sorry."))
     # # ['Super', 'lause', 'ää', 'sorry']
