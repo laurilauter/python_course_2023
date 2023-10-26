@@ -52,7 +52,7 @@ def find_sentences(text: str) -> list:
     :param text: given string to find sentences from
     :return: list of sentences found in given string
     """
-    regex = r'[^.!?]+[.!?]+'
+    regex = r'\w[^.!?]+[.!?]'
     matches = re.findall(regex, text)
     return matches
 
@@ -71,7 +71,9 @@ def find_words_from_sentence(sentence: str) -> list:
     :param sentence: given sentence to find words from
     :return: list of words found in given sentence
     """
-    pass
+    regex = r'[\w]+'
+    matches = re.findall(regex, sentence)
+    return matches
 
 
 def find_words_from_sentences_only(text: str) -> list:
@@ -102,7 +104,9 @@ def find_years(text: str) -> list:
     :param text: given string to find years from
     :return: list of years (integers) found in given string
     """
-    pass
+    regex = r'(?<!\d)\d{4}(?!\d)'
+    matches = re.findall(regex, text)
+    return matches
 
 
 def find_phone_numbers(text: str) -> dict:
@@ -123,7 +127,23 @@ def find_phone_numbers(text: str) -> dict:
     :param text: given string to find phone numbers from
     :return: dict containing the numbers
     """
-    pass
+    # regex = r'(\+\d\d\d *)?\d{8}'
+    regex = r'(\+\d{3}[- ]?)?\d{8}'
+    matches = re.findall(regex, text)
+
+    print(matches)
+    phone_numbers = {}
+    for match in matches:
+        match = match.strip()
+        print(match)
+
+        area_code, phone_number = match.split('-', 1) if '-' in match else ('', match)
+
+        if area_code not in phone_numbers:
+            phone_numbers[area_code] = []
+        phone_numbers[area_code].append(phone_number)
+
+    return phone_numbers
 
 
 if __name__ == '__main__':
@@ -138,16 +158,16 @@ if __name__ == '__main__':
 
     print(find_sentences('ei ole lause. See on!!! See ka...Ja see... See pole'))
     # ['See on!!!', 'See ka...', 'Ja see...']
-    #
-    # print(find_words_from_sentence("Super lause ää, sorry."))
-    # # ['Super', 'lause', 'ää', 'sorry']
-    #
+
+    print(find_words_from_sentence("Super lause ää, sorry."))
+    # ['Super', 'lause', 'ää', 'sorry']
+
     # print(find_words_from_sentences_only(
     #     'See on esimene - ä lause. See, on teine: lause! see ei ole lause. Aga kas see on? jah, oli.'))
     # # ['See', 'on', 'esimene', 'ä', 'lause', 'See', 'on', 'teine', 'lause', 'Aga', 'kas', 'see', 'on']
     #
-    # print(find_years("1998sef672387fh3f87fh83777f777f7777f73wfj893w8938434343"))
-    # # [1998, 7777]
-    #
-    # print(find_phone_numbers("+372 56887364  +37256887364  +33359835647  56887364 +11 1234567 +327 1 11111111"))
-    # # {'+372': ['56887364', '56887364'], '+333': ['59835647'], '': ['56887364', '1234567', '11111111']}
+    print(find_years("1998sef672387fh3f87fh83777f777f7777f73wfj893w8938434343"))
+    # [1998, 7777]
+
+    print(find_phone_numbers("+372 56887364  +37256887364  +33359835647  56887364 +11 1234567 +327 1 11111111"))
+    # {'+372': ['56887364', '56887364'], '+333': ['59835647'], '': ['56887364', '1234567', '11111111']}
