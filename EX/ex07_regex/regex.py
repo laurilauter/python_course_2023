@@ -96,21 +96,10 @@ def find_words_from_sentences_only(text: str) -> list:
     :param text: given string to find words from
     :return: list of words found in sentences from given string
     """
-    # result = []
-    # regex = r'\w[^.!?]+[.!?]+'
-    # matches = re.findall(regex, text)
-    # for match in matches:
-    #     if match[0].isupper() and match[0].isalpha():
-    #         result.append(match)
-    # words_regex = r'[\w]+'
-    # words = re.findall(words_regex, " ".join(result))
-    # return words
-
     result = []
     regex = r'[A-ZÜÕÖÄ]\w[^.!?]+[.!?]+'
     matches = re.findall(regex, text)
     for match in matches:
-        #if match[0].isupper() and match[0].isalpha():
         result.append(match)
     words_regex = r'[\w]+'
     words = re.findall(words_regex, " ".join(result))
