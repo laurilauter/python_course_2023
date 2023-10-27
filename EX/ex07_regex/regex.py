@@ -97,7 +97,7 @@ def find_words_from_sentences_only(text: str) -> list:
     :return: list of words found in sentences from given string
     """
     result = []
-    regex = r'\w[^.!?]+[.!?]'
+    regex = r'\w[^.!?]+[.!?]+'
     matches = re.findall(regex, text)
     for match in matches:
         if match[0].isupper():
@@ -172,6 +172,9 @@ if __name__ == '__main__':
 
     print(find_sentences('ei ole lause. See on!!! See ka...Ja see... See pole'))
     # ['See on!!!', 'See ka...', 'Ja see...']
+
+    print(find_sentences("Ma kirjutan vahel ka kolme punktiga lõppevaid lauseid, ei... 'Või karjun mitme hüüumärgiga!!', 'Või olen nagu: wat????"))
+    # ['Ma kirjutan vahel ka kolme punktiga lõppevaid lauseid, ei... 'Või karjun mitme hüüumärgiga!!', 'Või olen nagu: wat????']
 
     print(find_words_from_sentence("Super lause ää, sorry."))
     # ['Super', 'lause', 'ää', 'sorry']
