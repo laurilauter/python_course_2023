@@ -96,12 +96,22 @@ def find_words_from_sentences_only(text: str) -> list:
     :param text: given string to find words from
     :return: list of words found in sentences from given string
     """
+    # result = []
+    # regex = r'\w[^.!?]+[.!?]+'
+    # matches = re.findall(regex, text)
+    # for match in matches:
+    #     if match[0].isupper() and match[0].isalpha():
+    #         result.append(match)
+    # words_regex = r'[\w]+'
+    # words = re.findall(words_regex, " ".join(result))
+    # return words
+
     result = []
-    regex = r'\w[^.!?]+[.!?]+'
+    regex = r'[A-ZÜÕÖÄ]\w[^.!?]+[.!?]+'
     matches = re.findall(regex, text)
     for match in matches:
-        if match[0].isupper() and match[0].isalpha():
-            result.append(match)
+        #if match[0].isupper() and match[0].isalpha():
+        result.append(match)
     words_regex = r'[\w]+'
     words = re.findall(words_regex, " ".join(result))
     return words
@@ -161,30 +171,30 @@ def find_phone_numbers(text: str) -> dict:
 
 
 if __name__ == '__main__':
-    print(find_words('KanaMunaPelmeen!!ApelsinÕunMandariinKakaoHernesAhven'))
-    # ['Kana', 'Muna', 'Pelmeen', 'Apelsin', 'Õun', 'Mandariin', 'Kakao', 'Hernes', 'Ahven']
-
-    print(find_words_with_vowels('KanaMunaPelmeenApelsinÕunMandariinKakaoHernesAhven'))
-    # ['Apelsin', 'Õun', 'Ahven']
-
-    print(find_sentences('See on esimene - lause. See on ä teine lause! see ei ole lause. Aga kas see on? jah, oli.'))
-    # ['See on esimene - lause.', 'See on ä teine lause!', 'Aga kas see on?']
-
-    print(find_sentences('ei ole lause. See on!!! See ka...Ja see... See pole'))
-    # ['See on!!!', 'See ka...', 'Ja see...']
-
-    print(find_sentences("Ma kirjutan vahel ka kolme punktiga lõppevaid lauseid, ei... 'Või karjun mitme hüüumärgiga!!', 'Või olen nagu: wat????"))
-    # ['Ma kirjutan vahel ka kolme punktiga lõppevaid lauseid, ei... 'Või karjun mitme hüüumärgiga!!', 'Või olen nagu: wat????']
-
-    print(find_words_from_sentence("Super lause ää, sorry."))
-    # ['Super', 'lause', 'ää', 'sorry']
-
-    # print(find_words_from_sentences_only(
-    #     'See on esimene - ä lause. See, on teine: lause! see ei ole lause. Aga kas see on? jah, oli.'))
-    # # ['See', 'on', 'esimene', 'ä', 'lause', 'See', 'on', 'teine', 'lause', 'Aga', 'kas', 'see', 'on']
+    # print(find_words('KanaMunaPelmeen!!ApelsinÕunMandariinKakaoHernesAhven'))
+    # # ['Kana', 'Muna', 'Pelmeen', 'Apelsin', 'Õun', 'Mandariin', 'Kakao', 'Hernes', 'Ahven']
     #
-    print(find_years("1998sef672387fh3f87fh83777f777f7777f73wfj893w8938434343"))
-    # [1998, 7777]
+    # print(find_words_with_vowels('KanaMunaPelmeenApelsinÕunMandariinKakaoHernesAhven'))
+    # # ['Apelsin', 'Õun', 'Ahven']
+    #
+    # print(find_sentences('See on esimene - lause. See on ä teine lause! see ei ole lause. Aga kas see on? jah, oli.'))
+    # # ['See on esimene - lause.', 'See on ä teine lause!', 'Aga kas see on?']
+    #
+    # print(find_sentences('ei ole lause. See on!!! See ka...Ja see... See pole'))
+    # # ['See on!!!', 'See ka...', 'Ja see...']
+    #
+    # print(find_sentences("Ma kirjutan vahel ka kolme punktiga lõppevaid lauseid, ei... 'Või karjun mitme hüüumärgiga!!', 'Või olen nagu: wat????"))
+    # # ['Ma kirjutan vahel ka kolme punktiga lõppevaid lauseid, ei... 'Või karjun mitme hüüumärgiga!!', 'Või olen nagu: wat????']
+    #
+    # print(find_words_from_sentence("Super lause ää, sorry."))
+    # # ['Super', 'lause', 'ää', 'sorry']
 
-    print(find_phone_numbers("+372 56887364  +37256887364  +33359835647  56887364 +11 1234567 +327 1 11111111"))
-    # {'+372': ['56887364', '56887364'], '+333': ['59835647'], '': ['56887364', '1234567', '11111111']}
+    print(find_words_from_sentences_only(
+        'See on esimene - ä lause. See, on teine: lause! see eiole lause. Aga kas see on? jah, oli.'))
+    # ['See', 'on', 'esimene', 'ä', 'lause', 'See', 'on', 'teine', 'lause', 'Aga', 'kas', 'see', 'on']
+
+    # print(find_years("1998sef672387fh3f87fh83777f777f7777f73wfj893w8938434343"))
+    # # [1998, 7777]
+    #
+    # print(find_phone_numbers("+372 56887364  +37256887364  +33359835647  56887364 +11 1234567 +327 1 11111111"))
+    # # {'+372': ['56887364', '56887364'], '+333': ['59835647'], '': ['56887364', '1234567', '11111111']}
