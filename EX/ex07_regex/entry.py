@@ -19,9 +19,9 @@ def parse(row: str) -> tuple:
     :param row: given string to find values from
     :return: tuple of values found in given string
     """
-    regex = r'([A-ZÜÕÖÄ][a-züõöä]+)?([A-ZÜÕÖÄ][a-züõöä]+)?(\d{11})(\+\d{3}[- ]?\d{7,8})?(\d{2}-\d{2}-\d{4})?(.*)?'
     # regex = r'([A-ZÜÕÖÄ][a-züõöä]+)?([A-ZÜÕÖÄ][a-züõöä]+)?(\d{11})(\+\d{3}[- ]?\d{7,8})?(\d{2}-\d{2}-\d{4})?(.*)?'
-    # regex = r'([A-ZÜÕÖÄ][a-züõöä]+)?([A-ZÜÕÖÄ][a-züõöä]+)?(\d{11})((\+\d{3})?[- ]?\d{7,8})?(\d{2}-\d{2}-\d{4})?(.*)?'
+    # regex = r'([A-ZÜÕÖÄ][a-züõöä]+)?([A-ZÜÕÖÄ][a-züõöä]+)?(\d{11})(\+\d{3}[- ]?\d{7,8})?(\d{2}-\d{2}-\d{4})?(.*)?'
+    regex = r'([A-ZÜÕÖÄ][a-züõöä]+)?([A-ZÜÕÖÄ][a-züõöä]+)?(\d{11})((?:\+\d{3})?[- ]?\d{7,8})?(\d{2}-\d{2}-\d{4})?(.*)?'
     matches = re.findall(regex, row)
     new_text = re.sub(r"''", 'None', ''.join(map(str, matches)))
     new_tuple = tuple(eval(new_text))
