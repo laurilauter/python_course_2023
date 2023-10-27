@@ -20,7 +20,7 @@ def parse(row: str) -> tuple:
     :return: tuple of values found in given string
     """
     # regex = r'([A-ZÜÕÖÄ][a-züõöä]+)?([A-ZÜÕÖÄ][a-züõöä]+)?(\d{11})((\+\d{3}[- ]?)?(\d{7,8}))(\d{2}-\d{2}-\d{4})(.*)'
-    regex = r'([A-ZÜÕÖÄ][a-züõöä]+)?([A-ZÜÕÖÄ][a-züõöä]+)?(\d{11})(\+\d{3}[- ]?\d{7,8})(\d{2}-\d{2}-\d{4})(.*)'
+    regex = r'([A-ZÜÕÖÄ][a-züõöä]+)?([A-ZÜÕÖÄ][a-züõöä]+)?(\d{11})(\+\d{3}[- ]?\d{7,8})?(\d{2}-\d{2}-\d{4})?(.*)?'
     matches = re.findall(regex, row)
     result = ()
     if matches:
