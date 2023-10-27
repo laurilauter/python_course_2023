@@ -151,8 +151,8 @@ def find_phone_numbers(text: str) -> dict:
     matches = re.findall(regex, text)
     phone_numbers = {}
     for match in matches:
-        area_code = match[0]
-        phone_number = match[1]
+        area_code = match[0].strip()
+        phone_number = match[1].strip()
         if area_code not in phone_numbers:
             phone_numbers[area_code] = []
         phone_numbers[area_code].append(phone_number)
