@@ -104,7 +104,6 @@ def find_words_from_sentences_only(text: str) -> list:
             result.append(match)
     words_regex = r'[\w]+'
     words = re.findall(words_regex, " ".join(result))
-    words.pop()
     return words
 
 
