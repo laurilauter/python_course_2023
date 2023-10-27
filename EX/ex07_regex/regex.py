@@ -53,7 +53,7 @@ def find_sentences(text: str) -> list:
     :return: list of sentences found in given string
     """
     result = []
-    regex = r'\w[^.!?]+[.!?]'
+    regex = r'\w[^.!?]+[.!?]+'
     matches = re.findall(regex, text)
     for match in matches:
         if match[0].isupper():
@@ -147,18 +147,12 @@ def find_phone_numbers(text: str) -> dict:
     :param text: given string to find phone numbers from
     :return: dict containing the numbers
     """
-    # regex = r'(\+\d\d\d *)?\d{8}'
-    regex = r'(\+\d{3}[- ]?)?\d{8}'
+    regex = r'(\+\d{3}[- ]?)?(\d{7})'
     matches = re.findall(regex, text)
-
-    print(matches)
     phone_numbers = {}
     for match in matches:
-        match = match.strip()
-        print(match)
-
-        area_code, phone_number = match.split('-', 1) if '-' in match else ('', match)
-
+        area_code = match[0]
+        phone_number = match[1]
         if area_code not in phone_numbers:
             phone_numbers[area_code] = []
         phone_numbers[area_code].append(phone_number)
