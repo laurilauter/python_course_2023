@@ -100,7 +100,7 @@ def find_words_from_sentences_only(text: str) -> list:
     regex = r'\w[^.!?]+[.!?]+'
     matches = re.findall(regex, text)
     for match in matches:
-        if match[0].isupper():
+        if not match[0].islower():
             result.append(match)
     words_regex = r'[\w]+'
     words = re.findall(words_regex, " ".join(result))
