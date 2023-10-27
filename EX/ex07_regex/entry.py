@@ -22,7 +22,10 @@ def parse(row: str) -> tuple:
     # regex = r'([A-ZÜÕÖÄ][a-züõöä]+)?([A-ZÜÕÖÄ][a-züõöä]+)?(\d{11})((\+\d{3}[- ]?)?(\d{7,8}))(\d{2}-\d{2}-\d{4})(.*)'
     regex = r'([A-ZÜÕÖÄ][a-züõöä]+)?([A-ZÜÕÖÄ][a-züõöä]+)?(\d{11})(\+\d{3}[- ]?\d{7,8})(\d{2}-\d{2}-\d{4})(.*)'
     matches = re.findall(regex, row)
-    return tuple(matches)
+    result = ()
+    if matches:
+        result = tuple(matches[0])
+    return result
 
 
 if __name__ == '__main__':
