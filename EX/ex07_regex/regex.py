@@ -52,9 +52,13 @@ def find_sentences(text: str) -> list:
     :param text: given string to find sentences from
     :return: list of sentences found in given string
     """
+    result = []
     regex = r'\w[^.!?]+[.!?]'
     matches = re.findall(regex, text)
-    return matches
+    for match in matches:
+        if match[0].isupper():
+            result.append(match)
+    return result
 
 
 def find_words_from_sentence(sentence: str) -> list:
@@ -71,6 +75,12 @@ def find_words_from_sentence(sentence: str) -> list:
     :param sentence: given sentence to find words from
     :return: list of words found in given sentence
     """
+    # result = []
+    # regex = r'\w[^.!?]+[.!?]'
+    # matches = re.findall(regex, sentence)
+    # for match in matches:
+    #     if match[0].isupper():
+    #         result.append(match)
     regex = r'[\w]+'
     matches = re.findall(regex, sentence)
     return matches
@@ -86,7 +96,15 @@ def find_words_from_sentences_only(text: str) -> list:
     :param text: given string to find words from
     :return: list of words found in sentences from given string
     """
-    pass
+    result = []
+    regex = r'\w[^.!?]+[.!?]'
+    matches = re.findall(regex, text)
+    for match in matches:
+        if match[0].isupper():
+            result.append(match)
+    words_regex = r'[\w]+'
+    words = re.findall(words_regex, " ".join(result))
+    return words
 
 
 def find_years(text: str) -> list:
