@@ -44,7 +44,36 @@ def create_table_string(text: str) -> str:
     Times in the table should be displayed in UTC(https://et.wikipedia.org/wiki/UTC) time.
     If no items were found, return an empty string.
     """
-    pass
+    regex = r'(\[(?:.*?)\s(?:.*?)\])?(\/[a-zA-Z0-9&/=?-_%]*)?([eE][rR]{2}[oO][rR] \d{3})?((?:[0-9]{1,3}\.){3}[0-9]{1,3})?(usr:.* )?'
+
+    # prepare data
+    rows = text.split('\n')
+    clean_rows = [row.strip(' ') for row in rows]
+    for row in clean_rows:
+        if row == '':
+            clean_rows.remove(row)
+
+    # match data
+    data_collection = {'time': [], 'user': [], 'error': [], 'ipv4': [], 'endpoint': []}
+    for row in clean_rows:
+        matches = re.findall(regex, row)
+        # place data
+        for match in matches:
+            (time, endpoint, error, ipv4, user) = match
+            if time:
+                data_collection["time"].append(time)
+            if user:
+                data_collection["user"].append(user)
+            if error:
+                data_collection["error"].append(error)
+            if ipv4:
+                data_collection["ipv4"].append(ipv4)
+            if endpoint:
+                data_collection["endpoint"].append(endpoint)
+
+    return data_collection
+
+
 
 
 def get_times(text: str) -> list[tuple[int, int, int]]:
@@ -62,7 +91,7 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
     :param text: text to search for the times
     :return: list of tuples containing the time and offset
     """
-    pass
+    return "that"
 
 
 def get_usernames(text: str) -> list[str]:
@@ -98,10 +127,20 @@ def get_formatted_time(input):
 
 
 if __name__ == '__main__':
+
+    # logs = """
+    #         [14?36 UTC+9] /tere eRRoR 418 192.168.0.255
+    #         [8B48 UTC-6] usr:kasutaja
+    #         """
+
     logs = """
-            [14?36 UTC+9] /tere eRRoR 418 192.168.0.255
-            [8B48 UTC-6] usr:kasutaja
+            [-1b35 UTC-4] errOR 741
+            [24a48 UTC+0] 776.330.579.818
+            [02:53 UTC+5] usr:96NC9yqb /aA?Y4pK
+            [5b05 UTC+5] ERrOr 700 268.495.856.225
             """
+
+
     print(create_table_string(logs))
     # time     | 5:36 AM, 2:48 PM
     # user     | kasutaja
