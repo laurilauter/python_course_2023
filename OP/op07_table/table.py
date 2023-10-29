@@ -1,7 +1,7 @@
 """Create table from the given string."""
 import re
 
-data_collection = {'time': [], 'user': [], 'error': [], 'ipv4': [], 'endpoint': []}
+# data_collection = {'time': [], 'user': [], 'error': [], 'ipv4': [], 'endpoint': []}
 
 
 def create_table_string(text: str) -> str:
@@ -46,7 +46,7 @@ def create_table_string(text: str) -> str:
     Times in the table should be displayed in UTC(https://et.wikipedia.org/wiki/UTC) time.
     If no items were found, return an empty string.
     """
-    regex = r'(\[(?:.*?)\s(?:.*?)\])?(\/[a-zA-Z0-9&/=?-_%]*)?([eE][rR]{2}[oO][rR] \d{3})?((?:[0-9]{1,3}\.){3}[0-9]{1,3})?(usr:.* )?'
+    # regex = r'(\[(?:.*?)\s(?:.*?)\])?(\/[a-zA-Z0-9&/=?-_%]*)?([eE][rR]{2}[oO][rR] \d{3})?((?:[0-9]{1,3}\.){3}[0-9]{1,3})?(usr:.* )?'
 
     # # prepare data
     # rows = text.split('\n')
@@ -92,12 +92,15 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
     :param text: text to search for the times
     :return: list of tuples containing the time and offset
     """
-    regex = r'(\[(.*?)\s(.*?)\])?(\/[a-zA-Z0-9&/=?-_%]*)?'
+    #regex = r'(\[(.*?)\s(.*?)\])?(\/[a-zA-Z0-9&/=?-_%]*)?'
+    regex = r'\[(.+) (UTC[-+]\d{1,2})'
     times = []
     for match in re.finditer(regex, text):
-        if match.group(1) is not None:
-            time_fragments = match.group(1).strip("[]").split(" ")
-            # print(time_fragments)
+        print(match.group(0))
+        if match.group(0) is not None:
+            time_fragments = match.group(0).strip("[]").split(" ")
+
+            print(time_fragments)
             found_hour = re.search(r'((\d*)(?=[AaPp :.-]))', time_fragments[0])
             found_minute = re.search(r'((?<=[AaPp :.-])(\d*))', time_fragments[0])
             if found_hour and found_minute:
@@ -185,11 +188,16 @@ if __name__ == '__main__':
                 [14A3 UTC-4]
                 [-1b35 UTC-4]
                 [5b05 UTC+5]
+                [02:53 UTC+5]
+                """
+    logs3 = """
+                [02:53 UTC+5
+                [02:53 UTC-5
                 """
 
     # print(create_table_string(logs))
 
-    print(get_times(logs2))
+    print(get_times(logs3))
     # print(get_usernames(logs))
     # print(get_errors(logs))
     # print(get_addresses(logs))
