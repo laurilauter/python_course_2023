@@ -98,9 +98,11 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
 def get_usernames(text: str) -> list[str]:
     """Get usernames from text."""
     regex = r'(usr:(\w+))?'
+    usernames = []
     for match in re.finditer(regex, text):
         if match.group(1) is not None:
-            return list(match.group(1).replace("usr:", ""))
+            usernames.append(match.group(1).replace("usr:", ""))
+            return usernames
 
 
 def get_errors(text: str) -> list[int]:
