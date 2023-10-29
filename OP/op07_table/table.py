@@ -92,7 +92,13 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
     :param text: text to search for the times
     :return: list of tuples containing the time and offset
     """
-    pass
+    regex = r'(\[(?:.*?)\s(?:.*?)\])?(\/[a-zA-Z0-9&/=?-_%]*)?'
+    times = []
+    for match in re.finditer(regex, text):
+        if match.group(1) is not None:
+            time = match.group(1)
+            times.append(time)
+    return times
 
 
 def get_usernames(text: str) -> list[str]:
@@ -107,13 +113,24 @@ def get_usernames(text: str) -> list[str]:
 
 def get_errors(text: str) -> list[int]:
     """Get errors from text."""
-    pass
+    regex = r'([eE][rR]{2}[oO][rR] \d{3})?'
+    errors = []
+    for match in re.finditer(regex, text):
+        if match.group(1) is not None:
+            error = int(match.group(1).split(" ")[1])
+            errors.append(error)
+    return errors
 
 
 def get_addresses(text: str) -> list[str]:
     """Get IPv4 addresses from text."""
-    pass
-
+    regex = r'((?:[0-9]{1,3}\.){3}[0-9]{1,3})?'
+    addresses = []
+    for match in re.finditer(regex, text):
+        if match.group(1) is not None:
+            address = match.group(1)
+            addresses.append(address)
+    return addresses
 
 
 # HELPER FUNCTIONS
@@ -149,17 +166,18 @@ if __name__ == '__main__':
             [5b05 UTC+5] ERrOr 700 268.495.856.225
             """
 
-
     # print(create_table_string(logs))
 
+    print(get_times(logs))
     print(get_usernames(logs))
+    print(get_errors(logs))
+    print(get_addresses(logs))
 
     # time     | 5:36 AM, 2:48 PM
     # user     | kasutaja
     # error    | 418
     # ipv4     | 192.168.0.255
     # endpoint | /tere
-
 
     # [-1b35 UTC-4] errOR 741
     # [24a48 UTC+0] 776.330.579.818
