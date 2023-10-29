@@ -1,6 +1,8 @@
 """Create table from the given string."""
 import re
 
+data_collection = {'time': [], 'user': [], 'error': [], 'ipv4': [], 'endpoint': []}
+
 
 def create_table_string(text: str) -> str:
     """
@@ -46,34 +48,33 @@ def create_table_string(text: str) -> str:
     """
     regex = r'(\[(?:.*?)\s(?:.*?)\])?(\/[a-zA-Z0-9&/=?-_%]*)?([eE][rR]{2}[oO][rR] \d{3})?((?:[0-9]{1,3}\.){3}[0-9]{1,3})?(usr:.* )?'
 
-    # prepare data
-    rows = text.split('\n')
-    clean_rows = [row.strip(' ') for row in rows]
-    for row in clean_rows:
-        if row == '':
-            clean_rows.remove(row)
+    # # prepare data
+    # rows = text.split('\n')
+    # clean_rows = [row.strip(' ') for row in rows]
+    # for row in clean_rows:
+    #     if row == '':
+    #         clean_rows.remove(row)
+    #
+    # # match data and populate dictionary
+    # # data_collection = {'time': [], 'user': [], 'error': [], 'ipv4': [], 'endpoint': []}
+    # for row in clean_rows:
+    #     matches = re.findall(regex, row)
+    #     # place data
+    #     for match in matches:
+    #         (time, endpoint, error, ipv4, user) = match
+    #         if time:
+    #             data_collection["time"].append(time)
+    #         if user:
+    #             data_collection["user"].append(user)
+    #         if error:
+    #             data_collection["error"].append(error)
+    #         if ipv4:
+    #             data_collection["ipv4"].append(ipv4)
+    #         if endpoint:
+    #             data_collection["endpoint"].append(endpoint)
 
-    # match data
-    data_collection = {'time': [], 'user': [], 'error': [], 'ipv4': [], 'endpoint': []}
-    for row in clean_rows:
-        matches = re.findall(regex, row)
-        # place data
-        for match in matches:
-            (time, endpoint, error, ipv4, user) = match
-            if time:
-                data_collection["time"].append(time)
-            if user:
-                data_collection["user"].append(user)
-            if error:
-                data_collection["error"].append(error)
-            if ipv4:
-                data_collection["ipv4"].append(ipv4)
-            if endpoint:
-                data_collection["endpoint"].append(endpoint)
-
-    return data_collection
-
-
+    # return data_collection
+    pass
 
 
 def get_times(text: str) -> list[tuple[int, int, int]]:
@@ -91,12 +92,15 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
     :param text: text to search for the times
     :return: list of tuples containing the time and offset
     """
-    return "that"
+    pass
 
 
 def get_usernames(text: str) -> list[str]:
     """Get usernames from text."""
-    pass
+    regex = r'(usr:(\w+))?'
+    for match in re.finditer(regex, text):
+        if match.group(1) is not None:
+            return match.group(1)
 
 
 def get_errors(text: str) -> list[int]:
@@ -108,22 +112,24 @@ def get_addresses(text: str) -> list[str]:
     """Get IPv4 addresses from text."""
     pass
 
+
+
 # HELPER FUNCTIONS
-def get_endpoints(text: str) -> list[str]:
-    """Get endpoints from text."""
-    pass
-
-def create_table(input):
-    """Create table."""
-    pass
-
-def normalize(input):
-    """Add missing 0's to the minutes and remove extra 0's from hours and take offset into account."""
-    pass
-
-def get_formatted_time(input):
-    """Format 24 hour time to the 12 hour time."""
-    pass
+# def get_endpoints(text: str) -> list[str]:
+#     """Get endpoints from text."""
+#     pass
+#
+# def create_table(input):
+#     """Create table."""
+#     pass
+#
+# def normalize(input):
+#     """Add missing 0's to the minutes and remove extra 0's from hours and take offset into account."""
+#     pass
+#
+# def get_formatted_time(input):
+#     """Format 24 hour time to the 12 hour time."""
+#     pass
 
 
 if __name__ == '__main__':
@@ -141,7 +147,10 @@ if __name__ == '__main__':
             """
 
 
-    print(create_table_string(logs))
+    # print(create_table_string(logs))
+
+    print(get_usernames(logs))
+
     # time     | 5:36 AM, 2:48 PM
     # user     | kasutaja
     # error    | 418
