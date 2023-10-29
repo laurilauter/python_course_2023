@@ -102,7 +102,7 @@ def get_usernames(text: str) -> list[str]:
     for match in re.finditer(regex, text):
         if match.group(1) is not None:
             usernames.append(match.group(1).replace("usr:", ""))
-            return usernames
+    return usernames
 
 
 def get_errors(text: str) -> list[int]:
@@ -144,7 +144,8 @@ if __name__ == '__main__':
     logs = """
             [-1b35 UTC-4] errOR 741
             [24a48 UTC+0] 776.330.579.818
-            [02:53 UTC+5] usr:96NC9yqb /aA?Y4pK
+            [02:53 UTC+5] usr:86NC9yqb /aA?Y4pK
+            [02:53 UTC+5] usr:96NC9yqc /aA?Y4pK
             [5b05 UTC+5] ERrOr 700 268.495.856.225
             """
 
