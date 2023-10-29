@@ -1,8 +1,6 @@
 """Create table from the given string."""
 import re
 
-# data_collection = {'time': [], 'user': [], 'error': [], 'ipv4': [], 'endpoint': []}
-
 
 def create_table_string(text: str) -> str:
     """
@@ -46,35 +44,29 @@ def create_table_string(text: str) -> str:
     Times in the table should be displayed in UTC(https://et.wikipedia.org/wiki/UTC) time.
     If no items were found, return an empty string.
     """
-    # regex = r'(\[(?:.*?)\s(?:.*?)\])?(\/[a-zA-Z0-9&/=?-_%]*)?([eE][rR]{2}[oO][rR] \d{3})?((?:[0-9]{1,3}\.){3}[0-9]{1,3})?(usr:.* )?'
+    data_collection = {}
+    max_length = 0
 
-    # # prepare data
-    # rows = text.split('\n')
-    # clean_rows = [row.strip(' ') for row in rows]
-    # for row in clean_rows:
-    #     if row == '':
-    #         clean_rows.remove(row)
-    #
-    # # match data and populate dictionary
-    # # data_collection = {'time': [], 'user': [], 'error': [], 'ipv4': [], 'endpoint': []}
-    # for row in clean_rows:
-    #     matches = re.findall(regex, row)
-    #     # place data
-    #     for match in matches:
-    #         (time, endpoint, error, ipv4, user) = match
-    #         if time:
-    #             data_collection["time"].append(time)
-    #         if user:
-    #             data_collection["user"].append(user)
-    #         if error:
-    #             data_collection["error"].append(error)
-    #         if ipv4:
-    #             data_collection["ipv4"].append(ipv4)
-    #         if endpoint:
-    #             data_collection["endpoint"].append(endpoint)
+    times = get_times(text)
+    if times:
+        data_collection["time"] = times
+    users = get_usernames(text)
+    if users:
+        data_collection["user"] = users
+    errors = get_errors(text)
+    if errors:
+        data_collection["error"] = errors
+    ipv4s = get_addresses(text)
+    if ipv4s:
+        data_collection["ipv4"] = ipv4s
+    endpoints = get_endpoints(text)
+    if endpoints:
+        data_collection["endpoint"] = endpoints
 
-    # return data_collection
-    return "dummy"
+    # loop through data_collection to find max_length
+    # loop over dictionary and draw table, can use a subfunction to build each line
+
+    return data_collection  # instead return table as string
 
 
 def get_times(text: str) -> list[tuple[int, int, int]]:
@@ -92,15 +84,13 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
     :param text: text to search for the times
     :return: list of tuples containing the time and offset
     """
-    #regex = r'(\[(.*?)\s(.*?)\])?(\/[a-zA-Z0-9&/=?-_%]*)?'
     regex = r'\[(.+) (UTC[-+]\d{1,2})'
     times = []
     for match in re.finditer(regex, text):
-        print(match.group(0))
+        #print(match.group(0))
         if match.group(0) is not None:
             time_fragments = match.group(0).strip("[]").split(" ")
-
-            print(time_fragments)
+            #print(time_fragments)
             found_hour = re.search(r'((\d*)(?=[AaPp :.-]))', time_fragments[0])
             found_minute = re.search(r'((?<=[AaPp :.-])(\d*))', time_fragments[0])
             if found_hour and found_minute:
@@ -109,11 +99,9 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
                     minute = int(found_minute.group(0))
                     offset = int(time_fragments[1].strip("UTC"))
                     if hour < 24 and minute < 60:
-
                     # print(hour)
                     # print(minute)
                     # print(offset)
-
                         times.append((hour, minute, offset))
     return times
 
@@ -150,22 +138,15 @@ def get_addresses(text: str) -> list[str]:
     return addresses
 
 
-# HELPER FUNCTIONS
-# def get_endpoints(text: str) -> list[str]:
-#     """Get endpoints from text."""
-#     pass
-#
-# def create_table(input):
-#     """Create table."""
-#     pass
-#
-# def normalize(input):
-#     """Add missing 0's to the minutes and remove extra 0's from hours and take offset into account."""
-#     pass
-#
-# def get_formatted_time(input):
-#     """Format 24 hour time to the 12 hour time."""
-#     pass
+def get_endpoints(text: str) -> list[str]:
+    """Get endpoints from text."""
+    regex = r'(\/[a-zA-Z0-9&/=?-_%]*)?'
+    endpoints = []
+    for match in re.finditer(regex, text):
+        if match.group(1) is not None:
+            endpoint = match.group(1)
+            endpoints.append(endpoint)
+    return endpoints
 
 
 if __name__ == '__main__':
@@ -198,9 +179,9 @@ if __name__ == '__main__':
                 [24:53 UTC-5
                 """
 
-    # print(create_table_string(logs))
+    print(create_table_string(logs))
 
-    print(get_times(logs3))
+    # print(get_times(logs3))
     # print(get_usernames(logs))
     # print(get_errors(logs))
     # print(get_addresses(logs))
