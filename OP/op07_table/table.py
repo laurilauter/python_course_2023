@@ -100,7 +100,7 @@ def get_usernames(text: str) -> list[str]:
     regex = r'(usr:(\w+))?'
     for match in re.finditer(regex, text):
         if match.group(1) is not None:
-            return match.group(1)
+            return list(match.group(1).replace("usr:", ""))
 
 
 def get_errors(text: str) -> list[int]:
