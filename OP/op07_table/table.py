@@ -74,7 +74,7 @@ def create_table_string(text: str) -> str:
     #             data_collection["endpoint"].append(endpoint)
 
     # return data_collection
-    pass
+    return "dummy"
 
 
 def get_times(text: str) -> list[tuple[int, int, int]]:
