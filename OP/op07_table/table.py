@@ -92,12 +92,17 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
     :param text: text to search for the times
     :return: list of tuples containing the time and offset
     """
-    regex = r'(\[(?:.*?)\s(?:.*?)\])?(\/[a-zA-Z0-9&/=?-_%]*)?'
+    regex = r'(\[(.*?)\s(.*?)\])?(\/[a-zA-Z0-9&/=?-_%]*)?'
     times = []
     for match in re.finditer(regex, text):
         if match.group(1) is not None:
-            time = match.group(1)
-            times.append(time)
+            time_fragments = match.group(1).strip("[]").split(" ")
+            found_hour = re.search(r'((\d*)(?=[AaPp :.-]))', time_fragments[0])
+            hour = int(found_hour.group(0))
+            found_minute = re.search(r'((?<=[AaPp :.-])(\d*))', time_fragments[0])
+            minute = int(found_minute.group(0))
+            offset = int(time_fragments[1].strip("UTC"))
+            times.append((hour, minute, offset))
     return times
 
 
@@ -166,12 +171,18 @@ if __name__ == '__main__':
             [5b05 UTC+5] ERrOr 700 268.495.856.225
             """
 
+    logs2 = """
+                [10:53 UTC+3]
+                [1:43 UTC+0]
+                [14A3 UTC-4]
+                """
+
     # print(create_table_string(logs))
 
-    print(get_times(logs))
-    print(get_usernames(logs))
-    print(get_errors(logs))
-    print(get_addresses(logs))
+    print(get_times(logs2))
+    # print(get_usernames(logs))
+    # print(get_errors(logs))
+    # print(get_addresses(logs))
 
     # time     | 5:36 AM, 2:48 PM
     # user     | kasutaja
