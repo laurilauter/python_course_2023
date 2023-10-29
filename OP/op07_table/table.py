@@ -108,12 +108,13 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
                     hour = int(found_hour.group(0))
                     minute = int(found_minute.group(0))
                     offset = int(time_fragments[1].strip("UTC"))
+                    if hour < 24 and minute < 60:
 
                     # print(hour)
                     # print(minute)
                     # print(offset)
 
-                    times.append((hour, minute, offset))
+                        times.append((hour, minute, offset))
     return times
 
 
@@ -193,6 +194,8 @@ if __name__ == '__main__':
     logs3 = """
                 [02:53 UTC+5
                 [02:53 UTC-5
+                [02:63 UTC+5
+                [24:53 UTC-5
                 """
 
     # print(create_table_string(logs))
