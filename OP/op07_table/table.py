@@ -97,12 +97,20 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
     for match in re.finditer(regex, text):
         if match.group(1) is not None:
             time_fragments = match.group(1).strip("[]").split(" ")
+            # print(time_fragments)
             found_hour = re.search(r'((\d*)(?=[AaPp :.-]))', time_fragments[0])
-            hour = int(found_hour.group(0))
             found_minute = re.search(r'((?<=[AaPp :.-])(\d*))', time_fragments[0])
-            minute = int(found_minute.group(0))
-            offset = int(time_fragments[1].strip("UTC"))
-            times.append((hour, minute, offset))
+            if found_hour and found_minute:
+                if found_hour.group(0) and found_minute.group(0):
+                    hour = int(found_hour.group(0))
+                    minute = int(found_minute.group(0))
+                    offset = int(time_fragments[1].strip("UTC"))
+
+                    # print(hour)
+                    # print(minute)
+                    # print(offset)
+
+                    times.append((hour, minute, offset))
     return times
 
 
@@ -175,6 +183,8 @@ if __name__ == '__main__':
                 [10:53 UTC+3]
                 [1:43 UTC+0]
                 [14A3 UTC-4]
+                [-1b35 UTC-4]
+                [5b05 UTC+5]
                 """
 
     # print(create_table_string(logs))
