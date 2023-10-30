@@ -195,6 +195,8 @@ def normalize_times(minutes: list[int]) -> list[str]:
         minute = minute % 60
         am_pm = "AM" if hour < 12 else "PM"
         hour = hour % 12
+        if hour == 0:
+            hour = 12
         normalized_time = f"{hour:1d}:{minute:02d} {am_pm}"
         normalized_times.append(normalized_time)
     return normalized_times
@@ -271,9 +273,16 @@ if __name__ == '__main__':
             [10 25 UTC+8
             """
 
-    print(create_table_string(logs1))
+    logs6 = """
+            [01 01 UTC+0
+            """
+    logs7 = """
+            [00:59 UTC+0 [0:0 UTC+0 [00:15 UTC+0 [00:00 UTC+0 [0:00 UTC+0
+            """
 
-    # print(get_times(logs3))
+    print(create_table_string(logs7))
+
+    # print(get_times(logs6))
     # print(get_usernames(logs))
     # print(get_errors(logs))
     # print(get_addresses(logs))
