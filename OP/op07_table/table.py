@@ -46,7 +46,6 @@ def create_table_string(text: str) -> str:
     """
     table_string = ""
     data_collection = {}
-    max_length = -1
 
     times = get_times(text)
     if times:
@@ -170,7 +169,7 @@ def calculate_times(times: list[tuple[int, int, int]]) -> list[int]:
 
 
 def normalize_times(minutes: list[int]) -> list[str]:
-    """Converts minutes to 12 hour time"""
+    """Convert minutes to 12 hour time."""
     normalized_times = []
     for minute in minutes:
         hour = minute // 60
@@ -183,6 +182,7 @@ def normalize_times(minutes: list[int]) -> list[str]:
 
 
 def build_table_row(key: str, row_data: list) -> str:
+    """Build a table row."""
     print(row_data)
     value_string = ""
     row_string = ""
