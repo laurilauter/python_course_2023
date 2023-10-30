@@ -95,7 +95,8 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
     :param text: text to search for the times
     :return: list of tuples containing the time and offset
     """
-    regex = r'\[(.+) (UTC[-+]\d{1,2})'
+    # regex = r'\[(.+) (UTC[-+]\d{1,2})'
+    regex = r'((?<=[\[])(.+)) (UTC[-+]\d{1,2})'
     times = []
     for match in re.finditer(regex, text):
         if match.group(0) is not None:
@@ -235,8 +236,15 @@ if __name__ == '__main__':
                 [02:63 UTC+5
                 [24:53 UTC-5
                 """
+    logs4 = """
+            [11234 UTC+0
+            [1112 UTC+0
+            [123 UTC+0
+            [10:25 UTC+8
+            [1000 UTC+0
+            """
 
-    print(create_table_string(logs))
+    print(create_table_string(logs4))
 
     # print(get_times(logs3))
     # print(get_usernames(logs))
