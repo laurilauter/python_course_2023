@@ -100,8 +100,10 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
     for match in re.finditer(regex, text):
         if match.group(0) is not None:
             time_fragments = match.group(0).strip("[]").split(" ")
-            found_hour = re.search(r'((\d*)(?=[AaPp :.-]))', time_fragments[0])
-            found_minute = re.search(r'((?<=[AaPp :.-])(\d*))', time_fragments[0])
+            found_hour = re.search(r'((\d*)(?=[AaPp :.=-]))', time_fragments[0])
+            found_minute = re.search(r'((?<=[AaPp :.=?-])(\d*))', time_fragments[0])
+            print(found_hour)
+            print(found_minute)
             if found_hour and found_minute:
                 if found_hour.group(0) and found_minute.group(0):
                     hour = int(found_hour.group(0))
@@ -200,12 +202,13 @@ def build_table_row(key: str, row_data: list) -> str:
 
 if __name__ == '__main__':
 
-    # logs = """
-    #         [14?36 UTC+9] /tere eRRoR 418 192.168.0.255
-    #         [8B48 UTC-6] usr:kasutaja
-    #         """
-
     logs = """
+            [15=53 UTC+7] /NBYFaC0 468.793.214.681
+            [23-7 UTC+12] /1slr8I
+            [07.46 UTC+4] usr:B3HIyLm 119.892.677.533
+            """
+
+    logs1 = """
             [-1b35 UTC-4] errOR 741
             [24a48 UTC+0] 776.330.579.818
             [02:53 UTC+5] usr:96NC9yqb /aA?Y4pK
