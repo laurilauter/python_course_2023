@@ -176,7 +176,7 @@ def get_addresses(text: str) -> list[str]:
 
 def get_endpoints(text: str) -> list[str]:
     """Get endpoints from text."""
-    regex = r'(\/[a-zA-Z0-9&/=?-_%-&/]*)?'
+    regex = r'(\/[a-zA-Z0-9&/=?\-_%-&/]*)?'
     endpoints = []
     for match in re.finditer(regex, text):
         if match.group(1) is not None:
@@ -283,7 +283,7 @@ if __name__ == '__main__':
             """
     logs5 = """
             [10 25 UTC+8
-            [02B03 UTC+2]
+            [02B03 UTC+2] /-TGhb_lJ
             """
 
     logs6 = """
