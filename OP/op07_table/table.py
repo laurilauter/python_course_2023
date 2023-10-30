@@ -68,7 +68,6 @@ def create_table_string(text: str) -> str:
     for key, value in data_collection.items():
         sorted_values = sorted(value)
         sorted_data_collection[key] = sorted_values
-    print("sorted_data_collection", sorted_data_collection)
 
     # normalize times
     sorted_data_collection["time"] = normalize_times(sorted_data_collection["time"])
@@ -183,10 +182,6 @@ def normalize_times(minutes: list[int]) -> list[str]:
 
 def build_table_row(key: str, row_data: list) -> str:
     """Build a table row."""
-    print(row_data)
-    value_string = ""
-    row_string = ""
-
     if isinstance(row_data, list):
         if isinstance(row_data[0], int):
             list_of_strings = []
