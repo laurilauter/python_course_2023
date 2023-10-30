@@ -46,7 +46,6 @@ def create_table_string(text: str) -> str:
     """
     table_string = ""
     data_collection = {}
-    longest_key_length = 0
 
     times = get_times(text)
     if times:
@@ -75,11 +74,7 @@ def create_table_string(text: str) -> str:
         if sorted_data_collection["time"]:
             sorted_data_collection["time"] = normalize_times(sorted_data_collection["time"])
 
-    # get longest_key_length
-    for key in sorted_data_collection.keys():
-        if longest_key_length < max(longest_key_length, len(key)):
-            longest_key_length = max(longest_key_length, len(key))
-
+    longest_key_length = get_longest_key_length(sorted_data_collection)
     # build table
     for key in sorted_data_collection.keys():
         table_string += build_table_row(longest_key_length, key, sorted_data_collection[key])
@@ -205,6 +200,14 @@ def build_table_row(longest_key_length: int, key: str, row_data: list) -> str:
 
     row_string = f"{key:<{longest_key_length + 1}}| {str(value_string):>}\n"
     return row_string
+
+def get_longest_key_length(sorted_data_collection: dict) -> int:
+    """Get longest key length."""
+    max_key_length = 0
+    for key in sorted_data_collection.keys():
+        if max_key_length < max(max_key_length, len(key)):
+            max_key_length = max(max_key_length, len(key))
+    return max_key_length
 
 
 if __name__ == '__main__':
