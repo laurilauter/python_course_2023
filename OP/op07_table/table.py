@@ -194,7 +194,7 @@ def build_table_row(key: str, row_data: list) -> str:
     else:
         value_string = str(row_data)
 
-    row_string = f"{key:<10}|  {str(value_string):>}\n"
+    row_string = f"{key:<9}| {str(value_string):>}\n"
     return row_string
 
 
