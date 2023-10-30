@@ -181,7 +181,7 @@ def normalize_times(minutes: list[int]) -> list[str]:
         minute = minute % 60
         am_pm = "AM" if hour < 12 else "PM"
         hour = hour % 12
-        normalized_time = f"{hour:2d}:{minute:02d} {am_pm}"
+        normalized_time = f"{hour:1d}:{minute:02d} {am_pm}"
         normalized_times.append(normalized_time)
     return normalized_times
 
@@ -198,7 +198,7 @@ def build_table_row(longest_key_length: int, key: str, row_data: list) -> str:
     else:
         value_string = str(row_data)
 
-    row_string = f"{key:<{longest_key_length + 1}}| {str(value_string):>}\n"
+    row_string = f"{key:<{longest_key_length + 1}}| {str(value_string):>1}\n"
     return row_string
 
 
