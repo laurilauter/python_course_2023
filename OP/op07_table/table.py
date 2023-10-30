@@ -44,29 +44,40 @@ def create_table_string(text: str) -> str:
     Times in the table should be displayed in UTC(https://et.wikipedia.org/wiki/UTC) time.
     If no items were found, return an empty string.
     """
+    table_string = ""
     data_collection = {}
-    max_length = 0
+    max_length = -1
 
     times = get_times(text)
     if times:
-        data_collection["time"] = times
+        data_collection["time"] = set(calculate_times(times))
     users = get_usernames(text)
     if users:
-        data_collection["user"] = users
+        data_collection["user"] = set(users)
     errors = get_errors(text)
     if errors:
-        data_collection["error"] = errors
+        data_collection["error"] = set(errors)
     ipv4s = get_addresses(text)
     if ipv4s:
-        data_collection["ipv4"] = ipv4s
+        data_collection["ipv4"] = set(ipv4s)
     endpoints = get_endpoints(text)
     if endpoints:
-        data_collection["endpoint"] = endpoints
+        data_collection["endpoint"] = set(endpoints)
 
-    # loop through data_collection to find max_length
-    # loop over dictionary and draw table, can use a subfunction to build each line
+    # sort the dictionary
+    sorted_data_collection = {}
+    for key, value in data_collection.items():
+        sorted_values = sorted(value)
+        sorted_data_collection[key] = sorted_values
+    print("sorted_data_collection", sorted_data_collection)
 
-    return data_collection  # instead return table as string
+    # normalize times
+    sorted_data_collection["time"] = normalize_times(sorted_data_collection["time"])
+
+    # build table
+    for key in sorted_data_collection.keys():
+        table_string += build_table_row(key, sorted_data_collection[key])
+    return table_string
 
 
 def get_times(text: str) -> list[tuple[int, int, int]]:
@@ -87,10 +98,8 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
     regex = r'\[(.+) (UTC[-+]\d{1,2})'
     times = []
     for match in re.finditer(regex, text):
-        #print(match.group(0))
         if match.group(0) is not None:
             time_fragments = match.group(0).strip("[]").split(" ")
-            #print(time_fragments)
             found_hour = re.search(r'((\d*)(?=[AaPp :.-]))', time_fragments[0])
             found_minute = re.search(r'((?<=[AaPp :.-])(\d*))', time_fragments[0])
             if found_hour and found_minute:
@@ -99,9 +108,6 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
                     minute = int(found_minute.group(0))
                     offset = int(time_fragments[1].strip("UTC"))
                     if hour < 24 and minute < 60:
-                    # print(hour)
-                    # print(minute)
-                    # print(offset)
                         times.append((hour, minute, offset))
     return times
 
@@ -149,6 +155,52 @@ def get_endpoints(text: str) -> list[str]:
     return endpoints
 
 
+def calculate_times(times: list[tuple[int, int, int]]) -> list[int]:
+    """Calculate times."""
+    calculated_times = []
+    for time in times:
+        hours = time[0] + time[2]
+        if hours > 23:
+            hours -= 24
+        if hours < 0:
+            hours += 24
+        minutes = time[1]
+        calculated_times.append(hours * 60 + minutes)
+    return calculated_times
+
+
+def normalize_times(minutes: list[int]) -> list[str]:
+    """Converts minutes to 12 hour time"""
+    normalized_times = []
+    for minute in minutes:
+        hour = minute // 60
+        minute = minute % 60
+        am_pm = "AM" if hour < 12 else "PM"
+        hour = hour % 12
+        normalized_time = f"{hour:02d}:{minute:02d} {am_pm}"
+        normalized_times.append(normalized_time)
+    return normalized_times
+
+
+def build_table_row(key: str, row_data: list) -> str:
+    print(row_data)
+    value_string = ""
+    row_string = ""
+
+    if isinstance(row_data, list):
+        if isinstance(row_data[0], int):
+            list_of_strings = []
+            for integer in row_data:
+                list_of_strings.append(str(integer))
+            row_data = list_of_strings
+        value_string = ", ".join(row_data)
+    else:
+        value_string = str(row_data)
+
+    row_string = f"{key:<10}|  {str(value_string):>}\n"
+    return row_string
+
+
 if __name__ == '__main__':
 
     # logs = """
@@ -160,7 +212,9 @@ if __name__ == '__main__':
             [-1b35 UTC-4] errOR 741
             [24a48 UTC+0] 776.330.579.818
             [02:53 UTC+5] usr:86NC9yqb /aA?Y4pK
-            [02:53 UTC+5] usr:96NC9yqc /aA?Y4pK
+            [02:43 UTC+5] usr:96NC9yqc /aA?Y4pK
+            [01:23 UTC-2] usr:96NC9yqc /aA?Y4pK
+            [23:23 UTC+5] usr:96NC9yqc /aA?Y4pK
             [5b05 UTC+5] ERrOr 700 268.495.856.225
             """
 
@@ -174,7 +228,7 @@ if __name__ == '__main__':
                 """
     logs3 = """
                 [02:53 UTC+5
-                [02:53 UTC-5
+                [02:43 UTC-5
                 [02:63 UTC+5
                 [24:53 UTC-5
                 """
