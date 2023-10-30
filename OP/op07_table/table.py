@@ -70,7 +70,8 @@ def create_table_string(text: str) -> str:
         sorted_data_collection[key] = sorted_values
 
     # normalize times
-    sorted_data_collection["time"] = normalize_times(sorted_data_collection["time"])
+    if sorted_data_collection["time"]:
+        sorted_data_collection["time"] = normalize_times(sorted_data_collection["time"])
 
     # build table
     for key in sorted_data_collection.keys():
@@ -205,12 +206,6 @@ if __name__ == '__main__':
 
     logs = """
             [-1b35 UTC-4] errOR 741
-            [24a48 UTC+0] 776.330.579.818
-            [02:53 UTC+5] usr:86NC9yqb /aA?Y4pK
-            [02:43 UTC+5] usr:96NC9yqc /aA?Y4pK
-            [01:23 UTC-2] usr:96NC9yqc /aA?Y4pK
-            [23:23 UTC+5] usr:96NC9yqc /aA?Y4pK
-            [5b05 UTC+5] ERrOr 700 268.495.856.225
             """
 
     logs2 = """
