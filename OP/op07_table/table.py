@@ -163,7 +163,7 @@ def calculate_times(times: list[tuple[int, int, int]]) -> list[int]:
     """Calculate times."""
     calculated_times = []
     for time in times:
-        hours = time[0] + time[2]
+        hours = time[0] - time[2]
         if hours > 23:
             hours -= 24
         if hours < 0:
@@ -200,6 +200,7 @@ def build_table_row(longest_key_length: int, key: str, row_data: list) -> str:
 
     row_string = f"{key:<{longest_key_length + 1}}| {str(value_string):>}\n"
     return row_string
+
 
 def get_longest_key_length(sorted_data_collection: dict) -> int:
     """Get longest key length."""
