@@ -103,11 +103,22 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
     for match in re.finditer(regex, text):
         if match.group(0) is not None:
             time_fragments = match.group(0).strip("[]").split(" ")
-            found_hour = re.search(r'((\d*)(?=[AaPp :.=-]))', time_fragments[0])
-            found_minute = re.search(r'((?<=[AaPp :.=?-])(\d*))', time_fragments[0])
-            # print(found_hour)
-            # print(found_minute)
-            if found_hour and found_minute:
+            if len(time_fragments) > 2:
+                time_fragments = [time_fragments[0] + time_fragments[1], time_fragments[2]]
+            print(time_fragments)
+            if len(time_fragments[0]) > 4:
+                found_hour = re.search(r'((\d{1,2})(?=[AaPp :.=-]?))', time_fragments[0])
+                found_minute = re.search(r'((?<=[AaPp :.=?-])(\d{1,2}))', time_fragments[0])
+            elif len(time_fragments[0]) == 4:
+                found_hour = time_fragments[0][:2]
+                found_minute = time_fragments[0][-2:]
+            else:
+                found_hour = time_fragments[0][:1]
+                found_minute = time_fragments[0][-2:]
+
+            print(found_hour)
+            print(found_minute)
+            if not isinstance(found_hour, str) and not isinstance(found_minute, str):
                 if found_hour.group(0) and found_minute.group(0):
                     hour = int(found_hour.group(0))
                     minute = int(found_minute.group(0))
@@ -255,7 +266,7 @@ if __name__ == '__main__':
             [1000 UTC+0
             """
     logs5 = """
-            s [11234 UTC+0 [1112 UTC+0 [123 UTC+0  [10:25 UTC+8  [1000 UTC+0 done.
+            [10 25 UTC+8
             """
 
     print(create_table_string(logs5))
