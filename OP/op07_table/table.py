@@ -70,8 +70,9 @@ def create_table_string(text: str) -> str:
         sorted_data_collection[key] = sorted_values
 
     # normalize times
-    if sorted_data_collection["time"]:
-        sorted_data_collection["time"] = normalize_times(sorted_data_collection["time"])
+    if "time" in sorted_data_collection:
+        if sorted_data_collection["time"]:
+            sorted_data_collection["time"] = normalize_times(sorted_data_collection["time"])
 
     # build table
     for key in sorted_data_collection.keys():
