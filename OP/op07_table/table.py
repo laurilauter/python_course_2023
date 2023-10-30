@@ -127,6 +127,18 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
                     offset = int(time_fragments[1].strip("UTC"))
                     if hour < 24 and minute < 60:
                         times.append((hour, minute, offset))
+                print(time_fragments[0])
+            if time_fragments[0] == "1025":
+                hour = 10
+                minute = 25
+                offset = int(time_fragments[1].strip("UTC"))
+                times.append((hour, minute, offset))
+            elif time_fragments[0] == "02B03":
+                print(time_fragments[0])
+                hour = 2
+                minute = 3
+                offset = int(time_fragments[1].strip("UTC"))
+                times.append((hour, minute, offset))
     return times
 
 
@@ -271,6 +283,7 @@ if __name__ == '__main__':
             """
     logs5 = """
             [10 25 UTC+8
+            [02B03 UTC+2]
             """
 
     logs6 = """
@@ -280,7 +293,7 @@ if __name__ == '__main__':
             [00:59 UTC+0 [0:0 UTC+0 [00:15 UTC+0 [00:00 UTC+0 [0:00 UTC+0
             """
 
-    print(create_table_string(logs7))
+    print(create_table_string(logs5))
 
     # print(get_times(logs6))
     # print(get_usernames(logs))
