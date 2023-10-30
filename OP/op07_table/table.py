@@ -181,7 +181,7 @@ def normalize_times(minutes: list[int]) -> list[str]:
         minute = minute % 60
         am_pm = "AM" if hour < 12 else "PM"
         hour = hour % 12
-        normalized_time = f"{hour:02d}:{minute:02d} {am_pm}"
+        normalized_time = f"{hour:2d}:{minute:02d} {am_pm}"
         normalized_times.append(normalized_time)
     return normalized_times
 
