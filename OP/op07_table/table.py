@@ -74,9 +74,15 @@ def create_table_string(text: str) -> str:
         if sorted_data_collection["time"]:
             sorted_data_collection["time"] = normalize_times(sorted_data_collection["time"])
 
+    # get longest_key_length
+    longest_key_length = 0
+    for key in sorted_data_collection.keys():
+        if longest_key_length < max(longest_key_length, len(key)):
+            longest_key_length = max(longest_key_length, len(key))
+
     # build table
     for key in sorted_data_collection.keys():
-        table_string += build_table_row(key, sorted_data_collection[key])
+        table_string += build_table_row(longest_key_length, key, sorted_data_collection[key])
     return table_string
 
 
@@ -103,8 +109,8 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
             time_fragments = match.group(0).strip("[]").split(" ")
             found_hour = re.search(r'((\d*)(?=[AaPp :.=-]))', time_fragments[0])
             found_minute = re.search(r'((?<=[AaPp :.=?-])(\d*))', time_fragments[0])
-            print(found_hour)
-            print(found_minute)
+            # print(found_hour)
+            # print(found_minute)
             if found_hour and found_minute:
                 if found_hour.group(0) and found_minute.group(0):
                     hour = int(found_hour.group(0))
@@ -185,7 +191,7 @@ def normalize_times(minutes: list[int]) -> list[str]:
     return normalized_times
 
 
-def build_table_row(key: str, row_data: list) -> str:
+def build_table_row(longest_key_length: int, key: str, row_data: list) -> str:
     """Build a table row."""
     if isinstance(row_data, list):
         if isinstance(row_data[0], int):
@@ -197,7 +203,7 @@ def build_table_row(key: str, row_data: list) -> str:
     else:
         value_string = str(row_data)
 
-    row_string = f"{key:<9}| {str(value_string):>}\n"
+    row_string = f"{key:<{longest_key_length + 1}}| {str(value_string):>}\n"
     return row_string
 
 
@@ -240,11 +246,11 @@ if __name__ == '__main__':
             [11234 UTC+0
             [1112 UTC+0
             [123 UTC+0
-            [10:25 UTC+8
+            [10:25 UTC+8 15.822.272.473 error 9
             [1000 UTC+0
             """
 
-    print(create_table_string(logs4))
+    print(create_table_string(logs1))
 
     # print(get_times(logs3))
     # print(get_usernames(logs))
