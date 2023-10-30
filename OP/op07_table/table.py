@@ -106,18 +106,8 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
             if len(time_fragments) > 2:
                 time_fragments = [time_fragments[0] + time_fragments[1], time_fragments[2]]
             found_hour = re.search(r'((\d{1,2})(?=[a-zA-Z :,.=-]?))', time_fragments[0])
-            found_minute = re.search(r'((?<=[a-zA-Z :,.=?-])(\d{1,2}))', time_fragments[0])
+            found_minute = re.search(r'(\d{2})\b|(?<=\d{2})\d{2}\b', time_fragments[0])
             print(time_fragments)
-            # if len(time_fragments[0]) > 4:
-            #     found_hour = re.search(r'((\d{1,2})(?=[AaPp :.=-]?))', time_fragments[0])
-            #     found_minute = re.search(r'((?<=[AaPp :.=?-])(\d{1,2}))', time_fragments[0])
-            # elif len(time_fragments[0]) == 4:
-            #     found_hour = time_fragments[0][:2]
-            #     found_minute = time_fragments[0][-2:]
-            # else:
-            #     found_hour = time_fragments[0][:1]
-            #     found_minute = time_fragments[0][-2:]
-
             print(found_hour)
             print(found_minute)
             if found_hour and found_minute:
@@ -127,18 +117,6 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
                     offset = int(time_fragments[1].strip("UTC"))
                     if hour < 24 and minute < 60:
                         times.append((hour, minute, offset))
-            #     print(time_fragments[0])
-            # if time_fragments[0] == "1025":
-            #     hour = 10
-            #     minute = 25
-            #     offset = int(time_fragments[1].strip("UTC"))
-            #     times.append((hour, minute, offset))
-            # elif time_fragments[0] == "02B03":
-            #     print(time_fragments[0])
-            #     hour = 2
-            #     minute = 3
-            #     offset = int(time_fragments[1].strip("UTC"))
-            #     times.append((hour, minute, offset))
     return times
 
 
@@ -283,7 +261,7 @@ if __name__ == '__main__':
             """
     logs5 = """
             [10 25 UTC+8
-            [02B03 UTC+2] /-TGhb_lJ
+            [02B03 UTC+2]
             """
 
     logs6 = """
