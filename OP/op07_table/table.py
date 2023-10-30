@@ -120,7 +120,7 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
 
             print(found_hour)
             print(found_minute)
-            if not isinstance(found_hour, str) and not isinstance(found_minute, str):
+            if found_hour and found_minute:
                 if found_hour.group(0) and found_minute.group(0):
                     hour = int(found_hour.group(0))
                     minute = int(found_minute.group(0))
