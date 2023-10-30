@@ -124,7 +124,7 @@ def get_usernames(text: str) -> list[str]:
 
 def get_errors(text: str) -> list[int]:
     """Get errors from text."""
-    regex = r'([eE][rR]{2}[oO][rR] \d{3})?'
+    regex = r'([eE][rR]{2}[oO][rR] \d{1,3})?'
     errors = []
     for match in re.finditer(regex, text):
         if match.group(1) is not None:
@@ -207,6 +207,15 @@ if __name__ == '__main__':
 
     logs = """
             [-1b35 UTC-4] errOR 741
+            [24a48 UTC+0] 776.330.579.818
+            [02:53 UTC+5] usr:96NC9yqb /aA?Y4pK
+            [5b05 UTC+5] ERrOr 700 268.495.856.225
+            [24-09 UTC+10] usr:uJV5sf82_ eRrOR 844 715.545.485.989
+            [04=54 UTC+3] eRROR 452
+            [11=57 UTC-6] 15.822.272.473 error 9
+            [15=53 UTC+7] /NBYFaC0 468.793.214.681
+            [23-7 UTC+12] /1slr8I
+            [07.46 UTC+4] usr:B3HIyLm 119.892.677.533
             """
 
     logs2 = """
