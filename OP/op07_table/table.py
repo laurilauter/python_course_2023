@@ -105,16 +105,18 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
             time_fragments = match.group(0).strip("[]").split(" ")
             if len(time_fragments) > 2:
                 time_fragments = [time_fragments[0] + time_fragments[1], time_fragments[2]]
+            found_hour = re.search(r'((\d{1,2})(?=[AaPp :.=-]?))', time_fragments[0])
+            found_minute = re.search(r'((?<=[AaPp :.=?-])(\d{1,2}))', time_fragments[0])
             print(time_fragments)
-            if len(time_fragments[0]) > 4:
-                found_hour = re.search(r'((\d{1,2})(?=[AaPp :.=-]?))', time_fragments[0])
-                found_minute = re.search(r'((?<=[AaPp :.=?-])(\d{1,2}))', time_fragments[0])
-            elif len(time_fragments[0]) == 4:
-                found_hour = time_fragments[0][:2]
-                found_minute = time_fragments[0][-2:]
-            else:
-                found_hour = time_fragments[0][:1]
-                found_minute = time_fragments[0][-2:]
+            # if len(time_fragments[0]) > 4:
+            #     found_hour = re.search(r'((\d{1,2})(?=[AaPp :.=-]?))', time_fragments[0])
+            #     found_minute = re.search(r'((?<=[AaPp :.=?-])(\d{1,2}))', time_fragments[0])
+            # elif len(time_fragments[0]) == 4:
+            #     found_hour = time_fragments[0][:2]
+            #     found_minute = time_fragments[0][-2:]
+            # else:
+            #     found_hour = time_fragments[0][:1]
+            #     found_minute = time_fragments[0][-2:]
 
             print(found_hour)
             print(found_minute)
@@ -269,7 +271,7 @@ if __name__ == '__main__':
             [10 25 UTC+8
             """
 
-    print(create_table_string(logs5))
+    print(create_table_string(logs1))
 
     # print(get_times(logs3))
     # print(get_usernames(logs))
