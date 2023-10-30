@@ -46,6 +46,7 @@ def create_table_string(text: str) -> str:
     """
     table_string = ""
     data_collection = {}
+    longest_key_length = 0
 
     times = get_times(text)
     if times:
@@ -75,7 +76,6 @@ def create_table_string(text: str) -> str:
             sorted_data_collection["time"] = normalize_times(sorted_data_collection["time"])
 
     # get longest_key_length
-    longest_key_length = 0
     for key in sorted_data_collection.keys():
         if longest_key_length < max(longest_key_length, len(key)):
             longest_key_length = max(longest_key_length, len(key))
@@ -155,7 +155,7 @@ def get_addresses(text: str) -> list[str]:
 
 def get_endpoints(text: str) -> list[str]:
     """Get endpoints from text."""
-    regex = r'(\/[a-zA-Z0-9&/=?-_%]*)?'
+    regex = r'(\/[a-zA-Z0-9&/=?-_%-&/]*)?'
     endpoints = []
     for match in re.finditer(regex, text):
         if match.group(1) is not None:
