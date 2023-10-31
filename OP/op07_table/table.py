@@ -107,7 +107,7 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
                 time_fragments = [time_fragments[0] + time_fragments[1], time_fragments[2]]
             # found_hour = re.search(r'((\d{1,2})(?=[a-zA-Z !:,.\'\"=-\\\\-]?))', time_fragments[0])
 
-            found_hour = re.search(r'(\d{1,2})(?=\D)', time_fragments[0])
+            found_hour = re.search(r'(\d{1,2})(?=\D)|(\d{2}(?<=\d{2}))', time_fragments[0])
 
 
             # found_minute = re.search(r'((?<=[a-zA-Z !:,.\'\"=?-\\\\-])(\d{1,2}))|(?<=\d{2})\d{2}', time_fragments[0])
