@@ -105,8 +105,9 @@ def get_times(text: str) -> list[tuple[int, int, int]]:
             time_fragments = match.group(0).strip("[]").split(" ")
             if len(time_fragments) > 2:
                 time_fragments = [time_fragments[0] + time_fragments[1], time_fragments[2]]
-            found_hour = re.search(r'((\d{1,2})(?=[a-zA-Z :,.=-]?))', time_fragments[0])
-            found_minute = re.search(r'((?<=[a-zA-Z :,.=?-])(\d{1,2}))|(?<=\d{2})\d{2}', time_fragments[0])
+            found_hour = re.search(r'((\d{1,2})(?=[a-zA-Z :,.=-\\\\]?))', time_fragments[0])
+            # found_minute = re.search(r'((?<=[a-zA-Z :,.=?-\\])(\d{1,2}))', time_fragments[0])
+            found_minute = re.search(r'((?<=[a-zA-Z :,.=?-\\\\])(\d{1,2}))|(?<=\d{2})\d{2}', time_fragments[0])
             # found_minute = re.search(r'((\d{1,2})(?=[a-zA-Z :,.=-]?))\b|(?<=\d{2})\d{2}\b', time_fragments[0])
             print(time_fragments)
             print(found_hour)
@@ -268,6 +269,7 @@ if __name__ == '__main__':
     logs6 = """
             [10 25 UTC+0
             [01 01 UTC+0
+            [02\\02 UTC+0
             """
     logs7 = """
             [00:59 UTC+0 [0:0 UTC+0 [00:15 UTC+0 [00:00 UTC+0 [0:00 UTC+0
