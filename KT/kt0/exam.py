@@ -15,7 +15,7 @@ def add_char_into_pos(char: str, pos: int, string: str) -> str:
 
     """
     if string:
-        if len(string) < pos:
+        if len(string) <= pos:
             return string
         new_string = string[:pos - 1] + char + string[pos - 1:]
         return new_string
