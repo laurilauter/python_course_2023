@@ -55,17 +55,20 @@ def nr_into_num_list(nr: int, num_list: list) -> list:
     nr_into_num_list(0, [1,2,3,4,5]) -> [0,1,2,3,4,5,]
 
     """
-    is_added = False
-    for num in num_list:
-        if num < nr and not is_added:
-            num_list.append(nr)
-            is_added = True
-        num_list.append(nr)
+    pos = nr
+    return num_list[:pos] + [nr] + num_list[pos:]
 
-    if not is_added:
-        num_list.append(nr)
-
-    return num_list
+    # is_added = False
+    # for num in num_list:
+    #     if num < nr and not is_added:
+    #         num_list.append(nr)
+    #         is_added = True
+    #     num_list.append(nr)
+    #
+    # if not is_added:
+    #     num_list.append(nr)
+    #
+    # return num_list
 
 
 def symbol_average_position_in_words(words: list) -> dict:
