@@ -113,12 +113,15 @@ def remove_in_middle(text: str, to_remove: str) -> str:
     :param to_remove: substring to be removed.
     :return: string with middle substrings removed.
     """
-    first = text[:len(to_remove)]
-    last = text[:len(to_remove)]
-    middle = text[len(to_remove):-len(to_remove)]
-    while to_remove in middle:
-        middle = middle.replace(to_remove, "")
-    return first + middle + last
+    # first = text[:len(to_remove)]
+    # last = text[:len(to_remove)]
+    # middle = text[len(to_remove):-len(to_remove)]
+    # while to_remove in middle:
+    #     middle = middle.replace(to_remove, "")
+    # return first + middle + last
+
+    fragments = text.split(to_remove)
+    return fragments
 
 
 if __name__ == '__main__':
