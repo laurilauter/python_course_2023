@@ -35,8 +35,10 @@ def nr_of_common_characters(string1: str, string2: str) -> int:
 
     """
     common_chars = 0
-    for char_i in string1:
-        if char_i in string2:
+    string1a = "".join(set(string1))
+    string2a = "".join(set(string2))
+    for char_i in string1a:
+        if char_i in string2a:
             common_chars += 1
     return common_chars
 
