@@ -34,7 +34,11 @@ def nr_of_common_characters(string1: str, string2: str) -> int:
     common_characters("memm", "") -> 0
 
     """
-    pass
+    common_chars = 0
+    for char_i in string1:
+        if char_i in string2:
+            common_chars += 1
+    return common_chars
 
 
 def nr_into_num_list(nr: int, num_list: list) -> list:
@@ -111,10 +115,14 @@ def str_dist(string: str, sub: str) -> int:
 
 if __name__ == '__main__':
 
-    print(add_char_into_pos("a", 2, "kheksa"))# -> "kaheksa"
-    print(add_char_into_pos("t", 8, "kaheksa"))# -> "kaheksat"
-    print(add_char_into_pos("a", 1, "mps"))# -> "amps"
-    print(add_char_into_pos("a", 1, ""))# -> "a"
-    print(add_char_into_pos("k", 10, "kalla"))# -> "kalla"
+    # print(add_char_into_pos("a", 2, "kheksa"))# -> "kaheksa"
+    # print(add_char_into_pos("t", 8, "kaheksa"))# -> "kaheksat"
+    # print(add_char_into_pos("a", 1, "mps"))# -> "amps"
+    # print(add_char_into_pos("a", 1, ""))# -> "a"
+    # print(add_char_into_pos("k", 10, "kalla"))# -> "kalla"
+    # print(add_char_into_pos("a", 1, "bc"))  # -> "kalla"
 
-    print(add_char_into_pos("a", 1, "bc"))  # -> "kalla"
+    print(nr_of_common_characters("iva", "avis"))# -> 3  # 'a', 'i', 'v' are common
+    print(nr_of_common_characters("saali", "pall"))# -> 2  # 'a', 'l' are common
+    print(nr_of_common_characters("memm", "taat"))# -> 0
+    print(nr_of_common_characters("memm", ""))# -> 0
