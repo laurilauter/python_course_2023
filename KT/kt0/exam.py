@@ -15,8 +15,8 @@ def add_char_into_pos(char: str, pos: int, string: str) -> str:
 
     """
     if string:
-        if len(string) <= pos:
-            return string
+        # if len(string) < pos:
+        #     return string
         new_string = string[:pos - 1] + char + string[pos - 1:]
         return new_string
     return char
@@ -116,3 +116,5 @@ if __name__ == '__main__':
     print(add_char_into_pos("a", 1, "mps"))# -> "amps"
     print(add_char_into_pos("a", 1, ""))# -> "a"
     print(add_char_into_pos("k", 10, "kalla"))# -> "kalla"
+
+    print(add_char_into_pos("s", 6, "kaeva"))  # -> "kalla"
