@@ -260,10 +260,10 @@ if __name__ == '__main__':
     # print(recursive_reverse(""))  # = > ""
     # print(recursive_reverse("1"))  # = > "1"
 
-    print("\nloop sum:")
-    print(loop_sum(0))  # = > 0
-    print(loop_sum(3))  # = > 6
-    print(loop_sum(5))  # = > 15
+    # print("\nloop sum:")
+    # print(loop_sum(0))  # = > 0
+    # print(loop_sum(3))  # = > 6
+    # print(loop_sum(5))  # = > 15
 
     print("\nrecursive sum:")
     print(recursive_sum(0))  # = > 0
