@@ -86,11 +86,9 @@ def loop_factorial(num: int) -> int:
     """
     if num < 0:
         return -1
-
     factorial = 1
     for i in range(1, num + 1):
         factorial *= i
-
     return factorial
 
 
@@ -109,10 +107,8 @@ def recursive_factorial(num: int) -> int:
     """
     if num < 0:
         return -1
-
     if num == 0:
         return 1
-
     return num * recursive_factorial(num - 1)
 
 
@@ -137,10 +133,8 @@ def check_palindrome(string: str) -> bool:
 
     if len(string) <= 1:
         return True
-
     if string[0] != string[-1]:
         return False
-
     return check_palindrome(string[1:-1])
 
 
@@ -157,7 +151,15 @@ def check_for_prime(num: int, i=None) -> bool:
     :param i: used to check if 'num' is a multiple of some integer.
     :return: boolean. True if 'num' is prime, False otherwise
     """
-    pass
+    if num == 0 or num == 1:
+        return False
+    if i is None:
+        i = 2
+    if i * i > num:
+        return True
+    if num % i == 0:
+        return False
+    return check_for_prime(num, i + 1)
 
 
 def replace(input_string: str, char_to_replace: str, new_string: str) -> str:
@@ -184,7 +186,14 @@ def replace(input_string: str, char_to_replace: str, new_string: str) -> str:
     :param new_string: string of characters that will replace all occurences of 'char_to_replace'
     :return: input string with all 'char_to_replace' characters replaced with 'new_string'-s
     """
-    pass
+    if len(char_to_replace) != 1:
+        return "Length of char_to_replace must be one character!"
+    if input_string == "":
+        return ""
+    if input_string[0] == char_to_replace:
+        return new_string + replace(input_string[1:], char_to_replace, new_string)
+    else:
+        return input_string[0] + replace(input_string[1:], char_to_replace, new_string)
 
 
 def fibonacci(num: int, fib_list=None) -> list | None:
@@ -203,7 +212,15 @@ def fibonacci(num: int, fib_list=None) -> list | None:
     :param fib_list: used to pass the currently computed list on numbers
     :return: list of the first 'num' Fibonacci numbers
     """
-    pass
+    if num < 0:
+        return None
+    if num < 2:
+        return [0, 1]
+    if fib_list is None:
+        fib_list = [0, 1]
+    next_fib = fib_list[-1] + fib_list[-2]
+    fib_list.append(next_fib)
+    return fibonacci(num - 1, fib_list)
 
 
 def x_sum_loop(nums: list, x: int) -> int:
@@ -226,7 +243,12 @@ def x_sum_loop(nums: list, x: int) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    pass
+    result = 0
+    if x == 0:
+        return 0
+    for i in range(0, len(nums), abs(x)):
+        result += nums[i]
+    return result
 
 
 def x_sum_recursion(nums: list, x: int) -> int:
@@ -249,7 +271,12 @@ def x_sum_recursion(nums: list, x: int) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    pass
+    if x == 0 or not nums:
+        return 0
+    if x > 0:
+        return nums[x - 1] + x_sum_recursion(nums[x:], x)
+    else:
+        return nums[x] + x_sum_recursion(nums[:x], x)
 
 
 def sum_squares(nested_list: list | int) -> int:
@@ -266,7 +293,11 @@ def sum_squares(nested_list: list | int) -> int:
     :param nested_list: list of lists of lists of lists of lists ... and ints
     :return: sum of squares
     """
-    pass
+    if len(nested_list) == 0:
+        return 0
+    if not isinstance(nested_list[0], list):
+        return nested_list[0] ** 2 + sum_squares(nested_list[1:])
+    return sum_squares(nested_list[0]) + sum_squares(nested_list[1:])
 
 
 if __name__ == '__main__':
@@ -292,19 +323,19 @@ if __name__ == '__main__':
     # print(recursive_sum(3))  # = > 6
     # print(recursive_sum(5))  # = > 15
 
-    print("\nloop factorial:")
-    print(loop_factorial(0))  # = > 1
-    print(loop_factorial(5))  # = > 120
-    print(loop_factorial(7))  # = > 5040
-    print(loop_factorial(-1))  # = > -1
-    print(loop_factorial(-5))  # = > -1
-
-    print("\nrecursive factorial:")
-    print(recursive_factorial(0))  # = > 1
-    print(recursive_factorial(5))  # = > 120
-    print(recursive_factorial(7))  # = > 5040
-    print(recursive_factorial(-1))  # = > -1
-    print(recursive_factorial(-5))  # = > -1
+    # print("\nloop factorial:")
+    # print(loop_factorial(0))  # = > 1
+    # print(loop_factorial(5))  # = > 120
+    # print(loop_factorial(7))  # = > 5040
+    # print(loop_factorial(-1))  # = > -1
+    # print(loop_factorial(-5))  # = > -1
+    #
+    # print("\nrecursive factorial:")
+    # print(recursive_factorial(0))  # = > 1
+    # print(recursive_factorial(5))  # = > 120
+    # print(recursive_factorial(7))  # = > 5040
+    # print(recursive_factorial(-1))  # = > -1
+    # print(recursive_factorial(-5))  # = > -1
     #
     # print("\ncheck palindrome:")
     # print(check_palindrome("kirik"))  # = > True
@@ -317,41 +348,41 @@ if __name__ == '__main__':
     # print(check_for_prime(0))  # = > False
     # print(check_for_prime(1))  # = > False
     # print(check_for_prime(997))  # = > True
-    #
-    # print("\nreplace:")
-    # print(replace("", "", ""))  # = > "Length of char_to_replace must be one character!"
-    # print(replace("", "6", "9"))  # = > ""
-    # print(replace("hello ", " ", " world!"))  # = > "hello world!"
-    # print(replace("aabitsamees", "e", "E"))  # = > "aabitsamEEs"
-    # print(replace("randOMSTRing123", "n", "mgm"))  # = > "ramgmdOMSTRimgmg123"
-    # print(replace("WhatStringIsThis???", "", "ii"))  # = > "Length of char_to_replace must be one character!"
-    # print(replace("WhatStringIsThis???", "in", "i"))  # = > "Length of char_to_replace must be one character!"
-    #
-    # print("\nfibonacci:")
-    # print(fibonacci(-1))  # = > None
-    # print(fibonacci(0))  # = > [0, 1]
-    # print(fibonacci(1))  # = > [0, 1]
-    # print(fibonacci(9))  # = > [0, 1, 1, 2, 3, 5, 8, 13, 21]
-    #
-    # print("\nx sum loop:")
-    # print(x_sum_loop([], 3))  # 0
-    # print(x_sum_loop([2, 5, 6, 0, 15, 5], 3))  # 11
-    # print(x_sum_loop([0, 5, 6, -5, -9, 3], 1))  # 0
-    # print(x_sum_loop([43, 90, 115, 500], -2))  # 158
-    # print(x_sum_loop([1, 2], -9))  # 0
-    # print(x_sum_loop([2, 3, 6], 5))  # 0
-    # print(x_sum_loop([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
-    #
-    # print("\nx sum recursion:")
-    # print(x_sum_recursion([], 3))  # 0
-    # print(x_sum_recursion([2, 5, 6, 0, 15, 5], 3))  # 11
-    # print(x_sum_recursion([0, 5, 6, -5, -9, 3], 1))  # 0
-    # print(x_sum_recursion([43, 90, 115, 500], -2))  # 158
-    # print(x_sum_recursion([1, 2], -9))  # 0
-    # print(x_sum_recursion([2, 3, 6], 5))  # 0
-    # print(x_sum_recursion([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
-    #
-    # print("\nsum squares:")
-    # print(sum_squares([1, 2, 3]))  # -> 14
-    # print(sum_squares([[1, 2], 3]))  # -> sum_squares([1, 2]) + 9 -> 1 + 4 + 9 -> 14
-    # print(sum_squares([[[[[[[[[2]]]]]]]]]))  # -> 4
+    # #
+    print("\nreplace:")
+    print(replace("", "", ""))  # = > "Length of char_to_replace must be one character!"
+    print(replace("", "6", "9"))  # = > ""
+    print(replace("hello ", " ", " world!"))  # = > "hello world!"
+    print(replace("aabitsamees", "e", "E"))  # = > "aabitsamEEs"
+    print(replace("randOMSTRing123", "n", "mgm"))  # = > "ramgmdOMSTRimgmg123"
+    print(replace("WhatStringIsThis???", "", "ii"))  # = > "Length of char_to_replace must be one character!"
+    print(replace("WhatStringIsThis???", "in", "i"))  # = > "Length of char_to_replace must be one character!"
+
+    print("\nfibonacci:")
+    print(fibonacci(-1))  # = > None
+    print(fibonacci(0))  # = > [0, 1]
+    print(fibonacci(1))  # = > [0, 1]
+    print(fibonacci(9))  # = > [0, 1, 1, 2, 3, 5, 8, 13, 21]
+
+    print("\nx sum loop:")
+    print(x_sum_loop([], 3))  # 0
+    print(x_sum_loop([2, 5, 6, 0, 15, 5], 3))  # 11
+    print(x_sum_loop([0, 5, 6, -5, -9, 3], 1))  # 0
+    print(x_sum_loop([43, 90, 115, 500], -2))  # 158
+    print(x_sum_loop([1, 2], -9))  # 0
+    print(x_sum_loop([2, 3, 6], 5))  # 0
+    print(x_sum_loop([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
+
+    print("\nx sum recursion:")
+    print(x_sum_recursion([], 3))  # 0
+    print(x_sum_recursion([2, 5, 6, 0, 15, 5], 3))  # 11
+    print(x_sum_recursion([0, 5, 6, -5, -9, 3], 1))  # 0
+    print(x_sum_recursion([43, 90, 115, 500], -2))  # 158
+    print(x_sum_recursion([1, 2], -9))  # 0
+    print(x_sum_recursion([2, 3, 6], 5))  # 0
+    print(x_sum_recursion([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
+
+    print("\nsum squares:")
+    print(sum_squares([1, 2, 3]))  # -> 14
+    print(sum_squares([[1, 2], 3]))  # -> sum_squares([1, 2]) + 9 -> 1 + 4 + 9 -> 14
+    print(sum_squares([[[[[[[[[2]]]]]]]]]))  # -> 4
