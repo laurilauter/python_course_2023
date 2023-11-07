@@ -47,7 +47,10 @@ def loop_sum(num: int) -> int:
     :param num: the last number to add to the sum.
     :return: sum of integers from 0 up to given number.
     """
-    pass
+    num_sum = 0
+    for num in range(num + 1):
+        num_sum += num
+    return num_sum
 
 
 def recursive_sum(num: int) -> int:
@@ -61,7 +64,11 @@ def recursive_sum(num: int) -> int:
     :param num: the last number to add to the sum.
     :return: sum of integers from 0 up to given number.
     """
-    pass
+    num_sum = 0
+    if num == 0:
+        return num_sum
+    num_sum += num
+    return num_sum + recursive_sum(num - 1)
 
 
 def loop_factorial(num: int) -> int:
@@ -241,28 +248,28 @@ def sum_squares(nested_list: list | int) -> int:
 
 
 if __name__ == '__main__':
-    print("\nloop reverse:")
-    print(loop_reverse("hey"))  # => "yeh"
-    print(loop_reverse("aaa"))  # = > "aaa"
-    print(loop_reverse(""))  # = > ""
-    print(loop_reverse("1"))  # = > "1"
-
-    print("\nrecursive reverse:")
-    print(recursive_reverse("hey"))  # = > "yeh"
-    print(recursive_reverse("aaa"))  # = > "aaa"
-    print(recursive_reverse(""))  # = > ""
-    print(recursive_reverse("1"))  # = > "1"
-
-    # print("\nloop sum:")
-    # print(loop_sum(0))  # = > 0
-    # print(loop_sum(3))  # = > 6
-    # print(loop_sum(5))  # = > 15
+    # print("\nloop reverse:")
+    # print(loop_reverse("hey"))  # => "yeh"
+    # print(loop_reverse("aaa"))  # = > "aaa"
+    # print(loop_reverse(""))  # = > ""
+    # print(loop_reverse("1"))  # = > "1"
     #
-    # print("\nrecursive sum:")
-    # print(recursive_sum(0))  # = > 0
-    # print(recursive_sum(3))  # = > 6
-    # print(recursive_sum(5))  # = > 15
-    #
+    # print("\nrecursive reverse:")
+    # print(recursive_reverse("hey"))  # = > "yeh"
+    # print(recursive_reverse("aaa"))  # = > "aaa"
+    # print(recursive_reverse(""))  # = > ""
+    # print(recursive_reverse("1"))  # = > "1"
+
+    print("\nloop sum:")
+    print(loop_sum(0))  # = > 0
+    print(loop_sum(3))  # = > 6
+    print(loop_sum(5))  # = > 15
+
+    print("\nrecursive sum:")
+    print(recursive_sum(0))  # = > 0
+    print(recursive_sum(3))  # = > 6
+    print(recursive_sum(5))  # = > 15
+
     # print("\nloop factorial:")
     # print(loop_factorial(0))  # = > 1
     # print(loop_factorial(5))  # = > 120
