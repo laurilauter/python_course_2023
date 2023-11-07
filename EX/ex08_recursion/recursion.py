@@ -141,7 +141,7 @@ def check_palindrome(string: str) -> bool:
     if string[0] != string[-1]:
         return False
 
-    return check_palindrome(string[:-1])
+    return check_palindrome(string[1:-1])
 
 
 def check_for_prime(num: int, i=None) -> bool:
