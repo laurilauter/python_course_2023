@@ -84,7 +84,14 @@ def loop_factorial(num: int) -> int:
     :param num: integer from which the factorial should be calculated.
     :return: factorial of given number
     """
-    pass
+    if num < 0:
+        return -1
+
+    factorial = 1
+    for i in range(1, num + 1):
+        factorial *= i
+
+    return factorial
 
 
 def recursive_factorial(num: int) -> int:
@@ -100,7 +107,13 @@ def recursive_factorial(num: int) -> int:
     :param num: integer from which the factorial should be calculated.
     :return: factorial of given number
     """
-    pass
+    if num < 0:
+        return -1
+
+    if num == 0:
+        return 1
+
+    return num * recursive_factorial(num - 1)
 
 
 def check_palindrome(string: str) -> bool:
@@ -119,7 +132,16 @@ def check_palindrome(string: str) -> bool:
     :param string: string argument
     :return: boolean. True if 'string' is a palindrome, False otherwise
     """
-    pass
+    string = string.lower()
+    string = string.strip()
+
+    if len(string) <= 1:
+        return True
+
+    if string[0] != string[-1]:
+        return False
+
+    return check_palindrome(string[:-1])
 
 
 def check_for_prime(num: int, i=None) -> bool:
@@ -265,24 +287,24 @@ if __name__ == '__main__':
     # print(loop_sum(3))  # = > 6
     # print(loop_sum(5))  # = > 15
 
-    print("\nrecursive sum:")
-    print(recursive_sum(0))  # = > 0
-    print(recursive_sum(3))  # = > 6
-    print(recursive_sum(5))  # = > 15
+    # print("\nrecursive sum:")
+    # print(recursive_sum(0))  # = > 0
+    # print(recursive_sum(3))  # = > 6
+    # print(recursive_sum(5))  # = > 15
 
-    # print("\nloop factorial:")
-    # print(loop_factorial(0))  # = > 1
-    # print(loop_factorial(5))  # = > 120
-    # print(loop_factorial(7))  # = > 5040
-    # print(loop_factorial(-1))  # = > -1
-    # print(loop_factorial(-5))  # = > -1
-    #
-    # print("\nrecursive factorial:")
-    # print(recursive_factorial(0))  # = > 1
-    # print(recursive_factorial(5))  # = > 120
-    # print(recursive_factorial(7))  # = > 5040
-    # print(recursive_factorial(-1))  # = > -1
-    # print(recursive_factorial(-5))  # = > -1
+    print("\nloop factorial:")
+    print(loop_factorial(0))  # = > 1
+    print(loop_factorial(5))  # = > 120
+    print(loop_factorial(7))  # = > 5040
+    print(loop_factorial(-1))  # = > -1
+    print(loop_factorial(-5))  # = > -1
+
+    print("\nrecursive factorial:")
+    print(recursive_factorial(0))  # = > 1
+    print(recursive_factorial(5))  # = > 120
+    print(recursive_factorial(7))  # = > 5040
+    print(recursive_factorial(-1))  # = > -1
+    print(recursive_factorial(-5))  # = > -1
     #
     # print("\ncheck palindrome:")
     # print(check_palindrome("kirik"))  # = > True
