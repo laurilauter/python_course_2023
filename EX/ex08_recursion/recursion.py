@@ -271,12 +271,12 @@ def x_sum_recursion(nums: list, x: int) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    if x == 0 or not nums:
+    if x < 0:
+        return x_sum_recursion(nums[::-1], abs(x))
+    elif x > len(nums):
         return 0
-    if x > 0:
-        return nums[x - 1] + x_sum_recursion(nums[x:], x)
-    else:
-        return nums[x] + x_sum_recursion(nums[:x], x)
+    nums = nums[x - 1:]
+    return nums[0] + x_sum_recursion(nums[1:], x)
 
 
 def sum_squares(nested_list: list | int) -> int:
@@ -349,40 +349,40 @@ if __name__ == '__main__':
     # print(check_for_prime(1))  # = > False
     # print(check_for_prime(997))  # = > True
     # #
-    print("\nreplace:")
-    print(replace("", "", ""))  # = > "Length of char_to_replace must be one character!"
-    print(replace("", "6", "9"))  # = > ""
-    print(replace("hello ", " ", " world!"))  # = > "hello world!"
-    print(replace("aabitsamees", "e", "E"))  # = > "aabitsamEEs"
-    print(replace("randOMSTRing123", "n", "mgm"))  # = > "ramgmdOMSTRimgmg123"
-    print(replace("WhatStringIsThis???", "", "ii"))  # = > "Length of char_to_replace must be one character!"
-    print(replace("WhatStringIsThis???", "in", "i"))  # = > "Length of char_to_replace must be one character!"
-
-    print("\nfibonacci:")
-    print(fibonacci(-1))  # = > None
-    print(fibonacci(0))  # = > [0, 1]
-    print(fibonacci(1))  # = > [0, 1]
-    print(fibonacci(9))  # = > [0, 1, 1, 2, 3, 5, 8, 13, 21]
-
-    print("\nx sum loop:")
-    print(x_sum_loop([], 3))  # 0
-    print(x_sum_loop([2, 5, 6, 0, 15, 5], 3))  # 11
-    print(x_sum_loop([0, 5, 6, -5, -9, 3], 1))  # 0
-    print(x_sum_loop([43, 90, 115, 500], -2))  # 158
-    print(x_sum_loop([1, 2], -9))  # 0
-    print(x_sum_loop([2, 3, 6], 5))  # 0
-    print(x_sum_loop([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
+    # print("\nreplace:")
+    # print(replace("", "", ""))  # = > "Length of char_to_replace must be one character!"
+    # print(replace("", "6", "9"))  # = > ""
+    # print(replace("hello ", " ", " world!"))  # = > "hello world!"
+    # print(replace("aabitsamees", "e", "E"))  # = > "aabitsamEEs"
+    # print(replace("randOMSTRing123", "n", "mgm"))  # = > "ramgmdOMSTRimgmg123"
+    # print(replace("WhatStringIsThis???", "", "ii"))  # = > "Length of char_to_replace must be one character!"
+    # print(replace("WhatStringIsThis???", "in", "i"))  # = > "Length of char_to_replace must be one character!"
+    #
+    # print("\nfibonacci:")
+    # print(fibonacci(-1))  # = > None
+    # print(fibonacci(0))  # = > [0, 1]
+    # print(fibonacci(1))  # = > [0, 1]
+    # print(fibonacci(9))  # = > [0, 1, 1, 2, 3, 5, 8, 13, 21]
+    #
+    # print("\nx sum loop:")
+    # print(x_sum_loop([], 3))  # 0
+    # print(x_sum_loop([2, 5, 6, 0, 15, 5], 3))  # 11
+    # print(x_sum_loop([0, 5, 6, -5, -9, 3], 1))  # 0
+    # print(x_sum_loop([43, 90, 115, 500], -2))  # 158
+    # print(x_sum_loop([1, 2], -9))  # 0
+    # print(x_sum_loop([2, 3, 6], 5))  # 0
+    # print(x_sum_loop([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
 
     print("\nx sum recursion:")
-    print(x_sum_recursion([], 3))  # 0
-    print(x_sum_recursion([2, 5, 6, 0, 15, 5], 3))  # 11
-    print(x_sum_recursion([0, 5, 6, -5, -9, 3], 1))  # 0
+    # print(x_sum_recursion([], 3))  # 0
+    # print(x_sum_recursion([2, 5, 6, 0, 15, 5], 3))  # 11
+    # print(x_sum_recursion([0, 5, 6, -5, -9, 3], 1))  # 0
     print(x_sum_recursion([43, 90, 115, 500], -2))  # 158
-    print(x_sum_recursion([1, 2], -9))  # 0
-    print(x_sum_recursion([2, 3, 6], 5))  # 0
-    print(x_sum_recursion([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
+    # print(x_sum_recursion([1, 2], -9))  # 0
+    # print(x_sum_recursion([2, 3, 6], 5))  # 0
+    # print(x_sum_recursion([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
 
-    print("\nsum squares:")
-    print(sum_squares([1, 2, 3]))  # -> 14
-    print(sum_squares([[1, 2], 3]))  # -> sum_squares([1, 2]) + 9 -> 1 + 4 + 9 -> 14
-    print(sum_squares([[[[[[[[[2]]]]]]]]]))  # -> 4
+    # print("\nsum squares:")
+    # print(sum_squares([1, 2, 3]))  # -> 14
+    # print(sum_squares([[1, 2], 3]))  # -> sum_squares([1, 2]) + 9 -> 1 + 4 + 9 -> 14
+    # print(sum_squares([[[[[[[[[2]]]]]]]]]))  # -> 4
