@@ -218,6 +218,8 @@ def fibonacci(num: int, fib_list=None) -> list | None:
         return [0, 1]
     if fib_list is None:
         fib_list = [0, 1]
+    if num == 2 and len(fib_list) is not None:
+        return fib_list
     next_fib = fib_list[-1] + fib_list[-2]
     fib_list.append(next_fib)
     return fibonacci(num - 1, fib_list)
@@ -358,11 +360,11 @@ if __name__ == '__main__':
     # print(replace("WhatStringIsThis???", "", "ii"))  # = > "Length of char_to_replace must be one character!"
     # print(replace("WhatStringIsThis???", "in", "i"))  # = > "Length of char_to_replace must be one character!"
     #
-    # print("\nfibonacci:")
-    # print(fibonacci(-1))  # = > None
-    # print(fibonacci(0))  # = > [0, 1]
-    # print(fibonacci(1))  # = > [0, 1]
-    # print(fibonacci(9))  # = > [0, 1, 1, 2, 3, 5, 8, 13, 21]
+    print("\nfibonacci:")
+    print(fibonacci(-1))  # = > None
+    print(fibonacci(0))  # = > [0, 1]
+    print(fibonacci(1))  # = > [0, 1]
+    print(fibonacci(9))  # = > [0, 1, 1, 2, 3, 5, 8, 13, 21]
     #
     # print("\nx sum loop:")
     # print(x_sum_loop([], 3))  # 0
@@ -373,11 +375,11 @@ if __name__ == '__main__':
     # print(x_sum_loop([2, 3, 6], 5))  # 0
     # print(x_sum_loop([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
 
-    print("\nx sum recursion:")
+    # print("\nx sum recursion:")
     # print(x_sum_recursion([], 3))  # 0
     # print(x_sum_recursion([2, 5, 6, 0, 15, 5], 3))  # 11
     # print(x_sum_recursion([0, 5, 6, -5, -9, 3], 1))  # 0
-    print(x_sum_recursion([43, 90, 115, 500], -2))  # 158
+    # print(x_sum_recursion([43, 90, 115, 500], -2))  # 158
     # print(x_sum_recursion([1, 2], -9))  # 0
     # print(x_sum_recursion([2, 3, 6], 5))  # 0
     # print(x_sum_recursion([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
