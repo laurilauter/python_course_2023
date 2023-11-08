@@ -179,15 +179,11 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
 
     for town in towns:
         for row in merged_data:
-            if town[0] not in merged_data:
-                merged_data.append([town[0], town[1], "-"])
-                break
-            else:
+            if town[0] in row[0]:
                 row[1] = town[1]
-
-    print(merged_data)
+            elif len(merged_data) <= len(towns):
+                merged_data.append([town[0], town[1], "-"])
     write_csv_file(csv_output_filename, merged_data)
-
 
 
 if __name__ == '__main__':
