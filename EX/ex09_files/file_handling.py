@@ -1,3 +1,10 @@
+"""
+File handling.
+"""
+
+import csv
+
+
 def read_file_contents(filename: str) -> str:
     """
     Read file contents into a string.
@@ -55,7 +62,10 @@ def read_csv_file(filename: str) -> list[list[str]]:
     :param filename: The name of the file to read.
     :return: A list of lists, where each inner list represents a row of CSV data.
     """
-    pass
+    with open(filename, "r", encoding="utf-8") as csvfile:
+        reader = csv.reader(csvfile)
+        data = list(reader)
+    return data
 
 
 def write_contents_to_file(filename: str, contents: str) -> None:
@@ -153,3 +163,7 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
     :return: None
     """
     pass
+
+
+if __name__ == '__main__':
+    print(read_csv_file("data.csv"))
