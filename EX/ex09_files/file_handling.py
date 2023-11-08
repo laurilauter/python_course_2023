@@ -7,7 +7,10 @@ def read_file_contents(filename: str) -> str:
     :param filename: The name of the file to read.
     :return: The contents of the file as a string.
     """
-    pass
+    with open(filename, "r") as f:
+        content = f.read()
+        f.close()
+    return content
 
 
 def read_file_contents_to_list(filename: str) -> list[str]:
@@ -23,7 +26,10 @@ def read_file_contents_to_list(filename: str) -> list[str]:
     :param filename: The name of the file to read.
     :return: A list of lines without newline characters.
     """
-    pass
+    with open(filename, "r") as f:
+        lines = f.readlines()
+        f.close()
+    return lines
 
 
 def read_csv_file(filename: str) -> list[list[str]]:
