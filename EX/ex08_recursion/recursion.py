@@ -245,11 +245,15 @@ def x_sum_loop(nums: list, x: int) -> int:
     :param x: number indicating every which num to add to sum
     :return: sum of every x'th number in the list
     """
-    result = 0
     if x == 0:
         return 0
-    for i in range(0, len(nums), abs(x)):
-        result += nums[i]
+    result = 0
+    if x > 0:
+        for i in range(x - 1, len(nums), x):
+            result += nums[i]
+    elif x < 0:
+        for i in range(len(nums) + x, -1, x):
+            result += nums[i]
     return result
 
 
@@ -360,20 +364,20 @@ if __name__ == '__main__':
     # print(replace("WhatStringIsThis???", "", "ii"))  # = > "Length of char_to_replace must be one character!"
     # print(replace("WhatStringIsThis???", "in", "i"))  # = > "Length of char_to_replace must be one character!"
     #
-    print("\nfibonacci:")
-    print(fibonacci(-1))  # = > None
-    print(fibonacci(0))  # = > [0, 1]
-    print(fibonacci(1))  # = > [0, 1]
-    print(fibonacci(9))  # = > [0, 1, 1, 2, 3, 5, 8, 13, 21]
+    # print("\nfibonacci:")
+    # print(fibonacci(-1))  # = > None
+    # print(fibonacci(0))  # = > [0, 1]
+    # print(fibonacci(1))  # = > [0, 1]
+    # print(fibonacci(9))  # = > [0, 1, 1, 2, 3, 5, 8, 13, 21]
     #
-    # print("\nx sum loop:")
-    # print(x_sum_loop([], 3))  # 0
-    # print(x_sum_loop([2, 5, 6, 0, 15, 5], 3))  # 11
-    # print(x_sum_loop([0, 5, 6, -5, -9, 3], 1))  # 0
-    # print(x_sum_loop([43, 90, 115, 500], -2))  # 158
-    # print(x_sum_loop([1, 2], -9))  # 0
-    # print(x_sum_loop([2, 3, 6], 5))  # 0
-    # print(x_sum_loop([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
+    print("\nx sum loop:")
+    print(x_sum_loop([], 3))  # 0
+    print(x_sum_loop([2, 5, 6, 0, 15, 5], 3))  # 11
+    print(x_sum_loop([0, 5, 6, -5, -9, 3], 1))  # 0
+    print(x_sum_loop([43, 90, 115, 500], -2))  # 158
+    print(x_sum_loop([1, 2], -9))  # 0
+    print(x_sum_loop([2, 3, 6], 5))  # 0
+    print(x_sum_loop([6, 5, 3, 2, 9, 8, 6, 5, 4], 3))  # 15
 
     # print("\nx sum recursion:")
     # print(x_sum_recursion([], 3))  # 0
