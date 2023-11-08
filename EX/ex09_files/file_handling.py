@@ -1,6 +1,4 @@
-"""
-File handling.
-"""
+"""File handling."""
 
 import csv
 
@@ -63,7 +61,7 @@ def read_csv_file(filename: str) -> list[list[str]]:
     :return: A list of lists, where each inner list represents a row of CSV data.
     """
     with open(filename, "r", encoding="utf-8") as csvfile:
-        reader = csv.reader(csvfile)
+        reader = csv.reader(csvfile, delimiter=':')
         data = list(reader)
     return data
 
@@ -123,7 +121,7 @@ def write_csv_file(filename: str, data: list[list[str]]) -> None:
     :return: None
     """
     with open(filename, "w", encoding="utf-8") as csvfile:
-        writer = csv.writer(csvfile, delimiter=";")
+        writer = csv.writer(csvfile, delimiter=",")
         for row in data:
             writer.writerow(row)
 
@@ -169,8 +167,29 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
     :param csv_output_filename: The name of the CSV file to write to names, towns, and dates.
     :return: None
     """
-    pass
+    dates = read_csv_file(dates_filename)
+    towns = read_csv_file(towns_filename)
+    print(dates)
+    print(towns)
+
+    merged_data = [["name", "town", "date"]]
+    for date in dates:
+        merged_data.append([date[0], "-", date[1]])
+    for town in towns:
+        for row in merged_data:
+            if town[0] == row[0]:
+                row[1] = town[1]
+        else:
+            merged_data.append([town[0], town[1], "-"])
+    print(merged_data)
+    write_csv_file(csv_output_filename, merged_data)
+
 
 
 if __name__ == '__main__':
-    print(read_csv_file("data.csv"))
+    # print(read_csv_file("data.csv"))
+
+    dates_filename = "dates.txt"
+    towns_filename = "towns.txt"
+    csv_output_filename = "data.csv"
+    print(merge_dates_and_towns_into_csv(dates_filename, towns_filename, csv_output_filename))
