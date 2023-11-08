@@ -79,7 +79,9 @@ def write_contents_to_file(filename: str, contents: str) -> None:
     :param contents: The content to write to the file.
     :return: None
     """
-    pass
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(contents)
+        f.close()
 
 
 def write_lines_to_file(filename: str, lines: list[str]) -> None:
@@ -94,7 +96,9 @@ def write_lines_to_file(filename: str, lines: list[str]) -> None:
     :param lines: A list of strings, each representing a line to write to the file.
     :return: None
     """
-    pass
+    with open(filename, "w", encoding="utf-8") as f:
+        for line in lines:
+            f.write(line + "\n")
 
 
 def write_csv_file(filename: str, data: list[list[str]]) -> None:
@@ -118,7 +122,10 @@ def write_csv_file(filename: str, data: list[list[str]]) -> None:
     :param data: A list of lists to write to the file, where each list represents a row.
     :return: None
     """
-    pass
+    with open(filename, "w", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile, delimiter=";")
+        for row in data:
+            writer.writerow(row)
 
 
 def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv_output_filename: str) -> None:
