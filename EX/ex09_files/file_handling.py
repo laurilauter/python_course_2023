@@ -66,7 +66,7 @@ def read_csv_file(filename: str) -> list[list[str]]:
         data = list(reader)
         # print(data)
         if len(data[0]) <= 1:
-            return []
+            return [[""]]
     return data
 
 
