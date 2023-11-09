@@ -62,7 +62,7 @@ def read_csv_file(filename: str) -> list[list[str]]:
     """
     data = []
     with open(filename, "r", encoding="utf-8") as csvfile:
-        reader = csv.reader(csvfile, delimiter=':')  # : is needed for the final func
+        reader = csv.reader(csvfile, delimiter=',')  # : is needed for the final func
         for row in reader:
             data.append(row)
     return data
@@ -174,8 +174,19 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
     :param csv_output_filename: The name of the CSV file to write to names, towns, and dates.
     :return: None
     """
-    dates = read_csv_file(dates_filename)
-    towns = read_csv_file(towns_filename)
+
+    def read_csv_file_custom(filename: str) -> list[list[str]]:
+        """Read CSV file contents into a list of rows."""
+        data = []
+        with open(filename, "r", encoding="utf-8") as csvfile:
+            reader = csv.reader(csvfile, delimiter=':')  # : is needed for the final func
+            for row in reader:
+                data.append(row)
+        return data
+
+    dates = read_csv_file_custom(dates_filename)
+    towns = read_csv_file_custom(towns_filename)
+
     print(dates)
     print(towns)
     merged_data = [["name", "town", "date"]]
