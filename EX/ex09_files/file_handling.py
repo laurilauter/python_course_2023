@@ -61,11 +61,12 @@ def read_csv_file(filename: str) -> list[list[str]]:
     :param filename: The name of the file to read.
     :return: A list of lists, where each inner list represents a row of CSV data.
     """
+    data = []
     with open(filename, "r", encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile, delimiter=':')
-        data = list(reader)
-        # if len(data[0]) <= 2:
-        #     return data
+        # data = list(reader)
+        for row in reader:
+            data.append(row)
     return data
 
 
