@@ -32,7 +32,6 @@ def read_file_contents_to_list(filename: str) -> list[str]:
     :return: A list of lines without newline characters.
     """
     with open(filename, "r") as f:
-        # lines = f.readlines()
         lines = f.read().splitlines()
         f.close()
     return lines
@@ -63,12 +62,9 @@ def read_csv_file(filename: str) -> list[list[str]]:
     """
     data = []
     with open(filename, "r", encoding="utf-8") as csvfile:
-        reader = csv.reader(csvfile, delimiter=',')
-        # data = list(reader)
+        reader = csv.reader(csvfile, delimiter=':')  # : is needed for the final func
         for row in reader:
             data.append(row)
-        # if len(data) == 1:
-        #     return []
     return data
 
 
@@ -131,8 +127,8 @@ def write_csv_file(filename: str, data: list[list[str]]) -> None:
     :return: None
     """
     with open(filename, "w", encoding="utf-8") as csvfile:
-        # writer = csv.writer(csvfile, delimiter=",")
-        writer = csv.writer(csvfile)
+        writer = csv.writer(csvfile, delimiter=",")
+        # writer = csv.writer(csvfile)
         for row in data:
             writer.writerow(row)
 
@@ -180,6 +176,8 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
     """
     dates = read_csv_file(dates_filename)
     towns = read_csv_file(towns_filename)
+    print(dates)
+    print(towns)
     merged_data = [["name", "town", "date"]]
     for date in dates:
         merged_data.append([date[0], "-", date[1]])
@@ -190,19 +188,20 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
                 row[1] = town[1]
             elif len(merged_data) <= len(towns):
                 merged_data.append([town[0], town[1], "-"])
+
     write_csv_file(csv_output_filename, merged_data)
 
 
 if __name__ == '__main__':
     # print(read_csv_file("data.csv"))
     # print(read_csv_file("data2.csv"))
-    filename = "multi.txt"
-    lines = ["hello\nWorld\nstop", "hello\nWorld\nstop"]
-    filename2 = "single.txt"
-    lines2 = ["hello\nWorld\nstop"]
-    print(write_lines_to_file(filename2, lines2))
+    # filename = "multi.txt"
+    # lines = ["hello\nWorld\nstop", "hello\nWorld\nstop"]
+    # filename2 = "single.txt"
+    # lines2 = ["hello\nWorld\nstop"]
+    # print(write_lines_to_file(filename2, lines2))
     #
-    # dates_filename = "dates.txt"
-    # towns_filename = "towns.txt"
-    # csv_output_filename = "data.csv"
-    # print(merge_dates_and_towns_into_csv(dates_filename, towns_filename, csv_output_filename))
+    dates_filename = "dates.txt"
+    towns_filename = "towns.txt"
+    csv_output_filename = "data.csv"
+    print(merge_dates_and_towns_into_csv(dates_filename, towns_filename, csv_output_filename))
