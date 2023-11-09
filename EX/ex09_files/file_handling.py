@@ -63,10 +63,12 @@ def read_csv_file(filename: str) -> list[list[str]]:
     """
     data = []
     with open(filename, "r", encoding="utf-8") as csvfile:
-        reader = csv.reader(csvfile, delimiter=':')
+        reader = csv.reader(csvfile, delimiter=',')
         # data = list(reader)
         for row in reader:
             data.append(row)
+        if len(data[0]) == 1:
+            return []
     return data
 
 
@@ -189,7 +191,7 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
 
 if __name__ == '__main__':
     # print(read_csv_file("data.csv"))
-    print(read_csv_file("data2.csv"))
+    print(read_csv_file("data.csv"))
     #
     # dates_filename = "dates.txt"
     # towns_filename = "towns.txt"
