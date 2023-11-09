@@ -11,7 +11,7 @@ def capitalize_string(s: str) -> str:
     capitalize_string("ABc") => "ABc"
     capitalize_string("") => ""
     """
-    first = s[:1].capitalize()
+    first = s[:1].upper()
     rest = s[1:]
     return first + rest
 
