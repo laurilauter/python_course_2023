@@ -65,7 +65,7 @@ def read_csv_file(filename: str) -> list[list[str]]:
         reader = csv.reader(csvfile, delimiter=':')
         data = list(reader)
         # print(data)
-        if len(data[0]) < 2:
+        if len(data[0]) <= 1:
             return []
     return data
 
