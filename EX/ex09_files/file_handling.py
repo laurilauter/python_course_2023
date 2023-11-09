@@ -230,7 +230,12 @@ def read_csv_file_into_list_of_dicts(filename: str) -> list[dict[str, str]]:
     """
     with open(filename, encoding="utf-8") as f:
         reader = csv.reader(f, delimiter=",")
-        headers = next(reader)
+
+        headers = []
+        for row in reader:
+            if not headers:
+                headers = row
+                break
 
         data = []
         for row in reader:
@@ -283,6 +288,7 @@ if __name__ == '__main__':
     # csv_output_filename = "data.csv"
     # print(merge_dates_and_towns_into_csv(dates_filename, towns_filename, csv_output_filename))
 
-    print(read_csv_file_into_list_of_dicts("input.csv"))
+    # print(read_csv_file_into_list_of_dicts("input.csv"))
+    print(read_csv_file_into_list_of_dicts("input_empty.csv"))
 
 
