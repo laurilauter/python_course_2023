@@ -11,7 +11,10 @@ def capitalize_string(s: str) -> str:
     capitalize_string("ABc") => "ABc"
     capitalize_string("") => ""
     """
-    return s.capitalize()
+    result = s
+    if s.islower():
+        result = s.capitalize()
+    return result
 
 
 def has_seven(nums):
@@ -86,3 +89,5 @@ def mirror_ends(s: str) -> str:
 if __name__ == '__main__':
 
     print(capitalize_string("abc"))
+    print(capitalize_string("ABc"))
+    print(capitalize_string(""))
