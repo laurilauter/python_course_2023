@@ -308,6 +308,3 @@ if __name__ == '__main__':
     data2 = []
 
     print(write_list_of_dicts_to_csv_file("dict_out.csv", data2))
-
-
-
