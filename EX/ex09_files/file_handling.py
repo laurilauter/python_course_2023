@@ -101,8 +101,11 @@ def write_lines_to_file(filename: str, lines: list[str]) -> None:
     :return: None
     """
     with open(filename, "w", encoding="utf-8") as f:
-        for line in lines:
-            f.write(line + "\n")
+        if len(lines) > 1:
+            for line in lines:
+                f.write(line + "\n")
+        else:
+            f.write(str(lines))
 
 
 def write_csv_file(filename: str, data: list[list[str]]) -> None:
