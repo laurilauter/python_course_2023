@@ -11,10 +11,9 @@ def capitalize_string(s: str) -> str:
     capitalize_string("ABc") => "ABc"
     capitalize_string("") => ""
     """
-    result = s
-    if s.islower():
-        result = s.capitalize()
-    return result
+    first = s[:1].capitalize()
+    rest = s[1:]
+    return first + rest
 
 
 def has_seven(nums):
