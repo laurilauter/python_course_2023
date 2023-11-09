@@ -101,15 +101,12 @@ def write_lines_to_file(filename: str, lines: list[str]) -> None:
     :return: None
     """
     with open(filename, "w", encoding="utf-8") as f:
-        length = len(lines)
+        first_line_done = False
         for line in lines:
-            length -= 1
-            if len(lines) == length:
-                f.write(line)
-            elif len(lines) == 1:
-                f.write(line + "\n")
-            else:
-                f.write("\n" + line)
+            if first_line_done:
+                f.write('\n')
+            first_line_done = True
+            f.write(line)
 
 
 def write_csv_file(filename: str, data: list[list[str]]) -> None:
@@ -201,7 +198,9 @@ if __name__ == '__main__':
     # print(read_csv_file("data2.csv"))
     filename = "multi.txt"
     lines = ["hello\nWorld\nstop", "hello\nWorld\nstop"]
-    print(write_lines_to_file(filename, lines))
+    filename2 = "single.txt"
+    lines2 = ["hello\nWorld\nstop"]
+    print(write_lines_to_file(filename2, lines2))
     #
     # dates_filename = "dates.txt"
     # towns_filename = "towns.txt"
