@@ -67,8 +67,8 @@ def read_csv_file(filename: str) -> list[list[str]]:
         # data = list(reader)
         for row in reader:
             data.append(row)
-        if len(data) == 1:
-            return []
+        # if len(data) == 1:
+        #     return []
     return data
 
 
