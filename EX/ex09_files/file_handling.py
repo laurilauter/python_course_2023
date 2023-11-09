@@ -101,12 +101,15 @@ def write_lines_to_file(filename: str, lines: list[str]) -> None:
     :return: None
     """
     with open(filename, "w", encoding="utf-8") as f:
-        if len(lines) > 1:
-            for line in lines:
-                f.write(line + "\n")
-        else:
-            for line in lines:
+        length = len(lines)
+        for line in lines:
+            length -= 1
+            if len(lines) == length:
                 f.write(line)
+            elif len(lines) == 1:
+                f.write(line + "\n")
+            else:
+                f.write("\n" + line)
 
 
 def write_csv_file(filename: str, data: list[list[str]]) -> None:
@@ -195,7 +198,10 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
 
 if __name__ == '__main__':
     # print(read_csv_file("data.csv"))
-    print(read_csv_file("data2.csv"))
+    # print(read_csv_file("data2.csv"))
+    filename = "multi.txt"
+    lines = ["hello\nWorld\nstop", "hello\nWorld\nstop"]
+    print(write_lines_to_file(filename, lines))
     #
     # dates_filename = "dates.txt"
     # towns_filename = "towns.txt"
