@@ -105,7 +105,8 @@ def write_lines_to_file(filename: str, lines: list[str]) -> None:
             for line in lines:
                 f.write(line + "\n")
         else:
-            f.write(str(lines))
+            for line in lines:
+                f.write(line)
 
 
 def write_csv_file(filename: str, data: list[list[str]]) -> None:
