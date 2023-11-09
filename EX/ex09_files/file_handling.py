@@ -64,9 +64,8 @@ def read_csv_file(filename: str) -> list[list[str]]:
     with open(filename, "r", encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile, delimiter=':')
         data = list(reader)
-        # print(data)
-        if len(data[0]) <= 1:
-            return [[""]]
+        # if len(data[0]) <= 2:
+        #     return data
     return data
 
 
