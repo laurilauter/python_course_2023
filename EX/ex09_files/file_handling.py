@@ -279,7 +279,8 @@ def write_list_of_dicts_to_csv_file(filename: str, data: list[dict]) -> None:
         writer = csv.DictWriter(csvfile, fieldnames=keys)
         writer.writeheader()
         for item in data:
-            writer.writerow(item)
+            if item:
+                writer.writerow(item)
 
 
 if __name__ == '__main__':
