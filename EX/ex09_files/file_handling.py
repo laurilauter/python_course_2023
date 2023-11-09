@@ -187,18 +187,23 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
     dates = read_csv_file_custom(dates_filename)
     towns = read_csv_file_custom(towns_filename)
 
-    print(dates)
-    print(towns)
+    # print("dates", dates)
+    # print("towns", towns)
     merged_data = [["name", "town", "date"]]
     for date in dates:
         merged_data.append([date[0], "-", date[1]])
+    # print("dates", merged_data)
 
+    for town in towns:
+        if town[0] not in [x[0] for x in merged_data]:
+            merged_data.append([town[0], town[1], "-"])
+
+    # print("towns", merged_data)
     for town in towns:
         for row in merged_data:
             if town[0] in row[0]:
                 row[1] = town[1]
-            elif len(merged_data) <= len(towns):
-                merged_data.append([town[0], town[1], "-"])
+    # print("added", merged_data)
 
     write_csv_file(csv_output_filename, merged_data)
 
