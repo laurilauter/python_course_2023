@@ -2,7 +2,7 @@
 from EX.ex10_solution_and_tests.solution import students_study
 
 
-def test_students_study():
+def test_students_study_during_day():
     """
     The one with the coffee at noon.
 
@@ -10,18 +10,31 @@ def test_students_study():
     This case represents the time period of a day and coffee is present.
     Expected result: True.
     """
+    assert students_study(5, True) is True
+    assert students_study(17, True) is True
+    assert students_study(5, False) is False
+    assert students_study(17, False) is False
+    assert students_study(12, True) is True
+
+
+def test_students_study_during_evening():
+
     assert students_study(18, True) is True
     assert students_study(24, True) is True
     assert students_study(18, False) is True
     assert students_study(24, False) is True
+
+
+def test_students_study_during_night():
 
     assert students_study(1, True) is False
     assert students_study(4, True) is False
     assert students_study(1, False) is False
     assert students_study(4, False) is False
 
-    assert students_study(5, True) is True
-    assert students_study(17, True) is True
-    assert students_study(5, False) is False
-    assert students_study(17, False) is False
-    assert students_study(12, True) is True
+
+if __name__ == '__main__':
+
+    test_students_study_during_day()
+    test_students_study_during_evening()
+    test_students_study_during_night()
