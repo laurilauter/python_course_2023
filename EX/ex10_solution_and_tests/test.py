@@ -2,7 +2,7 @@
 from EX.ex10_solution_and_tests.solution import students_study
 
 
-def test_students_study_during_day():
+def test_students_study():
     """
     The one with the coffee at noon.
 
