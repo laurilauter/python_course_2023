@@ -55,6 +55,9 @@ def test_lottery():
     assert lottery(2, 2, 1) == 0
     assert lottery(2, 3, 1) == 1
 
+    assert lottery(2, 3, 2) == 0
+    assert lottery(2, 3, 3) == 1
+
 
 if __name__ == '__main__':
 
