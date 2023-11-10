@@ -45,9 +45,20 @@ def test_students_study_random():
     assert students_study(25, False) is False
 
 
+#  LOTTERY TESTS
+def test_lottery():
+    """The lottery."""
+    assert lottery(5, 5, 5) == 10
+    assert lottery(4, 4, 4) == 5
+    assert lottery(2, 2, 1) == 0
+    assert lottery(2, 3, 1) == 1
+
+
 if __name__ == '__main__':
 
     test_students_study_during_day()
     test_students_study_during_evening()
     test_students_study_during_night()
     test_students_study_random()
+
+    test_lottery()
