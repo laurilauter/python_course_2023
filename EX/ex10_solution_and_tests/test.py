@@ -90,5 +90,10 @@ if __name__ == '__main__':
     test_students_study_during_evening()
     test_students_study_during_night()
     test_students_study_random()
+    test_lottery_all_cases()
 
-    test_lottery()
+    test_fruit_order_all_zero()
+    test_fruit_order_zero_amount_zero_small()
+    test_fruit_order_zero_amount_zero_big()
+    test_fruit_order_zero_amount_others_not_zero()
+    test_fruit_order_zero_only_big_exact_match()
