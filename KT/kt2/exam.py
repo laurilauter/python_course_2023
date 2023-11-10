@@ -82,7 +82,8 @@ def sum_of_digits_recursion(s: str) -> int:
     s_sum = 0
     if len(s) <= 0:
         return s_sum
-    s_sum += int(s[:1])
+    if s[:1].isnumeric():
+        s_sum += int(s[:1])
     if s[1:2].isnumeric():
         return s_sum + sum_of_digits_recursion(s[1:])
     else:
@@ -106,3 +107,5 @@ if __name__ == '__main__':
     print(sum_of_digits_recursion(""))  # 0
     print(sum_of_digits_recursion(""))  # 0
     print(sum_of_digits_recursion("1-2-3-99"))  # 24
+    print(sum_of_digits_recursion("a"))  # 24
+
