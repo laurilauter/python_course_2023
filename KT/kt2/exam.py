@@ -107,5 +107,3 @@ if __name__ == '__main__':
     print(sum_of_digits_recursion(""))  # 0
     print(sum_of_digits_recursion("1-2-3-99"))  # 24
     print(sum_of_digits_recursion("a"))  # 24
-
-
