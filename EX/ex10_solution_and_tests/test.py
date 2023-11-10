@@ -61,11 +61,11 @@ def test_lottery_all_cases():
 def test_fruit_order_all_zero():
     """Fruit order."""
     assert fruit_order(0, 0, 0) == 0
-#
-#
-# def test_fruit_order_zero_amount_zero_small():
-#     """Fruit order."""
-#     assert fruit_order(0, 6, 0) == -1
+
+
+def test_fruit_order_zero_amount_zero_small():
+    """Fruit order."""
+    assert fruit_order(0, 6, 0) == -1
 #
 #
 # def test_fruit_order_zero_amount_zero_big():
@@ -93,7 +93,7 @@ if __name__ == '__main__':
     test_lottery_all_cases()
 
     test_fruit_order_all_zero()
-    # test_fruit_order_zero_amount_zero_small()
+    test_fruit_order_zero_amount_zero_small()
     # test_fruit_order_zero_amount_zero_big()
     # test_fruit_order_zero_amount_others_not_zero()
     # test_fruit_order_zero_only_big_exact_match()
