@@ -34,7 +34,11 @@ def min_diff(nums: list) -> int:
     :param nums: list of ints, at least 2 elements.
     :return: min diff between 2 numbers.
     """
-    pass
+    list_of_diffs = set()
+    sorted_nums = sorted(nums)
+    for i in range(len(sorted_nums) - 1):
+        list_of_diffs.add(sorted_nums[i + 1] - sorted_nums[i])
+    return min(list_of_diffs)
 
 
 def get_symbols_by_occurrences(text: str) -> dict:
@@ -67,14 +71,14 @@ def sum_of_digits_recursion(s: str) -> int:
 
 
 if __name__ == '__main__':
-    print(switch_lasts_and_firsts("ambulance"))  # => "cebulanam"
-    print(switch_lasts_and_firsts("firetruck"))  # => "ckretrufi"
-    print(switch_lasts_and_firsts("car"))  # => "rac"
+    # print(switch_lasts_and_firsts("ambulance"))  # => "cebulanam"
+    # print(switch_lasts_and_firsts("firetruck"))  # => "ckretrufi"
+    # print(switch_lasts_and_firsts("car"))  # => "rac"
     #
-    # print(min_diff([1, 2, 3]))  # => 1
-    # print(min_diff([1, 9, 17]))  # => 8
-    # print(min_diff([100, 90]))  # => 10
-    # print(min_diff([1, 100, 1000, 1]))  # => 0
+    print(min_diff([1, 2, 3]))  # => 1
+    print(min_diff([1, 9, 17]))  # => 8
+    print(min_diff([100, 90]))  # => 10
+    print(min_diff([1, 100, 1000, 1]))  # => 0
     #
     # print(get_symbols_by_occurrences("hello"))  # => {1: ['e', 'o', 'h'], 2: ['l']}
     # print(get_symbols_by_occurrences("abcaba"))  # => {2: ['b'], 1: ['c'], 3: ['a']}
