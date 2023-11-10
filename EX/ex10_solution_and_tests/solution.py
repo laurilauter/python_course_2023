@@ -9,10 +9,11 @@ def students_study(time: int, coffee_needed: bool) -> bool:
     (1, True) -> False.
     """
     if 1 <= time <= 4:
-        if 18 <= time <=24:
-            return True
-        if 5 <= time <= 17 and coffee_needed:
-            return True
+        return False
+    if 18 <= time <= 24:
+        return True
+    if 5 <= time <= 17 and coffee_needed:
+        return True
     return False
 
 
@@ -35,3 +36,14 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
     (3, 1, 10) -> -1
     """
     pass
+
+
+if __name__ == '__main__':
+
+    print(students_study(0, True))
+    # print(students_study(1, True))
+    # print(students_study(3, True))
+    # print(students_study(4, True))
+    # print(students_study(17, True))
+    # print(students_study(18, True))
+    # print(students_study(19, True))
