@@ -33,6 +33,14 @@ def test_students_study_during_night():
     assert students_study(4, False) is False
 
 
+def test_students_study_random():
+
+    assert students_study(0, True) is False
+    assert students_study(-4, True) is False
+    assert students_study(25, False) is False
+    assert students_study(00, False) is False
+
+
 if __name__ == '__main__':
 
     test_students_study_during_day()
