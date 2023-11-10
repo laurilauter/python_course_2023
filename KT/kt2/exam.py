@@ -79,7 +79,14 @@ def sum_of_digits_recursion(s: str) -> int:
     sum_of_digits_recursion("") => 0
     sum_of_digits_recursion("1-2-3-99") => 24
     """
-    pass
+    s_sum = 0
+    if len(s) <= 0:
+        return s_sum
+    s_sum += int(s[:1])
+    if s[1:2].isnumeric():
+        return s_sum + sum_of_digits_recursion(s[1:])
+    else:
+        return s_sum + sum_of_digits_recursion(s[2:])
 
 
 if __name__ == '__main__':
@@ -92,8 +99,10 @@ if __name__ == '__main__':
     # print(min_diff([100, 90]))  # => 10
     # print(min_diff([1, 100, 1000, 1]))  # => 0
     #
-    print(get_symbols_by_occurrences("hello"))  # => {1: ['e', 'o', 'h'], 2: ['l']}
-    print(get_symbols_by_occurrences("abcaba"))  # => {2: ['b'], 1: ['c'], 3: ['a']}
+    # print(get_symbols_by_occurrences("hello"))  # => {1: ['e', 'o', 'h'], 2: ['l']}
+    # print(get_symbols_by_occurrences("abcaba"))  # => {2: ['b'], 1: ['c'], 3: ['a']}
     #
-    # print(sum_of_digits_recursion("123"))  # 6
-    # print(sum_of_digits_recursion(""))  # 0
+    print(sum_of_digits_recursion("123"))  # 6
+    print(sum_of_digits_recursion(""))  # 0
+    print(sum_of_digits_recursion(""))  # 0
+    print(sum_of_digits_recursion("1-2-3-99"))  # 24
