@@ -28,8 +28,12 @@ def test_students_study_during_evening():
 def test_students_study_during_night():
 
     assert students_study(1, True) is False
+    assert students_study(2, True) is False
+    assert students_study(3, True) is False
     assert students_study(4, True) is False
     assert students_study(1, False) is False
+    assert students_study(2, False) is False
+    assert students_study(3, False) is False
     assert students_study(4, False) is False
 
 
