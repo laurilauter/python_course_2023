@@ -50,7 +50,19 @@ def get_symbols_by_occurrences(text: str) -> dict:
     get_symbols_by_occurrences("hello") => {1: ['e', 'o', 'h'], 2: ['l']}
     get_symbols_by_occurrences("abcaba") => {2: ['b'], 1: ['c'], 3: ['a']}
     """
-    pass
+    occurrence = {}
+    for char in text:
+        count = text.count(char)
+        if count not in occurrence:
+            occurrence[count] = set()
+        occurrence[count].add(char)
+
+    mod_occurrence = {}
+    for key, value in occurrence.items():
+        mod_occurrence[key] = list(value)
+
+    return dict(sorted(mod_occurrence.items()))
+
 
 
 def sum_of_digits_recursion(s: str) -> int:
@@ -75,13 +87,13 @@ if __name__ == '__main__':
     # print(switch_lasts_and_firsts("firetruck"))  # => "ckretrufi"
     # print(switch_lasts_and_firsts("car"))  # => "rac"
     #
-    print(min_diff([1, 2, 3]))  # => 1
-    print(min_diff([1, 9, 17]))  # => 8
-    print(min_diff([100, 90]))  # => 10
-    print(min_diff([1, 100, 1000, 1]))  # => 0
+    # print(min_diff([1, 2, 3]))  # => 1
+    # print(min_diff([1, 9, 17]))  # => 8
+    # print(min_diff([100, 90]))  # => 10
+    # print(min_diff([1, 100, 1000, 1]))  # => 0
     #
-    # print(get_symbols_by_occurrences("hello"))  # => {1: ['e', 'o', 'h'], 2: ['l']}
-    # print(get_symbols_by_occurrences("abcaba"))  # => {2: ['b'], 1: ['c'], 3: ['a']}
+    print(get_symbols_by_occurrences("hello"))  # => {1: ['e', 'o', 'h'], 2: ['l']}
+    print(get_symbols_by_occurrences("abcaba"))  # => {2: ['b'], 1: ['c'], 3: ['a']}
     #
     # print(sum_of_digits_recursion("123"))  # 6
     # print(sum_of_digits_recursion(""))  # 0
