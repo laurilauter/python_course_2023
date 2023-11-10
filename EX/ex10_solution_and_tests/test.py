@@ -18,6 +18,7 @@ def test_students_study_during_day():
 
 
 def test_students_study_during_evening():
+    """The one with the coffee at evening."""
 
     assert students_study(18, True) is True
     assert students_study(24, True) is True
@@ -26,7 +27,7 @@ def test_students_study_during_evening():
 
 
 def test_students_study_during_night():
-
+    """The one with the coffee at night."""
     assert students_study(1, True) is False
     assert students_study(2, True) is False
     assert students_study(3, True) is False
@@ -38,7 +39,7 @@ def test_students_study_during_night():
 
 
 def test_students_study_random():
-
+    """The one with the coffee at random."""
     assert students_study(0, True) is False
     assert students_study(-4, True) is False
     assert students_study(25, False) is False
