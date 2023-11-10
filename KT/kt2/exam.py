@@ -64,7 +64,6 @@ def get_symbols_by_occurrences(text: str) -> dict:
     return dict(sorted(mod_occurrence.items()))
 
 
-
 def sum_of_digits_recursion(s: str) -> int:
     """
     Return sum of all the digits.
@@ -108,4 +107,5 @@ if __name__ == '__main__':
     print(sum_of_digits_recursion(""))  # 0
     print(sum_of_digits_recursion("1-2-3-99"))  # 24
     print(sum_of_digits_recursion("a"))  # 24
+
 
