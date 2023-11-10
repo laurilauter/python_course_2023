@@ -58,9 +58,9 @@ def test_lottery_all_cases():
     assert lottery(2, 3, 3) == 1
 
 
-# def test_fruit_order_all_zero():
-#     """Fruit order."""
-#     assert fruit_order(0, 0, 0) == 0
+def test_fruit_order_all_zero():
+    """Fruit order."""
+    assert fruit_order(0, 0, 0) == 0
 #
 #
 # def test_fruit_order_zero_amount_zero_small():
@@ -92,7 +92,7 @@ if __name__ == '__main__':
     test_students_study_random()
     test_lottery_all_cases()
 
-    # test_fruit_order_all_zero()
+    test_fruit_order_all_zero()
     # test_fruit_order_zero_amount_zero_small()
     # test_fruit_order_zero_amount_zero_big()
     # test_fruit_order_zero_amount_others_not_zero()
