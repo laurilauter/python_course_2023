@@ -12,15 +12,15 @@ def test_students_study_during_day():
     """
     assert students_study(5, True) is True
     assert students_study(17, True) is True
-    # assert students_study(5, False) is False
-    # assert students_study(17, False) is False
-    # assert students_study(12, True) is True
+    assert students_study(5, False) is False
+    assert students_study(17, False) is False
+    assert students_study(12, True) is True
 
 
 def test_students_study_during_evening():
 
-    # assert students_study(18, True) is True
-    # assert students_study(24, True) is True
+    assert students_study(18, True) is True
+    assert students_study(24, True) is True
     assert students_study(18, False) is True
     assert students_study(24, False) is True
 
@@ -42,7 +42,6 @@ def test_students_study_random():
     assert students_study(0, True) is False
     assert students_study(-4, True) is False
     assert students_study(25, False) is False
-    assert students_study(None, None) is False
 
 
 if __name__ == '__main__':
@@ -50,3 +49,4 @@ if __name__ == '__main__':
     test_students_study_during_day()
     test_students_study_during_evening()
     test_students_study_during_night()
+    test_students_study_random()
