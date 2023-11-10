@@ -49,8 +49,8 @@ def test_students_study_random():
 def test_lottery():
     """The lottery."""
     assert lottery(5, 5, 5) == 10
-    assert lottery(-5, -5, -5) == 0
-    assert lottery(0, 0, 0) == 0
+    assert lottery(-5, -5, -5) == 5
+    assert lottery(0, 0, 0) == 5
     assert lottery(4, 4, 4) == 5
     assert lottery(2, 2, 1) == 0
     assert lottery(2, 3, 1) == 1
