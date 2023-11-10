@@ -39,16 +39,19 @@ def fruit_order(small_baskets: int, big_baskets: int, ordered_amount: int) -> in
     Return number of small fruit baskets if it's possible to finish the order, otherwise return -1.
 
     (4, 1, 9) -> 4
+    (5, 1, 9) -> 4
+
     (3, 1, 10) -> -1
+    (10, 0, 9) == 9
     """
-    if ordered_amount - big_baskets * 5 - small_baskets == 0:
-        return small_baskets
+    if ordered_amount - big_baskets * 5 - small_baskets <= 0:
+        return ordered_amount - big_baskets * 5
     return -1
 
 
 if __name__ == '__main__':
 
-    print(students_study(0, True))
+    # print(students_study(0, True))
     # print(students_study(1, True))
     # print(students_study(3, True))
     # print(students_study(4, True))
@@ -61,6 +64,8 @@ if __name__ == '__main__':
     # print(lottery(2, 2, 1))  # 0
     # print(lottery(2, 3, 1))  # 1
 
-    print(fruit_order(4, 1, 9))
+    # print(fruit_order(4, 1, 9))
+    # print(fruit_order(5, 1, 9))
     print(fruit_order(9, 0, 9))
+    print(fruit_order(10, 0, 9))
     print(fruit_order(3, 1, 10))
