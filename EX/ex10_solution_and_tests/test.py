@@ -64,7 +64,7 @@ def test_fruit_order_all_zero():
     assert fruit_order(0, 0, 0) == 0
 
 
-def test_fruit_order_zero_amount_zero_small():
+def test_fruit_order__zero_amount_zero_small():
     """Fruit order."""
     assert fruit_order(0, 6, 0) == -1
 
@@ -183,5 +183,6 @@ if __name__ == '__main__':
     test_fruit_match_large_numbers()
 
 
-    test_fruit_order_zero_amount_zero_small()
+    test_fruit_order__zero_amount_zero_small()
     # test_fruit_order_zero_amount_others_not_zero()
+
