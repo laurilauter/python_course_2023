@@ -149,6 +149,7 @@ def test_fruit_match_large_numbers():
 def test_fruit_only_big_more_than_required_match():
     """Fruit order."""
     assert fruit_order(0, 11, 50) == 0
+    assert fruit_order(0, 3, 20) == -1
 
 
 def test_fruit_only_big_more_than_required_no_match():
