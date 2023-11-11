@@ -106,7 +106,7 @@ def test_fruit_order_all_positive_exact_match():
 
 def test_fruit_order_use_all_smalls_some_bigs():
     """Fruit order."""
-    assert fruit_order(6, 3, 16) == 1
+    assert fruit_order(7, 5, 17) == 2
 
 
 def test_fruit_order_use_some_smalls_all_bigs():
@@ -126,7 +126,7 @@ def test_fruit_order_not_enough():
 
 def test_fruit_enough_bigs_not_enough_smalls():
     """Fruit order."""
-    assert fruit_order(3, 1, 14) == -1
+    assert fruit_order(3, 2, 14) == -1
 
 
 def test_fruit_not_enough_with_more_than_5_smalls():
@@ -136,12 +136,22 @@ def test_fruit_not_enough_with_more_than_5_smalls():
 
 def test_fruit_enough_bigs_not_enough_smalls_large_numbers():
     """Fruit order."""
-    assert fruit_order(21, 100, 522) == -1
+    assert fruit_order(210, 1000, 5222) == -1
 
 
 def test_fruit_match_large_numbers():
     """Fruit order."""
-    assert fruit_order(66, 100, 566) == 66
+    assert fruit_order(1111, 10000, 51111) == 1111
+
+
+def test_fruit_only_big_more_than_required_match():
+    """Fruit order."""
+    assert fruit_order(0, 10, 50) == 0
+
+
+def test_fruit_only_small_not_enough_more_than_5_smalls():
+    """Fruit order."""
+    assert fruit_order(6, 0, 7) == -1
 
 
 # def test_fruit_order__zero_amount_zero_small():
@@ -179,6 +189,8 @@ if __name__ == '__main__':
     test_fruit_not_enough_with_more_than_5_smalls()
     test_fruit_enough_bigs_not_enough_smalls_large_numbers()
     test_fruit_match_large_numbers()
+    test_fruit_only_big_more_than_required_match()
+    test_fruit_only_small_not_enough_more_than_5_smalls()
 
     # test_fruit_order__zero_amount_zero_small()
     # test_fruit_order_zero_amount_others_not_zero()
