@@ -126,7 +126,7 @@ def test_fruit_order_not_enough():
 
 def test_fruit_enough_bigs_not_enough_smalls():
     """Fruit order."""
-    assert fruit_order(3, 2, 14) == -1
+    assert fruit_order(1, 2, 14) == -1
 
 
 def test_fruit_not_enough_with_more_than_5_smalls():
