@@ -106,7 +106,7 @@ def test_fruit_order_all_positive_exact_match():
 
 def test_fruit_order_use_all_smalls_some_bigs():
     """Fruit order."""
-    assert fruit_order(7, 5, 17) == 2
+    assert fruit_order(7, 2, 17) == 7
 
 
 def test_fruit_order_use_some_smalls_all_bigs():
