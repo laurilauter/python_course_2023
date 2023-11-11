@@ -108,7 +108,7 @@ def test_fruit_order_use_all_smalls_some_bigs():
     """Fruit order."""
     assert fruit_order(7, 1, 12) == 7
     assert fruit_order(7, 6, 17) == 2
-    assert fruit_order(3, 8, 18) == 2
+    assert fruit_order(3, 8, 18) == 3
 
 
 def test_fruit_order_use_some_smalls_all_bigs():
