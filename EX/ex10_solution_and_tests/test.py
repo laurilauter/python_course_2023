@@ -87,7 +87,7 @@ def test_fruit_order_zero_only_big_exact_match():
 
 def test_fruit_order_only_big_not_enough_but_multiple_of_5():
     """Fruit order."""
-    assert fruit_order(0, 2, 15) == 0
+    assert fruit_order(0, 2, 15) == -1
 
 
 
