@@ -137,6 +137,8 @@ def test_fruit_not_enough_with_more_than_5_smalls():
 def test_fruit_enough_bigs_not_enough_smalls_large_numbers():
     """Fruit order."""
     assert fruit_order(210, 1000, 5222) == -1
+    assert fruit_order(500, 400, 2500) == 500
+    assert fruit_order(2, 500, 2003) == -1
 
 
 def test_fruit_match_large_numbers():
