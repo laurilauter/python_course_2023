@@ -90,6 +90,71 @@ def test_fruit_order_only_big_not_enough_but_multiple_of_5():
     assert fruit_order(0, 2, 15) == -1
 
 
+def test_fruit_order_only_small_exact_match():
+    """Fruit order."""
+    assert fruit_order(3, 0, 3) == 3
+
+
+def test_fruit_order_only_small_not_enough():
+    """Fruit order."""
+    assert fruit_order(3, 0, 4) == -1
+
+
+def test_fruit_order_only_small_more_than_required():
+    """Fruit order."""
+    assert fruit_order(5, 0, 4) == 4
+
+
+def test_fruit_order_match_with_more_than_5_smalls():
+    """Fruit order."""
+    assert fruit_order(6, 0, 6) == 6
+
+
+def test_fruit_order_all_positive_exact_match():
+    """Fruit order."""
+    assert fruit_order(6, 1, 11) == 6
+
+####
+
+def test_fruit_order_use_all_smalls_some_bigs():
+    """Fruit order."""
+    assert fruit_order(6, 3, 16) == 1
+
+
+def test_fruit_order_use_some_smalls_all_bigs():
+    """Fruit order."""
+    assert fruit_order(6, 3, 17) == 2
+
+
+def test_fruit_order_use_some_smalls_some_bigs():
+    """Fruit order."""
+    assert fruit_order(6, 2, 8) == 3
+
+
+def test_fruit_order_not_enough():
+    """Fruit order."""
+    assert fruit_order(6, 1, 20) == -1
+
+
+def test_fruit_enough_bigs_not_enough_smalls():
+    """Fruit order."""
+    assert fruit_order(3, 1, 14) == -1
+
+
+def test_fruit_not_enough_with_more_than_5_smalls():
+    """Fruit order."""
+    assert fruit_order(1, 4, 22) == -1
+
+
+def test_fruit_enough_bigs_not_enough_smalls_large_numbers():
+    """Fruit order."""
+    assert fruit_order(21, 100, 522) == -1
+
+
+def test_fruit_match_large_numbers():
+    """Fruit order."""
+    assert fruit_order(66, 100, 566) == 66
+
 
 if __name__ == '__main__':
 
@@ -107,3 +172,16 @@ if __name__ == '__main__':
 
     test_fruit_order_only_big_not_enough_but_multiple_of_5()
 
+    test_fruit_order_only_small_exact_match()
+    test_fruit_order_only_small_not_enough()
+    test_fruit_order_only_small_more_than_required()
+    test_fruit_order_match_with_more_than_5_smalls()
+    test_fruit_order_all_positive_exact_match()
+    test_fruit_order_use_all_smalls_some_bigs()
+    test_fruit_order_use_some_smalls_all_bigs()
+    test_fruit_order_use_some_smalls_some_bigs()
+    test_fruit_order_not_enough()
+    test_fruit_enough_bigs_not_enough_smalls()
+    test_fruit_not_enough_with_more_than_5_smalls()
+    test_fruit_enough_bigs_not_enough_smalls_large_numbers()
+    test_fruit_match_large_numbers()
