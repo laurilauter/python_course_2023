@@ -151,7 +151,7 @@ def test_fruit_only_big_more_than_required_match():
 
 def test_fruit_only_big_more_than_required_no_match():
     """Fruit order."""
-    assert fruit_order(0, 20, 50) == -1
+    assert fruit_order(0, 20, 50) == 0
 
 
 def test_fruit_only_small_not_enough_more_than_5_smalls():
