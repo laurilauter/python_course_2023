@@ -21,7 +21,6 @@ def test_students_study_during_day():
 
 def test_students_study_during_evening():
     """The one with the coffee at evening."""
-
     assert students_study(18, True) is True
     assert students_study(24, True) is True
     assert students_study(18, False) is True
@@ -65,9 +64,9 @@ def test_fruit_order_all_zero():
     assert fruit_order(0, 0, 0) == 0
 
 
-# def test_fruit_order_zero_amount_zero_small():
-#     """Fruit order."""
-#     assert fruit_order(0, 6, 0) == -1
+def test_fruit_order_zero_amount_zero_small():
+    """Fruit order."""
+    assert fruit_order(0, 6, 0) == -1
 
 
 def test_fruit_order_zero_amount_zero_big():
@@ -114,7 +113,6 @@ def test_fruit_order_all_positive_exact_match():
     """Fruit order."""
     assert fruit_order(6, 1, 11) == 6
 
-####
 
 def test_fruit_order_use_all_smalls_some_bigs():
     """Fruit order."""
@@ -165,7 +163,7 @@ if __name__ == '__main__':
     test_lottery_all_cases()
 
     test_fruit_order_all_zero()
-    # test_fruit_order_zero_amount_zero_small()
+    test_fruit_order_zero_amount_zero_small()
     test_fruit_order_zero_amount_zero_big()
     # test_fruit_order_zero_amount_others_not_zero()
     test_fruit_order_zero_only_big_exact_match()
