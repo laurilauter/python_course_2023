@@ -163,9 +163,7 @@ if __name__ == '__main__':
     test_lottery_all_cases()
 
     test_fruit_order_all_zero()
-    test_fruit_order_zero_amount_zero_small()
     test_fruit_order_zero_amount_zero_big()
-    # test_fruit_order_zero_amount_others_not_zero()
     test_fruit_order_zero_only_big_exact_match()
 
     test_fruit_order_only_big_not_enough_but_multiple_of_5()
@@ -183,3 +181,7 @@ if __name__ == '__main__':
     test_fruit_not_enough_with_more_than_5_smalls()
     test_fruit_enough_bigs_not_enough_smalls_large_numbers()
     test_fruit_match_large_numbers()
+
+
+    test_fruit_order_zero_amount_zero_small()
+    # test_fruit_order_zero_amount_others_not_zero()
