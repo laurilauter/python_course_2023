@@ -64,21 +64,11 @@ def test_fruit_order_all_zero():
     assert fruit_order(0, 0, 0) == 0
 
 
-def test_fruit_order__zero_amount_zero_small():
-    """Fruit order."""
-    assert fruit_order(0, 6, 0) == -1
-
-
 def test_fruit_order_zero_amount_zero_big():
     """Fruit order."""
     assert fruit_order(6, 0, 0) == 0
 
 
-# def test_fruit_order_zero_amount_others_not_zero():
-#     """Fruit order."""
-#     assert fruit_order(6, 6, 0) == -1
-#
-#
 def test_fruit_order_zero_only_big_exact_match():
     """Fruit order."""
     assert fruit_order(0, 2, 10) == 0
@@ -154,6 +144,14 @@ def test_fruit_match_large_numbers():
     assert fruit_order(66, 100, 566) == 66
 
 
+# def test_fruit_order__zero_amount_zero_small():
+#     """Fruit order."""
+#     assert fruit_order(0, 6, 0) == -1
+#
+# def test_fruit_order_zero_amount_others_not_zero():
+#     """Fruit order."""
+#     assert fruit_order(6, 6, 0) == -1
+
 if __name__ == '__main__':
 
     test_students_study_during_day()
@@ -182,7 +180,5 @@ if __name__ == '__main__':
     test_fruit_enough_bigs_not_enough_smalls_large_numbers()
     test_fruit_match_large_numbers()
 
-
-    test_fruit_order__zero_amount_zero_small()
+    # test_fruit_order__zero_amount_zero_small()
     # test_fruit_order_zero_amount_others_not_zero()
-
