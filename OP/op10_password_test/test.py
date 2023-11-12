@@ -129,7 +129,12 @@ def test__includes_number__true_but_number_not_first():
 
 def test__is_different__new_pass_case_sensitive():
     """The one with the coffee at noon."""
-    assert is_different_from_old_password("Abcdefg", "ABcdefg") is False
+    assert is_different_from_old_password("password", "PASSWORD") is False
+
+
+def test__is_different__old_pass_case_sensitive():
+    """The one with the coffee at noon."""
+    assert is_different_from_old_password("PASSWORD", "password") is False
 
 
 if __name__ == '__main__':
@@ -163,3 +168,4 @@ if __name__ == '__main__':
     test__includes_number__true_but_number_not_first()
 
     test__is_different__new_pass_case_sensitive()
+    test__is_different__old_pass_case_sensitive()
