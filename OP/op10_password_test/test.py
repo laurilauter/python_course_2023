@@ -5,9 +5,6 @@ from password import includes_lowercase
 from password import includes_special
 from password import includes_number
 from password import is_different_from_old_password
-from password import is_name_in_password
-from password import is_birthday_in_password
-from password import is_password_valid
 
 
 def test__is_correct_length__too_short():
