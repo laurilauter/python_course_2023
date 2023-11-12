@@ -146,7 +146,7 @@ def test__is_different__new_pass_odd_length__barely_different():
 
 def test__is_different__new_pass_odd_length__barely_different__reverse():
     """The one with the coffee at noon."""
-    assert is_different_from_old_password("1Pasxxxxx", "2Pasyyyyy") is True
+    assert is_different_from_old_password("1Pasxxxxx", "1Pasyyyyy") is True
 
 
 def test__is_different__new_pass_odd_length__barely_not_different():
@@ -157,6 +157,11 @@ def test__is_different__new_pass_odd_length__barely_not_different():
 def test__is_different__new_pass_odd_length__barely_not_different__not_in_beginning():
     """The one with the coffee at noon."""
     assert is_different_from_old_password("word1Pass", "xxxx1Pass") is False
+
+
+def test__is_different__new_pass_odd_length__barely_not_different__not_in_beginning_reverse():
+    """The one with the coffee at noon."""
+    assert is_different_from_old_password("xxxx1Pass", "word1Pass") is False
 
 #  even
 
@@ -198,3 +203,4 @@ if __name__ == '__main__':
     test__is_different__new_pass_odd_length__barely_different__reverse()
     test__is_different__new_pass_odd_length__barely_not_different()
     test__is_different__new_pass_odd_length__barely_not_different__not_in_beginning()
+    test__is_different__new_pass_odd_length__barely_not_different__not_in_beginning_reverse()
