@@ -87,6 +87,16 @@ def test__includes_lowercase__every_lowercase_letter():
     assert includes_lowercase("abcdefghijklmnopqrstuvwxyzüõöä") is True
 
 
+def test__includes_special__empty():
+    """The one with the coffee at noon."""
+    assert includes_lowercase("") is False
+
+
+def test__includes_special__includes_whitespace():
+    """The one with the coffee at noon."""
+    assert includes_lowercase(" ") is False
+
+
 if __name__ == '__main__':
 
     test__is_correct_length__too_short()
@@ -106,3 +116,7 @@ if __name__ == '__main__':
     test__includes_lowercase__true_but_lowercase_not_first()
     test__includes_lowercase__only_lowercase_letters()
     test__includes_lowercase__every_lowercase_letter()
+
+    test__includes_special__empty()
+    test__includes_special__includes_whitespace()
+
