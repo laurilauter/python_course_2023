@@ -196,6 +196,16 @@ def test__is_different__new_pass_even_length__barely_not_different__not_in_begin
     assert is_different_from_old_password("xxxxPassz", "xxxxssaP") is False
 
 
+def test__is_different__new_pass_even_length__barely_not_different__not_in_beginning_reverse8():
+    """The one with the coffee at noon."""
+    assert is_different_from_old_password("xxxxPassz", "xxxxssaP") is False
+
+
+def test__is_different__new_pass_even_length__barely_not_different__not_in_beginning_reverse9():
+    """The one with the coffee at noon."""
+    assert is_different_from_old_password("xxxxPassz", "xxxxssaP") is False
+
+
 if __name__ == '__main__':
 
     test__is_correct_length__too_short()
@@ -241,3 +251,6 @@ if __name__ == '__main__':
     test__is_different__new_pass_even_length__barely_not_different()
     test__is_different__new_pass_even_length__barely_not_different__not_in_beginning()
     test__is_different__new_pass_even_length__barely_not_different__not_in_beginning_reverse()
+
+    test__is_different__new_pass_even_length__barely_not_different__not_in_beginning_reverse8()
+    test__is_different__new_pass_even_length__barely_not_different__not_in_beginning_reverse9()
