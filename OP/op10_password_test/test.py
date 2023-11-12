@@ -9,9 +9,31 @@ def test__is_correct_length__too_short():
 
 def test__is_correct_length__too_long():
     """The one with the coffee at noon."""
-    assert is_correct_length("1234567890123456789012345678901234567890123456789012345678901234567890") is False
+    assert is_correct_length("1234567890123456789012345678901234567"
+                             "8901234567890123456789012345678902345678901"
+                             "23456789012345678901234567890") is False
+
+
+def test__is_correct_length__min_value():
+    """The one with the coffee at noon."""
+    assert is_correct_length("12345678") is True
+
+
+def test__is_correct_length__max_value():
+    """The one with the coffee at noon."""
+    assert is_correct_length("1234567890123456789012345678901"
+                             "234567890123456789012345678901234") is True
+
+
+def test__is_correct_length__empty():
+    """The one with the coffee at noon."""
+    assert is_correct_length("") is False
 
 
 if __name__ == '__main__':
 
     test__is_correct_length__too_short()
+    test__is_correct_length__too_long()
+    test__is_correct_length__min_value()
+    test__is_correct_length__max_value()
+    test__is_correct_length__empty()
