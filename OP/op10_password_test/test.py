@@ -107,6 +107,11 @@ def test__includes_special__several_different_special():
     assert includes_special("abcs!dA@#$%^&*()<s>gd") is True
 
 
+def test__includes_number__empty():
+    """The one with the coffee at noon."""
+    assert includes_number("") is False
+
+
 if __name__ == '__main__':
 
     test__is_correct_length__too_short()
@@ -131,3 +136,5 @@ if __name__ == '__main__':
     test__includes_special__includes_whitespace()
     test__includes_special__no_special()
     test__includes_special__several_different_special()
+
+    test__includes_number__empty()
