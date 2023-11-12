@@ -52,6 +52,11 @@ def test__includes_uppercase__true_but_uppercase_not_first():
     assert includes_uppercase("nUotfi34534534534534rsT") is True
 
 
+def test__includes_uppercase__only_uppercase_letters():
+    """The one with the coffee at noon."""
+    assert includes_uppercase("UPPERUPPER") is True
+
+
 if __name__ == '__main__':
 
     test__is_correct_length__too_short()
@@ -63,3 +68,4 @@ if __name__ == '__main__':
     test__includes_uppercase__empty()
     test__includes_uppercase__includes_number()
     test__includes_uppercase__true_but_uppercase_not_first()
+    test__includes_uppercase__only_uppercase_letters()
