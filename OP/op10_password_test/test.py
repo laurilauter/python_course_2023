@@ -89,17 +89,17 @@ def test__includes_lowercase__every_lowercase_letter():
 
 def test__includes_special__empty():
     """The one with the coffee at noon."""
-    assert includes_lowercase("") is False
+    assert includes_special("") is False
 
 
 def test__includes_special__includes_whitespace():
     """The one with the coffee at noon."""
-    assert includes_lowercase(" ") is False
+    assert includes_special("ghjghj ghjghj") is True
 
 
 def test__includes_special__no_special():
     """The one with the coffee at noon."""
-    assert includes_lowercase("abcsdAsgd") is False
+    assert includes_special("abcsdAsgd") is False
 
 
 if __name__ == '__main__':
