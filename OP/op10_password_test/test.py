@@ -151,17 +151,17 @@ def test__is_different__new_pass_odd_length__barely_different__reverse():
 
 def test__is_different__new_pass_odd_length__barely_not_different():
     """The one with the coffee at noon."""
-    assert is_different_from_old_password("1Passyyyy", "xxxxssaP1") is False
+    assert is_different_from_old_password("1Passyyyy", "1Passxxxx") is False
 
 
 def test__is_different__new_pass_odd_length__barely_not_different__not_in_beginning():
     """The one with the coffee at noon."""
-    assert is_different_from_old_password("zworPass", "zxxxPass") is False
+    assert is_different_from_old_password("zz1Passyyyy", "zz1Passxxxx") is False
 
 
 def test__is_different__new_pass_odd_length__barely_not_different__not_in_beginning_reverse():
     """The one with the coffee at noon."""
-    assert is_different_from_old_password("xxxx1Pass", "yyyyssaP1") is False
+    assert is_different_from_old_password("zz1Passyyyy", "zzxxxxssaP1") is False
 
 #  even
 
