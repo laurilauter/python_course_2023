@@ -161,7 +161,7 @@ def test__is_different__new_pass_odd_length__barely_not_different__not_in_beginn
 
 def test__is_different__new_pass_odd_length__barely_not_different__not_in_beginning_reverse():
     """The one with the coffee at noon."""
-    assert is_different_from_old_password("1Passyyyy", "1Passxxxx") is False
+    assert is_different_from_old_password("zxxxd1Passz", "zword1Passz") is False
 
 #  even
 
