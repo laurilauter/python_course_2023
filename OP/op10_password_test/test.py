@@ -147,6 +147,11 @@ def test__is_different__new_pass_odd_length__barely_not_different():
     assert is_different_from_old_password("1Password", "1Passxxxx") is False
 
 
+def test__is_different__new_pass_odd_length__barely_not_different__not_in_beginning():
+    """The one with the coffee at noon."""
+    assert is_different_from_old_password("word1Pass", "xxxx1Pass") is False
+
+
 if __name__ == '__main__':
 
     test__is_correct_length__too_short()
@@ -181,3 +186,4 @@ if __name__ == '__main__':
     test__is_different__old_pass_case_sensitive()
     test__is_different__new_pass_odd_length__barely_different()
     test__is_different__new_pass_odd_length__barely_not_different()
+    test__is_different__new_pass_odd_length__barely_not_different__not_in_beginning()
