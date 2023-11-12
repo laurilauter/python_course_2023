@@ -62,6 +62,31 @@ def test__includes_uppercase__every_uppercase_letter():
     assert includes_uppercase("ABCDEFGHIJKLMNOPQRSTUVWXYZÜÕÖÄ") is True
 
 
+def test__includes_lowercase__empty():
+    """The one with the coffee at noon."""
+    assert includes_lowercase("") is False
+
+
+def test__includes_lowercase__includes_number():
+    """The one with the coffee at noon."""
+    assert includes_lowercase("1234567890") is False
+
+
+def test__includes_lowercase__true_but_lowercase_not_first():
+    """The one with the coffee at noon."""
+    assert includes_lowercase("1234s5678a90") is True
+
+
+def test__includes_lowercase__only_lowercase_letters():
+    """The one with the coffee at noon."""
+    assert includes_lowercase("abcsdfgsdgsgd") is True
+
+
+def test__includes_lowercase__every_lowercase_letter():
+    """The one with the coffee at noon."""
+    assert includes_lowercase("abcdefghijklmnopqrstuvwxyzüõöä") is True
+
+
 if __name__ == '__main__':
 
     test__is_correct_length__too_short()
@@ -75,3 +100,9 @@ if __name__ == '__main__':
     test__includes_uppercase__true_but_uppercase_not_first()
     test__includes_uppercase__only_uppercase_letters()
     test__includes_uppercase__every_uppercase_letter()
+
+    test__includes_lowercase__empty()
+    test__includes_lowercase__includes_number()
+    test__includes_lowercase__true_but_lowercase_not_first()
+    test__includes_lowercase__only_lowercase_letters()
+    test__includes_lowercase__every_lowercase_letter()
