@@ -49,7 +49,7 @@ def test__includes_uppercase__includes_number():
 
 def test__includes_uppercase__true_but_uppercase_not_first():
     """The one with the coffee at noon."""
-    assert includes_uppercase("notfirsT") is True
+    assert includes_uppercase("nUotfi34534534534534rsT") is True
 
 
 if __name__ == '__main__':
