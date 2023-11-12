@@ -188,7 +188,7 @@ def test__is_different__new_pass_even_length__barely_not_different__not_in_begin
 
 def test__is_different__new_pass_even_length__barely_not_different__not_in_beginning_reverse():
     """The one with the coffee at noon."""
-    assert is_different_from_old_password("zxxxxPassz", "zwordPassz") is False
+    assert is_different_from_old_password("zxxxxPassz", "zwordzssaP") is False
 
 
 if __name__ == '__main__':
