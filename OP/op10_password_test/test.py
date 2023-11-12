@@ -97,6 +97,11 @@ def test__includes_special__includes_whitespace():
     assert includes_lowercase(" ") is False
 
 
+def test__includes_special__no_special():
+    """The one with the coffee at noon."""
+    assert includes_lowercase("abcsdAsgd") is False
+
+
 if __name__ == '__main__':
 
     test__is_correct_length__too_short()
@@ -119,4 +124,5 @@ if __name__ == '__main__':
 
     test__includes_special__empty()
     test__includes_special__includes_whitespace()
+    test__includes_special__no_special()
 
