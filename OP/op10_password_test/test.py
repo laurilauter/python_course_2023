@@ -173,7 +173,7 @@ def test__is_different__new_pass_even_length__barely_different():
 
 def test__is_different__new_pass_even_length__barely_different__reverse():
     """The one with the coffee at noon."""
-    assert is_different_from_old_password("Paswxxxx", "yyyywsaP") is False
+    assert is_different_from_old_password("yyyyxxxx", "yyyyxxxx") is False
 
 
 def test__is_different__new_pass_even_length__barely_not_different():
