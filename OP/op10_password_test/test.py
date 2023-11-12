@@ -144,7 +144,7 @@ def test__is_different__new_pass_odd_length__barely_different():
 
 def test__is_different__new_pass_odd_length__barely_not_different():
     """The one with the coffee at noon."""
-    assert is_different_from_old_password("1Password", "1Passwore") is False
+    assert is_different_from_old_password("1Password", "1Passxxxx") is False
 
 
 if __name__ == '__main__':
