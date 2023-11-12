@@ -39,7 +39,17 @@ def test__is_correct_length__empty():
 
 def test__includes_uppercase__empty():
     """The one with the coffee at noon."""
-    assert is_correct_length("") is False
+    assert includes_uppercase("") is False
+
+
+def test__includes_uppercase__includes_number():
+    """The one with the coffee at noon."""
+    assert includes_uppercase("1234567890") is False
+
+
+def test__includes_uppercase__true_but_uppercase_not_first():
+    """The one with the coffee at noon."""
+    assert includes_uppercase("notfirsT") is True
 
 
 if __name__ == '__main__':
@@ -51,3 +61,5 @@ if __name__ == '__main__':
     test__is_correct_length__empty()
 
     test__includes_uppercase__empty()
+    test__includes_uppercase__includes_number()
+    test__includes_uppercase__true_but_uppercase_not_first()
