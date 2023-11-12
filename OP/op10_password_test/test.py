@@ -1,5 +1,13 @@
 """Test cases for solution."""
 from password import is_correct_length
+from password import includes_uppercase
+from password import includes_lowercase
+from password import includes_special
+from password import includes_number
+from password import is_different_from_old_password
+from password import is_name_in_password
+from password import is_birthday_in_password
+from password import is_password_valid
 
 
 def test__is_correct_length__too_short():
@@ -29,6 +37,11 @@ def test__is_correct_length__empty():
     assert is_correct_length("") is False
 
 
+def test__includes_uppercase__empty():
+    """The one with the coffee at noon."""
+    assert is_correct_length("") is False
+
+
 if __name__ == '__main__':
 
     test__is_correct_length__too_short()
@@ -36,3 +49,5 @@ if __name__ == '__main__':
     test__is_correct_length__min_value()
     test__is_correct_length__max_value()
     test__is_correct_length__empty()
+
+    test__includes_uppercase__empty()
