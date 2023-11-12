@@ -166,6 +166,31 @@ def test__is_different__new_pass_odd_length__barely_not_different__not_in_beginn
 #  even
 
 
+def test__is_different__new_pass_even_length__barely_different():
+    """The one with the coffee at noon."""
+    assert is_different_from_old_password("Password", "Passxxxx") is True
+
+
+def test__is_different__new_pass_even_length__barely_different__reverse():
+    """The one with the coffee at noon."""
+    assert is_different_from_old_password("Passxxxx", "Passyyyy") is True
+
+
+def test__is_different__new_pass_even_length__barely_not_different():
+    """The one with the coffee at noon."""
+    assert is_different_from_old_password("Password", "Passxxxx") is False
+
+
+def test__is_different__new_pass_even_length__barely_not_different__not_in_beginning():
+    """The one with the coffee at noon."""
+    assert is_different_from_old_password("zword1Pass", "zxxxx1Pass") is False
+
+
+def test__is_different__new_pass_even_length__barely_not_different__not_in_beginning_reverse():
+    """The one with the coffee at noon."""
+    assert is_different_from_old_password("zxxxxPassz", "zwordPassz") is False
+
+
 if __name__ == '__main__':
 
     test__is_correct_length__too_short()
@@ -204,3 +229,9 @@ if __name__ == '__main__':
     test__is_different__new_pass_odd_length__barely_not_different()
     test__is_different__new_pass_odd_length__barely_not_different__not_in_beginning()
     test__is_different__new_pass_odd_length__barely_not_different__not_in_beginning_reverse()
+
+    test__is_different__new_pass_even_length__barely_different()
+    test__is_different__new_pass_even_length__barely_different__reverse()
+    test__is_different__new_pass_even_length__barely_not_different()
+    test__is_different__new_pass_even_length__barely_not_different__not_in_beginning()
+    test__is_different__new_pass_even_length__barely_not_different__not_in_beginning_reverse()
