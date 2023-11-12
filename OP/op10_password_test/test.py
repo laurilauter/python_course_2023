@@ -114,7 +114,7 @@ def test__includes_number__empty():
 
 def test__includes_number__every_digit():
     """The one with the coffee at noon."""
-    assert includes_number("0123456789") is False
+    assert includes_number("Aa0123456789") is True
 
 
 def test__includes_number__no_digits():
