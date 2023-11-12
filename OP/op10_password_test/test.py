@@ -112,6 +112,21 @@ def test__includes_number__empty():
     assert includes_number("") is False
 
 
+def test__includes_number__every_digit():
+    """The one with the coffee at noon."""
+    assert includes_number("0123456789") is False
+
+
+def test__includes_number__no_digits():
+    """The one with the coffee at noon."""
+    assert includes_number("abcsdAsgd") is False
+
+
+def test__includes_number__true_but_number_not_first():
+    """The one with the coffee at noon."""
+    assert includes_number("abcsdAsgd123") is True
+
+
 if __name__ == '__main__':
 
     test__is_correct_length__too_short()
@@ -138,3 +153,6 @@ if __name__ == '__main__':
     test__includes_special__several_different_special()
 
     test__includes_number__empty()
+    test__includes_number__every_digit()
+    test__includes_number__no_digits()
+    test__includes_number__true_but_number_not_first()
