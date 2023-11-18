@@ -47,16 +47,6 @@ def sort_cars_by_make(cars: list[Car]) -> list[Car]:
     :param cars: The list of cars to sort.
     :return: The sorted list of cars.
     """
-    # sorted_cars = []
-    # if cars:
-    #     make_groups = [make_group for make_group in cars]
-    #     print(make_groups)
-    #     for make_group in make_groups:
-    #         sorted_models = sorted([make_group], key=lambda car: car.model)
-    #         sorted_cars.extend(sorted_models)
-    #         print(sorted_models)
-    # return sorted_cars
-
     return sorted(cars, key=lambda car: (car.make, car.model))
 
 
@@ -201,7 +191,8 @@ if __name__ == '__main__':
     # print(find_cars_by_feature(list_of_cars, 'panorama'))  # [Audi A6, Audi A7, BMW X6, Mercedes S500]
     # print()
     #
-    # print(fuel_needed(list_of_cars[0], 150))  # 18.45; might be a little different due to floating point arithmetic errors
+    # print(fuel_needed(list_of_cars[0], 150))
+    # 18.45; might be a little different due to floating point arithmetic errors
     # print(calculate_average_fuel_consumption(list_of_cars))  # 11.048
     # print()
     #
