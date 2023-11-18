@@ -47,7 +47,9 @@ def sort_cars_by_make(cars: list[Car]) -> list[Car]:
     :param cars: The list of cars to sort.
     :return: The sorted list of cars.
     """
-    sorted_cars = sorted(cars, key=lambda car: car.make)
+    sorted_cars = []
+    if cars:
+        sorted_cars = sorted(cars, key=lambda car: car.make)
     return sorted_cars
 
 
@@ -94,7 +96,8 @@ def fuel_needed(car: Car, distance: int) -> float:
     :param distance: The distance in kilometers for which the fuel amount is calculated.
     :return: The amount of fuel needed in liters.
     """
-    return round(car.fuel_consumption / 100 * distance, 2)
+    if car and distance:
+        return round(car.fuel_consumption / 100 * distance, 2)
 
 
 def calculate_average_fuel_consumption(cars: list[Car]) -> float:
