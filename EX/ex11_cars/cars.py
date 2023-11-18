@@ -105,7 +105,7 @@ def fuel_needed(car: Car, distance: int) -> float:
     :return: The amount of fuel needed in liters.
     """
     if car and distance:
-        return round(car.fuel_consumption / 100 * distance, 2)
+        return car.fuel_consumption / 100 * distance
 
 
 def calculate_average_fuel_consumption(cars: list[Car]) -> float:
