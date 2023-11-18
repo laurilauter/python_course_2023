@@ -60,7 +60,11 @@ def find_cars_by_make_and_model(cars: list[Car], make: str, model: str) -> list[
     :param model: The given model.
     :return: The list of cars with the given make and model.
     """
-    pass
+    found_cars = []
+    for car in cars:
+        if car.make == make and car.model == model:
+            found_cars.append(car)
+    return found_cars
 
 
 def find_cars_by_feature(cars: list[Car], feature: str) -> list[Car]:
@@ -75,7 +79,11 @@ def find_cars_by_feature(cars: list[Car], feature: str) -> list[Car]:
     :param feature: The given feature.
     :return: The list of cars that have the specified feature.
     """
-    pass
+    found_cars = []
+    for car in cars:
+        if feature in car.features:
+            found_cars.append(car)
+    return found_cars
 
 
 def fuel_needed(car: Car, distance: int) -> float:
@@ -86,7 +94,7 @@ def fuel_needed(car: Car, distance: int) -> float:
     :param distance: The distance in kilometers for which the fuel amount is calculated.
     :return: The amount of fuel needed in liters.
     """
-    pass
+    return round(car.fuel_consumption / 100 * distance, 2)
 
 
 def calculate_average_fuel_consumption(cars: list[Car]) -> float:
@@ -98,7 +106,7 @@ def calculate_average_fuel_consumption(cars: list[Car]) -> float:
     :param cars: The list of cars to calculate the average fuel consumption for.
     :return: The average fuel consumption of the given cars.
     """
-    pass
+    return sum(car.fuel_consumption for car in cars) / len(cars)
 
 
 def most_popular_feature(cars: list[Car]) -> str:
@@ -111,7 +119,15 @@ def most_popular_feature(cars: list[Car]) -> str:
     :param cars: The list of cars to search through.
     :return: The most popular feature among the given cars.
     """
-    pass
+    popular_features = {}
+    for car in cars:
+        for feature in car.features:
+            if feature not in popular_features:
+                popular_features[feature] = 1
+            else:
+                popular_features[feature] += 1
+    return max(popular_features, key=popular_features.get)
+    # method of dict object that extracts value and returns its key
 
 
 def write_cars_to_file(cars: list[Car], file_name: str):
@@ -150,8 +166,8 @@ if __name__ == '__main__':
                     Car('Mercedes', 'S500', 10.6, ['leather', 'panorama', 'sport package',
                                                    'premium sound system'])]
 
-    print(list_of_cars)  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
-    print(sort_cars_by_make(list_of_cars))  # [Audi A6, Audi A7, BMW X5, BMW X6, Mercedes S500]
+    # print(list_of_cars)  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
+    # print(sort_cars_by_make(list_of_cars))  # [Audi A6, Audi A7, BMW X5, BMW X6, Mercedes S500]
     # print()
     #
     # print(find_cars_by_make_and_model(list_of_cars, 'BMW', 'X6'))  # [BMW X6]
@@ -162,6 +178,6 @@ if __name__ == '__main__':
     # print(calculate_average_fuel_consumption(list_of_cars))  # 11.048
     # print()
     #
-    # print(most_popular_feature(list_of_cars))  # leather
+    print(most_popular_feature(list_of_cars))  # leather
     # write_cars_to_file(list_of_cars, 'cars.json')
     # print(read_cars_from_file('cars.json'))  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
