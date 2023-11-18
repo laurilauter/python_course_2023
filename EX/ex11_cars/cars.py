@@ -155,7 +155,7 @@ def write_cars_to_file(cars: list[Car], file_name: str):
     cars_list = json.dumps([car.__dict__ for car in cars])
 
     with open(file_name, 'w', encoding='utf-8') as f:
-        json.dump(cars_list, f, ensure_ascii=False, indent=2)
+        json.dump(cars_list, f, ensure_ascii=True, indent=2)
 
 
 def read_cars_from_file(file_name: str) -> list[Car]:
