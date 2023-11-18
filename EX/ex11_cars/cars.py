@@ -47,13 +47,17 @@ def sort_cars_by_make(cars: list[Car]) -> list[Car]:
     :param cars: The list of cars to sort.
     :return: The sorted list of cars.
     """
-    sorted_cars = []
-    if cars:
-        make_groups = [make_group for make_group in cars]
-        for make_group in make_groups:
-            sorted_models = sorted([make_group], key=lambda car: car.model)
-            sorted_cars.extend(sorted_models)
-    return sorted_cars
+    # sorted_cars = []
+    # if cars:
+    #     make_groups = [make_group for make_group in cars]
+    #     print(make_groups)
+    #     for make_group in make_groups:
+    #         sorted_models = sorted([make_group], key=lambda car: car.model)
+    #         sorted_cars.extend(sorted_models)
+    #         print(sorted_models)
+    # return sorted_cars
+
+    return sorted(cars, key=lambda car: (car.make, car.model))
 
 
 def find_cars_by_make_and_model(cars: list[Car], make: str, model: str) -> list[Car]:
