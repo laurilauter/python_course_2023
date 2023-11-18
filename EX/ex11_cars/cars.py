@@ -63,10 +63,14 @@ def find_cars_by_make_and_model(cars: list[Car], make: str, model: str) -> list[
     :return: The list of cars with the given make and model.
     """
     found_cars = []
+    if cars:
+        found_cars = sort_cars_by_make(cars)
     for car in cars:
         if car.make == make and car.model == model:
             found_cars.append(car)
-    return sorted(found_cars, key=lambda car: car.make)
+    if found_cars:
+        found_cars = sorted(found_cars, key=lambda car: car.make)
+    return found_cars
 
 
 def find_cars_by_feature(cars: list[Car], feature: str) -> list[Car]:
@@ -82,10 +86,14 @@ def find_cars_by_feature(cars: list[Car], feature: str) -> list[Car]:
     :return: The list of cars that have the specified feature.
     """
     found_cars = []
+    if cars:
+        found_cars = sort_cars_by_make(cars)
     for car in cars:
         if feature in car.features:
             found_cars.append(car)
-    return sorted(found_cars, key=lambda car: car.make)
+    if found_cars:
+        found_cars = sorted(found_cars, key=lambda car: car.make)
+    return found_cars
 
 
 def fuel_needed(car: Car, distance: int) -> float:
