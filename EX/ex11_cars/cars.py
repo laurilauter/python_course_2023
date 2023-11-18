@@ -49,7 +49,10 @@ def sort_cars_by_make(cars: list[Car]) -> list[Car]:
     """
     sorted_cars = []
     if cars:
-        sorted_cars = sorted(cars, key=lambda car: car.make)
+        make_groups = [make_group for make_group in cars]
+        sorted_models = sorted(set(make_groups), key=lambda car: car.model)
+        sorted_cars.extend(sorted_models)
+
     return sorted_cars
 
 
@@ -181,11 +184,11 @@ if __name__ == '__main__':
                                                    'premium sound system'])]
 
     # print(list_of_cars)  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
-    # print(sort_cars_by_make(list_of_cars))  # [Audi A6, Audi A7, BMW X5, BMW X6, Mercedes S500]
+    print(sort_cars_by_make(list_of_cars))  # [Audi A6, Audi A7, BMW X5, BMW X6, Mercedes S500]
     # print()
     #
-    print(find_cars_by_make_and_model(list_of_cars, 'BMW', 'X6'))  # [BMW X6]
-    print(find_cars_by_feature(list_of_cars, 'panorama'))  # [Audi A6, Audi A7, BMW X6, Mercedes S500]
+    # print(find_cars_by_make_and_model(list_of_cars, 'BMW', 'X6'))  # [BMW X6]
+    # print(find_cars_by_feature(list_of_cars, 'panorama'))  # [Audi A6, Audi A7, BMW X6, Mercedes S500]
     # print()
     #
     # print(fuel_needed(list_of_cars[0], 150))  # 18.45; might be a little different due to floating point arithmetic errors
