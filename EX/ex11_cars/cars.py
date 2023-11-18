@@ -50,9 +50,9 @@ def sort_cars_by_make(cars: list[Car]) -> list[Car]:
     sorted_cars = []
     if cars:
         make_groups = [make_group for make_group in cars]
-        sorted_models = sorted(set(make_groups), key=lambda car: car.model)
-        sorted_cars.extend(sorted_models)
-
+        for make_group in make_groups:
+            sorted_models = sorted([make_group], key=lambda car: car.model)
+            sorted_cars.extend(sorted_models)
     return sorted_cars
 
 
@@ -183,8 +183,14 @@ if __name__ == '__main__':
                     Car('Mercedes', 'S500', 10.6, ['leather', 'panorama', 'sport package',
                                                    'premium sound system'])]
 
+    list_of_cars2 = [Car('BMW', 'X5', 12.3, ['leather', 'heated seats', 'GPS']),
+                    Car('BMW', 'X4', 7.2, ['leather', 'heated seats', 'panorama', 'GPS']),
+                    Car('Audi', 'A6', 9.93, ['leather', 'heated seats', 'panorama', 'GPS']),
+                    Car('Audi', 'A2', 15.21, ['leather', 'heated seats', 'panorama', 'sport package']),
+                    Car('Mercedes', 'S500', 10.6, ['leather', 'panorama', 'sport package',
+                                                   'premium sound system'])]
     # print(list_of_cars)  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
-    print(sort_cars_by_make(list_of_cars))  # [Audi A6, Audi A7, BMW X5, BMW X6, Mercedes S500]
+    print(sort_cars_by_make(list_of_cars2))  # [Audi A6, Audi A7, BMW X5, BMW X6, Mercedes S500]
     # print()
     #
     # print(find_cars_by_make_and_model(list_of_cars, 'BMW', 'X6'))  # [BMW X6]
