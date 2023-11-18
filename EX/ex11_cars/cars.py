@@ -64,7 +64,7 @@ def find_cars_by_make_and_model(cars: list[Car], make: str, model: str) -> list[
     for car in cars:
         if car.make == make and car.model == model:
             found_cars.append(car)
-    return found_cars
+    return sorted(found_cars, key=lambda car: car.make)
 
 
 def find_cars_by_feature(cars: list[Car], feature: str) -> list[Car]:
@@ -83,7 +83,7 @@ def find_cars_by_feature(cars: list[Car], feature: str) -> list[Car]:
     for car in cars:
         if feature in car.features:
             found_cars.append(car)
-    return found_cars
+    return sorted(found_cars, key=lambda car: car.make)
 
 
 def fuel_needed(car: Car, distance: int) -> float:
@@ -173,8 +173,8 @@ if __name__ == '__main__':
     # print(sort_cars_by_make(list_of_cars))  # [Audi A6, Audi A7, BMW X5, BMW X6, Mercedes S500]
     # print()
     #
-    # print(find_cars_by_make_and_model(list_of_cars, 'BMW', 'X6'))  # [BMW X6]
-    # print(find_cars_by_feature(list_of_cars, 'panorama'))  # [Audi A6, Audi A7, BMW X6, Mercedes S500]
+    print(find_cars_by_make_and_model(list_of_cars, 'BMW', 'X6'))  # [BMW X6]
+    print(find_cars_by_feature(list_of_cars, 'panorama'))  # [Audi A6, Audi A7, BMW X6, Mercedes S500]
     # print()
     #
     # print(fuel_needed(list_of_cars[0], 150))  # 18.45; might be a little different due to floating point arithmetic errors
@@ -182,5 +182,5 @@ if __name__ == '__main__':
     # print()
     #
     # print(most_popular_feature(list_of_cars))  # leather
-    write_cars_to_file(list_of_cars, 'cars.json')
+    # write_cars_to_file(list_of_cars, 'cars.json')
     # print(read_cars_from_file('cars.json'))  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
