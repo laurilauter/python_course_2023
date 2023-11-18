@@ -141,7 +141,10 @@ def write_cars_to_file(cars: list[Car], file_name: str):
     :param cars: The list of cars to write to the file.
     :param file_name: The name of the file to write the cars to.
     """
-    pass
+    cars_list = json.dumps([car.__dict__ for car in cars])
+
+    with open(file_name, 'w', encoding='utf-8') as f:
+        json.dump(cars_list, f, ensure_ascii=False, indent=2)
 
 
 def read_cars_from_file(file_name: str) -> list[Car]:
@@ -178,6 +181,6 @@ if __name__ == '__main__':
     # print(calculate_average_fuel_consumption(list_of_cars))  # 11.048
     # print()
     #
-    print(most_popular_feature(list_of_cars))  # leather
-    # write_cars_to_file(list_of_cars, 'cars.json')
+    # print(most_popular_feature(list_of_cars))  # leather
+    write_cars_to_file(list_of_cars, 'cars.json')
     # print(read_cars_from_file('cars.json'))  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
