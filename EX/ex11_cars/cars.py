@@ -79,15 +79,17 @@ def find_cars_by_feature(cars: list[Car], feature: str) -> list[Car]:
     :return: The list of cars that have the specified feature.
     """
     found_cars = []
-    if cars:
-        found_cars = sort_cars_by_make(cars)
+    # if cars:
+    #     found_cars = sort_cars_by_make(cars)
 
     for car in cars:
         if feature in car.features and car not in found_cars:
             found_cars.append(car)
 
+
     if found_cars:
-        found_cars = sorted(found_cars, key=lambda car: car.make)
+        cars_sorted_by_make = sort_cars_by_make(found_cars)
+        found_cars = sorted(cars_sorted_by_make, key=lambda car: car.model)
     return found_cars
 
 
