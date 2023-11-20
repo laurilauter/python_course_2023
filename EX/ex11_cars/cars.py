@@ -166,11 +166,19 @@ def read_cars_from_file(file_name: str) -> list[Car]:
     :param file_name: The name of the file to read the cars from.
     :return: The list of cars read from the file.
     """
-    json_data = []
+    cars = []
     with open(file_name) as json_file:
         if json_file:
             json_data = json.load(json_file)
-    return json_data
+            for car_data in json_data:
+                car = Car(
+                    make=car_data["make"],
+                    model=car_data["model"],
+                    fuel_consumption=car_data["fuel_consumption"],
+                    features=car_data["features"]
+                )
+                cars.append(car)
+    return cars
 
 
 if __name__ == '__main__':
@@ -201,5 +209,5 @@ if __name__ == '__main__':
     # print()
     #
     # print(most_popular_feature(list_of_cars))  # leather
-    write_cars_to_file(list_of_cars, 'cars.json')
+    # write_cars_to_file(list_of_cars, 'cars.json')
     print(read_cars_from_file('cars.json'))  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
