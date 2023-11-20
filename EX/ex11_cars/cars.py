@@ -60,13 +60,9 @@ def find_cars_by_make_and_model(cars: list[Car], make: str, model: str) -> list[
     :return: The list of cars with the given make and model.
     """
     found_cars = []
-    # if cars:
-    #     found_cars = sort_cars_by_make(cars)
     for car in cars:
         if car.make == make and car.model == model:
             found_cars.append(car)
-    # if found_cars:
-    #     found_cars = sorted(found_cars, key=lambda car: car.make)  # reuse sort_cars_by_make?
     return found_cars
 
 
@@ -85,9 +81,11 @@ def find_cars_by_feature(cars: list[Car], feature: str) -> list[Car]:
     found_cars = []
     if cars:
         found_cars = sort_cars_by_make(cars)
+
     for car in cars:
-        if feature in car.features:
+        if feature in car.features and car not in found_cars:
             found_cars.append(car)
+
     if found_cars:
         found_cars = sorted(found_cars, key=lambda car: car.make)
     return found_cars
@@ -191,8 +189,8 @@ if __name__ == '__main__':
     # print(sort_cars_by_make(list_of_cars2))  # [Audi A6, Audi A7, BMW X5, BMW X6, Mercedes S500]
     # print()
     #
-    print(find_cars_by_make_and_model(list_of_cars, 'BMW', 'X6'))  # [BMW X6]
-    # print(find_cars_by_feature(list_of_cars, 'panorama'))  # [Audi A6, Audi A7, BMW X6, Mercedes S500]
+    # print(find_cars_by_make_and_model(list_of_cars, 'BMW', 'X6'))  # [BMW X6]
+    print(find_cars_by_feature(list_of_cars, 'panorama'))  # [Audi A6, Audi A7, BMW X6, Mercedes S500]
     # print()
     #
     # print(fuel_needed(list_of_cars[0], 150))
