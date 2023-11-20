@@ -60,13 +60,13 @@ def find_cars_by_make_and_model(cars: list[Car], make: str, model: str) -> list[
     :return: The list of cars with the given make and model.
     """
     found_cars = []
-    if cars:
-        found_cars = sort_cars_by_make(cars)
+    # if cars:
+    #     found_cars = sort_cars_by_make(cars)
     for car in cars:
         if car.make == make and car.model == model:
             found_cars.append(car)
-    if found_cars:
-        found_cars = sorted(found_cars, key=lambda car: car.make)
+    # if found_cars:
+    #     found_cars = sorted(found_cars, key=lambda car: car.make)  # reuse sort_cars_by_make?
     return found_cars
 
 
@@ -182,16 +182,16 @@ if __name__ == '__main__':
                                                    'premium sound system'])]
 
     list_of_cars2 = [Car('BMW', 'X5', 12.3, ['leather', 'heated seats', 'GPS']),
-                    Car('BMW', 'X4', 7.2, ['leather', 'heated seats', 'panorama', 'GPS']),
-                    Car('Audi', 'A6', 9.93, ['leather', 'heated seats', 'panorama', 'GPS']),
-                    Car('Audi', 'A2', 15.21, ['leather', 'heated seats', 'panorama', 'sport package']),
-                    Car('Mercedes', 'S500', 10.6, ['leather', 'panorama', 'sport package',
-                                                   'premium sound system'])]
+                     Car('BMW', 'X4', 7.2, ['leather', 'heated seats', 'panorama', 'GPS']),
+                     Car('Audi', 'A6', 9.93, ['leather', 'heated seats', 'panorama', 'GPS']),
+                     Car('Audi', 'A2', 15.21, ['leather', 'heated seats', 'panorama', 'sport package']),
+                     Car('Mercedes', 'S500', 10.6, ['leather', 'panorama', 'sport package', 'premium sound system'])]
+
     # print(list_of_cars)  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
-    print(sort_cars_by_make(list_of_cars2))  # [Audi A6, Audi A7, BMW X5, BMW X6, Mercedes S500]
+    # print(sort_cars_by_make(list_of_cars2))  # [Audi A6, Audi A7, BMW X5, BMW X6, Mercedes S500]
     # print()
     #
-    # print(find_cars_by_make_and_model(list_of_cars, 'BMW', 'X6'))  # [BMW X6]
+    print(find_cars_by_make_and_model(list_of_cars, 'BMW', 'X6'))  # [BMW X6]
     # print(find_cars_by_feature(list_of_cars, 'panorama'))  # [Audi A6, Audi A7, BMW X6, Mercedes S500]
     # print()
     #
@@ -202,4 +202,4 @@ if __name__ == '__main__':
     #
     # print(most_popular_feature(list_of_cars))  # leather
     # write_cars_to_file(list_of_cars, 'cars.json')
-    print(read_cars_from_file('cars.json'))  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
+    # print(read_cars_from_file('cars.json'))  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
