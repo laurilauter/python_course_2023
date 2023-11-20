@@ -141,10 +141,16 @@ def write_cars_to_file(cars: list[Car], file_name: str):
     :param cars: The list of cars to write to the file.
     :param file_name: The name of the file to write the cars to.
     """
-    cars_list = json.dumps([car.__dict__ for car in cars])
-
     with open(file_name, 'w', encoding='utf-8') as f:
-        json.dump(cars_list, f, ensure_ascii=True, indent=2)
+        f.write('[')
+
+        first_car = True
+        for car in cars:
+            if not first_car:
+                f.write(',\n')  # newline between cars, except the first
+            first_car = False
+            json.dump(car.__dict__, f, ensure_ascii=True, indent=2)
+        f.write(']\n')
 
 
 def read_cars_from_file(file_name: str) -> list[Car]:
@@ -184,7 +190,7 @@ if __name__ == '__main__':
     # print()
     #
     # print(find_cars_by_make_and_model(list_of_cars, 'BMW', 'X6'))  # [BMW X6]
-    print(find_cars_by_feature(list_of_cars, 'panorama'))  # [Audi A6, Audi A7, BMW X6, Mercedes S500]
+    # print(find_cars_by_feature(list_of_cars, 'panorama'))  # [Audi A6, Audi A7, BMW X6, Mercedes S500]
     # print()
     #
     # print(fuel_needed(list_of_cars[0], 150))
@@ -193,5 +199,5 @@ if __name__ == '__main__':
     # print()
     #
     # print(most_popular_feature(list_of_cars))  # leather
-    # write_cars_to_file(list_of_cars, 'cars.json')
-    # print(read_cars_from_file('cars.json'))  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
+    write_cars_to_file(list_of_cars, 'cars.json')
+    print(read_cars_from_file('cars.json'))  # [BMW X5, BMW X6, Audi A6, Audi A7, Mercedes S500]
