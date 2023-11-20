@@ -141,16 +141,18 @@ def write_cars_to_file(cars: list[Car], file_name: str):
     :param cars: The list of cars to write to the file.
     :param file_name: The name of the file to write the cars to.
     """
-    with open(file_name, 'w', encoding='utf-8') as f:
-        f.write('[')
+    cars_list = []
+    for car in cars:
+        car_data = {
+            "make": car.make,
+            "model": car.model,
+            "fuel_consumption": car.fuel_consumption,
+            "features": car.features
+        }
+        cars_list.append(car_data)
 
-        first_car = True
-        for car in cars:
-            if not first_car:
-                f.write(',\n')  # newline between cars, except the first
-            first_car = False
-            json.dump(car.__dict__, f, ensure_ascii=True, indent=2)
-        f.write(']\n')
+    with open(file_name, 'w', encoding='utf-8') as f:
+        json.dump(cars_list, f, ensure_ascii=True, indent=2)
 
 
 def read_cars_from_file(file_name: str) -> list[Car]:
