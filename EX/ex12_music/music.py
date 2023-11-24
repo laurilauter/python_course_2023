@@ -139,8 +139,11 @@ class NoteCollection:
         result = ""
         if self.notes:
             result = "Notes:\n"
-            for note in self.notes:
-                result += " * " + note.note + "\n"
+            if len(self.notes) > 0:
+                for note_object in self.notes:
+                    result += " * " + note_object.note + "\n"
+            else:
+                result += "Empty."
         return result
 
 
