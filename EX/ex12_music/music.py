@@ -26,10 +26,7 @@ class Note:
         else:
             self.note = note_letter.upper()
 
-
-
         """Initialize the class.
-
         To make the logic a bit easier it is recommended to normalize the notes, that is, choose a sharpness
         either '#' or 'b' and use it as the main, that means the notes will be either A, A#, B, B#, C etc or
         A Bb, B, Cb, C.
@@ -52,7 +49,8 @@ class Note:
 
         Return True if equal otherwise False. Used to check A# == Bb or Ab == Z#
         """
-        return False
+        return type(other) is self.__class__ and self.note == other.note
+
 
 class NoteCollection:
     """NoteCollection class."""
@@ -124,6 +122,7 @@ class NoteCollection:
         :return: Content as a string
         """
         return ''
+
 
 if __name__ == '__main__':
     note_one = Note('a')  # yes, lowercase
