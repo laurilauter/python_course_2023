@@ -140,7 +140,7 @@ class NoteCollection:
         result = "Notes:\n"
         if len(self.notes) > 0:
             for note_object in self.notes:
-                result += " * " + note_object.note + "\n"
+                result += "  * " + note_object.note + "\n"
             result = result[:-1]
         else:
             result += "  Empty."
