@@ -141,6 +141,7 @@ class NoteCollection:
         if len(self.notes) > 0:
             for note_object in self.notes:
                 result += " * " + note_object.note + "\n"
+            result = result[:-1]
         else:
             result += "  Empty."
         return result
@@ -165,23 +166,23 @@ if __name__ == '__main__':
 
     # print(note_one)
 
-    # collection = NoteCollection()
+    collection = NoteCollection()
     # #
     # print(note_one)  # <Note: A>
     # print(note_three)  # <Note: Eb>
     #
-    # collection.add(note_one)
-    # collection.add(note_two)
+    collection.add(note_one)
+    collection.add(note_two)
 
-    collection2 = NoteCollection()
-    collection2.add(note_one)
-    print(collection2.extract())  # [<Note: A>,<Note: C>]
-    print(collection2.get_content())
+    # collection2 = NoteCollection()
+    # collection2.add(note_one)
+    # print(collection2.extract())  # [<Note: A>,<Note: C>]
+    # print(collection2.get_content())
 
-    # print(collection.get_content())
-    # # Notes:
-    # #   * A
-    # #   * C
+    print(collection.get_content())
+    # Notes:
+    #   * A
+    #   * C
     #
     # print(collection.extract())  # [<Note: A>,<Note: C>]
     # print(collection.get_content())
