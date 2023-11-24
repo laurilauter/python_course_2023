@@ -3,12 +3,13 @@ from __future__ import annotations
 
 
 class Note:
+
     """
     Note class.
-
     Every note has a name and a sharpness or alteration (supported values: "", "#", "b").
     """
     def __init__(self, note: str):
+        """Init the class"""
         note_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         note_letter = note[:1]
         alteration = note[1:2]
@@ -61,6 +62,7 @@ class NoteCollection:
 
         You will likely need to add something here, maybe a dict or a list?
         """
+        self.notes = []
 
     def add(self, note: Note) -> None:
         """
@@ -70,6 +72,10 @@ class NoteCollection:
 
         :param note: Input object to add to the collection
         """
+        if not isinstance(note, Note):
+            raise TypeError("Note must be a Note instance")
+
+        self.notes.append(note)
 
     def pop(self, note: str) -> Note | None:
         """
@@ -80,7 +86,12 @@ class NoteCollection:
         :param note: Note to remove
         :return: The removed Note object or None.
         """
-        return None
+        note_object = Note(note)
+        removed_note = None
+        if note in self.notes:
+            index = self.notes.index(note_object)
+            removed_note = self.notes.pop(index)
+        return removed_note
 
     def extract(self) -> list[Note]:
         """
@@ -99,7 +110,11 @@ class NoteCollection:
 
         :return: A list of all the notes that were previously in the collection.
         """
-        return []
+        extraction_result = []
+        if self.notes:
+            extraction_result = self.notes
+            self.notes = []
+        return extraction_result
 
     def get_content(self) -> str:
         """
@@ -121,49 +136,54 @@ class NoteCollection:
 
         :return: Content as a string
         """
-        return ''
+        result = ""
+        if self.notes:
+            result = "Notes:\n"
+            for note in self.notes:
+                result += " * " + note.note + "\n"
+        return result
 
 
 if __name__ == '__main__':
-    # note_one = Note('a')  # yes, lowercase
-    # note_two = Note('C')
-    # note_three = Note('Eb')
+    note_one = Note('a')  # yes, lowercase
+    note_two = Note('C')
+    note_three = Note('Eb')
     # print(note_one)
     # print(note_two)
     # print(note_three)
 
-    note_4 = Note('A#')
-    note_5 = Note('Bb')
+    # note_4 = Note('A#')
+    # note_5 = Note('Bb')
     # note_6 = Note('Cb')
     # print(note_4)
     # print(note_5)
     # print(note_6)
     #
-    print(note_4 == note_5)
+    # print(note_4 == note_5)
 
     # print(note_one)
 
-    # collection = NoteCollection()
+    collection = NoteCollection()
     #
-    # print(note_one) # <Note: A>
-    # print(note_three) # <Note: Eb>
-    #
-    # collection.add(note_one)
-    # collection.add(note_two)
-    #
-    # print(collection.get_content())
-    # # Notes:
-    # #   * A
-    # #   * C
-    #
-    # print(collection.extract()) # [<Note: A>,<Note: C>]
-    # print(collection.get_content())
-    # # Notes:
-    # #  Empty
-    #
-    # collection.add(note_one)
-    # collection.add(note_two)
-    # collection.add(note_three)
-    #
-    # print(collection.pop('a') == note_one)  # True
-    # print(collection.pop('Eb') == note_three)  # True
+    print(note_one) # <Note: A>
+    print(note_three) # <Note: Eb>
+
+    collection.add(note_one)
+    collection.add(note_two)
+
+    print(collection.get_content())
+    # Notes:
+    #   * A
+    #   * C
+
+    print(collection.extract()) # [<Note: A>,<Note: C>]
+    print(collection.get_content())
+    # Notes:
+    #  Empty
+
+    collection.add(note_one)
+    collection.add(note_two)
+    collection.add(note_three)
+
+    print(collection.pop('a') == note_one)  # True
+    print(collection.pop('Eb') == note_three)  # True
