@@ -142,7 +142,7 @@ class NoteCollection:
             for note_object in self.notes:
                 result += " * " + note_object.note + "\n"
         else:
-            result += "Empty."
+            result += "  Empty."
         return result
 
 
