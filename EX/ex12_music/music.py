@@ -44,7 +44,7 @@ class Note:
         Return: <Note: [note]> where [note] is the note_name + sharpness if the sharpness is given, that is not "".
         Repr should display the original note and sharpness, before normalization.
         """
-        return self.note
+        return f"<Note: {self.note}>"
 
     def __eq__(self, other):
         """
