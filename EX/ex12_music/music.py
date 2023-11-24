@@ -136,14 +136,13 @@ class NoteCollection:
 
         :return: Content as a string
         """
-        result = ""
-        if self.notes:
-            result = "Notes:\n"
-            if len(self.notes) > 0:
-                for note_object in self.notes:
-                    result += " * " + note_object.note + "\n"
-            else:
-                result += "Empty."
+
+        result = "Notes:\n"
+        if len(self.notes) > 0:
+            for note_object in self.notes:
+                result += " * " + note_object.note + "\n"
+        else:
+            result += "Empty."
         return result
 
 
@@ -166,29 +165,34 @@ if __name__ == '__main__':
 
     # print(note_one)
 
-    collection = NoteCollection()
+    # collection = NoteCollection()
+    # #
+    # print(note_one)  # <Note: A>
+    # print(note_three)  # <Note: Eb>
     #
-    print(note_one)  # <Note: A>
-    print(note_three)  # <Note: Eb>
+    # collection.add(note_one)
+    # collection.add(note_two)
 
-    collection.add(note_one)
-    collection.add(note_two)
+    collection2 = NoteCollection()
+    collection2.add(note_one)
+    print(collection2.extract())  # [<Note: A>,<Note: C>]
+    print(collection2.get_content())
 
-    print(collection.get_content())
-    # Notes:
-    #   * A
-    #   * C
-
-    print(collection.extract())  # [<Note: A>,<Note: C>]
-    print(collection.get_content())
-    # Notes:
-    #  Empty
-
-    collection.add(note_one)
-    collection.add(note_two)
-    collection.add(note_three)
-
-    # print(collection.pop('a') == note_one)  # True
-    # print(collection.pop('Eb') == note_three)  # True
-
-    print(collection.pop('a'))  #
+    # print(collection.get_content())
+    # # Notes:
+    # #   * A
+    # #   * C
+    #
+    # print(collection.extract())  # [<Note: A>,<Note: C>]
+    # print(collection.get_content())
+    # # Notes:
+    # #  Empty
+    #
+    # collection.add(note_one)
+    # collection.add(note_two)
+    # collection.add(note_three)
+    #
+    # # print(collection.pop('a') == note_one)  # True
+    # # print(collection.pop('Eb') == note_three)  # True
+    #
+    # print(collection.pop('a'))  #
