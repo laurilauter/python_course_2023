@@ -73,7 +73,7 @@ class NoteCollection:
         :param note: Input object to add to the collection
         """
         if not isinstance(note, Note):
-            raise TypeError("Note must be a Note instance")
+            raise TypeError("note must be a Note instance")
         if note not in self.notes:
             self.notes.append(note)
 
@@ -88,7 +88,7 @@ class NoteCollection:
         """
         note_object = Note(note)
         removed_note = None
-        if note in self.notes:
+        if note_object in self.notes:
             index = self.notes.index(note_object)
             removed_note = self.notes.pop(index)
         return removed_note
@@ -185,5 +185,7 @@ if __name__ == '__main__':
     collection.add(note_two)
     collection.add(note_three)
 
-    print(collection.pop('a') == note_one)  # True
-    print(collection.pop('Eb') == note_three)  # True
+    # print(collection.pop('a') == note_one)  # True
+    # print(collection.pop('Eb') == note_three)  # True
+
+    print(collection.pop('a'))  #
