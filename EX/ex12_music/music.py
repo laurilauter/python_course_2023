@@ -136,7 +136,7 @@ class NoteCollection:
 
         :return: Content as a string
         """
-
+        sorted_notes = sorted(self.notes, key=lambda note_obj: (note_obj.note[:1], note_obj.note[1:2]))
         result = "Notes:\n"
         if len(self.notes) > 0:
             for note_object in self.notes:
