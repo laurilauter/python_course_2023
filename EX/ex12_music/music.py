@@ -74,8 +74,8 @@ class NoteCollection:
         """
         if not isinstance(note, Note):
             raise TypeError("Note must be a Note instance")
-
-        self.notes.append(note)
+        if note not in self.notes:
+            self.notes.append(note)
 
     def pop(self, note: str) -> Note | None:
         """
@@ -165,8 +165,8 @@ if __name__ == '__main__':
 
     collection = NoteCollection()
     #
-    print(note_one) # <Note: A>
-    print(note_three) # <Note: Eb>
+    print(note_one)  # <Note: A>
+    print(note_three)  # <Note: Eb>
 
     collection.add(note_one)
     collection.add(note_two)
@@ -176,7 +176,7 @@ if __name__ == '__main__':
     #   * A
     #   * C
 
-    print(collection.extract()) # [<Note: A>,<Note: C>]
+    print(collection.extract())  # [<Note: A>,<Note: C>]
     print(collection.get_content())
     # Notes:
     #  Empty
