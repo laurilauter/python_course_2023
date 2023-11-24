@@ -16,8 +16,8 @@ class Note:
         if note_letter.isalpha() and alteration:
             if alteration.lower() == "b":
                 index = note_letters.rfind(note_letter.upper())
-                if index > 1:
-                    previous_char = note_letters[index - 2]
+                if index >= 1:
+                    previous_char = note_letters[index - 1]
                     self.note = previous_char + "#"
                 else:
                     self.note = "Z#"
@@ -125,12 +125,24 @@ class NoteCollection:
 
 
 if __name__ == '__main__':
-    note_one = Note('a')  # yes, lowercase
-    note_two = Note('C')
-    note_three = Note('Eb')
-    print(note_one)
-    print(note_two)
-    print(note_three)
+    # note_one = Note('a')  # yes, lowercase
+    # note_two = Note('C')
+    # note_three = Note('Eb')
+    # print(note_one)
+    # print(note_two)
+    # print(note_three)
+
+    note_4 = Note('A#')
+    note_5 = Note('Bb')
+    # note_6 = Note('Cb')
+    # print(note_4)
+    # print(note_5)
+    # print(note_6)
+    #
+    print(note_4 == note_5)
+
+    # print(note_one)
+
     # collection = NoteCollection()
     #
     # print(note_one) # <Note: A>
