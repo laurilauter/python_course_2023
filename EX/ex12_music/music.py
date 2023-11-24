@@ -138,8 +138,8 @@ class NoteCollection:
         """
         sorted_notes = sorted(self.notes, key=lambda note_obj: (note_obj.note[:1], note_obj.note[1:2]))
         result = "Notes:\n"
-        if len(self.notes) > 0:
-            for note_object in self.notes:
+        if len(sorted_notes) > 0:
+            for note_object in sorted_notes:
                 result += "  * " + note_object.note + "\n"
             result = result[:-1]
         else:
