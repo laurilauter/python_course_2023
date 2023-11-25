@@ -209,31 +209,10 @@ class Chords:
 
         :param chord: Chord to be added.
         """
-        # if len(self.chords) >= 1:
-        #     for c in self.chords:
-        #         print(c.chord_name, c.chord_notes)
-        #         if not c == chord:
-        #             print(c.chord_notes, c == chord)
-        #             self.chords.append(chord)
-        #         else:
-        #             raise ChordOverlapException("Chord already in Chords.")
-        # else:
-        #     self.chords.append(chord)
-
-        # for c in self.chords:
-        #     print(c.chord_name, c.chord_notes)
-        #     #if not c == chord:
-        #         print(c.chord_notes, c == chord)
-        #         self.chords.append(chord)
-        #     else:
-        #         raise ChordOverlapException("Chord already in Chords.")
-
         if chord not in self.chords:
             self.chords.append(chord)
         else:
             raise ChordOverlapException("Chord already in Chords.")
-
-
 
     def get(self, first_note: Note, second_note: Note, third_note: Note = None) -> Chord | None:
         """
@@ -263,8 +242,6 @@ class Chords:
             if c == requested_chord:
                 return c
         return None
-        #  make a Chord with these attributes and then use the __eq__ the chock if its in the list
-        # if chord in self.chords may not suffice
 
 
 class DuplicateNoteNamesException(Exception):
@@ -334,7 +311,7 @@ if __name__ == '__main__':
     # chords.add(Chord(Note('c#'), Note('d#'), 'c#5'))
     # print(chords.get(Note('C#'), Note('d#')))  # ->  <Chord: c#5>
 
-    #chords1 = Chords()
+    # chords1 = Chords()
     chords = Chords()
     #
     chord1 = Chord(Note('A'), Note('C#'), 'Amaj', Note('E'))
