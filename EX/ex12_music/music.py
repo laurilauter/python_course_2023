@@ -240,7 +240,8 @@ class Chords:
         requested_chord = Chord(first_note, second_note, 'Requested', third_note)
 
         for c in self.chords:
-            if c == requested_chord:
+            #if c == requested_chord:
+            if set(c.chord_notes) == set(requested_chord.chord_notes):
                 return c
         return None
 
