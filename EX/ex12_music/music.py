@@ -257,6 +257,11 @@ class Chords:
         :param third_note: The third note of the chord.
         :return: Chord or None.
         """
+        requested_chord = Chord(first_note, second_note, 'Requested', third_note)
+
+        for c in self.chords:
+            if c == requested_chord:
+                return c
         return None
         #  make a Chord with these attributes and then use the __eq__ the chock if its in the list
         # if chord in self.chords may not suffice
@@ -329,14 +334,15 @@ if __name__ == '__main__':
     # chords.add(Chord(Note('c#'), Note('d#'), 'c#5'))
     # print(chords.get(Note('C#'), Note('d#')))  # ->  <Chord: c#5>
 
-    chords1 = Chords()
+    #chords1 = Chords()
+    chords = Chords()
     #
-    # chord1 = Chord(Note('A'), Note('C#'), 'Amaj', Note('E'))
-    # chord2 = Chord(Note('E'), Note('G'), 'Emin', note_three=Note('B'))
-    # chord3 = Chord(Note('E'), Note('B'), 'E5')
+    chord1 = Chord(Note('A'), Note('C#'), 'Amaj', Note('E'))
+    chord2 = Chord(Note('E'), Note('G'), 'Emin', note_three=Note('B'))
+    chord3 = Chord(Note('E'), Note('B'), 'E5')
 
-    chord4 = Chord(Note('E'), Note('B'), 'Emaj')
-    chord5 = Chord(Note('E'), Note('B'), 'Em', Note('C'))
+    # chord4 = Chord(Note('E'), Note('B'), 'Emaj')
+    # chord5 = Chord(Note('E'), Note('B'), 'Em', Note('C'))
 
     # chord_bad1 = Chord(Note('B'), Note('B'), 'E1', Note('B'))
     # chord_bad2 = Chord(Note('A'), Note('B'), 'Cb', Note('D#'))
@@ -351,24 +357,24 @@ if __name__ == '__main__':
     # print(chord_bad4)
     # print(chord4 == chord5)
     #
-    # chords.add(chord1)
-    # chords.add(chord2)
-    # chords.add(chord3)
+    chords.add(chord1)
+    chords.add(chord2)
+    chords.add(chord3)
 
-    chords1.add(chord4)
-    chords1.add(chord5)
-    #chords1.add(chord4)
+    # chords1.add(chord4)
+    # chords1.add(chord5)
+    # chords1.add(chord4)
     #
-    #print(chords.get(Note('e'), Note('b')))  # -> <Chord: E5>
+    print(chords.get(Note('e'), Note('b')))  # -> <Chord: E5>
     #
-    # try:
-    #     wrong_chord = Chord(Note('E'), Note('A'), 'E')
-    #     print('Did not raise, not working as intended.')
-    # except DuplicateNoteNamesException:
-    #     print('Raised DuplicateNoteNamesException, working as intended!')
-    #
-    # try:
-    #     chords.add(Chord(Note('E'), Note('B'), 'Emaj7add9'))
-    #     print('Did not raise, not working as intended.')
-    # except ChordOverlapException:
-    #     print('Raised ChordOverlapException, working as intended!')
+    try:
+        wrong_chord = Chord(Note('E'), Note('A'), 'E')
+        print('Did not raise, not working as intended.')
+    except DuplicateNoteNamesException:
+        print('Raised DuplicateNoteNamesException, working as intended!')
+
+    try:
+        chords.add(Chord(Note('E'), Note('B'), 'Emaj7add9'))
+        print('Did not raise, not working as intended.')
+    except ChordOverlapException:
+        print('Raised ChordOverlapException, working as intended!')
