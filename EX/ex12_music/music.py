@@ -163,14 +163,17 @@ class Chord:
         self.chord_name = chord_name
         self.chord_notes = []
         note_list = [note_one, note_two, note_three]
+
         for n in note_list:
             if isinstance(n, Note) and n.note not in self.chord_notes:
                 print(f"not in list {n.note}", n.note not in self.chord_notes)
                 self.chord_notes.append(n.note)
-                if len(self.chord_notes) < 2:
-                    raise Exception("A chord must have at least two unique notes.")
-        if chord_name in self.chord_notes:
-            raise DuplicateNoteNamesException("A chord name must be different from note names.")
+        print("c1", len(self.chord_notes) < 2)
+        print("c2", len(self.chord_notes) != len(set(self.chord_notes)))
+        print("c3", chord_name in self.chord_notes)
+        if len(self.chord_notes) < 2 or len(self.chord_notes) != len(set(self.chord_notes)) or \
+                chord_name in self.chord_notes:
+            raise DuplicateNoteNamesException("Chord notes must be different and also differ from chord name.")
 
     def __repr__(self) -> str:
         """
@@ -297,15 +300,15 @@ if __name__ == '__main__':
     # chord1 = Chord(Note('A'), Note('C#'), 'Amaj', Note('E'))
     # chord2 = Chord(Note('E'), Note('G'), 'Emin', note_three=Note('B'))
     # chord3 = Chord(Note('E'), Note('B'), 'E5')
-    chord_bad1 = Chord(Note('B'), Note('B'), 'E1', Note('B'))
-    # chord_bad2 = Chord(Note('E'), Note('B'), 'E2')
+    # chord_bad1 = Chord(Note('B'), Note('B'), 'E1', Note('B'))
+    chord_bad2 = Chord(Note('A'), Note('A'), 'C', Note('D'))
     # chord_bad3 = Chord(Note('E'), Note('B'), 'E3')
     # chord_bad4 = Chord(Note('E'), Note('B'), 'E4')
     # print(chord1)
     # print(chord2)
     # print(chord3)
-    print(chord_bad1)
-    # print(chord_bad2)
+    # print(chord_bad1)
+    print(chord_bad2)
     # print(chord_bad3)
     # print(chord_bad4)
     #
