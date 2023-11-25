@@ -181,14 +181,14 @@ class Chord:
         """
         return f"<Chord: {self.chord_name}>"
 
-    def __eq__(self, other):
-        """
-        Compare two Chords.
-
-        Return True if equal otherwise False.
-        """
-        # return type(other) is self.__class__ and set(self.chord_notes) == set(other.chord_notes)
-        return set(self.chord_notes) == set(other.chord_notes)
+    # def __eq__(self, other):
+    #     """
+    #     Compare two Chords.
+    #
+    #     Return True if equal otherwise False.
+    #     """
+    #     # return type(other) is self.__class__ and set(self.chord_notes) == set(other.chord_notes)
+    #     return set(self.chord_notes) == set(other.chord_notes)
 
 
 class Chords:
@@ -200,8 +200,8 @@ class Chords:
 
         Add whatever you need to make this class function.
         """
-        self.chords = []
-        # self.chords = {}
+        # self.chords = []
+        self.chords = {}
 
     def add(self, chord: Chord) -> None:
         """
@@ -211,15 +211,16 @@ class Chords:
 
         :param chord: Chord to be added.
         """
-        if chord not in self.chords:
-            self.chords.append(chord)
-        else:
-            raise ChordOverlapException("Chord already in Chords.")
-
-        # if chord not in self.chords.values():
-        #     self.chords[chord.chord_name] = chord
+        # if chord not in self.chords:
+        #     self.chords.append(chord)
         # else:
         #     raise ChordOverlapException("Chord already in Chords.")
+
+        if chord not in self.chords.values():
+            self.chords[chord.chord_name] = tuple(chord.chord_notes)
+        else:
+            raise ChordOverlapException("Chord already in Chords.")
+        print(self.chords)
 
     def get(self, first_note: Note, second_note: Note, third_note: Note = None) -> Chord | None:
         """
@@ -245,18 +246,17 @@ class Chords:
         """
         requested_chord = Chord(first_note, second_note, 'Requested', third_note)
 
-        for c in self.chords:
-            if c == requested_chord:
-                # if set(c.chord_notes) == set(requested_chord.chord_notes):
-                return c
-        return None
-
-        # for c in self.chords.values():
-        #     print(c)
-        #     #if c == requested_chord:
-        #     if set(c.chord_notes) == set(requested_chord.chord_notes):
+        # for c in self.chords:
+        #     if c == requested_chord:
+        #         # if set(c.chord_notes) == set(requested_chord.chord_notes):
         #         return c
         # return None
+
+        if tuple(requested_chord.chord_notes) in self.chords.items():
+            for key, value in self.chords.items():
+                if value == tuple(requested_chord.chord_notes):
+                    return key
+        return None
 
 
 class DuplicateNoteNamesException(Exception):
