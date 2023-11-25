@@ -252,10 +252,17 @@ class Chords:
         #         return c
         # return None
 
-        if tuple(requested_chord.chord_notes) in self.chords.items():
-            for key, value in self.chords.items():
-                if value == tuple(requested_chord.chord_notes):
-                    return key
+        # if tuple(requested_chord.chord_notes) in self.chords.items():
+        #     for key, value in self.chords.items():
+        #         if value == tuple(requested_chord.chord_notes):
+        #             return key
+        # return None
+
+        requested_chord_notes = tuple(sorted(requested_chord.chord_notes))
+
+        if requested_chord_notes in self.chords:
+            return self.chords[requested_chord_notes]
+
         return None
 
 
