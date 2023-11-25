@@ -211,7 +211,7 @@ class Chords:
 
         :param chord: Chord to be added.
         """
-        if chord.chord_name not in self.chords.keys():
+        if chord not in self.chords.values():
             #self.chords.append(chord)
             self.chords[chord.chord_name] = chord
         else:
