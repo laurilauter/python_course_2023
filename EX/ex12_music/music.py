@@ -187,7 +187,8 @@ class Chord:
 
         Return True if equal otherwise False.
         """
-        return type(other) is self.__class__ and set(self.chord_notes) == set(other.chord_notes)
+        # return type(other) is self.__class__ and set(self.chord_notes) == set(other.chord_notes)
+        return set(self.chord_notes) == set(other.chord_notes)
 
 
 class Chords:
