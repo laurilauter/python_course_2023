@@ -244,8 +244,8 @@ class Chords:
 
         for c in self.chords.values():
             print(c)
-            if c == requested_chord:
-            #if set(c.chord_notes) == set(requested_chord.chord_notes):
+            #if c == requested_chord:
+            if set(c.chord_notes) == set(requested_chord.chord_notes):
                 return c
         return None
 
