@@ -181,14 +181,14 @@ class Chord:
         """
         return f"<Chord: {self.chord_name}>"
 
-    # def __eq__(self, other):
-    #     """
-    #     Compare two Chords.
-    #
-    #     Return True if equal otherwise False.
-    #     """
-    #     # return type(other) is self.__class__ and set(self.chord_notes) == set(other.chord_notes)
-    #     return set(self.chord_notes) == set(other.chord_notes)
+    def __eq__(self, other):
+        """
+        Compare two Chords.
+
+        Return True if equal otherwise False.
+        """
+        # return type(other) is self.__class__ and set(self.chord_notes) == set(other.chord_notes)
+        return set(self.chord_notes) == set(other.chord_notes)
 
 
 class Chords:
