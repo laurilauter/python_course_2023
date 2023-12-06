@@ -46,48 +46,63 @@ class Spaceship:
         self.dead_players = []
 
     def get_crewmate_list(self):
+        """Crewmate class."""
         return self.crewmate_list
 
     def get_impostor_list(self):
+        """Crewmate class."""
         return self.impostor_list
 
     def get_dead_players(self):
+        """Crewmate class."""
         return self.dead_players
 
     def add_crewmate(self, crewmate: Crewmate):
+        """Crewmate class."""
         self.crewmate_list.append(crewmate)
 
     def add_impostor(self, impostor: Impostor):
+        """Crewmate class."""
         self.impostor_list.append(impostor)
 
     def kill_impostor(self, sheriff: Crewmate, color: str):
+        """Crewmate class."""
         pass
 
     def revive_crewmate(self, altruist: Crewmate, dead_crewmate: Crewmate):
+        """Crewmate class."""
         pass
 
     def protect_crewmate(self, guardian_angel: Crewmate, crewmate_to_protect: Crewmate):
+        """Crewmate class."""
         pass
 
     def kill_crewmate(self, impostor: Impostor, color: str):
+        """Crewmate class."""
         pass
 
     def sort_crewmates_by_tasks(self):
+        """Crewmate class."""
         pass
 
     def sort_impostors_by_kills(self):
+        """Crewmate class."""
         pass
 
     def get_regular_crewmates(self):
+        """Crewmate class."""
         pass
 
     def get_role_of_player(self, color: str):
+        """Crewmate class."""
         pass
 
     def get_crewmate_with_most_tasks_done(self):
+        """Crewmate class."""
         pass
 
     def get_impostor_with_most_kills(self):
+        """Crewmate class."""
         pass
 
 
