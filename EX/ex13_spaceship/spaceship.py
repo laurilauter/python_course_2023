@@ -25,47 +25,70 @@ class Crewmate:
 class Impostor:
     """Crewmate class."""
 
-    def __init__(self, color: str, role: str, tasks: int = 10):
+    def __init__(self, color: str):
         """Init the class."""
         self.color = color.capitalize()
-        roles = ["Crewmate", "Sheriff", "Guardian Angel", "Altruist"]
-        self.role = "Crewmate"
-        if role in roles:
-            self.role = role
-        self.tasks = tasks
-        self.protected = False
+        self.kills = 0
 
     def __repr__(self) -> str:
         """
         Representation of the Crewmate class."""
-        return f"{self.color}, role: {self.role}, tasks left: {self.tasks}"
-
-    def complete_task(self):
-        if self.tasks > 0:
-            self.tasks -= 1
+        return f"Impostor {self.color}, kills: {self.kills}"
 
 
 class Spaceship:
     """Crewmate class."""
 
-    def __init__(self, color: str, role: str, tasks: int = 10):
+    def __init__(self):
         """Init the class."""
-        self.color = color.capitalize()
-        roles = ["Crewmate", "Sheriff", "Guardian Angel", "Altruist"]
-        self.role = "Crewmate"
-        if role in roles:
-            self.role = role
-        self.tasks = tasks
-        self.protected = False
+        self.crewmate_list = []
+        self.impostor_list = []
+        self.dead_players = []
 
-    def __repr__(self) -> str:
-        """
-        Representation of the Crewmate class."""
-        return f"{self.color}, role: {self.role}, tasks left: {self.tasks}"
+    def get_crewmate_list(self):
+        return self.crewmate_list
 
-    def complete_task(self):
-        if self.tasks > 0:
-            self.tasks -= 1
+    def get_impostor_list(self):
+        return self.impostor_list
+
+    def get_dead_players(self):
+        return self.dead_players
+
+    def add_crewmate(self, crewmate: Crewmate):
+        self.crewmate_list.append(crewmate)
+
+    def add_impostor(self, impostor: Impostor):
+        self.impostor_list.append(impostor)
+
+    def kill_impostor(self, sheriff: Crewmate, color: str):
+        pass
+
+    def revive_crewmate(self, altruist: Crewmate, dead_crewmate: Crewmate):
+        pass
+
+    def protect_crewmate(self, guardian_angel: Crewmate, crewmate_to_protect: Crewmate):
+        pass
+
+    def kill_crewmate(self, impostor: Impostor, color: str):
+        pass
+
+    def sort_crewmates_by_tasks(self):
+        pass
+
+    def sort_impostors_by_kills(self):
+        pass
+
+    def get_regular_crewmates(self):
+        pass
+
+    def get_role_of_player(self, color: str):
+        pass
+
+    def get_crewmate_with_most_tasks_done(self):
+        pass
+
+    def get_impostor_with_most_kills(self):
+        pass
 
 
 if __name__ == "__main__":
