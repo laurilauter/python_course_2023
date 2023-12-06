@@ -1,10 +1,52 @@
 
 class Crewmate:
-    """
-    Note class.
+    """Crewmate class."""
 
-    Every note has a name and a sharpness or alteration (supported values: "", "#", "b").
-    """
+    def __init__(self, color: str, role: str, tasks: int = 10):
+        """Init the class."""
+        self.color = color.capitalize()
+        roles = ["Crewmate", "Sheriff", "Guardian Angel", "Altruist"]
+        self.role = "Crewmate"
+        if role in roles:
+            self.role = role
+        self.tasks = tasks
+        self.protected = False
+
+    def __repr__(self) -> str:
+        """
+        Representation of the Crewmate class."""
+        return f"{self.color}, role: {self.role}, tasks left: {self.tasks}"
+
+    def complete_task(self):
+        if self.tasks > 0:
+            self.tasks -= 1
+
+
+class Impostor:
+    """Crewmate class."""
+
+    def __init__(self, color: str, role: str, tasks: int = 10):
+        """Init the class."""
+        self.color = color.capitalize()
+        roles = ["Crewmate", "Sheriff", "Guardian Angel", "Altruist"]
+        self.role = "Crewmate"
+        if role in roles:
+            self.role = role
+        self.tasks = tasks
+        self.protected = False
+
+    def __repr__(self) -> str:
+        """
+        Representation of the Crewmate class."""
+        return f"{self.color}, role: {self.role}, tasks left: {self.tasks}"
+
+    def complete_task(self):
+        if self.tasks > 0:
+            self.tasks -= 1
+
+
+class Spaceship:
+    """Crewmate class."""
 
     def __init__(self, color: str, role: str, tasks: int = 10):
         """Init the class."""
