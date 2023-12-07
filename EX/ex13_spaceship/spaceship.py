@@ -59,9 +59,11 @@ class Spaceship:
 
     def add_crewmate(self, crewmate: Crewmate):
         """Crewmate class."""
-        if crewmate not in self.crewmate_list and \
-                crewmate not in self.impostor_list and \
-                crewmate not in self.dead_players:
+        if crewmate in self.crewmate_list or \
+                crewmate in self.impostor_list or \
+                crewmate in self.dead_players:
+            return False
+        else:
             for crewmate in self.crewmate_list:
                 if crewmate.name == crewmate.name:
                     self.crewmate_list.append(crewmate)
@@ -69,10 +71,11 @@ class Spaceship:
 
     def add_impostor(self, impostor: Impostor):
         """Crewmate class."""
-        if impostor not in self.crewmate_list and \
-                impostor not in self.impostor_list and \
-                impostor not in self.dead_players and \
-                len(self.impostor_list) <= 3:
+        if impostor in self.crewmate_list or \
+                impostor in self.impostor_list or \
+                impostor in self.dead_players:
+            return False
+        else:
             for impostor in self.impostor_list:
                 if impostor.name == impostor.name:
                     self.impostor_list.append(impostor)
@@ -160,24 +163,25 @@ if __name__ == "__main__":
     print(yellow)  # -> Yellow, role: Guardian Angel, tasks left: 5.
     print(blue)  # -> Blue, role: Sheriff, tasks left: 0.
     print()
-    #
-    # print("Let's make Yellow complete a task.")
-    # yellow.complete_task()
-    # print(yellow)  # ->  Yellow, role: Guardian Angel, tasks left: 4.
-    # print()
-    #
-    # print("Adding crewmates to Spaceship:")
-    # spaceship.add_crewmate(red)
-    # spaceship.add_crewmate(white)
-    # spaceship.add_crewmate(yellow)
-    # spaceship.add_crewmate(green)
-    # print(spaceship.get_crewmate_list())  # -> [Red, role: Crewmate, tasks left: 10., White, role: Crewmate, tasks left: 10., Yellow, role: Guardian Angel, tasks left: 4., Green, role: Altruist, tasks left: 10.]
-    #
-    # spaceship.add_impostor(blue)  # Blue cannot be an Impostor.
-    # print(spaceship.get_impostor_list())  # -> []
-    # spaceship.add_crewmate(blue)
-    # print()
-    #
+
+    print("Let's make Yellow complete a task.")
+    yellow.complete_task()
+    print(yellow)  # ->  Yellow, role: Guardian Angel, tasks left: 4.
+    print()
+
+    print("Adding crewmates to Spaceship:")
+    spaceship.add_crewmate(red)
+    spaceship.add_crewmate(white)
+    spaceship.add_crewmate(yellow)
+    spaceship.add_crewmate(green)
+    print(
+        spaceship.get_crewmate_list())  # -> [Red, role: Crewmate, tasks left: 10., White, role: Crewmate, tasks left: 10., Yellow, role: Guardian Angel, tasks left: 4., Green, role: Altruist, tasks left: 10.]
+
+    spaceship.add_impostor(blue)  # Blue cannot be an Impostor.
+    print(spaceship.get_impostor_list())  # -> []
+    spaceship.add_crewmate(blue)
+    print()
+
     # print("Now let's add impostors.")
     # orange = Impostor("orANge")
     # black = Impostor("black")
