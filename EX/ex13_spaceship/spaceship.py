@@ -121,7 +121,7 @@ class Spaceship:
     def sort_impostors_by_kills(self):
         """Crewmate class."""
         impostors_by_kills = sorted(self.impostor_list, key=lambda impostor: impostor.kills)
-        return impostors_by_kills
+        return impostors_by_kills[::-1]
 
     def get_regular_crewmates(self):
         """Crewmate class."""
@@ -145,7 +145,7 @@ class Spaceship:
     def get_impostor_with_most_kills(self):
         """Crewmate class."""
         impostors_by_kills = sorted(self.impostor_list, key=lambda impostor: impostor.kills)
-        return impostors_by_kills[0]
+        return impostors_by_kills[::-1][0]
 
 
 if __name__ == "__main__":
