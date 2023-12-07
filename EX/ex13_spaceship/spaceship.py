@@ -115,27 +115,37 @@ class Spaceship:
 
     def sort_crewmates_by_tasks(self):
         """Crewmate class."""
-        pass
+        crewmates_by_tasks = sorted(self.crewmate_list, key=lambda crewmate: crewmate.tasks)
+        return crewmates_by_tasks
 
     def sort_impostors_by_kills(self):
         """Crewmate class."""
-        pass
+        impostors_by_kills = sorted(self.impostor_list, key=lambda impostor: impostor.kills)
+        return impostors_by_kills
 
     def get_regular_crewmates(self):
         """Crewmate class."""
-        pass
+        regulars = []
+        for crewmate in self.crewmate_list:
+            if crewmate.role == "Crewmate":
+                regulars.append(crewmate)
+        return regulars
 
     def get_role_of_player(self, color: str):
         """Crewmate class."""
-        pass
+        for crewmate in self.crewmate_list:
+            if color == crewmate.color:
+                return crewmate.role
 
     def get_crewmate_with_most_tasks_done(self):
         """Crewmate class."""
-        pass
+        crewmates_by_tasks = sorted(self.crewmate_list, key=lambda crewmate: crewmate.tasks)
+        return crewmates_by_tasks[0]
 
     def get_impostor_with_most_kills(self):
         """Crewmate class."""
-        pass
+        impostors_by_kills = sorted(self.impostor_list, key=lambda impostor: impostor.kills)
+        return impostors_by_kills[0]
 
 
 if __name__ == "__main__":
