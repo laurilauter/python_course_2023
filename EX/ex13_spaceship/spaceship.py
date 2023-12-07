@@ -64,10 +64,7 @@ class Spaceship:
                 crewmate in self.dead_players:
             return False
         else:
-            for crewmate in self.crewmate_list:
-                if crewmate.name == crewmate.name:
-                    self.crewmate_list.append(crewmate)
-            return False
+            self.crewmate_list.append(crewmate)
 
     def add_impostor(self, impostor: Impostor):
         """Crewmate class."""
@@ -76,10 +73,7 @@ class Spaceship:
                 impostor in self.dead_players:
             return False
         else:
-            for impostor in self.impostor_list:
-                if impostor.name == impostor.name:
-                    self.impostor_list.append(impostor)
-            return False
+            self.impostor_list.append(impostor)
 
     def kill_impostor(self, sheriff: Crewmate, color: str):
         """Crewmate class."""
