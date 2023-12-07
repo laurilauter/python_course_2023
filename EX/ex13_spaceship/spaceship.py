@@ -1,4 +1,3 @@
-
 class Crewmate:
     """Crewmate class."""
 
@@ -59,11 +58,24 @@ class Spaceship:
 
     def add_crewmate(self, crewmate: Crewmate):
         """Crewmate class."""
-        self.crewmate_list.append(crewmate)
+        if crewmate not in self.crewmate_list and \
+                crewmate not in self.impostor_list and \
+                crewmate not in self.dead_players:
+            for crewmate in self.crewmate_list:
+                if crewmate.name == crewmate.name:
+                    self.crewmate_list.append(crewmate)
+            return False
 
     def add_impostor(self, impostor: Impostor):
         """Crewmate class."""
-        self.impostor_list.append(impostor)
+        if impostor not in self.crewmate_list and \
+                impostor not in self.impostor_list and \
+                impostor not in self.dead_players and \
+                len(self.impostor_list) <= 3:
+            for impostor in self.impostor_list:
+                if impostor.name == impostor.name:
+                    self.impostor_list.append(impostor)
+            return False
 
     def kill_impostor(self, sheriff: Crewmate, color: str):
         """Crewmate class."""
