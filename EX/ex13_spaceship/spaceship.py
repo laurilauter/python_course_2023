@@ -6,7 +6,7 @@ class Crewmate:
         self.color = color.capitalize()
         roles = ["sheriff", "guardian angel", "altruist"]
         if role.lower() in roles:
-            self.role = role
+            self.role = role.title()
         else:
             self.role = "Crewmate"
         self.tasks = tasks
@@ -176,7 +176,7 @@ if __name__ == "__main__":
     print()
 
     print("Let's add some crewmates.")
-    green = Crewmate("green", "Guardian Angel")
+    green = Crewmate("green", "guardian angel")
     print(green)
     blue = Crewmate("blue", "Sheriff")
     print(blue)
