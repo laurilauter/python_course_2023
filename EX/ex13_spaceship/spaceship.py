@@ -45,6 +45,16 @@ class Spaceship:
         self.impostor_list = []
         self.dead_players = []
 
+    def get_colors(self):
+        colors = []
+        for crewmate in self.crewmate_list:
+            colors.append(crewmate.color)
+        for impostor in self.impostor_list:
+            colors.append(impostor.color)
+        for corpse in self.dead_players:
+            colors.append(corpse.color)
+        return colors
+
     def get_crewmate_list(self):
         """Crewmate class."""
         return self.crewmate_list
@@ -62,7 +72,8 @@ class Spaceship:
         if crewmate in self.crewmate_list or \
                 crewmate in self.impostor_list or \
                 crewmate in self.dead_players or \
-                not hasattr(crewmate, 'role'):
+                not hasattr(crewmate, 'role') or \
+                crewmate.color in self.get_colors():
             return False
         else:
             self.crewmate_list.append(crewmate)
@@ -72,7 +83,8 @@ class Spaceship:
         if impostor in self.crewmate_list or \
                 impostor in self.impostor_list or \
                 impostor in self.dead_players or \
-                hasattr(impostor, 'role'):
+                hasattr(impostor, 'role') or \
+                impostor.color in self.get_colors():
             return False
         else:
             self.impostor_list.append(impostor)
