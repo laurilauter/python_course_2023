@@ -61,7 +61,8 @@ class Spaceship:
         """Crewmate class."""
         if crewmate in self.crewmate_list or \
                 crewmate in self.impostor_list or \
-                crewmate in self.dead_players:
+                crewmate in self.dead_players or \
+                crewmate.role == "Impostor":
             return False
         else:
             self.crewmate_list.append(crewmate)
@@ -186,45 +187,45 @@ if __name__ == "__main__":
     spaceship.add_crewmate(blue)
     print()
 
-    # print("Now let's add impostors.")
-    # orange = Impostor("orANge")
-    # black = Impostor("black")
-    # purple = Impostor("Purple")
-    # spaceship.add_impostor(orange)
-    # spaceship.add_impostor(black)
-    #
-    # spaceship.add_impostor(Impostor("Blue"))  # Blue player already exists in Spaceship.
-    # spaceship.add_impostor(purple)
-    # spaceship.add_impostor(Impostor("Pink"))  # No more than three impostors can be on Spaceship.
-    # print(spaceship.get_impostor_list())  # -> Orange, Black and Purple
-    # print()
-    #
-    # print("The game has begun! Orange goes for the kill.")
-    # spaceship.kill_crewmate(orange, "yellow")
-    # print(orange)  # -> Impostor Orange, kills: 1.
-    # spaceship.kill_crewmate(black, "purple")  # You can't kill another Impostor, silly!
-    # print(spaceship.get_dead_players())  # -> Yellow
-    # print()
-    #
-    # print("Yellow is a Guardian angel, and can protect their allies when dead.")
-    # spaceship.protect_crewmate(yellow, green)
-    # print(green.protected)  # -> True
-    # spaceship.kill_crewmate(orange, "green")
-    # print(green in spaceship.dead_players)  # -> False
-    # print(green.protected)  # -> False
-    # print()
-    #
-    # print("Green revives their ally.")
-    # spaceship.kill_crewmate(purple, "RED")
-    # spaceship.revive_crewmate(green, red)
-    # print(red in spaceship.dead_players)  # -> False
-    # print()
-    #
-    # print("Let's check if the sorting and filtering works correctly.")
-    #
-    # red.complete_task()
-    # print(spaceship.get_role_of_player("Blue"))  # -> Sheriff
-    # spaceship.kill_crewmate(purple, "blue")
-    # print(spaceship.sort_crewmates_by_tasks())  # -> Red, White
-    # print(spaceship.sort_impostors_by_kills())  # -> Purple, Orange, Black
-    # print(spaceship.get_regular_crewmates())  # -> White, Red
+    print("Now let's add impostors.")
+    orange = Impostor("orANge")
+    black = Impostor("black")
+    purple = Impostor("Purple")
+    spaceship.add_impostor(orange)
+    spaceship.add_impostor(black)
+
+    spaceship.add_impostor(Impostor("Blue"))  # Blue player already exists in Spaceship.
+    spaceship.add_impostor(purple)
+    spaceship.add_impostor(Impostor("Pink"))  # No more than three impostors can be on Spaceship.
+    print(spaceship.get_impostor_list())  # -> Orange, Black and Purple
+    print()
+
+    print("The game has begun! Orange goes for the kill.")
+    spaceship.kill_crewmate(orange, "yellow")
+    print(orange)  # -> Impostor Orange, kills: 1.
+    spaceship.kill_crewmate(black, "purple")  # You can't kill another Impostor, silly!
+    print(spaceship.get_dead_players())  # -> Yellow
+    print()
+
+    print("Yellow is a Guardian angel, and can protect their allies when dead.")
+    spaceship.protect_crewmate(yellow, green)
+    print(green.protected)  # -> True
+    spaceship.kill_crewmate(orange, "green")
+    print(green in spaceship.dead_players)  # -> False
+    print(green.protected)  # -> False
+    print()
+
+    print("Green revives their ally.")
+    spaceship.kill_crewmate(purple, "RED")
+    spaceship.revive_crewmate(green, red)
+    print(red in spaceship.dead_players)  # -> False
+    print()
+
+    print("Let's check if the sorting and filtering works correctly.")
+
+    red.complete_task()
+    print(spaceship.get_role_of_player("Blue"))  # -> Sheriff
+    spaceship.kill_crewmate(purple, "blue")
+    print(spaceship.sort_crewmates_by_tasks())  # -> Red, White
+    print(spaceship.sort_impostors_by_kills())  # -> Purple, Orange, Black
+    print(spaceship.get_regular_crewmates())  # -> White, Red
