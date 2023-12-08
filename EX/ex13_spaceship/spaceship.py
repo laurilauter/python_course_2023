@@ -84,7 +84,8 @@ class Spaceship:
                 impostor in self.impostor_list or \
                 impostor in self.dead_players or \
                 hasattr(impostor, 'role') or \
-                impostor.color in self.get_colors():
+                impostor.color in self.get_colors() or \
+                len(self.impostor_list) >= 3:
             return False
         else:
             self.impostor_list.append(impostor)
