@@ -4,9 +4,9 @@ class Crewmate:
     def __init__(self, color: str, role: str, tasks: int = 10):
         """Init the class."""
         self.color = color.capitalize()
-        roles = ["Sheriff", "Guardian angel", "Altruist"]
-        if role.capitalize() in roles:
-            self.role = role.capitalize()
+        roles = ["sheriff", "guardian angel", "altruist"]
+        if role.lower() in roles:
+            self.role = role
         else:
             self.role = "Crewmate"
         self.tasks = tasks
