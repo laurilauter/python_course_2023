@@ -5,8 +5,8 @@ class Crewmate:
         """Init the class."""
         self.color = color.capitalize()
         roles = ["Crewmate", "Sheriff", "Guardian Angel", "Altruist"]
-        if role in roles:
-            self.role = role
+        if role.capitalize() in roles:
+            self.role = role.capitalize()
         else:
             self.role = "Crewmate"
         self.tasks = tasks
