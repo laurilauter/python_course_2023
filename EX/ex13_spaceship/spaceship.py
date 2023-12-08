@@ -71,7 +71,8 @@ class Spaceship:
         """Crewmate class."""
         if impostor in self.crewmate_list or \
                 impostor in self.impostor_list or \
-                impostor in self.dead_players:
+                impostor in self.dead_players or \
+                hasattr(impostor, 'role'):
             return False
         else:
             self.impostor_list.append(impostor)
