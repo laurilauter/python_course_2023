@@ -92,6 +92,7 @@ class Spaceship:
 
     def kill_impostor(self, sheriff: Crewmate, color: str):
         """Crewmate class."""
+        color = color.capitalize()
         if sheriff.role == "Sheriff":
             for impostor in self.impostor_list:
                 if impostor.color == color:
@@ -120,11 +121,15 @@ class Spaceship:
 
     def kill_crewmate(self, impostor: Impostor, color: str):
         """Crewmate class."""
+        color = color.capitalize()
         for crewmate in self.crewmate_list:
             if crewmate.color == color:
                 if not crewmate.protected:
                     self.crewmate_list.remove(crewmate)
                     self.dead_players.append(crewmate)
+                    for imp in self.impostor_list:
+                        if imp.color == impostor.color:
+                            imp.kills += 1
                 else:
                     crewmate.protected = False
 
@@ -208,6 +213,7 @@ if __name__ == "__main__":
     spaceship.add_impostor(orange)
     spaceship.add_impostor(black)
 
+    print("Blue player already exists in Spaceship.")
     spaceship.add_impostor(Impostor("Blue"))  # Blue player already exists in Spaceship.
     spaceship.add_impostor(purple)
     spaceship.add_impostor(Impostor("Pink"))  # No more than three impostors can be on Spaceship.
