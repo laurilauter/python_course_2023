@@ -62,7 +62,7 @@ class Spaceship:
         if crewmate in self.crewmate_list or \
                 crewmate in self.impostor_list or \
                 crewmate in self.dead_players or \
-                crewmate.role == "Impostor":
+                hasattr(crewmate, 'role'):
             return False
         else:
             self.crewmate_list.append(crewmate)
