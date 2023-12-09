@@ -120,10 +120,11 @@ class Spaceship:
         """Crewmate class."""
         if guardian_angel.color in self.get_colors():
             if guardian_angel.role == "Guardian Angel":
-                for crewmate in self.dead_players:
-                    if crewmate_to_protect.color == crewmate.color:
-                        if not crewmate.protected:
-                            crewmate.protected = True
+                if crewmate_to_protect not in self.dead_players:
+                    for crewmate in self.crewmate_list:
+                        if crewmate_to_protect.color == crewmate.color:
+                            if not crewmate.protected:
+                                crewmate.protected = True
 
     def kill_crewmate(self, impostor: Impostor, color: str):
         """Crewmate class."""
@@ -245,18 +246,20 @@ if __name__ == "__main__":
     print(green in spaceship.dead_players)  # -> False
     print(green.protected)  # -> False
     print()
-
-    print("Green revives their ally.")
-    spaceship.kill_crewmate(purple, "RED")
-    spaceship.revive_crewmate(green, red)
-    print(red in spaceship.dead_players)  # -> False
-    print()
-
-    print("Let's check if the sorting and filtering works correctly.")
-
-    red.complete_task()
-    print(spaceship.get_role_of_player("Blue"))  # -> Sheriff
-    spaceship.kill_crewmate(purple, "blue")
-    print(spaceship.sort_crewmates_by_tasks())  # -> Red, White
-    print(spaceship.sort_impostors_by_kills())  # -> Purple, Orange, Black
-    print(spaceship.get_regular_crewmates())  # -> White, Red
+    #
+    # print("Green revives their ally.")
+    # spaceship.kill_crewmate(purple, "RED")
+    # spaceship.revive_crewmate(green, red)
+    # print(red in spaceship.dead_players)  # -> False
+    # print()
+    #
+    # print("Let's check if the sorting and filtering works correctly.")
+    #
+    # red.complete_task()
+    # print(spaceship.get_role_of_player("Blue"))  # -> Sheriff
+    # print(spaceship.get_role_of_player("Red"))  # -> Crewmate
+    # print(spaceship.get_role_of_player("Purple"))  # -> None
+    # spaceship.kill_crewmate(purple, "blue")
+    # print(spaceship.sort_crewmates_by_tasks())  # -> Red, White
+    # print(spaceship.sort_impostors_by_kills())  # -> Purple, Orange, Black
+    # print(spaceship.get_regular_crewmates())  # -> White, Red
