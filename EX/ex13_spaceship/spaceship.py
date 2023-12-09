@@ -169,7 +169,7 @@ class Spaceship:
     def get_role_of_player(self, color: str):
         """Crewmate class."""
         for crewmate in self.crewmate_list:
-            if color == crewmate.color:
+            if color.capitalize() == crewmate.color:
                 return crewmate.role
 
     def get_crewmate_with_most_tasks_done(self):
@@ -276,14 +276,17 @@ if __name__ == "__main__":
 
     print()
     print("Kill impostor")
-    # spaceship.kill_impostor(cyan, "Orange")
-    # print(spaceship.get_impostor_list())
+    print(spaceship.get_impostor_list())
+    spaceship.kill_impostor(cyan, "Orange")
+    print(spaceship.get_impostor_list())
     # spaceship.kill_impostor(cyan, "black")
     # print(spaceship.get_impostor_list())
     # spaceship.kill_impostor(cyan, "purple")
     # print(spaceship.get_impostor_list())
-    spaceship.kill_impostor(cyan, "Red")
+    # spaceship.kill_impostor(cyan, "Red")
     print(spaceship.get_dead_players())
+
+    print(spaceship.get_role_of_player("cyaN"))
 
 
 
