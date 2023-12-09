@@ -1,4 +1,6 @@
 """Spaceship."""
+
+
 class Crewmate:
     """Crewmate class."""
 
