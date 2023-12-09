@@ -113,16 +113,17 @@ class Spaceship:
 
     def revive_crewmate(self, altruist: Crewmate, dead_crewmate: Crewmate):
         """Crewmate class."""
-        # if altruist.color in self.get_colors():
         if altruist in self.crewmate_list:
             if altruist.role == "Altruist":
                 if dead_crewmate in self.dead_players:
                     self.dead_players.remove(dead_crewmate)
                     self.crewmate_list.append(dead_crewmate)
+                    self.crewmate_list.remove(altruist)
+                    self.dead_players.append(altruist)
+
 
     def protect_crewmate(self, guardian_angel: Crewmate, crewmate_to_protect: Crewmate):
         """Crewmate class."""
-        # if guardian_angel.color in self.get_colors():
         if guardian_angel in self.dead_players:
             if guardian_angel.role == "Guardian Angel":
                 if crewmate_to_protect not in self.dead_players:
@@ -255,12 +256,14 @@ if __name__ == "__main__":
     print(green in spaceship.dead_players)  # -> False
     print(green.protected)  # -> False
     print()
-    #
-    # print("Green revives their ally.")
-    # spaceship.kill_crewmate(purple, "RED")
-    # spaceship.revive_crewmate(green, red)
-    # print(red in spaceship.dead_players)  # -> False
-    # print()
+
+    print("Green revives their ally.")
+    spaceship.kill_crewmate(purple, "RED")
+    spaceship.revive_crewmate(green, red)
+    print(red in spaceship.dead_players)  # -> False
+    print(spaceship.get_dead_players())
+    print(spaceship.get_crewmate_list())
+    print()
     #
     # print("Let's check if the sorting and filtering works correctly.")
     #
