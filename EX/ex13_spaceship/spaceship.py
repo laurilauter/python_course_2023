@@ -101,7 +101,7 @@ class Spaceship:
                 for impostor in self.impostor_list:
                     if impostor.color == color:
                         self.impostor_list.remove(impostor)
-                        # self.dead_players.append(impostor)
+                        self.dead_players.append(impostor)
                         break
                     else:
                         self.crewmate_list.remove(sheriff)
@@ -279,17 +279,20 @@ if __name__ == "__main__":
 
     print()
     print("Kill impostor")
-    print(spaceship.get_impostor_list())
-    spaceship.kill_impostor(cyan, "Orange")
-    print(spaceship.get_impostor_list())
-    # spaceship.kill_impostor(cyan, "black")
     # print(spaceship.get_impostor_list())
-    # spaceship.kill_impostor(cyan, "purple")
+    # spaceship.kill_impostor(cyan, "OrangE")
     # print(spaceship.get_impostor_list())
-    # spaceship.kill_impostor(cyan, "Red")
+    # spaceship.kill_impostor(cyan, "blaCk")
+    # print(spaceship.get_impostor_list())
+    # spaceship.kill_impostor(cyan, "PURPLE")
+    # print(spaceship.get_impostor_list())
+    print(spaceship.get_regular_crewmates())
+    print(spaceship.get_dead_players())
+    spaceship.kill_impostor(cyan, "Red")
     print(spaceship.get_dead_players())
 
     print(spaceship.get_role_of_player("cyaN"))
+    print(spaceship.get_role_of_player("red"))
 
 
 
