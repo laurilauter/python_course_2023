@@ -98,16 +98,19 @@ class Spaceship:
         color = color.capitalize()
         if sheriff in self.crewmate_list:
             if sheriff.role == "Sheriff":
-                if len(self.impostor_list) > 0:
-                    if self.get_role_of_player(color) == "Impostor":
-                        dead_impostor = self.get_impostor_by_color(color)
-                        self.impostor_list.remove(dead_impostor)
-                        self.dead_players.append(dead_impostor)
-                    else:
-                        for crewmate in self.crewmate_list:
-                            if crewmate.color == color:
-                                self.crewmate_list.remove(sheriff)
-                                self.dead_players.append(sheriff)
+                # if len(self.impostor_list) > 0:
+                if self.get_role_of_player(color) == "Impostor":
+                    dead_impostor = self.get_impostor_by_color(color)
+                    print("bf not removed", self.impostor_list)
+                    self.impostor_list.remove(dead_impostor)
+                    print("bf removed", self.impostor_list)
+                    self.dead_players.append(dead_impostor)
+                    print("bf in dead players", self.dead_players)
+                else:
+                    for crewmate in self.crewmate_list:
+                        if crewmate.color == color:
+                            self.crewmate_list.remove(sheriff)
+                            self.dead_players.append(sheriff)
 
     def revive_crewmate(self, altruist: Crewmate, dead_crewmate: Crewmate):
         """Crewmate class."""
@@ -204,212 +207,31 @@ if __name__ == "__main__":
     spaceship = Spaceship()
     print("Let's add some crewmates.")
     red = Crewmate("Red", "Crewmate")
-    white = Crewmate("White", "Impostor")
-    yellow = Crewmate("Yellow", "Guardian Angel", tasks=5)
-    green = Crewmate("green", "Altruist")
-    blue = Crewmate("BLUE", "Sheriff", tasks=0)
-    cyan = Crewmate("cyan", "Sheriff", tasks=0)
-
-    print(red)  # -> Red, role: Crewmate, tasks left: 10.
-    print(white)  # -> White, role: Crewmate, tasks left: 10.
-    print(yellow)  # -> Yellow, role: Guardian Angel, tasks left: 5.
-    print(green)
-    print(blue)  # -> Blue, role: Sheriff, tasks left: 0.
-
-    print()
-
-    print("Let's make Yellow complete a task.")
-    yellow.complete_task()
-    print(yellow)  # ->  Yellow, role: Guardian Angel, tasks left: 4.
-
-    print()
-
-    print("Adding crewmates to Spaceship:")
     spaceship.add_crewmate(red)
-    spaceship.add_crewmate(white)
-    spaceship.add_crewmate(yellow)
-    spaceship.add_crewmate(green)
+    cyan = Crewmate("cyan", "Sheriff", tasks=0)
     spaceship.add_crewmate(cyan)
-    print(
-        spaceship.get_crewmate_list())  # -> [Red, role: Crewmate, tasks left: 10., White, role: Crewmate, tasks left: 10., Yellow, role: Guardian Angel, tasks left: 4., Green, role: Altruist, tasks left: 10.]
-    print()
-    print("Blue cannot be an Impostor.")
-    spaceship.add_impostor(blue)  # Blue cannot be an Impostor.
-    print(spaceship.get_impostor_list())  # -> []
-    spaceship.add_crewmate(blue)
+    print("All 000", spaceship.get_all_crewmates())
+    print("All rrr", spaceship.get_regular_crewmates())
+
     print()
 
     print("Now let's add impostors.")
-    orange = Impostor("orANge")
     black = Impostor("black")
-    purple = Impostor("Purple")
-    spaceship.add_impostor(orange)
     spaceship.add_impostor(black)
-
-    print()
-
-    print("Blue player already exists in Spaceship.")
-    spaceship.add_impostor(Impostor("Blue"))  # Blue player already exists in Spaceship.
-    spaceship.add_impostor(purple)
-    spaceship.add_impostor(Impostor("Pink"))  # No more than three impostors can be on Spaceship.
-    print(spaceship.get_impostor_list())  # -> Orange, Black and Purple
-    print()
-
-    print("The game has begun! Orange goes for the kill.")
-    spaceship.kill_crewmate(orange, "yellow")
-    print(orange)  # -> Impostor Orange, kills: 1.
-    spaceship.kill_crewmate(black, "purple")  # You can't kill another Impostor, silly!
-    print(spaceship.get_dead_players())  # -> Yellow
-    print()
-
-    print("Yellow is a Guardian angel, and can protect their allies when dead.")
-    spaceship.protect_crewmate(yellow, green)
-    spaceship.protect_crewmate(yellow, red)
-    print(green.protected)  # -> True
-    print(red.protected)  # -> False
-    spaceship.kill_crewmate(orange, "green")
-    print(green in spaceship.dead_players)  # -> False
-    print(green.protected)  # -> False
-    print()
-
-    print("Green revives their ally.")
-    spaceship.kill_crewmate(purple, "RED")
-    spaceship.revive_crewmate(green, red)
-    print(red in spaceship.dead_players)  # -> False
-    print(spaceship.get_dead_players())
-    print(spaceship.get_crewmate_list())
-    print()
-
-    print("Let's check if the sorting and filtering works correctly.")
-
-    red.complete_task()
-    print(spaceship.get_role_of_player("Blue"))  # -> Sheriff
-    print(spaceship.get_role_of_player("Red"))  # -> Crewmate
-    print(spaceship.get_role_of_player("Purple"))  # -> None
-    spaceship.kill_crewmate(purple, "blue")
-    print(spaceship.sort_crewmates_by_tasks())  # -> Red, White
-    print(spaceship.sort_impostors_by_kills())  # -> Purple, Orange, Black
-    print(spaceship.get_regular_crewmates())  # -> White, Red
+    print("All 001", spaceship.get_all_crewmates())
+    print("Imps 001", spaceship.get_impostor_list())
 
     print()
     print("Kill impostor")
-    print("Imps", spaceship.get_impostor_list())
-    print("kill imp Black")
-    print("Imps 0", spaceship.get_impostor_list())
-    print("Role black", spaceship.get_role_of_player("Black"))
+    print("Imps before kill b", spaceship.get_impostor_list())
+    print("kill imp Black NEXT LINE")
     spaceship.kill_impostor(cyan, "Black")
+    print("Imps after kill b", spaceship.get_impostor_list())
+    print("Role black", spaceship.get_role_of_player("Black"))
     print("Imps 01", spaceship.get_impostor_list())
-
-    # spaceship.kill_impostor(cyan, "blaCk")
-    # print(spaceship.get_impostor_list())
-    # spaceship.kill_impostor(cyan, "PURPLE")
-    # print("Imps", spaceship.get_impostor_list())
-    # spaceship.kill_impostor(cyan, "PURPLE")
     print()
-    print("Get role cyan 1", spaceship.get_role_of_player("cyaN"))
-    print("Imps 1", spaceship.get_impostor_list())
-    print("All 1", spaceship.get_all_crewmates())
-    print("Dead 1", spaceship.get_dead_players())
-    print("kill imp Wrong")
-    spaceship.kill_impostor(cyan, "Wrong")
-    print("GET role cyan 2", spaceship.get_role_of_player("cyaN"))
-    print("Imps 2", spaceship.get_impostor_list())
-    print("All 2", spaceship.get_all_crewmates())
-    print("Dead 2", spaceship.get_dead_players())
-    print("kill imp Red")
-    spaceship.kill_impostor(cyan, "Red")
-    print("GET role cyan 3", spaceship.get_role_of_player("cyaN"))
-    print("Imps 3", spaceship.get_impostor_list())
-    print("All 3", spaceship.get_all_crewmates())
-    print("Dead 3", spaceship.get_dead_players())
+    print("kill imp Red NEXT LINE")
+    spaceship.kill_impostor(cyan, "red")
+    print("Role red", spaceship.get_role_of_player("red"))
+    print("Role cyan", spaceship.get_role_of_player("cyan"))
 
-    print(spaceship.get_role_of_player("cyaN"))
-    # print(spaceship.get_role_of_player("red"))
-
-    # print("Spaceship.")
-    # #
-    # spaceship = Spaceship()
-    # print(spaceship.get_dead_players())  # -> []
-    # print()
-    #
-    # print("Let's add some crewmates.")
-    # # green = Crewmate("green", "guardian angel")
-    # # print(green)
-    # # blue = Crewmate("blue", "Sheriff")
-    # # print(blue)
-    # red = Crewmate("Red", "Crewmate")
-    # white = Crewmate("White", "Impostor")
-    # yellow = Crewmate("Yellow", "Guardian Angel", tasks=5)
-    # green = Crewmate("green", "Altruist")
-    # blue = Crewmate("BLUE", "Sheriff", tasks=0)
-    #
-    # print(red)  # -> Red, role: Crewmate, tasks left: 10.
-    # print(white)  # -> White, role: Crewmate, tasks left: 10.
-    # print(yellow)  # -> Yellow, role: Guardian Angel, tasks left: 5.
-    # print(green)
-    # print(blue)  # -> Blue, role: Sheriff, tasks left: 0.
-    # print()
-    #
-    # print("Let's make Yellow complete a task.")
-    # yellow.complete_task()
-    # print(yellow)  # ->  Yellow, role: Guardian Angel, tasks left: 4.
-    # print()
-    #
-    # print("Adding crewmates to Spaceship:")
-    # spaceship.add_crewmate(red)
-    # spaceship.add_crewmate(white)
-    # spaceship.add_crewmate(yellow)
-    # spaceship.add_crewmate(green)
-    # print(
-    #     spaceship.get_crewmate_list())  # -> [Red, role: Crewmate, tasks left: 10., White, role: Crewmate, tasks left: 10., Yellow, role: Guardian Angel, tasks left: 4., Green, role: Altruist, tasks left: 10.]
-    #
-    # spaceship.add_impostor(blue)  # Blue cannot be an Impostor.
-    # print(spaceship.get_impostor_list())  # -> []
-    # spaceship.add_crewmate(blue)
-    # print()
-    #
-    # print("Now let's add impostors.")
-    # orange = Impostor("orANge")
-    # black = Impostor("black")
-    # purple = Impostor("Purple")
-    # spaceship.add_impostor(orange)
-    # spaceship.add_impostor(black)
-    #
-    # print("Blue player already exists in Spaceship.")
-    # spaceship.add_impostor(Impostor("Blue"))  # Blue player already exists in Spaceship.
-    # spaceship.add_impostor(purple)
-    # spaceship.add_impostor(Impostor("Pink"))  # No more than three impostors can be on Spaceship.
-    # print(spaceship.get_impostor_list())  # -> Orange, Black and Purple
-    # print()
-    #
-    # print("The game has begun! Orange goes for the kill.")
-    # spaceship.kill_crewmate(orange, "yellow")
-    # print(orange)  # -> Impostor Orange, kills: 1.
-    # spaceship.kill_crewmate(black, "purple")  # You can't kill another Impostor, silly!
-    # print(spaceship.get_dead_players())  # -> Yellow
-    # print()
-    #
-    # print("Yellow is a Guardian angel, and can protect their allies when dead.")
-    # spaceship.protect_crewmate(yellow, green)
-    # print(green.protected)  # -> True
-    # spaceship.kill_crewmate(orange, "green")
-    # print(green in spaceship.dead_players)  # -> False
-    # print(green.protected)  # -> False
-    # print()
-    # #
-    # # print("Green revives their ally.")
-    # # spaceship.kill_crewmate(purple, "RED")
-    # # spaceship.revive_crewmate(green, red)
-    # # print(red in spaceship.dead_players)  # -> False
-    # # print()
-    # #
-    # # print("Let's check if the sorting and filtering works correctly.")
-    # #
-    # # red.complete_task()
-    # # print(spaceship.get_role_of_player("Blue"))  # -> Sheriff
-    # # print(spaceship.get_role_of_player("Red"))  # -> Crewmate
-    # # print(spaceship.get_role_of_player("Purple"))  # -> None
-    # # spaceship.kill_crewmate(purple, "blue")
-    # # print(spaceship.sort_crewmates_by_tasks())  # -> Red, White
-    # # print(spaceship.sort_impostors_by_kills())  # -> Purple, Orange, Black
-    # # print(spaceship.get_regular_crewmates())  # -> White, Red
