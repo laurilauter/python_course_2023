@@ -106,6 +106,7 @@ class Spaceship:
                     else:
                         self.crewmate_list.remove(sheriff)
                         self.dead_players.append(sheriff)
+                        break
 
     def revive_crewmate(self, altruist: Crewmate, dead_crewmate: Crewmate):
         """Crewmate class."""
@@ -275,13 +276,13 @@ if __name__ == "__main__":
 
     print()
     print("Kill impostor")
-    spaceship.kill_impostor(cyan, "Orange")
-    print(spaceship.get_impostor_list())
-    spaceship.kill_impostor(cyan, "black")
-    print(spaceship.get_impostor_list())
-    spaceship.kill_impostor(cyan, "purple")
-    print(spaceship.get_impostor_list())
-    # spaceship.kill_impostor(blue, "Red")
+    # spaceship.kill_impostor(cyan, "Orange")
+    # print(spaceship.get_impostor_list())
+    # spaceship.kill_impostor(cyan, "black")
+    # print(spaceship.get_impostor_list())
+    # spaceship.kill_impostor(cyan, "purple")
+    # print(spaceship.get_impostor_list())
+    spaceship.kill_impostor(cyan, "Red")
     print(spaceship.get_dead_players())
 
 
