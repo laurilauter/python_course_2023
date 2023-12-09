@@ -99,7 +99,7 @@ class Spaceship:
         if sheriff in self.crewmate_list:
             if sheriff.role == "Sheriff":
                 if len(self.impostor_list) > 0:
-                    if spaceship.get_role_of_player(color) == "Impostor":
+                    if self.get_role_of_player(color) == "Impostor":
                         dead_impostor = self.get_impostor_by_color(color)
                         self.impostor_list.remove(dead_impostor)
                         self.dead_players.append(dead_impostor)
