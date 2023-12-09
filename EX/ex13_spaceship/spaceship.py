@@ -140,16 +140,17 @@ class Spaceship:
     def kill_crewmate(self, impostor: Impostor, color: str):
         """Crewmate class."""
         color = color.capitalize()
-        for crewmate in self.crewmate_list:
-            if crewmate.color == color:
-                if not crewmate.protected:
-                    self.crewmate_list.remove(crewmate)
-                    self.dead_players.append(crewmate)
-                    for imp in self.impostor_list:
-                        if imp.color == impostor.color:
-                            imp.kills += 1
-                else:
-                    crewmate.protected = False
+        if impostor in self.impostor_list:
+            for crewmate in self.crewmate_list:
+                if crewmate.color == color:
+                    if not crewmate.protected:
+                        self.crewmate_list.remove(crewmate)
+                        self.dead_players.append(crewmate)
+                        for imp in self.impostor_list:
+                            if imp.color == impostor.color:
+                                imp.kills += 1
+                    else:
+                        crewmate.protected = False
 
     def sort_crewmates_by_tasks(self):
         """Crewmate class."""
