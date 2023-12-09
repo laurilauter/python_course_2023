@@ -171,6 +171,9 @@ class Spaceship:
         for crewmate in self.crewmate_list:
             if color.capitalize() == crewmate.color:
                 return crewmate.role
+        for impostor in self.impostor_list:
+            if color.capitalize() == impostor.color:
+                return "Impostor"
 
     def get_crewmate_with_most_tasks_done(self):
         """Crewmate class."""
