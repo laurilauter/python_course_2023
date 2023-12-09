@@ -94,7 +94,7 @@ class Spaceship:
             self.impostor_list.append(impostor)
 
     def kill_impostor(self, sheriff: Crewmate, color: str):
-        """kill impostor."""
+        """Kill impostor."""
         color = color.capitalize()
         if sheriff in self.crewmate_list:
             if sheriff.role == "Sheriff":
