@@ -1,8 +1,6 @@
+"""Spaceship."""
 class Crewmate:
-    """Crewmate class.
-
-    Something
-    """
+    """Crewmate class."""
 
     def __init__(self, color: str, role: str, tasks: int = 10):
         """Init the class."""
@@ -20,6 +18,7 @@ class Crewmate:
         return f"{self.color}, role: {self.role}, tasks left: {self.tasks}."
 
     def complete_task(self):
+        """Crewmate class."""
         if self.tasks > 0:
             self.tasks -= 1
 
@@ -33,8 +32,7 @@ class Impostor:
         self.kills = 0
 
     def __repr__(self) -> str:
-        """
-        Representation of the Crewmate class."""
+        """Representation of the Crewmate class."""
         return f"Impostor {self.color}, kills: {self.kills}."
 
 
