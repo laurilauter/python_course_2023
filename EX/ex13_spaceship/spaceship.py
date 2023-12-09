@@ -1,5 +1,8 @@
 class Crewmate:
-    """Crewmate class."""
+    """Crewmate class.
+
+    Something
+    """
 
     def __init__(self, color: str, role: str, tasks: int = 10):
         """Init the class."""
@@ -13,8 +16,7 @@ class Crewmate:
         self.protected = False
 
     def __repr__(self) -> str:
-        """
-        Representation of the Crewmate class."""
+        """Representation of the Crewmate class."""
         return f"{self.color}, role: {self.role}, tasks left: {self.tasks}."
 
     def complete_task(self):
@@ -46,6 +48,7 @@ class Spaceship:
         self.dead_players = []
 
     def get_colors(self):
+        """Init the class."""
         colors = []
         for crewmate in self.crewmate_list:
             colors.append(crewmate.color)
