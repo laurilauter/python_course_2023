@@ -128,9 +128,11 @@ class Spaceship:
             if guardian_angel.role == "Guardian Angel":
                 if crewmate_to_protect not in self.dead_players:
                     for crewmate in self.crewmate_list:
-                        if crewmate_to_protect.color == crewmate.color:
-                            if not crewmate.protected:
-                                crewmate.protected = True
+                        if not crewmate.protected:
+                            for mate in self.crewmate_list:
+                                if crewmate_to_protect.color == mate.color:
+                                    if not mate.protected:
+                                        mate.protected = True
 
     def kill_crewmate(self, impostor: Impostor, color: str):
         """Crewmate class."""
