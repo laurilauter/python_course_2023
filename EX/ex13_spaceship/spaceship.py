@@ -288,12 +288,17 @@ if __name__ == "__main__":
     # print(spaceship.get_impostor_list())
     # spaceship.kill_impostor(cyan, "PURPLE")
     # print(spaceship.get_impostor_list())
+    print(spaceship.get_role_of_player("cyaN"))
+    print("Regulars", spaceship.get_regular_crewmates())
+    print("Dead", spaceship.get_dead_players())
+    spaceship.kill_impostor(cyan, "Wrong")
     print("Regulars", spaceship.get_regular_crewmates())
     print("Dead", spaceship.get_dead_players())
     spaceship.kill_impostor(cyan, "Red")
+    print("Regulars", spaceship.get_regular_crewmates())
     print("Dead", spaceship.get_dead_players())
 
-    # print(spaceship.get_role_of_player("cyaN"))
+    print(spaceship.get_role_of_player("cyaN"))
     # print(spaceship.get_role_of_player("red"))
 
 
