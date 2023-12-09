@@ -116,10 +116,9 @@ class Spaceship:
         # if altruist.color in self.get_colors():
         if altruist in self.crewmate_list:
             if altruist.role == "Altruist":
-                for crewmate in self.dead_players:
-                    if dead_crewmate.color == crewmate.color:
-                        self.dead_players.remove(dead_crewmate)
-                        self.crewmate_list.append(dead_crewmate)
+                if dead_crewmate in self.dead_players:
+                    self.dead_players.remove(dead_crewmate)
+                    self.crewmate_list.append(dead_crewmate)
 
     def protect_crewmate(self, guardian_angel: Crewmate, crewmate_to_protect: Crewmate):
         """Crewmate class."""
