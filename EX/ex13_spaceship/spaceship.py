@@ -104,9 +104,11 @@ class Spaceship:
                         self.dead_players.append(impostor)
                         break
                     else:
-                        self.crewmate_list.remove(sheriff)
-                        self.dead_players.append(sheriff)
-                        break
+                        for crewmate in self.crewmate_list:
+                            if crewmate.color == color:
+                                self.crewmate_list.remove(sheriff)
+                                self.dead_players.append(sheriff)
+                                break
 
     def revive_crewmate(self, altruist: Crewmate, dead_crewmate: Crewmate):
         """Crewmate class."""
