@@ -28,7 +28,15 @@ def get_request_error_handling(url: str) -> int | requests.RequestException:
     :param url: The URL to which the GET request will be sent.
     :return: Server's response object or the exception object if an error occurs.
     """
-    pass
+    try:
+        r = requests.get(url)
+
+        if r.status_code != 200:
+            raise Exception(f"Error: HTTP status code {r.status_code}")
+
+        return r.status_code
+    except (requests.exceptions.RequestException, Exception) as e:
+        return e
 
 
 def post_request(url: str, data: dict) -> requests.Response:
@@ -126,6 +134,7 @@ def fetch_aggregate_data(url: str) -> dict:
 
 if __name__ == '__main__':
     print(get_request("https://www.google.com"))  # 200
+    print(get_request_error_handling("https://www.google.com"))  # 200
     # print(advanced_user_filter(
     #     "https://cs.taltech.ee/services/ex14/json-data",
     #     750000, 900, 2500))
