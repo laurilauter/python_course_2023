@@ -61,7 +61,7 @@ def post_request(url: str, data: dict) -> requests.Response:
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
         return e
-    return response.json()
+    return response
 
 
 def delete_request(url: str) -> int | requests.RequestException:
