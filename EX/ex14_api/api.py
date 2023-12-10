@@ -73,7 +73,12 @@ def delete_request(url: str) -> int | requests.RequestException:
     :param url: The URL to which the DELETE request will be sent.
     :return: Server's response status code or the exception object if an error occurs.
     """
-    pass
+    try:
+        response = requests.delete(url)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        return e
+    return response.status_code
 
 
 def stream_request(url: str) -> str:
@@ -88,7 +93,16 @@ def stream_request(url: str) -> str:
     :param url: The URL to send the GET request to.
     :return: A string containing the streamed content.
     """
-    pass
+    try:
+        response = requests.get(url, stream=True)
+        response.raise_for_status()
+        content = ""
+        for chunk in response.iter_content(chunk_size=1024):
+            if chunk:
+                content += chunk.decode("utf-8")
+    except requests.exceptions.RequestException as e:
+        return e
+    return content
 
 
 def get_authenticated_request(url: str, auth_token: str) -> Any | requests.RequestException:
@@ -102,7 +116,13 @@ def get_authenticated_request(url: str, auth_token: str) -> Any | requests.Reque
     :return: Server's response json object or the exception object if an error occurs.
 
     """
-    pass
+    try:
+        headers = {"Authorization": f"Bearer {auth_token}"}
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        return e
+    return response.json()
 
 
 def advanced_user_filter(url, min_followers: int, min_posts: int, min_following: int) -> list:
@@ -118,7 +138,16 @@ def advanced_user_filter(url, min_followers: int, min_posts: int, min_following:
     :param min_following: Minimum following required.
     :return: List of user data dictionaries.
     """
-    pass
+    response = requests.get(url)
+    response.raise_for_status()
+    data = response.json()
+    filtered_data = []
+    for user in data:
+        if user["followers"] >= min_followers and user["posts"] >= min_posts and user["following"] >= min_following:
+            filtered_data.append(
+                {"username": user["username"], "full_name": user["full_name"], "followers": user["followers"],
+                 "following": user["following"], "posts": user["posts"]})
+    return filtered_data
 
 
 def fetch_aggregate_data(url: str) -> dict:
@@ -141,7 +170,29 @@ def fetch_aggregate_data(url: str) -> dict:
     :param url: URL from which to fetch user data.
     :return: Aggregated data including total and average values.
     """
-    pass
+    response = requests.get(url)
+    response.raise_for_status()
+    data = response.json()
+
+    total_followers = 0
+    total_following = 0
+    total_posts = 0
+
+    for user in data:
+        total_followers += user["followers"]
+        total_following += user["following"]
+        total_posts += user["posts"]
+
+    num_users = len(data)
+
+    return {
+        "average_followers": total_followers / num_users,
+        "average_following": total_following / num_users,
+        "average_posts": total_posts / num_users,
+        "total_followers": total_followers,
+        "total_following": total_following,
+        "total_posts": total_posts
+    }
 
 
 if __name__ == '__main__':
