@@ -28,15 +28,22 @@ def get_request_error_handling(url: str) -> int | requests.RequestException:
     :param url: The URL to which the GET request will be sent.
     :return: Server's response object or the exception object if an error occurs.
     """
+    # try:
+    #     r = requests.get(url)
+    #
+    #     if r.status_code != 200:
+    #         raise Exception(f"Error: HTTP status code {r.status_code}")
+    #
+    #     return r.status_code
+    # except (requests.exceptions.RequestException, Exception) as e:
+    #     return e
+
     try:
-        r = requests.get(url)
-
-        if r.status_code != 200:
-            raise Exception(f"Error: HTTP status code {r.status_code}")
-
-        return r.status_code
-    except (requests.exceptions.RequestException, Exception) as e:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
         return e
+    return response.status_code
 
 
 def post_request(url: str, data: dict) -> requests.Response:
@@ -50,14 +57,11 @@ def post_request(url: str, data: dict) -> requests.Response:
     :return: Server's response json object or the exception object if an error occurs.
     """
     try:
-        r = requests.post(url, data)
-
-        if r.status_code != 200:
-            raise Exception(f"Error: HTTP status code {r.status_code}")
-
-        return r
-    except (requests.exceptions.RequestException, Exception) as e:
+        response = requests.post(url, json=data)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
         return e
+    return response.json()
 
 
 def delete_request(url: str) -> int | requests.RequestException:
