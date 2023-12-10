@@ -28,16 +28,6 @@ def get_request_error_handling(url: str) -> int | requests.RequestException:
     :param url: The URL to which the GET request will be sent.
     :return: Server's response object or the exception object if an error occurs.
     """
-    # try:
-    #     r = requests.get(url)
-    #
-    #     if r.status_code != 200:
-    #         raise Exception(f"Error: HTTP status code {r.status_code}")
-    #
-    #     return r.status_code
-    # except (requests.exceptions.RequestException, Exception) as e:
-    #     return e
-
     try:
         response = requests.get(url)
         response.raise_for_status()
@@ -93,13 +83,26 @@ def stream_request(url: str) -> str:
     :param url: The URL to send the GET request to.
     :return: A string containing the streamed content.
     """
+    # try:
+    #     response = requests.get(url, stream=True)
+    #     response.raise_for_status()
+    #     content = ""
+    #     for chunk in response.iter_content(chunk_size=1024):
+    #         if chunk:
+    #             content += chunk.decode("utf-8")
+    # except requests.exceptions.RequestException as e:
+    #     return e
+    # return content
+
     try:
         response = requests.get(url, stream=True)
         response.raise_for_status()
         content = ""
-        for chunk in response.iter_content(chunk_size=1024):
-            if chunk:
-                content += chunk.decode("utf-8")
+        for line in response.iter_lines():
+            # filter out keep-alive new lines
+            if line:
+                content += line.decode("utf-8")
+                # print(json.loads(decoded_line))
     except requests.exceptions.RequestException as e:
         return e
     return content
