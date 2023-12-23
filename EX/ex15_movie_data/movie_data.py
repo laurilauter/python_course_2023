@@ -1,6 +1,7 @@
 """What should we watch, Honey?..."""
 
 import pandas as pd
+from typing import Union
 
 
 class MovieData:
@@ -35,9 +36,9 @@ class MovieData:
         :return: None
         """
         try:
-            self.movies = pd.read_csv(movies_filename)
-            self.ratings = pd.read_csv(ratings_filename)
-            self.tags = pd.read_csv(tags_filename)
+            self.movies = pd.DataFrame(pd.read_csv(movies_filename))
+            self.ratings = pd.DataFrame(pd.read_csv(ratings_filename))
+            self.tags = pd.DataFrame(pd.read_csv(tags_filename))
         except ValueError:
             raise ValueError("Could not load all data.")
 
@@ -62,61 +63,59 @@ class MovieData:
         # Merge the movies, ratings, and tags dataframes
         merged_df = pd.merge(self.movies, self.ratings, on='movieId')
         merged_df = pd.merge(merged_df, self.tags, on='movieId')
-
         # Drop the userId and timestamp columns
         merged_df.drop(['userId', 'timestamp'], axis=1, inplace=True)
-
         # Group the dataframe by movieId, title, genres, and rating
         grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating'], as_index=False)
-
         # Aggregate the tag column
         agg_df = grouped_df.agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
-
         # Rename the columns
         agg_df.columns = ['movieId', 'title', 'genres', 'rating', 'tag']
+        self.aggregate_movie_dataframe = pd.DataFrame(agg_df)
 
-        self.aggregate_movie_dataframe = agg_df
-
-    def get_aggregate_movie_dataframe(self) -> pd.DataFrame | None:
+    def get_aggregate_movie_dataframe(self) -> Union[pd.DataFrame, None]:
         """
         Return aggregate_movie_dataframe variable.
 
         :return: pandas DataFrame
         """
-        if self.aggregate_movie_dataframe is None:
-            raise ValueError(
-                "Aggregate movie dataframe not yet created. Call create_aggregate_movie_dataframe() first.")
-        return self.aggregate_movie_dataframe
+        try:
+            return self.aggregate_movie_dataframe
+        except ValueError:
+            raise ValueError("Aggregate movie dataframe not available.")
 
-    def get_movies_dataframe(self) -> pd.DataFrame | None:
+    def get_movies_dataframe(self) -> Union[pd.DataFrame, None]:
         """
         Return movies dataframe.
 
         :return: pandas DataFrame
         """
-        if self.movies is None:
-            raise ValueError("Movies DataFrame is not available")
-        return None
+        try:
+            return self.movies
+        except ValueError:
+            raise ValueError("Movies DataFrame not available.")
 
-    def get_ratings_dataframe(self) -> pd.DataFrame | None:
+    def get_ratings_dataframe(self) -> Union[pd.DataFrame, None]:
         """
         Return ratings dataframe.
 
         :return: pandas DataFrame
         """
-        if self.ratings is None:
-            raise ValueError("ratings DataFrame is not available")
-        return self.ratings
+        try:
+            return self.ratings
+        except ValueError:
+            raise ValueError("Ratings DataFrame not available.")
 
-    def get_tags_dataframe(self) -> pd.DataFrame | None:
+    def get_tags_dataframe(self) -> Union[pd.DataFrame, None]:
         """
         Return tags dataframe.
 
         :return: pandas DataFrame
         """
-        if self.tags is None:
-            raise ValueError("tags DataFrame is not available")
-        return self.tags
+        try:
+            return self.tags
+        except ValueError:
+            raise ValueError("Tags DataFrame not available.")
 
 
 class MovieFilter:
@@ -144,7 +143,7 @@ class MovieFilter:
         """
         pass
 
-    def filter_movies_by_rating_value(self, rating: float, comp: str) -> pd.DataFrame | None:
+    def filter_movies_by_rating_value(self, rating: float, comp: str) -> Union[pd.DataFrame, None]:
         """
         Return pandas DataFrame of self.movie_data filtered according to rating and comp string value.
 
@@ -206,7 +205,7 @@ class MovieFilter:
         """
         pass
 
-    def get_decent_comedy_movies(self) -> pd.DataFrame | None:
+    def get_decent_comedy_movies(self) -> Union[pd.DataFrame, None]:
         """
         Return all movies with a rating of at least 3.0 and where genre is 'Comedy'.
 
@@ -214,7 +213,7 @@ class MovieFilter:
         """
         pass
 
-    def get_decent_children_movies(self) -> pd.DataFrame | None:
+    def get_decent_children_movies(self) -> Union[pd.DataFrame, None]:
         """
         Return all movies with a rating of at least 3.0 and where genre is 'Children'.
 
@@ -263,44 +262,44 @@ if __name__ == '__main__':
         # ...
         # [3683 rows x 4 columns]
 
-        my_movie_data.create_aggregate_movie_dataframe('--empty--')
-        print(my_movie_data.get_aggregate_movie_dataframe())  # ->
-        #       movieId             title                                       genres  rating               tag
-        # 0           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
-        # 1           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
-        # 2           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
-        # 3           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
-        # ...
-        # [100854 rows x 5 columns]
-        # last rows in the aggregate dataframe will have the tag field set to '--empty--' since here
-        # it is the nan_placeholder value given to the function.
-
-        my_movie_filter = MovieFilter()
-        my_movie_filter.set_movie_data(my_movie_data.get_aggregate_movie_dataframe())
-        print(my_movie_filter.filter_movies_by_rating_value(2.1, 'less_than'))  # ->
-        #       movieId             title                                       genres  rating               tag
-        # 26          1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     0.5   pixar pixar fun
-        # 43          1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     2.0   pixar pixar fun
-        # 52          1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     2.0   pixar pixar fun
-        # 69          1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     2.0   pixar pixar fun
-        # ...
-        # [13523 rows x 5 columns]
-
-        print(my_movie_filter.filter_movies_by_year(1988))  # ->
-        #        movieId                    title                                           genres  rating        tag
-        # 17962      709  Oliver & Company (1988)      Adventure|Animation|Children|Comedy|Musical     5.0  --empty--
-        # 17963      709  Oliver & Company (1988)      Adventure|Animation|Children|Comedy|Musical     2.0  --empty--
-        # 17964      709  Oliver & Company (1988)      Adventure|Animation|Children|Comedy|Musical     3.0  --empty--
-        # 17964      709  Oliver & Company (1988)      Adventure|Animation|Children|Comedy|Musical     3.5  --empty--
-        # ...
-        # [1551 rows x 5 columns]
-
-        print(my_movie_filter.get_decent_movies())
-        # -> first five rows all Toy Story
-        # dataframe size [81763 rows x 5 columns]
-        print(my_movie_filter.get_decent_comedy_movies())
-        # -> first five rows all Toy Story
-        # dataframe size [30274 rows x 5 columns]
-        print(my_movie_filter.get_decent_children_movies())
-        # -> first 5 rows all Toy Story
-        # dataframe size [7326 rows x 5 columns]
+        # my_movie_data.create_aggregate_movie_dataframe('--empty--')
+        # print(my_movie_data.get_aggregate_movie_dataframe())  # ->
+        # #       movieId             title                                       genres  rating               tag
+        # # 0           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
+        # # 1           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
+        # # 2           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
+        # # 3           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
+        # # ...
+        # # [100854 rows x 5 columns]
+        # # last rows in the aggregate dataframe will have the tag field set to '--empty--' since here
+        # # it is the nan_placeholder value given to the function.
+        #
+        # my_movie_filter = MovieFilter()
+        # my_movie_filter.set_movie_data(my_movie_data.get_aggregate_movie_dataframe())
+        # print(my_movie_filter.filter_movies_by_rating_value(2.1, 'less_than'))  # ->
+        # #       movieId             title                                       genres  rating               tag
+        # # 26          1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     0.5   pixar pixar fun
+        # # 43          1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     2.0   pixar pixar fun
+        # # 52          1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     2.0   pixar pixar fun
+        # # 69          1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     2.0   pixar pixar fun
+        # # ...
+        # # [13523 rows x 5 columns]
+        #
+        # print(my_movie_filter.filter_movies_by_year(1988))  # ->
+        # #        movieId                    title                                           genres  rating        tag
+        # # 17962      709  Oliver & Company (1988)      Adventure|Animation|Children|Comedy|Musical     5.0  --empty--
+        # # 17963      709  Oliver & Company (1988)      Adventure|Animation|Children|Comedy|Musical     2.0  --empty--
+        # # 17964      709  Oliver & Company (1988)      Adventure|Animation|Children|Comedy|Musical     3.0  --empty--
+        # # 17964      709  Oliver & Company (1988)      Adventure|Animation|Children|Comedy|Musical     3.5  --empty--
+        # # ...
+        # # [1551 rows x 5 columns]
+        #
+        # print(my_movie_filter.get_decent_movies())
+        # # -> first five rows all Toy Story
+        # # dataframe size [81763 rows x 5 columns]
+        # print(my_movie_filter.get_decent_comedy_movies())
+        # # -> first five rows all Toy Story
+        # # dataframe size [30274 rows x 5 columns]
+        # print(my_movie_filter.get_decent_children_movies())
+        # # -> first 5 rows all Toy Story
+        # # dataframe size [7326 rows x 5 columns]
