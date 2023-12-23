@@ -62,39 +62,12 @@ class MovieData:
         :param nan_placeholder: Value to replace all np.nan-valued elements in column 'tag'.
         :return: None
         """
-        # # Merge the movies, ratings, and tags dataframes
-        # merged_df = pd.merge(self.movies, self.ratings, on='movieId')
-        # merged_df = pd.merge(merged_df, self.tags, on='movieId', how="left")
-
-        # self.tags.drop(columns=['userId', 'timestamp'], axis='columns', inplace=True)
-        # self.ratings.drop(columns=['userId', 'timestamp'], axis='columns', inplace=True)
-
-        # # Merge the movies, ratings, and tags dataframes
-        # merged_df = pd.merge(self.tags, self.ratings, on='movieId')
-        # merged_df = pd.merge(merged_df, self.movies, on='movieId')
-        # # Group the dataframe by movieId, title, genres, and rating
-        # grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating'], as_index=False)
-        # # Aggregate the tag column
-        # agg_df = grouped_df.agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
-        # # Rename the columns
-        # # agg_df.columns = ['movieId', 'title', 'genres', 'rating', 'tag']
-        # self.aggregate_movie_dataframe = agg_df
-        #
         tags_df = self.tags.groupby('movieId').agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
-        merged_df = pd.merge(tags_df, self.ratings, on='movieId', how="left")
-        # Drop duplicate rows based on movieId
-        merged_df = merged_df.drop_duplicates(subset=['movieId'])
-
-        # Reset index to make movieId's unique
-        merged_df = merged_df.reset_index(drop=True)
-
-        # print("MD1", merged_df)
-        merged_df = merged_df.merge(self.movies, on='movieId', how="left")
-        # print("MD2", merged_df)
+        print("TD1", tags_df)
+        merged_df = pd.merge(self.movies, tags_df, on='movieId', how="left")
+        merged_df = merged_df.merge(self.ratings, on='movieId', how="left")
         grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating'], as_index=False)
-        # print("GD3", merged_df)
         agg_df = grouped_df.agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
-        # print("AD4", merged_df)
 
         self.aggregate_movie_dataframe = agg_df
 
