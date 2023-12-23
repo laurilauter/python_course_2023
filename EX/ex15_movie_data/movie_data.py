@@ -59,7 +59,23 @@ class MovieData:
         :param nan_placeholder: Value to replace all np.nan-valued elements in column 'tag'.
         :return: None
         """
-        pass
+        # Merge the movies, ratings, and tags dataframes
+        merged_df = pd.merge(self.movies, self.ratings, on='movieId')
+        merged_df = pd.merge(merged_df, self.tags, on='movieId')
+
+        # Drop the userId and timestamp columns
+        merged_df.drop(['userId', 'timestamp'], axis=1, inplace=True)
+
+        # Group the dataframe by movieId, title, genres, and rating
+        grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating'], as_index=False)
+
+        # Aggregate the tag column
+        agg_df = grouped_df.agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
+
+        # Rename the columns
+        agg_df.columns = ['movieId', 'title', 'genres', 'rating', 'tag']
+
+        self.aggregate_movie_dataframe = agg_df
 
     def get_aggregate_movie_dataframe(self) -> pd.DataFrame | None:
         """
@@ -67,7 +83,10 @@ class MovieData:
 
         :return: pandas DataFrame
         """
-        pass
+        if self.aggregate_movie_dataframe is None:
+            raise ValueError(
+                "Aggregate movie dataframe not yet created. Call create_aggregate_movie_dataframe() first.")
+        return self.aggregate_movie_dataframe
 
     def get_movies_dataframe(self) -> pd.DataFrame | None:
         """
@@ -75,7 +94,9 @@ class MovieData:
 
         :return: pandas DataFrame
         """
-        pass
+        if self.movies is None:
+            raise ValueError("Movies DataFrame is not available")
+        return None
 
     def get_ratings_dataframe(self) -> pd.DataFrame | None:
         """
@@ -83,7 +104,9 @@ class MovieData:
 
         :return: pandas DataFrame
         """
-        pass
+        if self.ratings is None:
+            raise ValueError("ratings DataFrame is not available")
+        return self.ratings
 
     def get_tags_dataframe(self) -> pd.DataFrame | None:
         """
@@ -91,7 +114,9 @@ class MovieData:
 
         :return: pandas DataFrame
         """
-        pass
+        if self.tags is None:
+            raise ValueError("tags DataFrame is not available")
+        return self.tags
 
 
 class MovieFilter:
@@ -209,7 +234,7 @@ if __name__ == '__main__':
 
         # give correct path names here. These names are only good if you
         # installed the 3 data files in 'EX/ex15_movie_data/ml-latest-small/'
-        my_movie_data.load_data("ml-latest-small/movies.csv", "ml-latest-small/ratings.csv", "ml-latest-small/tags.csv")
+        my_movie_data.load_data("movies.csv", "ratings.csv", "tags.csv")
         print(my_movie_data.get_movies_dataframe())  # ->
         #       movieId                    title                                       genres
         # 0           1         Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy
