@@ -67,10 +67,8 @@ class MovieData:
         # merged_df = pd.merge(merged_df, self.tags, on='movieId', how="left")
 
         # Merge the movies, ratings, and tags dataframes
-        merged_df = pd.merge(self.tags, self.ratings, on='movieId', how="left")
-        print("merged_df")
-        print(merged_df)
-        merged_df = pd.merge(merged_df, self.movies, on='movieId', how="left")
+        merged_df = pd.merge(self.tags, self.ratings, on='movieId')
+        merged_df = pd.merge(merged_df, self.movies, on='movieId')
 
         # Group the dataframe by movieId, title, genres, and rating
         grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating'], as_index=False)
@@ -192,9 +190,8 @@ class MovieFilter:
         :param genre: string value to filter by
         :return: pandas DataFrame object of the filtration result
         """
-        print(genre)
         filt = (self.movie_data["genres"] == genre)
-
+        # filt = (self.movie_data["genres"].str.contains(genre))
         filtered_movies = self.movie_data[filt]
         return filtered_movies
 
@@ -252,8 +249,9 @@ class MovieFilter:
 
         :return: pandas DataFrame object of the search result
         """
-        df = self.filter_movies_by_rating_value(2.9, "greater_than")
-        df = df.loc[df['genres'] == 'Comedy']
+        # df = self.filter_movies_by_rating_value(2.9, "greater_than")
+        df = self.get_decent_movies()
+        df = (df.loc[df['genres'] == 'Comedy'])
         return df
 
     def get_decent_children_movies(self) -> Union[pd.DataFrame, None]:
@@ -262,8 +260,9 @@ class MovieFilter:
 
         :return: pandas DataFrame object of the search result
         """
-        df = self.filter_movies_by_rating_value(2.9, "greater_than")
-        df = df.loc[df['genres'] == 'Children']
+        df = self.get_decent_movies()
+        filt = df['genres'].str.contains('Children')
+        df = df[filt]
         return df
 
 
