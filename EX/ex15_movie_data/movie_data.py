@@ -62,9 +62,8 @@ class MovieData:
         :param nan_placeholder: Value to replace all np.nan-valued elements in column 'tag'.
         :return: None
         """
-        tags_df = self.tags.groupby('movieId').agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
-        print("TD1", tags_df)
-        merged_df = pd.merge(self.movies, tags_df, on='movieId', how="left")
+        # tags_df = self.tags.groupby('movieId').agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
+        merged_df = pd.merge(self.movies, self.tags, on='movieId', how="left")
         merged_df = merged_df.merge(self.ratings, on='movieId', how="left")
         grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating'], as_index=False)
         agg_df = grouped_df.agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
