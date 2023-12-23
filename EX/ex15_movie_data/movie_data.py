@@ -82,13 +82,13 @@ class MovieData:
         #
         # # tags = self.tags.groupby('movieId').agg({'tag': lambda x: ' '.join(x)})
         # # tags = pd.merge(tags, self.movies, on='movieId', how="left")
+        tags = self.tags.groupby(['movieId']).agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
+        merged_df = pd.merge(self.movies, self.ratings, on='movieId', how="left")
+        merged_df = pd.merge(merged_df, tags, on='movieId', how="left")
+        # merged_df = merged_df[['movieId', 'title', 'genres', 'rating', 'tag']]
 
-        merged_df = pd.merge(self.movies, self.ratings, on='movieId')
-        merged_df = pd.merge(merged_df, self.tags, on='movieId')
-        merged_df = merged_df[['movieId', 'title', 'genres', 'rating', 'tag']]
-        grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating']).agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
 
-        self.aggregate_movie_dataframe = grouped_df
+        self.aggregate_movie_dataframe = merged_df
 
     def get_aggregate_movie_dataframe(self) -> Union[pd.DataFrame, None]:
         """
@@ -203,7 +203,6 @@ class MovieFilter:
         :return: pandas DataFrame object of the filtration result
         """
         filt = (self.movie_data["genres"] == genre)
-        # filt = (self.movie_data["genres"].str.contains(genre))
         filtered_movies = self.movie_data[filt]
         return filtered_movies
 
@@ -273,8 +272,9 @@ class MovieFilter:
         :return: pandas DataFrame object of the search result
         """
         df = self.get_decent_movies()
-        filt = df['genres'].str.contains('Children')
-        df = df[filt]
+        # filt = df['genres'].str.contains('Children')
+        # df = df[filt]
+        df = (df.loc[df['genres'] == 'Children'])
         return df
 
 
