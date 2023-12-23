@@ -38,9 +38,9 @@ class MovieData:
         try:
             self.movies = pd.DataFrame(pd.read_csv(movies_filename))
             self.ratings = pd.DataFrame(pd.read_csv(ratings_filename))
-            self.ratings.drop(['userId', 'timestamp'], axis=1)
+            # self.ratings.drop(['userId', 'timestamp'], axis=1)
             self.tags = pd.DataFrame(pd.read_csv(tags_filename))
-            self.tags.drop(['userId', 'timestamp'], axis=1)
+            # self.tags.drop(['userId', 'timestamp'], axis=1)
         except ValueError:
             raise ValueError("Could not load all data.")
 
@@ -62,9 +62,15 @@ class MovieData:
         :param nan_placeholder: Value to replace all np.nan-valued elements in column 'tag'.
         :return: None
         """
+        # # Merge the movies, ratings, and tags dataframes
+        # merged_df = pd.merge(self.movies, self.ratings, on='movieId')
+        # merged_df = pd.merge(merged_df, self.tags, on='movieId', how="left")
+
         # Merge the movies, ratings, and tags dataframes
-        merged_df = pd.merge(self.movies, self.ratings, on='movieId')
-        merged_df = pd.merge(merged_df, self.tags, on='movieId', how="left")
+        merged_df = pd.merge(self.tags, self.ratings, on='movieId', how="left")
+        print("merged_df")
+        print(merged_df)
+        merged_df = pd.merge(merged_df, self.movies, on='movieId', how="left")
 
         # Group the dataframe by movieId, title, genres, and rating
         grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating'], as_index=False)
