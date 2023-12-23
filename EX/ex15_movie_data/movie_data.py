@@ -37,8 +37,10 @@ class MovieData:
         """
         try:
             self.movies = pd.DataFrame(pd.read_csv(movies_filename))
-            self.ratings = pd.DataFrame(pd.read_csv(ratings_filename)).drop(columns=['userId', 'timestamp'], axis=1)
-            self.tags = pd.DataFrame(pd.read_csv(tags_filename)).drop(columns=['userId', 'timestamp'], axis=1)
+            # self.ratings = pd.DataFrame(pd.read_csv(ratings_filename)).drop(columns=['userId', 'timestamp'], axis=1)
+            self.ratings = pd.DataFrame(pd.read_csv(ratings_filename))
+            # self.tags = pd.DataFrame(pd.read_csv(tags_filename)).drop(columns=['userId', 'timestamp'], axis=1)
+            self.tags = pd.DataFrame(pd.read_csv(tags_filename))
         except ValueError:
             raise ValueError("Could not load all data.")
 
