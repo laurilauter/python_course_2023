@@ -78,18 +78,23 @@ class MovieData:
         # agg_df = grouped_df.agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
         # # Rename the columns
         # # agg_df.columns = ['movieId', 'title', 'genres', 'rating', 'tag']
-        # self.aggregate_movie_dataframe = pd.DataFrame(agg_df)
+        # self.aggregate_movie_dataframe = agg_df
         #
-        # # tags = self.tags.groupby('movieId').agg({'tag': lambda x: ' '.join(x)})
-        # # tags = pd.merge(tags, self.movies, on='movieId', how="left")
-        # agg_df.columns = ['movieId', 'title', 'genres', 'rating', 'tag']
-        # tags = self.tags.groupby(['movieId']).agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
-        merged_df = pd.merge(self.tags, self.ratings, on='movieId', how="left")
-        merged_df = merged_df.merge(self.movies, on='movieId', how="left")
-        grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating'], as_index=False)
-        agg_df = grouped_df.agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
+        tags_df = self.tags.groupby('movieId').agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
+        merged_df = pd.merge(tags_df, self.ratings, on='movieId', how="left")
+        # Drop duplicate rows based on movieId
+        merged_df = merged_df.drop_duplicates(subset=['movieId'])
 
-        # merged_df = merged_df[['movieId', 'title', 'genres', 'rating', 'tag']]
+        # Reset index to make movieId's unique
+        merged_df = merged_df.reset_index(drop=True)
+
+        # print("MD1", merged_df)
+        merged_df = merged_df.merge(self.movies, on='movieId', how="left")
+        # print("MD2", merged_df)
+        grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating'], as_index=False)
+        # print("GD3", merged_df)
+        agg_df = grouped_df.agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
+        # print("AD4", merged_df)
 
         self.aggregate_movie_dataframe = agg_df
 
