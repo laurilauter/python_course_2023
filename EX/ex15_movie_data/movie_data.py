@@ -70,8 +70,8 @@ class MovieData:
         # self.ratings.drop(columns=['userId', 'timestamp'], axis='columns', inplace=True)
 
         # Merge the movies, ratings, and tags dataframes
-        merged_df = pd.merge(self.tags, self.ratings, on='movieId', how='left')
-        merged_df = pd.merge(merged_df, self.movies, on='movieId', how='left')
+        merged_df = pd.merge(self.tags, self.ratings, on='movieId')
+        merged_df = pd.merge(merged_df, self.movies, on='movieId')
         # drop columns
         # merged_df = merged_df.drop(columns=['userId_x', 'timestamp_x'], axis=1)
         # Group the dataframe by movieId, title, genres, and rating
