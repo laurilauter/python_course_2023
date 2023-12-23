@@ -75,7 +75,7 @@ class MovieData:
         # drop columns
         # merged_df = merged_df.drop(columns=['userId_x', 'timestamp_x'], axis=1)
         # Group the dataframe by movieId, title, genres, and rating
-        grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating', 'tag'], as_index=False)
+        grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating'], as_index=False)
         # Aggregate the tag column
         # agg_df = merged_df.agg({'tag': lambda x: ' '.join(x.fillna('--empty--'))})
         agg_df = grouped_df.agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
