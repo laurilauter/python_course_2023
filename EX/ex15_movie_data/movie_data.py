@@ -37,7 +37,7 @@ class MovieData:
         """
         try:
             self.movies = pd.DataFrame(pd.read_csv(movies_filename))
-            # self.ratings = pd.DataFrame(pd.read_csv(ratings_filename)).drop(columns=['userId', 'timestamp'], axis=1)
+            # self.ratings = pd.DataFrame(pd.read_csv(ratings_filename)).drop(columns=['userId', 'timestamp'], axis=1, inplace=True)
             self.ratings = pd.DataFrame(pd.read_csv(ratings_filename))
             # self.tags = pd.DataFrame(pd.read_csv(tags_filename)).drop(columns=['userId', 'timestamp'], axis=1)
             self.tags = pd.DataFrame(pd.read_csv(tags_filename))
@@ -66,10 +66,14 @@ class MovieData:
         # merged_df = pd.merge(self.movies, self.ratings, on='movieId')
         # merged_df = pd.merge(merged_df, self.tags, on='movieId', how="left")
 
+        # self.tags.drop(columns=['userId', 'timestamp'], axis='columns', inplace=True)
+        # self.ratings.drop(columns=['userId', 'timestamp'], axis='columns', inplace=True)
+
         # Merge the movies, ratings, and tags dataframes
         merged_df = pd.merge(self.tags, self.ratings, on='movieId')
         merged_df = pd.merge(merged_df, self.movies, on='movieId')
-
+        # drop columns
+        merged_df = merged_df.drop(columns=['userId_x', 'timestamp_x'], axis=1)
         # Group the dataframe by movieId, title, genres, and rating
         grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating', 'tag'], as_index=False)
         # Aggregate the tag column
