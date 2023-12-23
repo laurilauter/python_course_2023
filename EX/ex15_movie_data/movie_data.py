@@ -161,7 +161,7 @@ class MovieFilter:
             raise ValueError("Invalid rating value. Rating must be a non-negative number.")
 
         if comp not in {'greater_than', 'equals', 'less_than'}:
-            raise ValueError(f"Invalid comparison operator. Valid options are: 'greater_than', 'equals', 'less_than'.")
+            raise ValueError("Invalid comparison operator. Valid options are: 'greater_than', 'equals', 'less_than'.")
 
         if comp == "greater_than":
             filt = (self.movie_data["rating"] > rating)
