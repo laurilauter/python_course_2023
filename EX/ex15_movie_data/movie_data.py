@@ -64,7 +64,7 @@ class MovieData:
         merged_df = pd.merge(self.movies, self.ratings, on='movieId')
         merged_df = pd.merge(merged_df, self.tags, on='movieId')
         # Drop the userId and timestamp columns
-        merged_df.drop(['userId', 'timestamp'], axis=1, inplace=True)
+        # merged_df.drop(['userId', 'timestamp'], axis=1, inplace=True)
         # Group the dataframe by movieId, title, genres, and rating
         grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating'], as_index=False)
         # Aggregate the tag column
@@ -141,7 +141,10 @@ class MovieFilter:
         :param movie_data: pandas DataFrame object
         :return: None
         """
-        pass
+        try:
+            self.movie_data = movie_data
+        except ValueError:
+            raise ValueError("Could not load Movie Data.")
 
     def filter_movies_by_rating_value(self, rating: float, comp: str) -> Union[pd.DataFrame, None]:
         """
@@ -154,7 +157,11 @@ class MovieFilter:
         :param comp: string representation of the comparison operation
         :return: pandas DataFrame object of the filtration result
         """
-        pass
+        filtered_movies = self.movie_data.filter_movies_by_rating_value(rating, comp)
+        try:
+            return filtered_movies
+        except ValueError:
+            raise ValueError("Tags DataFrame not available.")
 
     def filter_movies_by_genre(self, genre: str) -> pd.DataFrame:
         """
@@ -262,18 +269,18 @@ if __name__ == '__main__':
         # ...
         # [3683 rows x 4 columns]
 
-        # my_movie_data.create_aggregate_movie_dataframe('--empty--')
-        # print(my_movie_data.get_aggregate_movie_dataframe())  # ->
-        # #       movieId             title                                       genres  rating               tag
-        # # 0           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
-        # # 1           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
-        # # 2           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
-        # # 3           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
-        # # ...
-        # # [100854 rows x 5 columns]
-        # # last rows in the aggregate dataframe will have the tag field set to '--empty--' since here
-        # # it is the nan_placeholder value given to the function.
-        #
+        my_movie_data.create_aggregate_movie_dataframe('--empty--')
+        print(my_movie_data.get_aggregate_movie_dataframe())  # ->
+        #       movieId             title                                       genres  rating               tag
+        # 0           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
+        # 1           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
+        # 2           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
+        # 3           1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     4.0   pixar pixar fun
+        # ...
+        # [100854 rows x 5 columns]
+        # last rows in the aggregate dataframe will have the tag field set to '--empty--' since here
+        # it is the nan_placeholder value given to the function.
+
         # my_movie_filter = MovieFilter()
         # my_movie_filter.set_movie_data(my_movie_data.get_aggregate_movie_dataframe())
         # print(my_movie_filter.filter_movies_by_rating_value(2.1, 'less_than'))  # ->
