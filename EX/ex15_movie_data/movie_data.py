@@ -62,14 +62,8 @@ class MovieData:
         :param nan_placeholder: Value to replace all np.nan-valued elements in column 'tag'.
         :return: None
         """
-        # # Merge the movies, ratings, and tags dataframes
-        # merged_df = pd.merge(self.movies, self.ratings, on='movieId', how='left')
-        # # merged_df = pd.merge(merged_df, self.tags, on='movieId').drop(['userId', 'timestamp'], axis=1, inplace=True)
-        # merged_df = pd.merge(merged_df, self.tags, on='movieId', how='left')
-
         # Merge the movies, ratings, and tags dataframes
         merged_df = pd.merge(self.movies, self.ratings, on='movieId')
-        # merged_df = pd.merge(merged_df, self.tags, on='movieId').drop(['userId', 'timestamp'], axis=1, inplace=True)
         merged_df = pd.merge(merged_df, self.tags, on='movieId', how="left")
 
         # Group the dataframe by movieId, title, genres, and rating
