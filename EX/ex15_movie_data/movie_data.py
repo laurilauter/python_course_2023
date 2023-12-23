@@ -77,9 +77,13 @@ class MovieData:
         # Group the dataframe by movieId, title, genres, and rating
         grouped_df = merged_df.groupby(['movieId', 'title', 'genres', 'rating', 'tag'], as_index=False)
         # Aggregate the tag column
-        agg_df = grouped_df.agg({'tag': lambda x: ' '.join(x.fillna('--empty--'))})
+        # agg_df = merged_df.agg({'tag': lambda x: ' '.join(x.fillna('--empty--'))})
+        agg_df = grouped_df.agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
         # Rename the columns
-        agg_df.columns = ['movieId', 'title', 'genres', 'rating', 'tag']
+        # agg_df.columns = ['movieId', 'title', 'genres', 'rating', 'tag']
+        print("AG DF")
+        print(agg_df)
+        # agg_df = agg_df.drop(columns=['userId', 'timestamp'], axis=1)
         self.aggregate_movie_dataframe = pd.DataFrame(agg_df)
 
         # tags = self.tags.groupby('movieId').agg({'tag': lambda x: ' '.join(x)})
