@@ -83,10 +83,9 @@ class MovieData:
         # # tags = self.tags.groupby('movieId').agg({'tag': lambda x: ' '.join(x)})
         # # tags = pd.merge(tags, self.movies, on='movieId', how="left")
         tags = self.tags.groupby(['movieId']).agg({'tag': lambda x: ' '.join(x.fillna(nan_placeholder))})
-        merged_df = pd.merge(self.movies, self.ratings, on='movieId', how="left")
-        merged_df = pd.merge(merged_df, tags, on='movieId', how="left")
+        merged_df = pd.merge(self.movies, tags, on='movieId', how="left")
+        merged_df = merged_df.merge(self.ratings, on='movieId', how="left")
         # merged_df = merged_df[['movieId', 'title', 'genres', 'rating', 'tag']]
-
 
         self.aggregate_movie_dataframe = merged_df
 
