@@ -183,7 +183,7 @@ class MovieFilter:
         if genre is None or not genre:
             raise ValueError("No genre given.")
 
-        filt = (self.movie_data["genres"].str.contains(genre.capitalize()))
+        filt = (self.movie_data["genres"].str.contains(genre, case=False))
         filtered_movies = self.movie_data[filt]
         return filtered_movies
 
@@ -202,8 +202,7 @@ class MovieFilter:
         if not tag:
             raise ValueError("Tag cannot be an empty string")
 
-        tag = tag.lower()
-        filt = self.movie_data["tag"].str.contains(tag)
+        filt = self.movie_data["tag"].str.contains(tag, case=False)
 
         filtered_movies = self.movie_data[filt]
         return filtered_movies
