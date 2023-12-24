@@ -183,8 +183,7 @@ class MovieFilter:
         if genre is None or not genre:
             raise ValueError("No genre given.")
 
-        genre = str(genre).capitalize()
-        filt = (self.movie_data["genres"] == genre)
+        filt = (self.movie_data["genres"].str.contains(genre.capitalize()))
         filtered_movies = self.movie_data[filt]
         return filtered_movies
 
