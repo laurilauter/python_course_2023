@@ -37,12 +37,8 @@ class MovieData:
         """
         try:
             self.movies = pd.DataFrame(pd.read_csv(movies_filename))
-            ratings = pd.DataFrame(pd.read_csv(ratings_filename))
-            # self.ratings = ratings.drop(columns=['userId', 'timestamp'], axis=1)
-            self.ratings = ratings
-            tags = pd.DataFrame(pd.read_csv(tags_filename))
-            # self.tags = tags.drop(columns=['userId', 'timestamp'], axis=1)
-            self.tags = tags
+            self.ratings = pd.DataFrame(pd.read_csv(ratings_filename))
+            self.tags = pd.DataFrame(pd.read_csv(tags_filename))
 
         except ValueError:
             raise ValueError("Could not load all data.")
@@ -66,11 +62,8 @@ class MovieData:
         :return: None
         """
         self.tags = self.tags.drop(columns=['userId', 'timestamp'], axis=1)
-
         tags_df = self.tags.groupby('movieId').agg({'tag': lambda x: ' '.join(x)})
-
         self.ratings = self.ratings.drop(columns=['userId', 'timestamp'], axis=1)
-
         merged_df = pd.merge(self.movies, self.ratings, on='movieId', how="left")
         merged_final_df = merged_df.merge(tags_df, on='movieId', how="left")
         merged_final_df.loc[merged_final_df['tag'].isna(), 'tag'] = nan_placeholder
@@ -105,7 +98,6 @@ class MovieData:
         :return: pandas DataFrame
         """
         try:
-            # self.ratings.to_csv('self_ratings.csv', sep=',', encoding='utf-8')
             return self.ratings
         except ValueError:
             raise ValueError("Ratings DataFrame not available.")
