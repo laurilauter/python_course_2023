@@ -159,9 +159,9 @@ class MovieFilter:
             raise ValueError("Invalid comparison operator. Valid options are: 'greater_than', 'equals', 'less_than'.")
 
         if comp == "greater_than":
-            filt = (self.movie_data["rating"] >= rating)
+            filt = (self.movie_data["rating"] > rating)
         elif comp == "less_than":
-            filt = (self.movie_data["rating"] <= rating)
+            filt = (self.movie_data["rating"] < rating)
         else:
             filt = (self.movie_data["rating"] == rating)
 
