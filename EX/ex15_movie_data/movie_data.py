@@ -63,13 +63,8 @@ class MovieData:
         :return: None
         """
         tags_df = self.tags.groupby('movieId').agg({'tag': lambda x: ' '.join(x)})
-
         merged_df = pd.merge(self.movies, self.ratings, on='movieId', how="left")
         merged_final_df = merged_df.merge(tags_df, on='movieId', how="left")
-
-
-        # merged_final_df = merged_df.merge(self.ratings, on='movieId', how="left")
-
         merged_final_df.loc[merged_final_df['tag'].isna(), 'tag'] = nan_placeholder
         self.aggregate_movie_dataframe = merged_final_df
 
@@ -162,7 +157,7 @@ class MovieFilter:
 
         if comp not in {'greater_than', 'equals', 'less_than'}:
             raise ValueError("Invalid comparison operator. Valid options are: 'greater_than', 'equals', 'less_than'.")
-
+        filt = (self.movie_data["rating"] == rating)
         if comp == "greater_than":
             filt = (self.movie_data["rating"] > rating)
         elif comp == "less_than":
@@ -188,7 +183,7 @@ class MovieFilter:
         if genre is None or not genre:
             raise ValueError("No genre given.")
 
-        genre = genre.capitalize()
+        genre = str(genre).capitalize()
         filt = (self.movie_data["genres"] == genre)
         filtered_movies = self.movie_data[filt]
         return filtered_movies
@@ -333,6 +328,10 @@ if __name__ == '__main__':
         # 69          1  Toy Story (1995)  Adventure|Animation|Children|Comedy|Fantasy     2.0   pixar pixar fun
         # ...
         # [13523 rows x 5 columns]
+        print()
+        print("filter_movies_by_genre")
+        print(my_movie_filter.filter_movies_by_genre('COMEDY'))  # ->
+        print()
         print()
         print("filter_movies_by_year")
         print(my_movie_filter.filter_movies_by_year(1988))  # ->
