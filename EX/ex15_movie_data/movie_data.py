@@ -152,7 +152,7 @@ class MovieFilter:
         :param comp: string representation of the comparison operation
         :return: pandas DataFrame object of the filtration result
         """
-        if rating is None or rating <= 0:
+        if rating is None or rating < 0:
             raise ValueError("Invalid rating value. Rating must be a non-negative number.")
 
         if comp not in {'greater_than', 'equals', 'less_than'}:
