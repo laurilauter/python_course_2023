@@ -63,8 +63,13 @@ class MovieData:
         :return: None
         """
         tags_df = self.tags.groupby('movieId').agg({'tag': lambda x: ' '.join(x)})
-        merged_df = pd.merge(self.movies, tags_df, on='movieId', how="left")
-        merged_final_df = merged_df.merge(self.ratings, on='movieId', how="left")
+
+        merged_df = pd.merge(self.movies, self.ratings, on='movieId', how="left")
+        merged_final_df = merged_df.merge(tags_df, on='movieId', how="left")
+
+
+        # merged_final_df = merged_df.merge(self.ratings, on='movieId', how="left")
+
         merged_final_df.loc[merged_final_df['tag'].isna(), 'tag'] = nan_placeholder
         self.aggregate_movie_dataframe = merged_final_df
 
