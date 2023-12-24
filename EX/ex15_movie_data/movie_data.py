@@ -239,9 +239,8 @@ class MovieFilter:
 
         :return: pandas DataFrame object of the search result
         """
-        # df = self.filter_movies_by_rating_value(2.9, "greater_than")
         df = self.get_decent_movies()
-        df = (df.loc[df['genres'] == 'Comedy'])
+        df = (df.loc[df['genres'].str.contains('Comedy', case=False)])
         return df
 
     def get_decent_children_movies(self) -> Union[pd.DataFrame, None]:
@@ -251,9 +250,7 @@ class MovieFilter:
         :return: pandas DataFrame object of the search result
         """
         df = self.get_decent_movies()
-        # filt = df['genres'].str.contains('Children')
-        # df = df[filt]
-        df = (df.loc[df['genres'] == 'Children'])
+        df = (df.loc[df['genres'].str.contains('Children', case=False)])
         return df
 
 
