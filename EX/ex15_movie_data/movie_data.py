@@ -233,7 +233,7 @@ class MovieFilter:
 
         :return: pandas DataFrame object of the search result
         """
-        return self.filter_movies_by_rating_value(3.0, "greater_than")
+        return self.filter_movies_by_rating_value(2.9, "greater_than")
 
     def get_decent_comedy_movies(self) -> Union[pd.DataFrame, None]:
         """
