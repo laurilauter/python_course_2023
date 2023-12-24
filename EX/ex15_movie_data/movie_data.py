@@ -220,7 +220,7 @@ class MovieFilter:
         :return: pandas DataFrame object of the filtration result
         """
         if year is None or year < 0:
-            raise ValueError("Year cannot be None or less than zero")
+            raise ValueError("Year cannot be None or less than zero.")
 
         filt = self.movie_data["title"].str.contains("(" + str(year) + ")", regex=False)
         filtered_movies = self.movie_data[filt]
