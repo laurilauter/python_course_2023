@@ -88,8 +88,7 @@ class MovieData:
         try:
             return self.movies
         except ValueError:
-            return None
-            # raise ValueError("Movies DataFrame not available.")
+            raise ValueError("Movies DataFrame not available.")
 
     def get_ratings_dataframe(self) -> Union[pd.DataFrame, None]:
         """
@@ -101,7 +100,8 @@ class MovieData:
             # self.ratings.to_csv('self_ratings.csv', sep=',', encoding='utf-8')
             return self.ratings
         except ValueError:
-            raise ValueError("Ratings DataFrame not available.")
+            return None
+            # raise ValueError("Ratings DataFrame not available.")
 
     def get_tags_dataframe(self) -> Union[pd.DataFrame, None]:
         """
@@ -112,7 +112,8 @@ class MovieData:
         try:
             return self.tags
         except ValueError:
-            raise ValueError("Tags DataFrame not available.")
+            return None
+            # raise ValueError("Tags DataFrame not available.")
 
 
 class MovieFilter:
