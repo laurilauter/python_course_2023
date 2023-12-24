@@ -38,9 +38,12 @@ class MovieData:
         try:
             self.movies = pd.DataFrame(pd.read_csv(movies_filename))
             ratings = pd.DataFrame(pd.read_csv(ratings_filename))
-            self.ratings = ratings.drop(columns=['userId', 'timestamp'], axis=1)
+            # self.ratings = ratings.drop(columns=['userId', 'timestamp'], axis=1)
+            self.ratings = ratings
             tags = pd.DataFrame(pd.read_csv(tags_filename))
-            self.tags = tags.drop(columns=['userId', 'timestamp'], axis=1)
+            # self.tags = tags.drop(columns=['userId', 'timestamp'], axis=1)
+            self.tags = tags
+
         except ValueError:
             raise ValueError("Could not load all data.")
 
@@ -62,7 +65,12 @@ class MovieData:
         :param nan_placeholder: Value to replace all np.nan-valued elements in column 'tag'.
         :return: None
         """
+        self.tags = self.tags.drop(columns=['userId', 'timestamp'], axis=1)
+
         tags_df = self.tags.groupby('movieId').agg({'tag': lambda x: ' '.join(x)})
+
+        self.ratings = self.ratings.drop(columns=['userId', 'timestamp'], axis=1)
+
         merged_df = pd.merge(self.movies, self.ratings, on='movieId', how="left")
         merged_final_df = merged_df.merge(tags_df, on='movieId', how="left")
         merged_final_df.loc[merged_final_df['tag'].isna(), 'tag'] = nan_placeholder
