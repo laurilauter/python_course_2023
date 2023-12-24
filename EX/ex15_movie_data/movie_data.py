@@ -152,16 +152,16 @@ class MovieFilter:
         :param comp: string representation of the comparison operation
         :return: pandas DataFrame object of the filtration result
         """
-        if rating is None or rating < 0:
+        if rating is None or rating <= 0:
             raise ValueError("Invalid rating value. Rating must be a non-negative number.")
 
         if comp not in {'greater_than', 'equals', 'less_than'}:
             raise ValueError("Invalid comparison operator. Valid options are: 'greater_than', 'equals', 'less_than'.")
 
         if comp == "greater_than":
-            filt = (self.movie_data["rating"] > rating)
+            filt = (self.movie_data["rating"] >= rating)
         elif comp == "less_than":
-            filt = (self.movie_data["rating"] < rating)
+            filt = (self.movie_data["rating"] <= rating)
         else:
             filt = (self.movie_data["rating"] == rating)
 
@@ -230,7 +230,7 @@ class MovieFilter:
 
         :return: pandas DataFrame object of the search result
         """
-        return self.filter_movies_by_rating_value(2.9, "greater_than")
+        return self.filter_movies_by_rating_value(3.0, "greater_than")
 
     def get_decent_comedy_movies(self) -> Union[pd.DataFrame, None]:
         """
