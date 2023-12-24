@@ -180,6 +180,10 @@ class MovieFilter:
         :param genre: string value to filter by
         :return: pandas DataFrame object of the filtration result
         """
+        if genre is None:
+            raise ValueError("No genre given.")
+
+        genre = genre.capitalize()
         filt = (self.movie_data["genres"] == genre)
         filtered_movies = self.movie_data[filt]
         return filtered_movies
