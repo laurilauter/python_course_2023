@@ -162,7 +162,7 @@ class MovieFilter:
             filt = (self.movie_data["rating"] > rating)
         elif comp == "less_than":
             filt = (self.movie_data["rating"] < rating)
-        else:
+        elif comp == "equals":
             filt = (self.movie_data["rating"] == rating)
 
         filtered_movies = self.movie_data[filt]
@@ -223,10 +223,9 @@ class MovieFilter:
         if year is None or year < 0:
             raise ValueError("Year cannot be None or less than zero")
 
-        filt = self.movie_data["title"].str.contains(str(year), regex=False)
+        filt = self.movie_data["title"].str.contains("(" + str(year) + ")", regex=False)
         filtered_movies = self.movie_data[filt]
         return filtered_movies
-        pass
 
     def get_decent_movies(self) -> pd.DataFrame:
         """
