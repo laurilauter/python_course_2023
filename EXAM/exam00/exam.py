@@ -72,7 +72,8 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
         if len(parts) > 1:
             score = parts[len(parts) - 1]
             name = person.replace(score, "").rstrip()
-            structured_persons.append([name, score])
+            if score.isnumeric():
+                structured_persons.append([name, score])
 
     for person in structured_persons:
         if int(person[1]) >= min_result:
@@ -334,7 +335,7 @@ if __name__ == '__main__':
     #print(get_names_from_results("ago 123,peeter 11", 100)) #  = > ["ago"]
     #print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) #  = > ["ago", "peeter", "kitty11!!"]
     #print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) #  = > ["ago", "kusti riin"]
-    print(get_names_from_results("2 sdf sdf sdf sdf  123,3 11,33", 10))
+    print(get_names_from_results("tyu sdf123,3 11as,33", 10))
 
 
     hotel = Hotel()
