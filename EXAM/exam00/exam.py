@@ -17,7 +17,9 @@ def find_capital_letters(s: str) -> str:
     find_capital_letters("aAbBc") => "AB"
     """
     result = ""
-
+    for char in s:
+        if char.isupper():
+            result += char
     return result
 
 
@@ -34,7 +36,10 @@ def close_far(a: int, b: int, c: int) -> bool:
     close_far(1, 2, 3) => False
     close_far(4, 1, 3) => True
     """
-    pass
+    nums = sorted([a, b, c])
+    for n in range(len(nums)):
+        if nums[n] - nums[n - 1] > 1:
+            return True
 
 
 def get_names_from_results(results_string: str, min_result: int) -> list:
@@ -296,6 +301,14 @@ class Hotel:
 
 
 if __name__ == '__main__':
+
+    # print(find_capital_letters("ABC")) # = > "ABC"
+    # print(find_capital_letters("abc")) #= > ""
+    # print(find_capital_letters("aAbBc")) #= > "AB"
+
+    print(close_far(1, 10, 2))
+    print(close_far(1, 2, 3))
+
     hotel = Hotel()
     # room1 = Room(1, 100)
     # room1.add_feature("tv")
