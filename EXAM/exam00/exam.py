@@ -69,15 +69,16 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
     result = []
     for person in persons:
         parts = person.split(" ")
-        if len(parts) > 1:
-            score = parts[len(parts) - 1]
-            name = person.replace(score, "").rstrip()
-            if score.isnumeric():
-                structured_persons.append([name, score])
+        #if len(parts) > 1:
+        score = parts[len(parts) - 1]
+        name = person.replace(score, "").rstrip()
+        if score.isnumeric():
+            structured_persons.append([name, score])
 
     for person in structured_persons:
         if int(person[1]) >= min_result:
-            result.append(person[0])
+            if person[0]:
+                result.append(person[0])
 
     return result
 
