@@ -16,7 +16,9 @@ def find_capital_letters(s: str) -> str:
     find_capital_letters("abc") => ""
     find_capital_letters("aAbBc") => "AB"
     """
-    pass
+    result = ""
+
+    return result
 
 
 def close_far(a: int, b: int, c: int) -> bool:
@@ -303,7 +305,7 @@ if __name__ == '__main__':
     # room2.add_feature("sauna")
     # hotel.add_room(room1)
     # hotel.add_room(room2)
-    # # TODO: try to add room with existing number, try to add existing feature to room
+    # #  try to add room with existing number, try to add existing feature to room
     # assert hotel.get_rooms() == [room1, room2]
     # assert hotel.get_booked_rooms() == []
     #
@@ -321,4 +323,4 @@ if __name__ == '__main__':
     # }
     # assert hotel.get_most_profitable_feature() == 'tv'
     #
-    # # TODO: try to add a room so that two or more features have the same profit
+    # #  try to add a room so that two or more features have the same profit
