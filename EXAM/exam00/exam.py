@@ -69,10 +69,11 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
     result = []
     for person in persons:
         parts = person.split(" ")
-        score = parts[len(parts) - 1]
-        name = person.replace(score, "").rstrip()
-        if score.isnumeric():
-            structured_persons.append([name, score])
+        if len(parts) > 1:
+            score = parts[len(parts) - 1]
+            name = person.replace(score, "").rstrip()
+            if score.isnumeric():
+                structured_persons.append([name, score])
 
     for person in structured_persons:
         if int(person[1]) >= min_result:
@@ -122,6 +123,8 @@ def tic_tac_toe(game: list) -> int:
             result = game[1][1]
         if game[2][0] == game[2][1] and game[2][0] == game[2][2]:
             result = game[2][2]
+
+        # draw not solved
     return result
 
 
@@ -356,11 +359,11 @@ if __name__ == '__main__':
     # print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) #  = > ["ago", "peeter", "kitty11!!"]
     # print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) #  = > ["ago", "kusti riin"]
     # print(get_names_from_results("tyu sdf123,3 11as,33", 10))
-    # print(get_names_from_results("tim 34,33", 10))
+    print(get_names_from_results("tim 34,33", 10))
 
-    print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]])) # = > 1
-    print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]])) # = > 0
-    print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]])) # = > 2
+    # print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]])) # = > 1
+    # print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]])) # = > 0
+    # print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]])) # = > 2
 
 
     hotel = Hotel()
