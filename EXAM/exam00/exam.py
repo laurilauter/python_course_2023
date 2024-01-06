@@ -40,6 +40,7 @@ def close_far(a: int, b: int, c: int) -> bool:
     for n in range(len(nums)):
         if nums[n] - nums[n - 1] > 1:
             return True
+    return False
 
 
 def get_names_from_results(results_string: str, min_result: int) -> list:
