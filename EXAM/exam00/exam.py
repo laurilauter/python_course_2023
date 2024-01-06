@@ -37,9 +37,11 @@ def close_far(a: int, b: int, c: int) -> bool:
     close_far(4, 1, 3) => True
     """
     nums = sorted([a, b, c])
-    for n in range(len(nums)):
-        if nums[n] - nums[n - 1] > 1:
-            return True
+    for i in range(len(nums)):
+        if nums[i] - nums[i - 1] > 1:
+            for j in range(len(nums)):
+                if nums[j] - nums[j - 1] <= 1:
+                    return True
     return False
 
 
@@ -309,6 +311,7 @@ if __name__ == '__main__':
 
     print(close_far(1, 10, 2))
     print(close_far(1, 2, 3))
+    print(close_far(0, 2, 3))
 
     hotel = Hotel()
     # room1 = Room(1, 100)
