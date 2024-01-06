@@ -1,5 +1,6 @@
 """Exam0."""
 from typing import Optional
+import re
 
 
 def find_capital_letters(s: str) -> str:
@@ -63,7 +64,26 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
     get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11) => ["ago", "peeter",  "kitty11!!"]
     get_names_from_results("ago 123,peeter 11,kusti riin 14", 12) => ["ago", "kusti riin"]
     """
-    pass
+    persons = results_string.split(",")
+    spec_persons = []
+    result = []
+    for person in persons:
+        if len(person) > 1:
+            parts = person.split(" ")
+            for part in parts:
+                if part.isnumeric():
+                    another = person.replace(part, "").rstrip()
+                    dude = [another, part]
+                    spec_persons.append(dude)
+                elif not part:
+                    break
+
+    for person in spec_persons:
+        if int(person[1]) >= min_result:
+            if person[0].isalpha():
+                result.append(person[0])
+
+    return result
 
 
 def tic_tac_toe(game: list) -> int:
@@ -309,9 +329,16 @@ if __name__ == '__main__':
     # print(find_capital_letters("abc")) #= > ""
     # print(find_capital_letters("aAbBc")) #= > "AB"
 
-    print(close_far(1, 10, 2))
-    print(close_far(1, 2, 3))
-    print(close_far(0, 2, 3))
+    # print(close_far(1, 10, 2))
+    # print(close_far(1, 2, 3))
+    # print(close_far(4, 1, 3))
+    # print(close_far(1, 2, 2))
+
+    #print(get_names_from_results("ago 123,peeter 11", 0)) #  = > ["ago", "peeter"]
+    print(get_names_from_results("ago 123,peeter 11,33", 10)) #  = > ["ago", "peeter"]  # 33 does not have the name
+    #print(get_names_from_results("ago 123,peeter 11", 100)) #  = > ["ago"]
+    #print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) #  = > ["ago", "peeter", "kitty11!!"]
+    #print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) #  = > ["ago", "kusti riin"]
 
     hotel = Hotel()
     # room1 = Room(1, 100)
