@@ -65,23 +65,18 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
     get_names_from_results("ago 123,peeter 11,kusti riin 14", 12) => ["ago", "kusti riin"]
     """
     persons = results_string.split(",")
-    spec_persons = []
+    structured_persons = []
     result = []
     for person in persons:
-        if len(person) > 1:
-            parts = person.split(" ")
-            for part in parts:
-                if part.isnumeric():
-                    another = person.replace(part, "").rstrip()
-                    dude = [another, part]
-                    spec_persons.append(dude)
-                elif part == "":
-                    break
+        parts = person.split(" ")
+        if len(parts) > 1:
+            score = parts[len(parts) - 1]
+            name = person.replace(score, "").rstrip()
+            structured_persons.append([name, score])
 
-    for person in spec_persons:
+    for person in structured_persons:
         if int(person[1]) >= min_result:
-            if person[0].isalpha():
-                result.append(person[0])
+            result.append(person[0])
 
     return result
 
@@ -335,10 +330,12 @@ if __name__ == '__main__':
     # print(close_far(1, 2, 2))
 
     #print(get_names_from_results("ago 123,peeter 11", 0)) #  = > ["ago", "peeter"]
-    print(get_names_from_results("ago 123,peeter 11,33", 10)) #  = > ["ago", "peeter"]  # 33 does not have the name
+    # print(get_names_from_results("ago 123,peeter 11,33", 10)) #  = > ["ago", "peeter"]  # 33 does not have the name
     #print(get_names_from_results("ago 123,peeter 11", 100)) #  = > ["ago"]
     #print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) #  = > ["ago", "peeter", "kitty11!!"]
     #print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) #  = > ["ago", "kusti riin"]
+    print(get_names_from_results("2 sdf sdf sdf sdf  123,3 11,33", 10))
+
 
     hotel = Hotel()
     # room1 = Room(1, 100)
