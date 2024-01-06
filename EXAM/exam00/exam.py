@@ -75,7 +75,7 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
                     another = person.replace(part, "").rstrip()
                     dude = [another, part]
                     spec_persons.append(dude)
-                elif not part:
+                elif part == "":
                     break
 
     for person in spec_persons:
