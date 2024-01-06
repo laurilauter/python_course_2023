@@ -95,13 +95,34 @@ def tic_tac_toe(game: list) -> int:
     I.e the game could have four 1s and one 0 etc.
 
     tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]]) => 1
+
     tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]]) => 0
     tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]]) => 2
 
     :param game
     :return: winning player id
     """
-    pass
+    result = 0
+    for i in range(3):
+        if game[1][0] == game[0][0] and game[1][0] == game[2][0]:
+            result = game[1][0]
+        if game[1][1] == game[0][1] and game[1][1] == game[2][1]:
+            result = game[1][1]
+        if game[1][2] == game[0][2] and game[1][2] == game[2][2]:
+            result = game[1][0]
+
+        if game[1][1] == game[0][0] and game[1][1] == game[2][2]:
+            result = game[1][1]
+        if game[1][1] == game[0][2] and game[1][1] == game[2][0]:
+            result = game[1][1]
+
+        if game[0][0] == game[0][1] and game[0][0] == game[0][2]:
+            result = game[0][0]
+        if game[1][0] == game[1][1] and game[1][0] == game[1][2]:
+            result = game[1][1]
+        if game[2][0] == game[2][1] and game[2][0] == game[2][2]:
+            result = game[2][2]
+    return result
 
 
 def rainbows(field: str, lower=False) -> int:
@@ -329,13 +350,18 @@ if __name__ == '__main__':
     # print(close_far(4, 1, 3))
     # print(close_far(1, 2, 2))
 
-    #print(get_names_from_results("ago 123,peeter 11", 0)) #  = > ["ago", "peeter"]
+    # print(get_names_from_results("ago 123,peeter 11", 0)) #  = > ["ago", "peeter"]
     # print(get_names_from_results("ago 123,peeter 11,33", 10)) #  = > ["ago", "peeter"]  # 33 does not have the name
-    #print(get_names_from_results("ago 123,peeter 11", 100)) #  = > ["ago"]
-    #print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) #  = > ["ago", "peeter", "kitty11!!"]
-    #print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) #  = > ["ago", "kusti riin"]
-    #print(get_names_from_results("tyu sdf123,3 11as,33", 10))
-    print(get_names_from_results("tim 34,33", 10))
+    # print(get_names_from_results("ago 123,peeter 11", 100)) #  = > ["ago"]
+    # print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) #  = > ["ago", "peeter", "kitty11!!"]
+    # print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) #  = > ["ago", "kusti riin"]
+    # print(get_names_from_results("tyu sdf123,3 11as,33", 10))
+    # print(get_names_from_results("tim 34,33", 10))
+
+    print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]])) # = > 1
+    print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]])) # = > 0
+    print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]])) # = > 2
+
 
     hotel = Hotel()
     # room1 = Room(1, 100)
