@@ -37,7 +37,13 @@ def close_far(a: int, b: int, c: int) -> bool:
     close_far(1, 2, 3) => False
     close_far(4, 1, 3) => True
     """
-    nums = sorted([a, b, c])
+
+    nums = []
+    for num in [a, b, c]:
+        if num < 0:
+            nums.append(abs(num))
+
+    nums.sort()
     print(nums)
     if 0 <= abs(nums[1] - nums[0]) <= 1 < abs(nums[2] - nums[1]):
         return True
@@ -351,8 +357,10 @@ if __name__ == '__main__':
 
     # print(close_far(1, 2, 10))
     # print(close_far(1, 2, 3))
-    print(close_far(4, 1, 3))
+    # print(close_far(4, 1, 3))
     # print(close_far(1, 20, 100)) # false
+    print(close_far(-4, -2, -1))  # false
+
 
     # print(get_names_from_results("ago 123,peeter 11", 0)) #  = > ["ago", "peeter"]
     # print(get_names_from_results("ago 123,peeter 11,33", 10)) #  = > ["ago", "peeter"]  # 33 does not have the name
