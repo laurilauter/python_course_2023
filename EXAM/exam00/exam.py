@@ -73,7 +73,8 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
         parts = person.split(" ")
         if len(parts) > 1:
             score = parts[len(parts) - 1]
-            name = person.replace(score, "").rstrip()
+            parts.remove(parts[len(parts) - 1])
+            name = " ".join(parts)
             if score.isnumeric():
                 structured_persons.append([name, score])
 
@@ -351,9 +352,9 @@ if __name__ == '__main__':
     # print(find_capital_letters("abc")) #= > ""
     # print(find_capital_letters("aAbBc")) #= > "AB"
 
-    print(close_far(1, 2, 10))
-    print(close_far(1, 2, 3))
-    print(close_far(4, 1, 3))
+    # print(close_far(1, 2, 10))
+    # print(close_far(1, 2, 3))
+    # print(close_far(4, 1, 3))
     # print(close_far(1, 20, 100)) # false
     # print(close_far(-4, -2, -1))  # false
 
@@ -364,7 +365,7 @@ if __name__ == '__main__':
     # print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) #  = > ["ago", "peeter", "kitty11!!"]
     # print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) #  = > ["ago", "kusti riin"]
     # print(get_names_from_results("tyu sdf123,3 11as,33", 10))
-    # print(get_names_from_results("tim 34,33", 10))
+    print(get_names_from_results("ti tim12345 34,33", 10))
 
     # print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]])) # = > 1
     # print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]])) # = > 0
