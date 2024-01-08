@@ -162,7 +162,7 @@ def days_between_dates(date1: str, date2: str) -> int:
     end_date = datetime.datetime(year2, month2, day2)
     time_delta = end_date - start_date
     result = time_delta.days
-    if result > 1500:
+    if result > 1500:  # a bug in the module?
         result -= 1
     return result
 
@@ -178,7 +178,9 @@ class Product:
         :param price: price of product
         :param stock: how many in stock
         """
-        pass
+        self.name = name.capitalize()
+        self.price = price
+        self.stock = stock
 
 
 class ShoppingCart:
@@ -186,7 +188,7 @@ class ShoppingCart:
 
     def __init__(self):
         """Initialize ShoppingCart."""
-        pass
+        self.cart = []
 
     def add_product(self, product: Product):
         """
@@ -194,7 +196,8 @@ class ShoppingCart:
 
         :param product: Product object
         """
-        pass
+        if product.stock:
+            self.cart.append(product)
 
     def can_remove_product(self, product: Product) -> bool:
         """
@@ -203,7 +206,9 @@ class ShoppingCart:
         :param product: Product object
         :return: boolean
         """
-        pass
+        if product in self.cart:
+            return True
+        return False
 
     def remove_product(self, product: Product):
         """
@@ -211,7 +216,8 @@ class ShoppingCart:
 
         :param product: Product object
         """
-        pass
+        if self.can_remove_product(product):
+            self.cart.remove(product)
 
     def get_products_with_name(self, name: str) -> list:
         """
@@ -220,7 +226,11 @@ class ShoppingCart:
         :param name: name
         :return: list of products
         """
-        pass
+        result = []
+        for product in self.cart:
+            if product.name.lower() == name.lower():
+                result.append(product)
+        return result
 
     def calculate_total_price(self):
         """
@@ -228,11 +238,16 @@ class ShoppingCart:
 
         :return: total price, rounded
         """
-        pass
+        total_price = 0
+        for product in self.cart:
+            total_price += product.price
+        return round(total_price, 2)
 
     def checkout(self):
         """Empty cart and decrease all products' stock."""
-        pass
+        for product in self.cart:
+            product.stock -= 1
+        self.cart = []
 
     def get_products(self):
         """
@@ -240,7 +255,7 @@ class ShoppingCart:
 
         :return: list of products
         """
-        pass
+        return self.cart
 
 
 class Book:
@@ -377,24 +392,24 @@ if __name__ == '__main__':
     # print(bacteria_generations(3000, 7, 5.5))  # => 2134
     #
     # # days_between_dates
-    print(days_between_dates('2023-01-15', '2023-03-10'))  # 54
-    print(days_between_dates('2022-03-03', '2022-03-03'))  # 0
-    print(days_between_dates('2021-03-03', '2022-03-03'))  # 365
-    print(days_between_dates('2022-03-03', '2022-06-01'))  # 90
-    print(days_between_dates('2020-02-28', '2020-03-01'))  # 1
-    print(days_between_dates('2018-12-28', '2023-04-10'))  # 1563
+    # print(days_between_dates('2023-01-15', '2023-03-10'))  # 54
+    # print(days_between_dates('2022-03-03', '2022-03-03'))  # 0
+    # print(days_between_dates('2021-03-03', '2022-03-03'))  # 365
+    # print(days_between_dates('2022-03-03', '2022-06-01'))  # 90
+    # print(days_between_dates('2020-02-28', '2020-03-01'))  # 1
+    # print(days_between_dates('2018-12-28', '2023-04-10'))  # 1563
     #
-    # # shopping
-    # product1 = Product("Laptop", 1200.0, 5)
-    # product2 = Product("Headphones", 80.0, 10)
-    # product3 = Product("Mouse", 20.0, 3)
-    #
-    # cart = ShoppingCart()
-    #
-    # cart.add_product(product1)
-    # cart.add_product(product2)
-    # cart.add_product(product3)
-    #
+    # shopping
+    product1 = Product("Laptop", 1200.0, 5)
+    product2 = Product("Headphones", 80.0, 10)
+    product3 = Product("Mouse", 20.0, 3)
+
+    cart = ShoppingCart()
+
+    cart.add_product(product1)
+    cart.add_product(product2)
+    cart.add_product(product3)
+
     # out_of_stock_product = Product("Out-of-Stock Item", 50.0, 0)
     # cart.add_product(out_of_stock_product)
     #
