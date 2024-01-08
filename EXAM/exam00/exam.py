@@ -178,21 +178,21 @@ def longest_substring(text: str) -> str:
     abBcd => Bcd
     '' -> ''
     """
-    text = text.lower()
-    word_ff = ""
-    word_rev = ""
+    #text = text.lower()
+    max_word = ""
+    pos = (len(text) // 2) + 1
 
-    for i in range(len(text)):
-        if text[i:i + 1] not in word_ff:
-            word_ff += text[i:i + 1]
-    for i in range(len(text)):
-        text = text[::-1]
-        if text[i:i + 1] not in word_rev:
-            word_rev += text[i:i + 1]
-    if len(word_ff) >= len(word_rev):
-        return word_ff
-    else:
-        return word_rev
+    for p in range(pos):
+        word = ""
+        for i in range(p, len(text)):
+            i = i + p
+            if text[i:i + 1].lower() not in word:
+                word += text[i:i + 1]
+            else:
+                if len(word) > len(max_word):
+                    max_word = word
+                    word = ""
+    return max_word
 
 
 class Student:
@@ -402,10 +402,10 @@ if __name__ == '__main__':
     # print(rainbows("WoBniar")) #  == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
     # print(rainbows("rainbowobniar")) #  == 1  # Kaks vikerkaart jagavad tähte seega üks neist ei ole valiidne
 
-    print(longest_substring("aaa"))# a
-    print(longest_substring("abc"))# abc
-    print(longest_substring("abccba"))# abc
-    print(longest_substring("babcdEFghij"))# abcdEFghij
+    # print(longest_substring("aaa"))# a
+    # print(longest_substring("abc"))# abc
+    # print(longest_substring("abccba"))# abc
+    # print(longest_substring("babcdEFghij"))# abcdEFghij
     print(longest_substring("abBcd"))# Bcd
     #print(longest_substring('aababcabcdabcdeabcdefabcdefgqwertyuiop')) # fgqwertyuiop
 
