@@ -268,7 +268,7 @@ def add_result_to_student(student: Student, grades_count: int, new_grade: int, c
     Return the modified student object.
     """
     # Uue keskmise hinde arvutamise valem: (hinnete kogus * praegune keskmine hinne + uus hinne) / uus hinnete kogus
-    student.average_grade = (student.average_grade * grades_count) + new_grade / (grades_count + 1)
+    student.average_grade = ((student.average_grade * grades_count) + new_grade) / (grades_count + 1)
     student.credit_points = credit_points
     return student
 
