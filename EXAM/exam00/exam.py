@@ -110,31 +110,24 @@ def tic_tac_toe(game: list) -> int:
     :param game
     :return: winning player id
     """
-    result = 0
+
     for i in range(3):
-        if game[1][0] == game[0][0] and game[1][0] == game[2][0]:
-            result = game[1][0]
-        elif game[1][1] == game[0][1] and game[1][1] == game[2][1]:
-            result = game[1][1]
-        elif game[1][2] == game[0][2] and game[1][2] == game[2][2]:
-            result = game[1][0]
+        if game[i][0] > 0 and game[i][0] == game[i][1] == game[i][2]:
+            return game[i][0]
+    if game[1][0] > 0 and game[1][0] == game[0][0] and game[1][0] == game[2][0]:
+        return game[1][0]
+    elif game[1][0] > 0 and game[1][1] == game[0][1] and game[1][1] == game[2][1]:
+        return game[1][1]
+    elif game[1][0] > 0 and game[1][2] == game[0][2] and game[1][2] == game[2][2]:
+        return game[1][0]
 
-        elif game[1][1] == game[0][0] and game[1][1] == game[2][2]:
-            result = game[1][1]
-        elif game[1][1] == game[0][2] and game[1][1] == game[2][0]:
-            result = game[1][1]
+    elif game[1][0] > 0 and game[1][1] == game[0][0] and game[1][1] == game[2][2]:
+        return game[1][1]
+    elif game[1][0] > 0 and game[1][1] == game[0][2] and game[1][1] == game[2][0]:
+        return game[1][1]
+    else:
+        return 0
 
-        elif game[0][0] == game[0][1] and game[0][0] == game[0][2]:
-            result = game[0][0]
-        elif game[1][0] == game[1][1] and game[1][0] == game[1][2]:
-            result = game[1][1]
-        elif game[2][0] == game[2][1] and game[2][0] == game[2][2]:
-            result = game[2][2]
-        else:
-            result = 0
-
-        # draw not solved
-    return result
 
 
 def rainbows(field: str, lower=False) -> int:
@@ -372,10 +365,11 @@ if __name__ == '__main__':
     # print(get_names_from_results("tyu sdf123,3 11as,33", 10))
     # print(get_names_from_results("ti tim12345 34,33,1 11", 10))
 
-    # print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]])) # = > 1
-    # print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]])) # = > 0
-    # print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]])) # = > 2
+    print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]])) # = > 1
+    print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]])) # = > 0
+    print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]])) # = > 2
     print(tic_tac_toe([[2, 1, 2], [1, 1, 2], [2, 2, 1]]))  # = > 0
+    print(tic_tac_toe([[0, 0, 0], [1, 1, 1], [0, 0, 0]]))
 
     # print(rainbows("rainbowThisIsJustSomeNoise")) #  == 1  # Lisaks vikerkaarele on veel sümboleid
     # print(rainbows("WoBniar")) #  == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
