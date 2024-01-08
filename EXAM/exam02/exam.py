@@ -263,7 +263,10 @@ class Book:
 
     def __init__(self, author: str, title: str, isbn: int, return_date: datetime.date or None):
         """Initialize book."""
-        pass
+        self.author = author
+        self.title = title
+        self.isbn = isbn
+        self.return_date = return_date
 
     def set_return_date(self, return_date_str: str) -> None:
         """
@@ -273,7 +276,15 @@ class Book:
         and sets it as the return_date. If return_date_str is None, the return_date is set to None,
         indicating that the book is not currently lent out.
         """
-        pass
+        result_date_obj = None
+        if return_date_str:
+            return_date_split = return_date_str.split("-")
+            year = int(return_date_split[0])
+            month = int(return_date_split[1])
+            day = int(return_date_split[2])
+            result_date_obj = datetime.datetime(year, month, day)
+
+        self.return_date = result_date_obj
 
 
 class Lender:
@@ -281,7 +292,7 @@ class Lender:
 
     def __init__(self, lent_books: list[Book]):
         """Initialize lender."""
-        pass
+        self.lent_books = lent_books
 
     def get_lent_books_by_return_date(self) -> list[Book]:
         """Get books lent by the lender, sorted by the return date in ascending order."""
@@ -400,15 +411,15 @@ if __name__ == '__main__':
     # print(days_between_dates('2018-12-28', '2023-04-10'))  # 1563
     #
     # shopping
-    product1 = Product("Laptop", 1200.0, 5)
-    product2 = Product("Headphones", 80.0, 10)
-    product3 = Product("Mouse", 20.0, 3)
-
-    cart = ShoppingCart()
-
-    cart.add_product(product1)
-    cart.add_product(product2)
-    cart.add_product(product3)
+    # product1 = Product("Laptop", 1200.0, 5)
+    # product2 = Product("Headphones", 80.0, 10)
+    # product3 = Product("Mouse", 20.0, 3)
+    #
+    # cart = ShoppingCart()
+    #
+    # cart.add_product(product1)
+    # cart.add_product(product2)
+    # cart.add_product(product3)
 
     # out_of_stock_product = Product("Out-of-Stock Item", 50.0, 0)
     # cart.add_product(out_of_stock_product)
@@ -431,18 +442,18 @@ if __name__ == '__main__':
     #
     # # Library
     #
-    # library = Library([], [], 1)
+    library = Library([], [], 1)
     #
-    # # Create books
-    # book1 = Book("John Doe", "Programming Basics", 1234567890123, None)
-    # book2 = Book("Jane Smith", "Python for Beginners", 9876543210987, None)
+    # Create books
+    book1 = Book("John Doe", "Programming Basics", 1234567890123, None)
+    book2 = Book("Jane Smith", "Python for Beginners", 9876543210987, None)
     #
-    # # Add books to the library
-    # library.add_book_to_library(book1)
-    # library.add_book_to_library(book2)
-    #
-    # # Create a lender
-    # lender = Lender([])
+    # Add books to the library
+    library.add_book_to_library(book1)
+    library.add_book_to_library(book2)
+
+    # Create a lender
+    lender = Lender([])
     #
     # # Register the lender as a reader
     # library.register_lender_as_reader(lender)

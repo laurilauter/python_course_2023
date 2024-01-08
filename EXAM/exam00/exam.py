@@ -73,7 +73,6 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
         parts = person.split(" ")
         if len(parts) > 1:
             score = parts[len(parts) - 1]
-            #parts.remove(parts[len(parts) - 1])
             parts.pop()
             name = " ".join(parts)
             if score.isnumeric():
