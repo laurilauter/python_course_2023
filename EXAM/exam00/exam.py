@@ -38,7 +38,10 @@ def close_far(a: int, b: int, c: int) -> bool:
     close_far(4, 1, 3) => True
     """
     nums = sorted([a, b, c])
+    print(nums)
     if 0 <= abs(nums[1] - nums[0]) <= 1 < abs(nums[2] - nums[1]):
+        return True
+    if 0 <= abs(nums[2] - nums[1]) <= 1 < abs(nums[1] - nums[0]):
         return True
     return False
 
@@ -346,9 +349,9 @@ if __name__ == '__main__':
     # print(find_capital_letters("abc")) #= > ""
     # print(find_capital_letters("aAbBc")) #= > "AB"
 
-    print(close_far(-1, 0, 10))
+    # print(close_far(1, 2, 10))
     # print(close_far(1, 2, 3))
-    # print(close_far(4, 1, 3))
+    print(close_far(4, 1, 3))
     # print(close_far(1, 20, 100)) # false
 
     # print(get_names_from_results("ago 123,peeter 11", 0)) #  = > ["ago", "peeter"]
