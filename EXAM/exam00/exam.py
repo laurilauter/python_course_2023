@@ -227,9 +227,6 @@ def get_top_student_with_credit_points(students: list, min_credit_points: int):
     top_student = None
     top_students = [student for student in students if student.credit_points >= min_credit_points]
 
-    # for student in top_students:
-    #     print(student.average_grade)
-
     for student in top_students:
         if not top_student:
             top_student = student
@@ -270,7 +267,10 @@ def add_result_to_student(student: Student, grades_count: int, new_grade: int, c
 
     Return the modified student object.
     """
-    pass
+    # Uue keskmise hinde arvutamise valem: (hinnete kogus * praegune keskmine hinne + uus hinne) / uus hinnete kogus
+    student.average_grade = (student.average_grade * grades_count) + new_grade / (grades_count + 1)
+    student.credit_points = credit_points
+    return student
 
 
 def get_ordered_students(students: list) -> list:
