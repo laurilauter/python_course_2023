@@ -130,7 +130,6 @@ def tic_tac_toe(game: list) -> int:
         return 0
 
 
-
 def rainbows(field: str, lower=False) -> int:
     """
     Count rainbows.
@@ -146,7 +145,19 @@ def rainbows(field: str, lower=False) -> int:
     :param field: string to search rainbows from
     :return: number of rainbows in the string
     """
-    pass
+    field = field.lower()
+    count = 0
+    word = "rainbow"
+
+    if word not in field and word[::-1] not in field:
+        return count
+    else:
+        count += 1
+        if word in field:
+            field = field.replace(word,"",1)
+        else:
+            field = field.replace(word[::-1], "", 1)
+        return count + rainbows(field)
 
 
 def longest_substring(text: str) -> str:
@@ -364,7 +375,7 @@ if __name__ == '__main__':
     # print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) #  = > ["ago", "peeter", "kitty11!!"]
     # print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) #  = > ["ago", "kusti riin"]
     # print(get_names_from_results("tyu sdf123,3 11as,33", 10))
-    # print(get_names_from_results("ti tim12345 34,33,1 11", 10))
+    # print(get_names_from_results("ti tim12345 34,9POrw2n1ll2gVXkA 8HNiBrBZ74S WYT...mHTvUk2X99S 35", 10))
 
     # print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]])) # = > 1
     # print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]])) # = > 0
@@ -372,9 +383,9 @@ if __name__ == '__main__':
     # print(tic_tac_toe([[2, 1, 2], [1, 1, 2], [2, 2, 1]]))  # = > 0
     # print(tic_tac_toe([[0, 0, 0], [1, 1, 1], [0, 0, 0]])) # 1
     # print(tic_tac_toe([[0, 1, 0], [0, 1, 0], [0, 1, 0]])) # 1
-    print(tic_tac_toe([[0, 0, 1], [0, 0, 1], [0, 0, 1]]))# 1
+    # print(tic_tac_toe([[0, 0, 1], [0, 0, 1], [0, 0, 1]]))# 1
     # print(rainbows("rainbowThisIsJustSomeNoise")) #  == 1  # Lisaks vikerkaarele on veel sümboleid
-    # print(rainbows("WoBniar")) #  == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
+    print(rainbows("WoBniar")) #  == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
     # print(rainbows("rainbowobniar")) #  == 1  # Kaks vikerkaart jagavad tähte seega üks neist ei ole valiidne
 
     # print(longest_substring(aaa))# a
