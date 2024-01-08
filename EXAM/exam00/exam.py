@@ -73,7 +73,8 @@ def get_names_from_results(results_string: str, min_result: int) -> list:
         parts = person.split(" ")
         if len(parts) > 1:
             score = parts[len(parts) - 1]
-            parts.remove(parts[len(parts) - 1])
+            #parts.remove(parts[len(parts) - 1])
+            parts.pop()
             name = " ".join(parts)
             if score.isnumeric():
                 structured_persons.append([name, score])
@@ -340,7 +341,6 @@ class Hotel:
                 return True
             return False
 
-
     def book_room(self, required_features: list) -> Optional[Room]:
         """
         Book an available room which has the most matching features.
@@ -410,13 +410,13 @@ if __name__ == '__main__':
     # print(close_far(-4, -2, -1))  # false
 
 
-    # print(get_names_from_results("ago 123,peeter 11", 0)) #  = > ["ago", "peeter"]
-    # print(get_names_from_results("ago 123,peeter 11,33", 10)) #  = > ["ago", "peeter"]  # 33 does not have the name
-    # print(get_names_from_results("ago 123,peeter 11", 100)) #  = > ["ago"]
-    # print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) #  = > ["ago", "peeter", "kitty11!!"]
-    # print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) #  = > ["ago", "kusti riin"]
-    # print(get_names_from_results("tyu sdf123,3 11as,33", 10))
-    # print(get_names_from_results("ti tim12345 34,9POrw2n1ll2gVXkA 8HNiBrBZ74S WYT...mHTvUk2X99S 35", 10))
+    print(get_names_from_results("ago 123,peeter 11", 0)) #  = > ["ago", "peeter"]
+    print(get_names_from_results("ago 123,peeter 11,33", 10)) #  = > ["ago", "peeter"]  # 33 does not have the name
+    print(get_names_from_results("ago 123,peeter 11", 100)) #  = > ["ago"]
+    print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) #  = > ["ago", "peeter", "kitty11!!"]
+    print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) #  = > ["ago", "kusti riin"]
+    print(get_names_from_results("tyu sdf123,3 11as,33", 10))
+    print(get_names_from_results("ti tim12345 34,9POrw2n1ll2gVXkA 8HNiBrBZ74S WYT...mHTvUk2X99S 35", 10))
 
     # print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]])) # = > 1
     # print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]])) # = > 0
@@ -442,31 +442,31 @@ if __name__ == '__main__':
     # # print(dude.average_grade)
     # print(get_top_student_with_credit_points([low, mid, high], 3).name)
 
-    hotel = Hotel()
-    room1 = Room(1, 100)
-    room1.add_feature("tv")
-    room1.add_feature("bed")
-    room2 = Room(2, 200)
-    room2.add_feature("tv")
-    room2.add_feature("sauna")
-    hotel.add_room(room1)
-    hotel.add_room(room2)
-    #  try to add room with existing number, try to add existing feature to room
-    assert hotel.get_rooms() == [room1, room2]
-    assert hotel.get_booked_rooms() == []
-
-    assert hotel.book_room(["tv", "president"]) == room1
-    assert hotel.get_available_rooms() == [room2]
-    assert hotel.get_booked_rooms() == [room1]
-
-    assert hotel.book_room([]) == room2
-    assert hotel.get_available_rooms() == []
-
-    assert hotel.get_feature_profits() == {
-        'tv': 300,
-        'bed': 100,
-        'sauna': 200
-    }
-    assert hotel.get_most_profitable_feature() == 'tv'
+    # hotel = Hotel()
+    # room1 = Room(1, 100)
+    # room1.add_feature("tv")
+    # room1.add_feature("bed")
+    # room2 = Room(2, 200)
+    # room2.add_feature("tv")
+    # room2.add_feature("sauna")
+    # hotel.add_room(room1)
+    # hotel.add_room(room2)
+    # #  try to add room with existing number, try to add existing feature to room
+    # assert hotel.get_rooms() == [room1, room2]
+    # assert hotel.get_booked_rooms() == []
+    #
+    # assert hotel.book_room(["tv", "president"]) == room1
+    # assert hotel.get_available_rooms() == [room2]
+    # assert hotel.get_booked_rooms() == [room1]
+    #
+    # assert hotel.book_room([]) == room2
+    # assert hotel.get_available_rooms() == []
+    #
+    # assert hotel.get_feature_profits() == {
+    #     'tv': 300,
+    #     'bed': 100,
+    #     'sauna': 200
+    # }
+    # assert hotel.get_most_profitable_feature() == 'tv'
 
     #  try to add a room so that two or more features have the same profit
