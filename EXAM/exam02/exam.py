@@ -1,5 +1,6 @@
 """Exam 2 (2024-01-06)."""
 from datetime import datetime, timedelta
+import datetime
 
 
 def swap_first_and_last_char(text: str) -> str:
@@ -146,7 +147,13 @@ def days_between_dates(date1: str, date2: str) -> int:
     :param date2: The second date in YYYY-MM-DD format.
     :return: The number of days between the two dates.
     """
-    pass
+    date_first = [int(i) for i in date1.split("-")]
+    date_second = [int(i) for i in date2.split("-")]
+    start_date = datetime.datetime(date_first[0], date_first[1], date_first[2])
+    end_date = datetime.datetime(date_second[0], date_second[1], date_second[2])
+    print(start_date, end_date)
+    time_delta = end_date - start_date
+    return time_delta.days
 
 
 class Product:
@@ -337,7 +344,7 @@ if __name__ == '__main__':
     # print(reverse_words_in_text("The brown fox jumps over the lazy dog quickly."))
     # # quickly. dog lazy the over jumps fox brown The
     # print(reverse_words_in_text("Python Test."))
-    print(reverse_words_in_text("ab cd\nef gr"))
+    # print(reverse_words_in_text("ab cd\nef gr"))
     # Test. Python
     #
     # # pairwise_multiplication
@@ -359,8 +366,8 @@ if __name__ == '__main__':
     # print(bacteria_generations(3000, 7, 5.5))  # => 2134
     #
     # # days_between_dates
-    # print(days_between_dates('2023-01-15', '2023-03-10'))  # 54
-    # print(days_between_dates('2022-03-03', '2022-03-03'))  # 0
+    print(days_between_dates('2023-01-15', '2023-03-10'))  # 54
+    print(days_between_dates('2022-03-03', '2022-03-03'))  # 0
     # print(days_between_dates('2021-03-03', '2022-03-03'))  # 365
     # print(days_between_dates('2022-03-03', '2022-06-01'))  # 90
     # print(days_between_dates('2020-02-28', '2020-03-01'))  # 1
