@@ -39,9 +39,9 @@ def close_far(a: int, b: int, c: int) -> bool:
     """
     nums = sorted([a, b, c])
     for i in range(len(nums)):
-        if nums[i] - nums[i - 1] > 1:
+        if nums[i] - nums[i - 1] <= 1:
             for j in range(len(nums)):
-                if nums[j] - nums[j - 1] <= 1:
+                if nums[j] - nums[j - 1] >= 2:
                     return True
     return False
 
@@ -349,10 +349,10 @@ if __name__ == '__main__':
     # print(find_capital_letters("abc")) #= > ""
     # print(find_capital_letters("aAbBc")) #= > "AB"
 
-    # print(close_far(1, 10, 2))
-    # print(close_far(1, 2, 3))
-    # print(close_far(4, 1, 3))
-    # print(close_far(1, 2, 2))
+    print(close_far(1, 10, 2))
+    print(close_far(1, 2, 3))
+    print(close_far(4, 1, 3))
+    print(close_far(1, 20, 100)) # false
 
     # print(get_names_from_results("ago 123,peeter 11", 0)) #  = > ["ago", "peeter"]
     # print(get_names_from_results("ago 123,peeter 11,33", 10)) #  = > ["ago", "peeter"]  # 33 does not have the name
@@ -360,14 +360,23 @@ if __name__ == '__main__':
     # print(get_names_from_results("ago 123,peeter 11,kitty11!! 33", 11)) #  = > ["ago", "peeter", "kitty11!!"]
     # print(get_names_from_results("ago 123,peeter 11,kusti riin 14", 12)) #  = > ["ago", "kusti riin"]
     # print(get_names_from_results("tyu sdf123,3 11as,33", 10))
-    print(get_names_from_results("tim 34,33", 10))
+    # print(get_names_from_results("tim 34,33", 10))
 
     # print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]])) # = > 1
     # print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]])) # = > 0
     # print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]])) # = > 2
 
+    # print(rainbows("rainbowThisIsJustSomeNoise")) #  == 1  # Lisaks vikerkaarele on veel sümboleid
+    # print(rainbows("WoBniar")) #  == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
+    # print(rainbows("rainbowobniar")) #  == 1  # Kaks vikerkaart jagavad tähte seega üks neist ei ole valiidne
 
-    hotel = Hotel()
+    # print(longest_substring(aaa))# a
+    # print(longest_substring(abc))# abc
+    # print(longest_substring(abccba))# abc
+    # print(longest_substring(babcdEFghij))# abcdEFghij
+    # print(longest_substring(abBcd))# Bcd
+
+    # hotel = Hotel()
     # room1 = Room(1, 100)
     # room1.add_feature("tv")
     # room1.add_feature("bed")
