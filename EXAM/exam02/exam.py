@@ -147,6 +147,11 @@ def days_between_dates(date1: str, date2: str) -> int:
     :param date2: The second date in YYYY-MM-DD format.
     :return: The number of days between the two dates.
     """
+    # date_string = "2023-10-04"
+    # date_format = "%Y-%m-%d"
+    #
+    # date = datetime.datetime.strptime(date_string, date_format)
+
     date1_split = date1.split("-")
     date2_split = date2.split("-")
 
