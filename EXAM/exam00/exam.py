@@ -179,7 +179,7 @@ def longest_substring(text: str) -> str:
     '' -> ''
     """
     #text = text.lower()
-    max_word = ""
+    max_word = []
     pos = (len(text) // 2) + 1
 
     for p in range(pos):
@@ -190,9 +190,9 @@ def longest_substring(text: str) -> str:
                 word += text[i:i + 1]
             else:
                 if len(word) > len(max_word):
-                    max_word = word
+                    max_word.append(word)
                     word = ""
-    return max_word
+    return max(max_word, key=len)
 
 
 class Student:
@@ -403,7 +403,7 @@ if __name__ == '__main__':
     # print(rainbows("rainbowobniar")) #  == 1  # Kaks vikerkaart jagavad tähte seega üks neist ei ole valiidne
 
     # print(longest_substring("aaa"))# a
-    # print(longest_substring("abc"))# abc
+    print(longest_substring("abc"))# abc
     # print(longest_substring("abccba"))# abc
     # print(longest_substring("babcdEFghij"))# abcdEFghij
     print(longest_substring("abBcd"))# Bcd
