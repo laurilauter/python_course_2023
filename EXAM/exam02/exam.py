@@ -296,15 +296,15 @@ class Lender:
 
     def get_lent_books_by_return_date(self) -> list[Book]:
         """Get books lent by the lender, sorted by the return date in ascending order."""
-        pass
+        return sorted(self.lent_books, key=lambda book: book.return_date.time)
 
     def add_book_to_the_lent_books(self, book: Book) -> None:
         """Add the book to the lent books list."""
-        pass
+        self.lent_books.append(book)
 
     def remove_book_from_lent_books(self, book: Book) -> None:
         """Remove the book from the lent books."""
-        pass
+        self.lent_books.remove(book)
 
 
 class Library:
