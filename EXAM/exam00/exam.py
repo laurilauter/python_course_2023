@@ -178,7 +178,7 @@ def longest_substring(text: str) -> str:
     abBcd => Bcd
     '' -> ''
     """
-    pass
+    return text
 
 
 class Student:
@@ -385,14 +385,14 @@ if __name__ == '__main__':
     # print(tic_tac_toe([[0, 1, 0], [0, 1, 0], [0, 1, 0]])) # 1
     # print(tic_tac_toe([[0, 0, 1], [0, 0, 1], [0, 0, 1]]))# 1
     # print(rainbows("rainbowThisIsJustSomeNoise")) #  == 1  # Lisaks vikerkaarele on veel sümboleid
-    print(rainbows("WoBniar")) #  == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
+    # print(rainbows("WoBniar")) #  == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
     # print(rainbows("rainbowobniar")) #  == 1  # Kaks vikerkaart jagavad tähte seega üks neist ei ole valiidne
 
-    # print(longest_substring(aaa))# a
-    # print(longest_substring(abc))# abc
-    # print(longest_substring(abccba))# abc
-    # print(longest_substring(babcdEFghij))# abcdEFghij
-    # print(longest_substring(abBcd))# Bcd
+    # print(longest_substring("aaa"))# a
+    # print(longest_substring("abc"))# abc
+    print(longest_substring("abccba"))# abc
+    # print(longest_substring("babcdEFghij"))# abcdEFghij
+    # print(longest_substring("abBcd"))# Bcd
 
     # hotel = Hotel()
     # room1 = Room(1, 100)
