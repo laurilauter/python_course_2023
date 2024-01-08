@@ -178,13 +178,12 @@ def longest_substring(text: str) -> str:
     abBcd => Bcd
     '' -> ''
     """
-    #text = text.lower()
     max_word = []
-    pos = (len(text) // 2) + 1
+    #pos = len(text) -1
 
-    for p in range(pos):
+    for p in range(len(text)):
         word = ""
-        for i in range(p, len(text)):
+        for i in range(p, len(text) + 1):
             i = i + p
             if text[i:i + 1].lower() not in word:
                 word += text[i:i + 1]
@@ -192,6 +191,7 @@ def longest_substring(text: str) -> str:
                 if len(word) > len(max_word):
                     max_word.append(word)
                     word = ""
+                    p += 1
     return max(max_word, key=len)
 
 
@@ -402,12 +402,12 @@ if __name__ == '__main__':
     # print(rainbows("WoBniar")) #  == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
     # print(rainbows("rainbowobniar")) #  == 1  # Kaks vikerkaart jagavad tähte seega üks neist ei ole valiidne
 
-    # print(longest_substring("aaa"))# a
+    print(longest_substring("aaa"))# a
     print(longest_substring("abc"))# abc
-    # print(longest_substring("abccba"))# abc
-    # print(longest_substring("babcdEFghij"))# abcdEFghij
+    print(longest_substring("abccba"))# abc
+    print(longest_substring("babcdEFghij"))# abcdEFghij
     print(longest_substring("abBcd"))# Bcd
-    #print(longest_substring('aababcabcdabcdeabcdefabcdefgqwertyuiop')) # fgqwertyuiop
+    print(longest_substring('aababcabcdabcdeabcdefabcdefgqwertyuiop')) # fgqwertyuiop
 
     # hotel = Hotel()
     # room1 = Room(1, 100)
