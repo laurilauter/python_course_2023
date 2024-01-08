@@ -116,14 +116,14 @@ def tic_tac_toe(game: list) -> int:
             return game[i][0]
     if game[1][0] > 0 and game[1][0] == game[0][0] and game[1][0] == game[2][0]:
         return game[1][0]
-    elif game[1][0] > 0 and game[1][1] == game[0][1] and game[1][1] == game[2][1]:
+    elif game[1][1] > 0 and game[1][1] == game[0][1] and game[1][1] == game[2][1]:
         return game[1][1]
-    elif game[1][0] > 0 and game[1][2] == game[0][2] and game[1][2] == game[2][2]:
+    elif game[1][2] > 0 and game[1][2] == game[0][2] and game[1][2] == game[2][2]:
         return game[1][0]
 
-    elif game[1][0] > 0 and game[1][1] == game[0][0] and game[1][1] == game[2][2]:
+    elif game[1][1] > 0 and game[1][1] == game[0][0] and game[1][1] == game[2][2]:
         return game[1][1]
-    elif game[1][0] > 0 and game[1][1] == game[0][2] and game[1][1] == game[2][0]:
+    elif game[1][1] > 0 and game[1][1] == game[0][2] and game[1][1] == game[2][0]:
         return game[1][1]
     else:
         return 0
@@ -365,11 +365,12 @@ if __name__ == '__main__':
     # print(get_names_from_results("tyu sdf123,3 11as,33", 10))
     # print(get_names_from_results("ti tim12345 34,33,1 11", 10))
 
-    print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]])) # = > 1
-    print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]])) # = > 0
-    print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]])) # = > 2
-    print(tic_tac_toe([[2, 1, 2], [1, 1, 2], [2, 2, 1]]))  # = > 0
-    print(tic_tac_toe([[0, 0, 0], [1, 1, 1], [0, 0, 0]]))
+    # print(tic_tac_toe([[1, 2, 1], [2, 1, 2], [2, 2, 1]])) # = > 1
+    # print(tic_tac_toe([[1, 0, 1], [2, 1, 2], [2, 2, 0]])) # = > 0
+    # print(tic_tac_toe([[2, 2, 2], [0, 2, 0], [0, 1, 0]])) # = > 2
+    # print(tic_tac_toe([[2, 1, 2], [1, 1, 2], [2, 2, 1]]))  # = > 0
+    # print(tic_tac_toe([[0, 0, 0], [1, 1, 1], [0, 0, 0]])) # 1
+    print(tic_tac_toe([[0, 1, 0], [0, 1, 0], [0, 1, 0]])) # 1
 
     # print(rainbows("rainbowThisIsJustSomeNoise")) #  == 1  # Lisaks vikerkaarele on veel sümboleid
     # print(rainbows("WoBniar")) #  == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
