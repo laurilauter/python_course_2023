@@ -43,7 +43,16 @@ def reverse_words_in_text(text: str) -> str:
     :param text: Input text whose word order you want to reverse.
     :return: Text where the order of words in each line is reversed.
     """
-    pass
+    result = ""
+    if text:
+        lines = text.split("\n")
+        for line in lines:
+            words = line.split(" ")[::-1]
+            words = " ".join(words)
+            result += words + "\n"
+    if result[-3:] == "\n":
+        result = result[:-3]
+    return result
 
 
 def pairwise_multiplication(data: list, result: int) -> list:
@@ -319,16 +328,17 @@ class Library:
 
 if __name__ == '__main__':
     # swap_first_and_last_char
-    print(swap_first_and_last_char("hello"))  # => oellh
-    print(swap_first_and_last_char("Python"))  # => nythoP
-    print(swap_first_and_last_char("A"))  # => A
-    print(swap_first_and_last_char(""))  # => ''
+    # print(swap_first_and_last_char("hello"))  # => oellh
+    # print(swap_first_and_last_char("Python"))  # => nythoP
+    # print(swap_first_and_last_char("A"))  # => A
+    # print(swap_first_and_last_char(""))  # => ''
 
-    # # reverse_words_in_text
+    # reverse_words_in_text
     # print(reverse_words_in_text("The brown fox jumps over the lazy dog quickly."))
     # # quickly. dog lazy the over jumps fox brown The
     # print(reverse_words_in_text("Python Test."))
-    # # Test. Python
+    print(reverse_words_in_text("ab cd\nef gr"))
+    # Test. Python
     #
     # # pairwise_multiplication
     # print(pairwise_multiplication([3, 5, 10], 15))  # ->  [[3, 5]]
