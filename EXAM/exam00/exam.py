@@ -287,7 +287,10 @@ class Room:
 
     def __init__(self, number: int, price: int):
         """Initialize room."""
-        pass
+        self.number = number
+        self.price = price
+        self.features = []
+        self.booked = False
 
     def add_feature(self, feature: str) -> bool:
         """
@@ -298,19 +301,23 @@ class Room:
         - the room is booked.
         Otherwise, add the feature to the room and return True
         """
-        pass
+        if feature in self.features or self.booked:
+            return False
+        else:
+            self.features.append(feature)
+            return True
 
     def get_features(self) -> list:
         """Return all the features of the room."""
-        pass
+        return self.features
 
     def get_price(self) -> int:
         """Return the price."""
-        pass
+        return self.price
 
     def get_number(self) -> int:
         """Return the room number."""
-        pass
+        return self.number
 
 
 class Hotel:
@@ -318,7 +325,7 @@ class Hotel:
 
     def __init__(self):
         """Initialize hotel."""
-        pass
+        self.rooms = []
 
     def add_room(self, room: Room) -> bool:
         """
@@ -327,7 +334,12 @@ class Hotel:
         If a room with the given number already exists, do not add a room and return False.
         Otherwise add the room to hotel and return True.
         """
-        pass
+        for existing_room in self.rooms:
+            if not existing_room.number == room.number:
+                self.rooms.append(room)
+                return True
+            return False
+
 
     def book_room(self, required_features: list) -> Optional[Room]:
         """
@@ -337,19 +349,21 @@ class Hotel:
         If there are several with the same amount of matching features, return the one with the smallest room number.
         If there is no available rooms, return None
         """
-        pass
+
 
     def get_available_rooms(self) -> list:
         """Return a list of available (not booked) rooms."""
-        pass
+        available_rooms = [room for room in self.rooms if not room.booked]
+        return available_rooms
 
     def get_rooms(self) -> list:
         """Return all the rooms (both booked and available)."""
-        pass
+        return self.rooms
 
     def get_booked_rooms(self) -> list:
         """Return all the booked rooms."""
-        pass
+        booked_rooms = [room for room in self.rooms if room.booked]
+        return booked_rooms
 
     def get_feature_profits(self) -> dict:
         """
@@ -422,37 +436,37 @@ if __name__ == '__main__':
     # print(longest_substring("abBcd"))# Bcd
     # print(longest_substring('aababcabcdabcdeabcdefabcdefgqwertyuiop')) # fgqwertyuiop
 
-    low = create_student("Low", [1, 2, 1, 1], 2)
-    mid = create_student("Mid", [4, 3, 3, 3], 3)
-    high = create_student("High", [5, 5, 4, 5], 4)
-    # print(dude.average_grade)
-    print(get_top_student_with_credit_points([low, mid, high], 3).name)
+    # low = create_student("Low", [1, 2, 1, 1], 2)
+    # mid = create_student("Mid", [4, 3, 3, 3], 3)
+    # high = create_student("High", [5, 5, 4, 5], 4)
+    # # print(dude.average_grade)
+    # print(get_top_student_with_credit_points([low, mid, high], 3).name)
 
-    # hotel = Hotel()
-    # room1 = Room(1, 100)
-    # room1.add_feature("tv")
-    # room1.add_feature("bed")
-    # room2 = Room(2, 200)
-    # room2.add_feature("tv")
-    # room2.add_feature("sauna")
-    # hotel.add_room(room1)
-    # hotel.add_room(room2)
-    # #  try to add room with existing number, try to add existing feature to room
-    # assert hotel.get_rooms() == [room1, room2]
-    # assert hotel.get_booked_rooms() == []
-    #
-    # assert hotel.book_room(["tv", "president"]) == room1
-    # assert hotel.get_available_rooms() == [room2]
-    # assert hotel.get_booked_rooms() == [room1]
-    #
-    # assert hotel.book_room([]) == room2
-    # assert hotel.get_available_rooms() == []
-    #
-    # assert hotel.get_feature_profits() == {
-    #     'tv': 300,
-    #     'bed': 100,
-    #     'sauna': 200
-    # }
-    # assert hotel.get_most_profitable_feature() == 'tv'
-    #
-    # #  try to add a room so that two or more features have the same profit
+    hotel = Hotel()
+    room1 = Room(1, 100)
+    room1.add_feature("tv")
+    room1.add_feature("bed")
+    room2 = Room(2, 200)
+    room2.add_feature("tv")
+    room2.add_feature("sauna")
+    hotel.add_room(room1)
+    hotel.add_room(room2)
+    #  try to add room with existing number, try to add existing feature to room
+    assert hotel.get_rooms() == [room1, room2]
+    assert hotel.get_booked_rooms() == []
+
+    assert hotel.book_room(["tv", "president"]) == room1
+    assert hotel.get_available_rooms() == [room2]
+    assert hotel.get_booked_rooms() == [room1]
+
+    assert hotel.book_room([]) == room2
+    assert hotel.get_available_rooms() == []
+
+    assert hotel.get_feature_profits() == {
+        'tv': 300,
+        'bed': 100,
+        'sauna': 200
+    }
+    assert hotel.get_most_profitable_feature() == 'tv'
+
+    #  try to add a room so that two or more features have the same profit
