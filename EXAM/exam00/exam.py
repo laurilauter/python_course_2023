@@ -225,7 +225,11 @@ def get_top_student_with_credit_points(students: list, min_credit_points: int):
     If there are no students with enough credit points, return None.
     If several students have the same average score, return the first.
     """
-    pass
+    top_students = []
+    for student in students:
+        if student.average_grade >= min_credit_points:
+            top_students.append(student)
+    return students
 
 
 def add_result_to_student(student: Student, grades_count: int, new_grade: int, credit_points) -> Student:
