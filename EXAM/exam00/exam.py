@@ -38,12 +38,8 @@ def close_far(a: int, b: int, c: int) -> bool:
     close_far(4, 1, 3) => True
     """
     nums = sorted([a, b, c])
-    print(nums)
-    for i in range(len(nums)):
-        if abs(nums[i] - nums[i - 1]) <= 1:
-            for j in range(len(nums)):
-                if abs(nums[j] - nums[j - 1]) >= 2:
-                    return True
+    if 0 <= abs(nums[1] - nums[0]) <= 1 < abs(nums[2] - nums[1]):
+        return True
     return False
 
 
