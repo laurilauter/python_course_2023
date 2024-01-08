@@ -212,7 +212,8 @@ def create_student(name: str, grades: list, credit_points: int) -> Student:
     Round the average grade up to three decimal places.
     If the list of grades is empty, the average grade will be 0.
     """
-    pass
+    avg_grade = round(sum(grades) / len(grades), 3)
+    return Student(name, avg_grade, credit_points)
 
 
 def get_top_student_with_credit_points(students: list, min_credit_points: int):
@@ -402,12 +403,15 @@ if __name__ == '__main__':
     # print(rainbows("WoBniar")) #  == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
     # print(rainbows("rainbowobniar")) #  == 1  # Kaks vikerkaart jagavad tähte seega üks neist ei ole valiidne
 
-    print(longest_substring("aaa"))# a
-    print(longest_substring("abc"))# abc
-    print(longest_substring("abccba"))# abc
-    print(longest_substring("babcdEFghij"))# abcdEFghij
-    print(longest_substring("abBcd"))# Bcd
-    print(longest_substring('aababcabcdabcdeabcdefabcdefgqwertyuiop')) # fgqwertyuiop
+    # print(longest_substring("aaa"))# a
+    # print(longest_substring("abc"))# abc
+    # print(longest_substring("abccba"))# abc
+    # print(longest_substring("babcdEFghij"))# abcdEFghij
+    # print(longest_substring("abBcd"))# Bcd
+    # print(longest_substring('aababcabcdabcdeabcdefabcdefgqwertyuiop')) # fgqwertyuiop
+
+    dude = create_student("Priit", [2, 3, 4, 5], 4)
+    print(dude.average_grade)
 
     # hotel = Hotel()
     # room1 = Room(1, 100)
