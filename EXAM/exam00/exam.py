@@ -178,7 +178,21 @@ def longest_substring(text: str) -> str:
     abBcd => Bcd
     '' -> ''
     """
-    return text
+    text = text.lower()
+    word_ff = ""
+    word_rev = ""
+
+    for i in range(len(text)):
+        if text[i:i + 1] not in word_ff:
+            word_ff += text[i:i + 1]
+    for i in range(len(text)):
+        text = text[::-1]
+        if text[i:i + 1] not in word_rev:
+            word_rev += text[i:i + 1]
+    if len(word_ff) >= len(word_rev):
+        return word_ff
+    else:
+        return word_rev
 
 
 class Student:
@@ -388,11 +402,12 @@ if __name__ == '__main__':
     # print(rainbows("WoBniar")) #  == 1  # Vikerkaar on tagurpidi ja sisaldab suuri tähti
     # print(rainbows("rainbowobniar")) #  == 1  # Kaks vikerkaart jagavad tähte seega üks neist ei ole valiidne
 
-    # print(longest_substring("aaa"))# a
-    # print(longest_substring("abc"))# abc
+    print(longest_substring("aaa"))# a
+    print(longest_substring("abc"))# abc
     print(longest_substring("abccba"))# abc
-    # print(longest_substring("babcdEFghij"))# abcdEFghij
-    # print(longest_substring("abBcd"))# Bcd
+    print(longest_substring("babcdEFghij"))# abcdEFghij
+    print(longest_substring("abBcd"))# Bcd
+    #print(longest_substring('aababcabcdabcdeabcdefabcdefgqwertyuiop')) # fgqwertyuiop
 
     # hotel = Hotel()
     # room1 = Room(1, 100)
