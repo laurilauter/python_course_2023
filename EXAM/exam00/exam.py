@@ -179,7 +179,6 @@ def longest_substring(text: str) -> str:
     '' -> ''
     """
     max_word = []
-    #pos = len(text) -1
 
     for p in range(len(text)):
         word = ""
@@ -225,11 +224,14 @@ def get_top_student_with_credit_points(students: list, min_credit_points: int):
     If there are no students with enough credit points, return None.
     If several students have the same average score, return the first.
     """
-    top_students = []
-    for student in students:
-        if student.average_grade >= min_credit_points:
-            top_students.append(student)
-    return top_students
+    top_student = Student("Dummy", 0, 0)
+    top_students = [student for student in students if float(student.average_grade) >= float(min_credit_points)]
+
+    for student in top_students:
+        if top_student.average_grade < student.average_grade:
+            top_student = student
+        return top_student
+    return None
 
 
 def add_result_to_student(student: Student, grades_count: int, new_grade: int, credit_points) -> Student:
@@ -416,8 +418,11 @@ if __name__ == '__main__':
     # print(longest_substring("abBcd"))# Bcd
     # print(longest_substring('aababcabcdabcdeabcdefabcdefgqwertyuiop')) # fgqwertyuiop
 
-    dude = create_student("Priit", [2, 3, 4, 5], 4)
-    print(dude.average_grade)
+    low = create_student("Low", [1, 2, 1, 1], 4)
+    mid = create_student("Mid", [2, 3, 3, 3], 4)
+    high = create_student("High", [5, 5, 4, 5], 4)
+    # print(dude.average_grade)
+    print(get_top_student_with_credit_points([low, mid, high], 3))
 
     # hotel = Hotel()
     # room1 = Room(1, 100)
