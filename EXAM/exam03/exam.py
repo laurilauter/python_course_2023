@@ -270,11 +270,9 @@ class Cinema:
         :return: genre
         """
         for movie in self.movies:
-            if movie.title == title:
-            #if movie.title.lower() == title.lower():
+            if movie.title.lower() == title.lower():
                 return movie.genre
-            else:
-                return "No such movie"
+        return "No such movie"
 
     def get_movie_timetable(self) -> list[Movie]:
         """
@@ -557,10 +555,12 @@ if __name__ == '__main__':
     movie1 = Movie("Inception", "Sci-Fi", 1.5)
     movie2 = Movie("The Shawshank Redemption", "Drama", 2.0)
     movie3 = Movie("Jurassic Park", "Adventure", 1.0)
+    movie4 = Movie("Jurassic Park 3", "action", 1.0)
 
     cinema.add_movie(movie1)
     cinema.add_movie(movie2)
     cinema.add_movie(movie3)
+    cinema.add_movie(movie4)
 
     all_movies = cinema.get_movies()
     print([movie.title for movie in all_movies])  # ['Inception', 'The Shawshank Redemption', 'Jurassic Park']
@@ -569,9 +569,13 @@ if __name__ == '__main__':
 
     drama_movies = cinema.get_movies_by_genre("Drama")
     print([movie.title for movie in drama_movies])  # []
+    drama_movies = cinema.get_movies_by_genre("action")
+    print([movie.title for movie in drama_movies])  # []
 
-    genre_of_inception = cinema.get_genre_of_movie_with_title("Inception")
-    print(genre_of_inception)  # sci-fi.
+    # genre_of_inception = cinema.get_genre_of_movie_with_title("Inception")
+    # print(genre_of_inception)  # sci-fi.
+    genre_of_inception = cinema.get_genre_of_movie_with_title("Jurassic Park 3")
+    print(genre_of_inception)  # action
 
     movie_timetable = cinema.get_movie_timetable()
     print([movie.title for movie in movie_timetable])  # ['Jurassic Park', 'Inception']
