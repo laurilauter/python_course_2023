@@ -189,9 +189,6 @@ def increasing_subsequences(nums: list, count: int) -> list or str:
                 i = j
 
     is_equal_length = True
-    # for i in range(1, len(subsequences)):
-    #     if len(subsequences[i][0]) != len(subsequences[i - 1][0]):
-    #         is_equal_length = False
 
     if len(subsequences) < count or not is_equal_length or len(subsequences) == 1:
         return "Not enough subsequences!"
@@ -273,7 +270,8 @@ class Cinema:
         :return: genre
         """
         for movie in self.movies:
-            if movie.title.lower() == title.lower():
+            if movie.title == title:
+            #if movie.title.lower() == title.lower():
                 return movie.genre
             else:
                 return "No such movie"
@@ -534,7 +532,7 @@ if __name__ == '__main__':
     # print(average_word_length({2: ["awesome"]}))  # => 7
     # print(average_word_length({13: ["awesome"]}))  # => 0
     # print(average_word_length({0: ["a", "b", "c"], 2: ["aa", "bb", "cc"], 6: ["aaa", "bbb", "ccc"]}))  # => 2
-    print(average_word_length({0: ["123456789012345678901234567890123456789012345678901", "12345678901234567890123456789012345678901234567890"]}))  # => 2
+    # print(average_word_length({0: ["123456789012345678901234567890123456789012345678901", "12345678901234567890123456789012345678901234567890"]}))  # => 2
 
     # count_pythons
     # print(count_pythons("Ihj pYthoN pYthoN"))  # => 2
@@ -549,37 +547,37 @@ if __name__ == '__main__':
     # print(increasing_subsequences([1, 2, 4, 3], 2))  # "Not enough subsequences!"
     # print(increasing_subsequences([1, 2, 4, 0], 0))  # []
     # print(increasing_subsequences([1, 2, 4, 0, 7, 9, 10], 2))  # []
-    print(increasing_subsequences([1, 2, 10], 0))  # []
-    print(increasing_subsequences([], 0))  # []
-    print(increasing_subsequences([], 3))  # []
-    # # Cinema
-    #
-    # cinema = Cinema()
-    #
-    # movie1 = Movie("Inception", "Sci-Fi", 1.5)
-    # movie2 = Movie("The Shawshank Redemption", "Drama", 2.0)
-    # movie3 = Movie("Jurassic Park", "Adventure", 1.0)
-    #
-    # cinema.add_movie(movie1)
-    # cinema.add_movie(movie2)
-    # cinema.add_movie(movie3)
-    #
-    # all_movies = cinema.get_movies()
-    # print([movie.title for movie in all_movies])  # ['Inception', 'The Shawshank Redemption', 'Jurassic Park']
-    #
-    # cinema.remove_movie(movie2)
-    #
-    # drama_movies = cinema.get_movies_by_genre("Drama")
-    # print([movie.title for movie in drama_movies])  # []
-    #
-    # genre_of_inception = cinema.get_genre_of_movie_with_title("Inception")
-    # print(genre_of_inception)  # sci-fi.
-    #
-    # movie_timetable = cinema.get_movie_timetable()
-    # print([movie.title for movie in movie_timetable])  # ['Jurassic Park', 'Inception']
-    #
-    # next_airing_movie = cinema.get_next_airing()
-    # print({next_airing_movie})  # Jurassic Park
+    # print(increasing_subsequences([1, 2, 10], 0))  # []
+    # print(increasing_subsequences([], 0))  # []
+    # print(increasing_subsequences([], 3))  # []
+    # Cinema
+
+    cinema = Cinema()
+
+    movie1 = Movie("Inception", "Sci-Fi", 1.5)
+    movie2 = Movie("The Shawshank Redemption", "Drama", 2.0)
+    movie3 = Movie("Jurassic Park", "Adventure", 1.0)
+
+    cinema.add_movie(movie1)
+    cinema.add_movie(movie2)
+    cinema.add_movie(movie3)
+
+    all_movies = cinema.get_movies()
+    print([movie.title for movie in all_movies])  # ['Inception', 'The Shawshank Redemption', 'Jurassic Park']
+
+    cinema.remove_movie(movie2)
+
+    drama_movies = cinema.get_movies_by_genre("Drama")
+    print([movie.title for movie in drama_movies])  # []
+
+    genre_of_inception = cinema.get_genre_of_movie_with_title("Inception")
+    print(genre_of_inception)  # sci-fi.
+
+    movie_timetable = cinema.get_movie_timetable()
+    print([movie.title for movie in movie_timetable])  # ['Jurassic Park', 'Inception']
+
+    next_airing_movie = cinema.get_next_airing()
+    print({next_airing_movie})  # Jurassic Park
 
     # # Song contest
     # song1 = Song("Best day ever", "rock", 3.5, 15)
