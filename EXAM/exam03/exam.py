@@ -209,7 +209,8 @@ class Movie:
         :param genre: genre of movie
         :param starting_in: hours until movie airs
         """
-        self.title = title
+
+        self.title = title.title()
         self.genre = genre
         self.starting_in = starting_in
 
@@ -552,10 +553,10 @@ if __name__ == '__main__':
 
     cinema = Cinema()
 
-    movie1 = Movie("Inception", "Sci-Fi", 1.5)
+    movie1 = Movie("inception", "Sci-Fi", 1.5)
     movie2 = Movie("The Shawshank Redemption", "Drama", 2.0)
     movie3 = Movie("Jurassic Park", "Adventure", 1.0)
-    movie4 = Movie("Jurassic Park 3", "action", 1.0)
+    movie4 = Movie("Jurassic Park 3", "Action", 1.0)
 
     cinema.add_movie(movie1)
     cinema.add_movie(movie2)
