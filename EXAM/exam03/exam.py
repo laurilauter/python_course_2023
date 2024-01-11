@@ -97,6 +97,9 @@ def average_word_length(words: dict):
     word_lengths = []
     for word in words_list:
         word_lengths.append(len(word))
+
+    if len(word_lengths) == 0:
+        return 0
     return round(sum(word_lengths) / len(word_lengths))
 
 
@@ -134,6 +137,7 @@ def count_pythons(text, letter_counts=None) -> int:
                 return count_pythons(text) + count
     return count
 
+
 def increasing_subsequences(nums: list, count: int) -> list or str:
     """
     Find strictly increasing subsequences in a given list.
@@ -154,7 +158,20 @@ def increasing_subsequences(nums: list, count: int) -> list or str:
     increasing_subsequences([1, 2, 4, 3], 2) -> "Not enough subsequences!"
     increasing_subsequences([1, 2, 4, 0], 0) -> []
     """
-    pass
+    subsequences = []
+    for i in range(len(nums)):
+        subsequence = [nums[i]]
+        for j in range(i + 1, len(nums)):
+            if nums[j] > subsequence[-1]:
+                subsequence.append(nums[j])
+        if len(subsequence) > 1:
+            subsequences.append((subsequence, len(subsequence)))
+    if len(subsequences) < count:
+        return "Not enough subsequences!"
+    elif count == 0:
+        return []
+    else:
+        return subsequences[:count]
 
 
 class Movie:
