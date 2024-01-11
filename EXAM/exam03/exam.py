@@ -187,7 +187,12 @@ def increasing_subsequences(nums: list, count: int) -> list or str:
             else:
                 subsequence = [nums[j]]
                 i = j
-    if len(subsequences) < count:
+    is_equal_length = True
+    for i in range(1, len(subsequences)):
+        if len(subsequences[i][0]) != len(subsequences[i - 1][0]):
+            is_equal_length = False
+
+    if len(subsequences) < count or not is_equal_length:
         return "Not enough subsequences!"
     elif count == 0:
         return []
@@ -542,6 +547,7 @@ if __name__ == '__main__':
     print(increasing_subsequences([10, 9, 5, 1, 3, 4, 2, 6, 8], 2))  # [([1, 3, 4], 3), ([2, 6, 8], 3)]
     print(increasing_subsequences([1, 2, 4, 3], 2))  # "Not enough subsequences!"
     print(increasing_subsequences([1, 2, 4, 0], 0))  # []
+    print(increasing_subsequences([1, 2, 4, 0, 7, 9, 10], 2))  # []
     # # Cinema
     #
     # cinema = Cinema()
