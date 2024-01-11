@@ -87,24 +87,17 @@ def average_word_length(words: dict):
     :param words: given dictionary of integers as keys and lists of words as values
     :return: average word length as an integer
     """
-    avg_length_value = 0
-    length_values = []
-    avg_length_values = []
-    total_len_avg = 0
-    count1 = 0
-    count2 = 0
-    for key, value in words.items():
+    even_keys = []
+    for key in words.keys():
         if key % 2 == 0:
-            for word in value:
-                length_values.append(len(word))
-                count1 += 1
-            if count1 > 0:
-                avg_length_value = round(sum(length_values) / count1)
-        count2 += 1
-        if count2 > 0 and avg_length_value:
-            avg_length_values.append(avg_length_value)
-            total_len_avg = round(sum(avg_length_values) / count2)
-    return total_len_avg
+            even_keys.append(key)
+    words_list = []
+    for key in even_keys:
+        words_list += words[key]
+    word_lengths = []
+    for word in words_list:
+        word_lengths.append(len(word))
+    return round(sum(word_lengths) / len(word_lengths))
 
 
 def count_pythons(text, letter_counts=None) -> int:
