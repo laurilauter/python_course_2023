@@ -106,18 +106,10 @@ def average_word_length(words: dict):
 
     result = sum(word_lengths) / len(word_lengths)
 
-    # print(result)
-    #
-    # decimals = result % 1
-    # whole_int = int(result // 1)
-    #
-    # if decimals >= 0.5:
-    #     whole_int += 1
-
-    # return whole_int
     decimals = 0
     multiplier = 10 ** decimals
     return math.ceil(result * multiplier) / multiplier
+
 
 def count_pythons(text, letter_counts=None) -> int:
     """
@@ -197,7 +189,7 @@ def increasing_subsequences(nums: list, count: int) -> list or str:
     #     if len(subsequences[i][0]) != len(subsequences[i - 1][0]):
     #         is_equal_length = False
 
-    if len(subsequences) < count or not is_equal_length:
+    if len(subsequences) < count or not is_equal_length or len(subsequences) < 2:
         return "Not enough subsequences!"
     elif count == 0:
         return []
@@ -550,9 +542,9 @@ if __name__ == '__main__':
     # # increasing_subsequences
     # print(increasing_subsequences([1, 3, 5, 2, 7, 8, 0], 2))  # [([1, 3, 5], 3), ([2, 7, 8], 3)]
     # print(increasing_subsequences([10, 9, 5, 1, 3, 4, 2, 6, 8], 2))  # [([1, 3, 4], 3), ([2, 6, 8], 3)]
-    # print(increasing_subsequences([1, 2, 4, 3], 2))  # "Not enough subsequences!"
+    print(increasing_subsequences([1, 2, 4, 3], 2))  # "Not enough subsequences!"
     # print(increasing_subsequences([1, 2, 4, 0], 0))  # []
-    # print(increasing_subsequences([1, 2, 4, 0, 7, 9, 10], 2))  # []
+    print(increasing_subsequences([1, 2, 4, 0, 7, 9, 10], 2))  # []
     # # Cinema
     #
     # cinema = Cinema()
