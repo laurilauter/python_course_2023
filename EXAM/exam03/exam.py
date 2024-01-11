@@ -191,8 +191,6 @@ def increasing_subsequences(nums: list, count: int) -> list or str:
 
     if len(subsequences) < count or not is_equal_length or len(subsequences) == 1:
         return "Not enough subsequences!"
-    elif count == 0 or len(subsequences) == 0 or len(nums) == 0:
-        return "Not enough subsequences!"  # []
     elif not count or not nums:
         return []
     else:
@@ -544,9 +542,12 @@ if __name__ == '__main__':
     # # increasing_subsequences
     # print(increasing_subsequences([1, 3, 5, 2, 7, 8, 0], 2))  # [([1, 3, 5], 3), ([2, 7, 8], 3)]
     # print(increasing_subsequences([10, 9, 5, 1, 3, 4, 2, 6, 8], 2))  # [([1, 3, 4], 3), ([2, 6, 8], 3)]
-    print(increasing_subsequences([1, 2, 4, 3], 2))  # "Not enough subsequences!"
+    # print(increasing_subsequences([1, 2, 4, 3], 2))  # "Not enough subsequences!"
     # print(increasing_subsequences([1, 2, 4, 0], 0))  # []
-    print(increasing_subsequences([1, 2, 4, 0, 7, 9, 10], 2))  # []
+    # print(increasing_subsequences([1, 2, 4, 0, 7, 9, 10], 2))  # []
+    print(increasing_subsequences([1, 2, 10], 0))  # []
+    print(increasing_subsequences([], 0))  # []
+    print(increasing_subsequences([], 3))  # []
     # # Cinema
     #
     # cinema = Cinema()
