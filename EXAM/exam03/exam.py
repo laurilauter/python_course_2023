@@ -100,7 +100,9 @@ def average_word_length(words: dict):
 
     if len(word_lengths) == 0:
         return 0
-    return round(sum(word_lengths) / len(word_lengths))
+    result = sum(word_lengths) / len(word_lengths)
+    return int(result-0.5)+1
+
 
 
 def count_pythons(text, letter_counts=None) -> int:
@@ -504,10 +506,10 @@ if __name__ == '__main__':
     # # => []
     #
     # # average_word_length
-    # print(average_word_length({2: ["awesome"]}))  # => 7
-    # print(average_word_length({13: ["awesome"]}))  # => 0
-    # print(average_word_length({0: ["a", "b", "c"], 2: ["aa", "bb", "cc"], 6: ["aaa", "bbb", "ccc"]}))  # => 2
-    # print(average_word_length({0: ["a", "bwer", "c"], 2: ["awerwererwea", "bb", "cwerc"], 6: ["aawerwera", "bwerbb", "cwercc"]}))  # => 2
+    print(average_word_length({2: ["awesome"]}))  # => 7
+    print(average_word_length({13: ["awesome"]}))  # => 0
+    print(average_word_length({0: ["a", "b", "c"], 2: ["aa", "bb", "cc"], 6: ["aaa", "bbb", "ccc"]}))  # => 2
+    print(average_word_length({1: ["a", "bwer", "casd"], 2: ["awa", "b83", "gcryy"], 5: ["aawewerwera", "bwerbb", "cweewewrcc"]}))  # => 2
 
     # count_pythons
     # print(count_pythons("Ihj pYthoN pYthoN"))  # => 2
@@ -523,32 +525,32 @@ if __name__ == '__main__':
     # print(increasing_subsequences([1, 2, 4, 0], 0))  # []
     # # Cinema
     #
-    cinema = Cinema()
-
-    movie1 = Movie("Inception", "Sci-Fi", 1.5)
-    movie2 = Movie("The Shawshank Redemption", "Drama", 2.0)
-    movie3 = Movie("Jurassic Park", "Adventure", 1.0)
-
-    cinema.add_movie(movie1)
-    cinema.add_movie(movie2)
-    cinema.add_movie(movie3)
-
-    all_movies = cinema.get_movies()
-    print([movie.title for movie in all_movies])  # ['Inception', 'The Shawshank Redemption', 'Jurassic Park']
-
-    cinema.remove_movie(movie2)
-
-    drama_movies = cinema.get_movies_by_genre("Drama")
-    print([movie.title for movie in drama_movies])  # []
-
-    genre_of_inception = cinema.get_genre_of_movie_with_title("Inception")
-    print(genre_of_inception)  # sci-fi.
-
-    movie_timetable = cinema.get_movie_timetable()
-    print([movie.title for movie in movie_timetable])  # ['Jurassic Park', 'Inception']
-
-    next_airing_movie = cinema.get_next_airing()
-    print({next_airing_movie})  # Jurassic Park
+    # cinema = Cinema()
+    #
+    # movie1 = Movie("Inception", "Sci-Fi", 1.5)
+    # movie2 = Movie("The Shawshank Redemption", "Drama", 2.0)
+    # movie3 = Movie("Jurassic Park", "Adventure", 1.0)
+    #
+    # cinema.add_movie(movie1)
+    # cinema.add_movie(movie2)
+    # cinema.add_movie(movie3)
+    #
+    # all_movies = cinema.get_movies()
+    # print([movie.title for movie in all_movies])  # ['Inception', 'The Shawshank Redemption', 'Jurassic Park']
+    #
+    # cinema.remove_movie(movie2)
+    #
+    # drama_movies = cinema.get_movies_by_genre("Drama")
+    # print([movie.title for movie in drama_movies])  # []
+    #
+    # genre_of_inception = cinema.get_genre_of_movie_with_title("Inception")
+    # print(genre_of_inception)  # sci-fi.
+    #
+    # movie_timetable = cinema.get_movie_timetable()
+    # print([movie.title for movie in movie_timetable])  # ['Jurassic Park', 'Inception']
+    #
+    # next_airing_movie = cinema.get_next_airing()
+    # print({next_airing_movie})  # Jurassic Park
 
     # # Song contest
     # song1 = Song("Best day ever", "rock", 3.5, 15)
