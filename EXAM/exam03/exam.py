@@ -106,14 +106,18 @@ def average_word_length(words: dict):
 
     result = sum(word_lengths) / len(word_lengths)
 
-    decimals = result % 1
-    whole_int = int(result // 1)
+    # print(result)
+    #
+    # decimals = result % 1
+    # whole_int = int(result // 1)
+    #
+    # if decimals >= 0.5:
+    #     whole_int += 1
 
-    if decimals >= 0.5:
-        whole_int += 1
-
-    return whole_int
-
+    # return whole_int
+    decimals = 0
+    multiplier = 10 ** decimals
+    return math.ceil(result * multiplier) / multiplier
 
 def count_pythons(text, letter_counts=None) -> int:
     """
@@ -534,7 +538,7 @@ if __name__ == '__main__':
     # print(average_word_length({2: ["awesome"]}))  # => 7
     # print(average_word_length({13: ["awesome"]}))  # => 0
     # print(average_word_length({0: ["a", "b", "c"], 2: ["aa", "bb", "cc"], 6: ["aaa", "bbb", "ccc"]}))  # => 2
-    # print(average_word_length({0: ["123456789012345678901234567890123456789012345678901", "12345678901234567890123456789012345678901234567890"]}))  # => 2
+    print(average_word_length({0: ["123456789012345678901234567890123456789012345678901", "12345678901234567890123456789012345678901234567890"]}))  # => 2
 
     # count_pythons
     # print(count_pythons("Ihj pYthoN pYthoN"))  # => 2
@@ -544,11 +548,11 @@ if __name__ == '__main__':
     # print(count_pythons("On the porch was hot and sunny"))  # => 1
 
     # # increasing_subsequences
-    print(increasing_subsequences([1, 3, 5, 2, 7, 8, 0], 2))  # [([1, 3, 5], 3), ([2, 7, 8], 3)]
-    print(increasing_subsequences([10, 9, 5, 1, 3, 4, 2, 6, 8], 2))  # [([1, 3, 4], 3), ([2, 6, 8], 3)]
-    print(increasing_subsequences([1, 2, 4, 3], 2))  # "Not enough subsequences!"
-    print(increasing_subsequences([1, 2, 4, 0], 0))  # []
-    print(increasing_subsequences([1, 2, 4, 0, 7, 9, 10], 2))  # []
+    # print(increasing_subsequences([1, 3, 5, 2, 7, 8, 0], 2))  # [([1, 3, 5], 3), ([2, 7, 8], 3)]
+    # print(increasing_subsequences([10, 9, 5, 1, 3, 4, 2, 6, 8], 2))  # [([1, 3, 4], 3), ([2, 6, 8], 3)]
+    # print(increasing_subsequences([1, 2, 4, 3], 2))  # "Not enough subsequences!"
+    # print(increasing_subsequences([1, 2, 4, 0], 0))  # []
+    # print(increasing_subsequences([1, 2, 4, 0, 7, 9, 10], 2))  # []
     # # Cinema
     #
     # cinema = Cinema()
