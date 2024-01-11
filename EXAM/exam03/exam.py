@@ -211,7 +211,7 @@ class Movie:
         """
 
         self.title = title.title()
-        self.genre = genre
+        self.genre = genre.lower()
         self.starting_in = starting_in
 
 
