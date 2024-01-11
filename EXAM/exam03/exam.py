@@ -166,6 +166,10 @@ def increasing_subsequences(nums: list, count: int) -> list or str:
     increasing_subsequences([1, 2, 4, 3], 2) -> "Not enough subsequences!"
     increasing_subsequences([1, 2, 4, 0], 0) -> []
     """
+
+    if not count or not nums or count == 0:
+        return []
+
     subsequences = []
     i = 0
     while i < len(nums) - 1:
@@ -191,7 +195,7 @@ def increasing_subsequences(nums: list, count: int) -> list or str:
 
     if len(subsequences) < count or not is_equal_length or len(subsequences) == 1:
         return "Not enough subsequences!"
-    elif not count or not nums:
+    elif not count or not nums or count == 0:
         return []
     else:
         return subsequences[:count]
