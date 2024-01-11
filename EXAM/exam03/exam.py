@@ -87,22 +87,32 @@ def average_word_length(words: dict):
     :param words: given dictionary of integers as keys and lists of words as values
     :return: average word length as an integer
     """
+    int_result = 0
     even_keys = []
+
     for key in words.keys():
         if key % 2 == 0:
             even_keys.append(key)
     words_list = []
     for key in even_keys:
         words_list += words[key]
+
     word_lengths = []
     for word in words_list:
         word_lengths.append(len(word))
 
     if len(word_lengths) == 0:
-        return 0
-    result = sum(word_lengths) / len(word_lengths)
-    return int(result-0.5)+1
+        return int_result
 
+    result = sum(word_lengths) / len(word_lengths)
+
+    decimals = result % 1
+    whole_int = int(result // 1)
+
+    if decimals >= 0.5:
+        whole_int += 1
+
+    return whole_int
 
 
 def count_pythons(text, letter_counts=None) -> int:
@@ -506,10 +516,10 @@ if __name__ == '__main__':
     # # => []
     #
     # # average_word_length
-    print(average_word_length({2: ["awesome"]}))  # => 7
-    print(average_word_length({13: ["awesome"]}))  # => 0
-    print(average_word_length({0: ["a", "b", "c"], 2: ["aa", "bb", "cc"], 6: ["aaa", "bbb", "ccc"]}))  # => 2
-    print(average_word_length({1: ["a", "bwer", "casd"], 2: ["awa", "b83", "gcryy"], 5: ["aawewerwera", "bwerbb", "cweewewrcc"]}))  # => 2
+    # print(average_word_length({2: ["awesome"]}))  # => 7
+    # print(average_word_length({13: ["awesome"]}))  # => 0
+    # print(average_word_length({0: ["a", "b", "c"], 2: ["aa", "bb", "cc"], 6: ["aaa", "bbb", "ccc"]}))  # => 2
+    print(average_word_length({0: ["123456789012345678901234567890123456789012345678901", "12345678901234567890123456789012345678901234567890"]}))  # => 2
 
     # count_pythons
     # print(count_pythons("Ihj pYthoN pYthoN"))  # => 2
