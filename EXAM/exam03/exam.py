@@ -187,6 +187,7 @@ def increasing_subsequences(nums: list, count: int) -> list or str:
             else:
                 subsequence = [nums[j]]
                 i = j
+
     is_equal_length = True
     # for i in range(1, len(subsequences)):
     #     if len(subsequences[i][0]) != len(subsequences[i - 1][0]):
