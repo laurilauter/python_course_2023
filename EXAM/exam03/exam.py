@@ -272,7 +272,7 @@ class Cinema:
         """
         for movie in self.movies:
             if movie.title.lower() == title.lower():
-                return movie.genre.lower()
+                return movie.genre
         return "No such movie"
 
     def get_movie_timetable(self) -> list[Movie]:
