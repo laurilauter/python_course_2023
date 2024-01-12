@@ -476,7 +476,7 @@ class Competition:
         #                 self.judges.append(judge)
         #                 return True
 
-        if isinstance(judge, Judge):
+        if not isinstance(judge, Judge):
             return False
 
         for judge_genre in judge.preferences:
