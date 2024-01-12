@@ -442,8 +442,14 @@ class Competition:
         :param contestant: Contestant.
         :return: Boolean.
         """
+        if not isinstance(contestant, Contestant):
+            return False
+
+        #genre = contestant.choose_song().genre
         if self.minimum_age < contestant.age < self.maximum_age:
+        #if self.minimum_age < contestant.age < self.maximum_age and genre in self.suitable_genres:
             self.contestants.append(contestant)
+            return True
 
     def add_judge(self, judge: Judge) -> bool:
         """
@@ -456,8 +462,8 @@ class Competition:
         :return: Boolean.
         """
         for genre in self.suitable_genres:
-            for like in judge.preferences:
-                if genre == like:
+            for judge_genre in judge.preferences:
+                if genre == judge_genre and isinstance(judge, Judge):
                     self.judges.append(judge)
 
     def create_order_of_performances(self) -> list[Contestant]:
