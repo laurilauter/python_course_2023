@@ -478,8 +478,9 @@ class Competition:
 
         :return: Order of performances.
         """
-        # half done
-        return sorted(self.contestants, key=lambda contestant: (contestant.age, contestant.favorite_song), reverse=True)
+        # print("cont", self.contestants)
+        # print("create_order_of_performances", sorted(self.contestants, key=lambda contestant: (contestant.age, contestant.favorite_song), reverse=False))
+        return sorted(self.contestants, key=lambda contestant: (contestant.age, contestant.favorite_song), reverse=False)
 
     def perform_song_rankings(self) -> dict:
         """
@@ -496,7 +497,7 @@ class Competition:
                 if contestant.favorite_song.genre in judge.preferences:
                     judge_like = 10
             rankings[contestant.favorite_song] = contestant.favorite_song.difficulty * contestant.vocals + judge_like
-
+        print(rankings)
         return rankings
 
     def get_suitable_genres(self) -> list:
@@ -539,7 +540,7 @@ class Competition:
 
         :return: Winner song.
         """
-        return sorted(self.judges, key=lambda judge: judge.name)
+        return None
 
 
 if __name__ == '__main__':
@@ -627,8 +628,8 @@ if __name__ == '__main__':
     song1 = Song("Best day ever", "rock", 3.5, 15)
     song2 = Song("My enemy hair", "pop", 2.0, 5)
     song3 = Song("Kinda normal", "pop", 3.0, 7)
-    song4 = Song("S1", "pop", 3.0, 7)
-    song_list = [song1, song2, song3, song4]
+    #song4 = Song("S1", "pop", 3.0, 7)
+    song_list = [song1, song2, song3]
     #song_list = [song4]
 
     bob = Contestant("bob", "Ernest", 20, 9)
