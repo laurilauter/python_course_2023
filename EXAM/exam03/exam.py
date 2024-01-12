@@ -389,7 +389,7 @@ class Contestant:
                 max_song = [song[0]]
 
         if not max_song:
-            max_song = [song_list[0]]
+            max_song = None
 
         return max_song[0]
 
@@ -606,7 +606,9 @@ if __name__ == '__main__':
     song1 = Song("Best day ever", "rock", 3.5, 15)
     song2 = Song("My enemy hair", "pop", 2.0, 5)
     song3 = Song("Kinda normal", "pop", 3.0, 7)
-    song_list = [song1, song2, song3]
+    song4 = Song("S1", "pop", 3.0, 7)
+    # song_list = [song1, song2, song3, song4]
+    song_list = [song4]
 
     bob = Contestant("bob", "Ernest", 20, 9)
     mari = Contestant("mari", "riisa", 9, 0)
