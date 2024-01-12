@@ -404,7 +404,7 @@ class Judge:
         :param name: Name.
         :param preferences: Preferences.
         """
-        self.name = name
+        self.name = name.title()
         self.preferences = preferences
 
     def __repr__(self):
