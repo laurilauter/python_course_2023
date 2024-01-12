@@ -473,6 +473,8 @@ class Competition:
             for judge_genre in judge.preferences:
                 if genre == judge_genre and isinstance(judge, Judge):
                     self.judges.append(judge)
+                    return True
+        return False
 
     def create_order_of_performances(self) -> list[Contestant]:
         """
@@ -502,7 +504,6 @@ class Competition:
             rankings[contestant.favorite_song] = contestant.favorite_song.difficulty * contestant.vocals + judge_like
 
         return rankings
-
 
     def get_suitable_genres(self) -> list:
         """
