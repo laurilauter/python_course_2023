@@ -389,7 +389,7 @@ class Contestant:
                 max_song = [song[0]]
 
         if not max_song:
-            max_song = None
+            return None
 
         return max_song[0]
 
