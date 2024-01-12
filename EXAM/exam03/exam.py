@@ -445,6 +445,7 @@ class Competition:
         if not isinstance(contestant, Contestant):
             return False
 
+
         #genre = contestant.choose_song().genre
         if self.minimum_age < contestant.age < self.maximum_age:
         #if self.minimum_age < contestant.age < self.maximum_age and genre in self.suitable_genres:
@@ -493,7 +494,7 @@ class Competition:
 
         :return: Sorted genres.
         """
-        pass
+        sorted(self.suitable_genres, key=lambda competitor: competitor.genre, reverse=True)
 
     def get_contestants(self) -> list:
         """
@@ -517,7 +518,7 @@ class Competition:
 
         :return: Sorted songs.
         """
-        pass
+        return sorted(self.judges, key=lambda judge: judge.name)
 
     def get_winner(self) -> Song:
         """
@@ -525,7 +526,7 @@ class Competition:
 
         :return: Winner song.
         """
-        pass
+        return sorted(self.judges, key=lambda judge: judge.name)
 
 
 if __name__ == '__main__':
