@@ -309,7 +309,7 @@ class Song:
         :param duration: Song duration.
         :param difficulty: Song difficulty.
         """
-        self.name = name.title()
+        self.name = name
         self.genre = genre
         self.duration = duration
         self.difficulty = difficulty
