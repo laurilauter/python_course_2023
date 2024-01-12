@@ -376,9 +376,11 @@ class Contestant:
         name_letters = self.name.lower()
         for song in song_list:
             count = 0
+            name = song.name
             for letter in name_letters:
-                if letter in song.name:
+                if letter in name:
                     count += 1
+                    name.replace(letter, "")
             if count > 0:
                 match_count.append((song, count))
         print(match_count)
