@@ -313,6 +313,10 @@ class Song:
         self.genre = genre
         self.duration = duration
         self.difficulty = difficulty
+        if difficulty > 10:
+            self.difficulty = 10
+        elif difficulty < 1:
+            self.difficulty = 1
 
     def __repr__(self):
         """
@@ -335,8 +339,7 @@ class Contestant:
         :param age: Age.
         :param vocals: Vocals.
         """
-        self.first_name = first_name
-        self.last_name = last_name
+        self.name = first_name.capitalize() + " " + last_name.capitalize()
         self.age = int(age)
         self.vocals = vocals
 
@@ -346,7 +349,7 @@ class Contestant:
 
         :return: String with full name.
         """
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.name}"
 
     def choose_song(self, song_list: list[Song]) -> Song | None:
         """
@@ -367,13 +370,16 @@ class Contestant:
         :param song_list: List of songs to chose from.
         :return: Contestants song or None.
         """
-        max_count = 0
-        name_letters = self.last_name + self.last_name
+        match_count = []
+        name_letters = self.name.lower()
         for song in song_list:
+            count = 0
             for letter in name_letters:
                 if letter in song.name:
-                    max_count += 1
-            return song
+                    count += 1
+                match_count.append((song, count))
+
+        return None
 
 
 class Judge:
@@ -476,7 +482,7 @@ class Competition:
 
         :return: Sorted contestants.
         """
-        return sorted(self.contestants, key=lambda contestant: contestant.first_name)
+        return sorted(self.contestants, key=lambda contestant: contestant.name)
 
     def get_judges(self) -> list:
         """
@@ -551,81 +557,81 @@ if __name__ == '__main__':
     # print(increasing_subsequences([], 3))  # []
     # Cinema
 
-    cinema = Cinema()
+    # cinema = Cinema()
+    #
+    # movie1 = Movie("inception", "Sci-Fi", 1.5)
+    # movie2 = Movie("The Shawshank Redemption", "Drama", 2.0)
+    # movie3 = Movie("Jurassic Park", "Adventure", 1.0)
+    # movie4 = Movie("Jurassic Park 3", "Action", 1.0)
+    #
+    # cinema.add_movie(movie1)
+    # cinema.add_movie(movie2)
+    # cinema.add_movie(movie3)
+    # cinema.add_movie(movie4)
+    #
+    # all_movies = cinema.get_movies()
+    # print([movie.title for movie in all_movies])  # ['Inception', 'The Shawshank Redemption', 'Jurassic Park']
+    #
+    # cinema.remove_movie(movie2)
+    #
+    # drama_movies = cinema.get_movies_by_genre("Drama")
+    # print([movie.title for movie in drama_movies])  # []
+    # drama_movies = cinema.get_movies_by_genre("action")
+    # print([movie.title for movie in drama_movies])  # []
+    #
+    # # genre_of_inception = cinema.get_genre_of_movie_with_title("Inception")
+    # # print(genre_of_inception)  # sci-fi.
+    # genre_of_inception = cinema.get_genre_of_movie_with_title("Jurassic Park 3")
+    # print(genre_of_inception)  # action
+    #
+    # movie_timetable = cinema.get_movie_timetable()
+    # print([movie.title for movie in movie_timetable])  # ['Jurassic Park', 'Inception']
+    #
+    # next_airing_movie = cinema.get_next_airing()
+    # print({next_airing_movie})  # Jurassic Park
 
-    movie1 = Movie("inception", "Sci-Fi", 1.5)
-    movie2 = Movie("The Shawshank Redemption", "Drama", 2.0)
-    movie3 = Movie("Jurassic Park", "Adventure", 1.0)
-    movie4 = Movie("Jurassic Park 3", "Action", 1.0)
+    # Song contest
+    song1 = Song("Best day ever", "rock", 3.5, 15)
+    song2 = Song("My enemy hair", "pop", 2.0, 5)
+    song3 = Song("Kinda normal", "pop", 3.0, 7)
+    song_list = [song1, song2, song3]
 
-    cinema.add_movie(movie1)
-    cinema.add_movie(movie2)
-    cinema.add_movie(movie3)
-    cinema.add_movie(movie4)
+    bob = Contestant("bob", "Ernest", 20, 9)
+    mari = Contestant("mari", "riisa", 9, 0)
+    kiur = Contestant("Kiur", "norman", 15, 6)
 
-    all_movies = cinema.get_movies()
-    print([movie.title for movie in all_movies])  # ['Inception', 'The Shawshank Redemption', 'Jurassic Park']
+    competition = Competition(10, 35, ["rock", "pop"])
 
-    cinema.remove_movie(movie2)
+    judge1 = Judge("Judy", ["Rock"])
+    judge2 = Judge("emili", ["rock", "pop"])
 
-    drama_movies = cinema.get_movies_by_genre("Drama")
-    print([movie.title for movie in drama_movies])  # []
-    drama_movies = cinema.get_movies_by_genre("action")
-    print([movie.title for movie in drama_movies])  # []
+    #  Choosing songs for competition
+    print(bob.choose_song(song_list))  # Best day ever, style: rock
+    print(mari.choose_song(song_list))  # My enemy hair, style: pop
+    print(kiur.choose_song(song_list))  # Kinda normal, style: pop
 
-    # genre_of_inception = cinema.get_genre_of_movie_with_title("Inception")
-    # print(genre_of_inception)  # sci-fi.
-    genre_of_inception = cinema.get_genre_of_movie_with_title("Jurassic Park 3")
-    print(genre_of_inception)  # action
+    #  Register to competition
+    print(competition.add_contestant(bob))  # True
+    print(competition.add_contestant(mari))  # False
+    print(competition.add_contestant(kiur))  # True
 
-    movie_timetable = cinema.get_movie_timetable()
-    print([movie.title for movie in movie_timetable])  # ['Jurassic Park', 'Inception']
+    #  Add judge to competition
+    print(competition.add_judge(judge1))  # False
+    print(competition.add_judge(judge2))  # True
 
-    next_airing_movie = cinema.get_next_airing()
-    print({next_airing_movie})  # Jurassic Park
+    print(competition.create_order_of_performances())
+    # [Kiur Norman, Bob Ernest]
 
-    # # Song contest
-    # song1 = Song("Best day ever", "rock", 3.5, 15)
-    # song2 = Song("My enemy hair", "pop", 2.0, 5)
-    # song3 = Song("Kinda normal", "pop", 3.0, 7)
-    # song_list = [song1, song2, song3]
-    #
-    # bob = Contestant("bob", "Ernest", 20, 9)
-    # mari = Contestant("mari", "riisa", 9, 0)
-    # kiur = Contestant("Kiur", "norman", 15, 6)
-    #
-    # competition = Competition(10, 35, ["rock", "pop"])
-    #
-    # judge1 = Judge("Judy", ["Rock"])
-    # judge2 = Judge("emili", ["rock", "pop"])
-    #
-    # #  Choosing songs for competition
-    # print(bob.choose_song(song_list))  # Best day ever, style: rock
-    # print(mari.choose_song(song_list))  # My enemy hair, style: pop
-    # print(kiur.choose_song(song_list))  # Kinda normal, style: pop
-    #
-    # #  Register to competition
-    # print(competition.add_contestant(bob))  # True
-    # print(competition.add_contestant(mari))  # False
-    # print(competition.add_contestant(kiur))  # True
-    #
-    # #  Add judge to competition
-    # print(competition.add_judge(judge1))  # False
-    # print(competition.add_judge(judge2))  # True
-    #
-    # print(competition.create_order_of_performances())
-    # # [Kiur Norman, Bob Ernest]
-    #
-    # print(competition.perform_song_rankings())
-    # # {Best day ever, style: rock: 100, Kinda normal, style: pop: 52}
-    #
-    # print(competition.get_suitable_genres())  # ['pop', 'rock']
-    #
-    # print(competition.get_contestants())  # [Bob Ernest, Kiur Norman]
-    #
-    # print(competition.get_judges())  # [Emili]
-    #
-    # print(competition.get_judges_rankings_in_order())
-    # # [Best day ever, style: rock, Kinda normal, style: pop]
-    #
-    # print(competition.get_winner())  # Best day ever, style: rock
+    print(competition.perform_song_rankings())
+    # {Best day ever, style: rock: 100, Kinda normal, style: pop: 52}
+
+    print(competition.get_suitable_genres())  # ['pop', 'rock']
+
+    print(competition.get_contestants())  # [Bob Ernest, Kiur Norman]
+
+    print(competition.get_judges())  # [Emili]
+
+    print(competition.get_judges_rankings_in_order())
+    # [Best day ever, style: rock, Kinda normal, style: pop]
+
+    print(competition.get_winner())  # Best day ever, style: rock
