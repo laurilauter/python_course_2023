@@ -469,12 +469,17 @@ class Competition:
         :param judge: Judge.
         :return: Boolean.
         """
-        for genre in self.suitable_genres:
-            if isinstance(judge, Judge):
-                for judge_genre in judge.preferences:
-                    if genre == judge_genre:
-                        self.judges.append(judge)
-                        return True
+        # for genre in self.suitable_genres:
+        #     if isinstance(judge, Judge):
+        #         for judge_genre in judge.preferences:
+        #             if genre == judge_genre:
+        #                 self.judges.append(judge)
+        #                 return True
+
+        if isinstance(judge, Judge):
+            if judge.preferences == self.suitable_genres:
+                self.judges.append(judge)
+                return True
         return False
 
     def create_order_of_performances(self) -> list[Contestant]:
