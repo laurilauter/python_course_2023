@@ -387,6 +387,10 @@ class Contestant:
         for song in match_count:
             if song[1] > match_score:
                 max_song = [song[0]]
+
+        if not max_song:
+            max_song = [song_list[0]]
+
         return max_song[0]
 
 
