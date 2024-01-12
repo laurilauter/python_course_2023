@@ -309,7 +309,7 @@ class Song:
         :param duration: Song duration.
         :param difficulty: Song difficulty.
         """
-        self.name = name.capitalize()
+        self.name = name.title()
         self.genre = genre
         self.duration = duration
         self.difficulty = difficulty
@@ -383,14 +383,10 @@ class Contestant:
                     name.replace(letter, "")
             if count > 0:
                 match_count.append((song, count))
-        print(match_count)
 
         for song in match_count:
             if song[1] > match_score:
                 max_song = [song[0]]
-
-        print(max_song[0])
-
         return max_song[0]
 
 
