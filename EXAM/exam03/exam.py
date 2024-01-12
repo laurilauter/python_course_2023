@@ -445,10 +445,15 @@ class Competition:
         if not isinstance(contestant, Contestant):
             return False
 
+        genre = None
+        try:
+            song = contestant.choose_song()
+            if song is not None:
+                genre = song.genre
+        except Exception:
+            pass
 
-        #genre = contestant.choose_song().genre
-        if self.minimum_age < contestant.age < self.maximum_age:
-        #if self.minimum_age < contestant.age < self.maximum_age and genre in self.suitable_genres:
+        if self.minimum_age < contestant.age < self.maximum_age and genre in self.suitable_genres:
             self.contestants.append(contestant)
             return True
 
@@ -494,7 +499,7 @@ class Competition:
 
         :return: Sorted genres.
         """
-        sorted(self.suitable_genres, key=lambda competitor: competitor.genre, reverse=True)
+        sorted(self.suitable_genres, key=lambda genre: genre, reverse=True)
 
     def get_contestants(self) -> list:
         """
