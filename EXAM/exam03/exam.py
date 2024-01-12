@@ -371,13 +371,26 @@ class Contestant:
         :return: Contestants song or None.
         """
         match_count = []
+        max_song = []
+        match_score = 0
         name_letters = self.name.lower()
         for song in song_list:
             count = 0
             for letter in name_letters:
                 if letter in song.name:
                     count += 1
+            if count > 0:
                 match_count.append((song, count))
+        print(match_count)
+
+        for song in match_count:
+            if song[1] > match_score:
+                max_song = [song[0]]
+
+        print(max_song[0])
+
+        if match_score > 0:
+            return max_song[0]
 
         return None
 
