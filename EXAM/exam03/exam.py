@@ -447,9 +447,11 @@ class Competition:
         if not isinstance(contestant, Contestant):
             return False
 
-        if self.minimum_age <= contestant.age <= self.maximum_age and contestant.favorite_song.genre in self.suitable_genres:
-            self.contestants.append(contestant)
-            return True
+        if self.minimum_age <= contestant.age <= self.maximum_age:
+            if contestant.favorite_song.genre in self.suitable_genres:
+                self.contestants.append(contestant)
+                return True
+        return False
 
     def add_judge(self, judge: Judge) -> bool:
         """
