@@ -474,6 +474,7 @@ class Competition:
 
         :return: Order of performances.
         """
+
         return sorted(self.contestants, key=lambda competitor: competitor.age, reverse=True)
 
     def perform_song_rankings(self) -> dict:
