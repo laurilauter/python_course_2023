@@ -342,6 +342,7 @@ class Contestant:
         self.name = first_name.capitalize() + " " + last_name.capitalize()
         self.age = int(age)
         self.vocals = vocals
+        self.favorite_song = None
 
     def __repr__(self):
         """
@@ -391,6 +392,7 @@ class Contestant:
         if not max_song:
             return None
 
+        self.favorite_song = max_song[0]
         return max_song[0]
 
 
@@ -480,8 +482,8 @@ class Competition:
 
         :return: Order of performances.
         """
-
-        return sorted(self.contestants, key=lambda competitor: competitor.age, reverse=True)
+        # half done
+        return sorted(self.contestants, key=lambda contestant: contestant.age, reverse=True)
 
     def perform_song_rankings(self) -> dict:
         """
@@ -491,7 +493,16 @@ class Competition:
 
         :return: Rankings
         """
-        pass
+        rankings = {}
+        for contestant in self.contestants:
+            judge_like = 0
+            for judge in self.judges:
+                if contestant.favorite_song.genre in judge.preferences:
+                    judge_like = 10
+            rankings[contestant.favorite_song] = contestant.favorite_song.difficulty * contestant.vocals + judge_like
+
+        return rankings
+
 
     def get_suitable_genres(self) -> list:
         """
@@ -620,8 +631,8 @@ if __name__ == '__main__':
     song2 = Song("My enemy hair", "pop", 2.0, 5)
     song3 = Song("Kinda normal", "pop", 3.0, 7)
     song4 = Song("S1", "pop", 3.0, 7)
-    # song_list = [song1, song2, song3, song4]
-    song_list = [song4]
+    song_list = [song1, song2, song3, song4]
+    #song_list = [song4]
 
     bob = Contestant("bob", "Ernest", 20, 9)
     mari = Contestant("mari", "riisa", 9, 0)
