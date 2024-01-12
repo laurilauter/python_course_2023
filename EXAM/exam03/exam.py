@@ -478,12 +478,10 @@ class Competition:
 
         if isinstance(judge, Judge):
             for judge_genre in judge.preferences:
-                for genre in self.suitable_genres:
-                    if judge_genre.lower() != genre.lower():
-                        break
-                    self.judges.append(judge)
-                    return True
-        return False
+                if judge_genre.lower() not in self.suitable_genres:
+                    return False
+            self.judges.append(judge)
+        return True
 
     def create_order_of_performances(self) -> list[Contestant]:
         """
@@ -650,7 +648,7 @@ if __name__ == '__main__':
 
     competition = Competition(10, 35, ["rock", "pop"])
 
-    judge1 = Judge("Judy", ["Rock"])
+    judge1 = Judge("Judy", ["Rock", "trans"])
     judge2 = Judge("emili", ["rock", "pop"])
 
     #  Choosing songs for competition
