@@ -534,8 +534,11 @@ class Competition:
         :return: Sorted songs.
         """
         rankings = self.perform_song_rankings()
-        print("rankings", rankings)
-        return sorted(self.judges, key=lambda judge: judge.name)
+        sorted_rankings = sorted(rankings.items(), key=lambda x: x[1], reverse=True)
+        listed_songs = []
+        for entry in sorted_rankings:
+            listed_songs.append(entry[0])
+        return listed_songs
 
     def get_winner(self) -> Song:
         """
