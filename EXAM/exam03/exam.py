@@ -477,9 +477,12 @@ class Competition:
         #                 return True
 
         if isinstance(judge, Judge):
-            if judge.preferences == self.suitable_genres:
-                self.judges.append(judge)
-                return True
+            for judge_genre in judge.preferences:
+                for genre in self.suitable_genres:
+                    if judge_genre.lower() != genre.lower():
+                        break
+                    self.judges.append(judge)
+                    return True
         return False
 
     def create_order_of_performances(self) -> list[Contestant]:
