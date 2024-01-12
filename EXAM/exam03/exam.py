@@ -391,10 +391,7 @@ class Contestant:
 
         print(max_song[0])
 
-        if match_score > 0:
-            return max_song[0]
-
-        return None
+        return max_song[0]
 
 
 class Judge:
