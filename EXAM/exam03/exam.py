@@ -508,7 +508,8 @@ class Competition:
 
         :return: Sorted genres.
         """
-        return sorted(self.suitable_genres, key=lambda genre: genre, reverse=True)
+        print("gen ", sorted(self.suitable_genres, key=lambda genre: genre, reverse=False))
+        return sorted(self.suitable_genres, key=lambda genre: genre, reverse=False)
 
     def get_contestants(self) -> list:
         """
@@ -516,7 +517,7 @@ class Competition:
 
         :return: Sorted contestants.
         """
-        return sorted(self.contestants, key=lambda contestant: contestant.name, reverse=True)
+        return sorted(self.contestants, key=lambda contestant: contestant.name, reverse=False)
 
     def get_judges(self) -> list:
         """
@@ -524,7 +525,7 @@ class Competition:
 
         :return: Sorted judges.
         """
-        return sorted(self.judges, key=lambda judge: judge.name, reverse=True)
+        return sorted(self.judges, key=lambda judge: judge.name, reverse=False)
 
     def get_judges_rankings_in_order(self) -> list[Song]:
         """
@@ -638,7 +639,7 @@ if __name__ == '__main__':
     mari = Contestant("mari", "riisa", 9, 0)
     kiur = Contestant("Kiur", "norman", 15, 6)
 
-    competition = Competition(10, 35, ["rock", "pop"])
+    competition = Competition(10, 35, ["rock", "pop", "aa"])
 
     judge1 = Judge("Judy", ["Rock", "trans"])
     judge2 = Judge("emili", ["rock", "pop"])
