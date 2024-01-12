@@ -449,7 +449,7 @@ class Competition:
 
         genre = None
         try:
-            song = contestant.choose_song()
+            song = contestant.favorite_song
             if song is not None:
                 genre = song.genre
         except Exception:
@@ -469,13 +469,6 @@ class Competition:
         :param judge: Judge.
         :return: Boolean.
         """
-        # for genre in self.suitable_genres:
-        #     if isinstance(judge, Judge):
-        #         for judge_genre in judge.preferences:
-        #             if genre == judge_genre:
-        #                 self.judges.append(judge)
-        #                 return True
-
         if not isinstance(judge, Judge):
             return False
 
