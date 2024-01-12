@@ -447,15 +447,7 @@ class Competition:
         if not isinstance(contestant, Contestant):
             return False
 
-        genre = None
-        try:
-            song = contestant.favorite_song
-            if song is not None:
-                genre = song.genre
-        except Exception:
-            pass
-
-        if self.minimum_age < contestant.age < self.maximum_age and genre in self.suitable_genres:
+        if self.minimum_age < contestant.age < self.maximum_age and contestant.favorite_song in self.suitable_genres:
             self.contestants.append(contestant)
             return True
 
@@ -487,7 +479,7 @@ class Competition:
         :return: Order of performances.
         """
         # half done
-        return sorted(self.contestants, key=lambda contestant: contestant.age, reverse=True)
+        return sorted(self.contestants, key=lambda contestant: (contestant.age, contestant.favorite_song), reverse=True)
 
     def perform_song_rankings(self) -> dict:
         """
@@ -513,7 +505,7 @@ class Competition:
 
         :return: Sorted genres.
         """
-        sorted(self.suitable_genres, key=lambda genre: genre, reverse=True)
+        return sorted(self.suitable_genres, key=lambda genre: genre, reverse=True)
 
     def get_contestants(self) -> list:
         """
@@ -521,7 +513,7 @@ class Competition:
 
         :return: Sorted contestants.
         """
-        return sorted(self.contestants, key=lambda contestant: contestant.name)
+        return sorted(self.contestants, key=lambda contestant: contestant.name, reverse=True)
 
     def get_judges(self) -> list:
         """
@@ -529,7 +521,7 @@ class Competition:
 
         :return: Sorted judges.
         """
-        return sorted(self.judges, key=lambda judge: judge.name)
+        return sorted(self.judges, key=lambda judge: judge.name, reverse=True)
 
     def get_judges_rankings_in_order(self) -> list[Song]:
         """
@@ -537,6 +529,8 @@ class Competition:
 
         :return: Sorted songs.
         """
+        rankings = self.perform_song_rankings()
+        print("rankings", rankings)
         return sorted(self.judges, key=lambda judge: judge.name)
 
     def get_winner(self) -> Song:
