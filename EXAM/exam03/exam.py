@@ -379,7 +379,7 @@ class Contestant:
             count = 0
             name = song.name
             for letter in name_letters:
-                if letter in name:
+                if letter.lower() in name.lower():
                     count += 1
                     name.replace(letter, "")
             if count > 0:
@@ -393,6 +393,7 @@ class Contestant:
             return None
 
         self.favorite_song = max_song[0]
+        print("singer, max_song[0]",self.name,  max_song[0])
         return max_song[0]
 
 
@@ -538,6 +539,7 @@ class Competition:
         listed_songs = []
         for entry in sorted_rankings:
             listed_songs.append(entry[0])
+        print("listed_songs", listed_songs)
         return listed_songs
 
     def get_winner(self) -> Song:
@@ -631,8 +633,10 @@ if __name__ == '__main__':
     # print({next_airing_movie})  # Jurassic Park
 
     # Song contest
-    song1 = Song("Best day ever", "rock", 3.5, 15)
-    song2 = Song("My enemy hair", "pop", 2.0, 5)
+    #song1 = Song("Best day ever", "rock", 3.5, 15)
+    song1 = Song("Bxxxxxxxxx", "rock", 3.5, 15)
+    #song2 = Song("My enemy hair", "pop", 2.0, 5)
+    song2 = Song("bob ErnestX", "pop", 2.0, 5)
     song3 = Song("Kinda normal", "pop", 3.0, 7)
     #song4 = Song("S1", "pop", 3.0, 7)
     song_list = [song1, song2, song3]
