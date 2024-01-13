@@ -394,7 +394,6 @@ class Contestant:
             return None
 
         self.favorite_song = max_song[0]
-        #print("singer, max_song[0]",self.name,  max_song[0])
         return max_song[0]
 
 
@@ -499,7 +498,6 @@ class Competition:
                 if contestant.favorite_song.genre in judge.preferences:
                     judge_like = 10
             rankings[contestant.favorite_song] = contestant.favorite_song.difficulty * contestant.vocals + judge_like
-        print("rankings", rankings)
         return rankings
 
     def get_suitable_genres(self) -> list:
@@ -516,7 +514,7 @@ class Competition:
 
         :return: Sorted contestants.
         """
-        print("get contestants ", sorted(self.contestants, key=lambda contestant: contestant.name, reverse=False))
+        #print("get contestants ", sorted(self.contestants, key=lambda contestant: contestant.name, reverse=False))
         return sorted(self.contestants, key=lambda contestant: contestant.name, reverse=False)
 
     def get_judges(self) -> list:
@@ -538,7 +536,7 @@ class Competition:
         listed_songs = []
         for entry in sorted_rankings:
             listed_songs.append(entry[0])
-        print("listed_songs", listed_songs)
+        #print("listed_songs", listed_songs)
         return listed_songs
 
     def get_winner(self) -> Song:
@@ -548,7 +546,7 @@ class Competition:
         :return: Winner song.
         """
         ranked_songs = self.get_judges_rankings_in_order()
-        print("ranked0 ", ranked_songs[0])
+        #print("ranked0 ", ranked_songs[0])
         if ranked_songs:
             return ranked_songs[0]
 
@@ -642,9 +640,9 @@ if __name__ == '__main__':
 
     bob = Contestant("bob", "Ernest", 20, 9)
     mari = Contestant("mari", "riisa", 9, 0)
-    kiur = Contestant("Kiur", "norman", 21, 6)
+    kiur = Contestant("Kiur", "norman", 15, 6)
 
-    competition = Competition(10, 35, ["rock", "pop", "aa"])
+    competition = Competition(10, 35, ["rock", "pop"])
 
     judge1 = Judge("Judy", ["Rock", "trans"])
     judge2 = Judge("emili", ["rock", "pop"])
@@ -663,7 +661,6 @@ if __name__ == '__main__':
     print(competition.add_judge(judge1))  # False
     print(competition.add_judge(judge2))  # True
 
-    print("Order of performance")
     print(competition.create_order_of_performances())
     # [Kiur Norman, Bob Ernest]
 
