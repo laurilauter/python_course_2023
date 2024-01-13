@@ -195,7 +195,9 @@ def increasing_subsequences(nums: list, count: int) -> list or str:
     elif not count or not nums or count == 0:
         return []
     else:
-        return subsequences[:count]
+        print("subsequences", subsequences)
+        #return subsequences[:count]
+        return subsequences
 
 
 class Movie:
@@ -589,7 +591,7 @@ if __name__ == '__main__':
     # print(count_pythons("On the porch was hot and sunny"))  # => 1
 
     # # increasing_subsequences
-    # print(increasing_subsequences([1, 3, 5, 2, 7, 8, 0], 2))  # [([1, 3, 5], 3), ([2, 7, 8], 3)]
+    print(increasing_subsequences([1, 3, 5, 2, 7, 8, 9, 0], 2))  # [([1, 3, 5], 3), ([2, 7, 8], 3)]
     # print(increasing_subsequences([10, 9, 5, 1, 3, 4, 2, 6, 8], 2))  # [([1, 3, 4], 3), ([2, 6, 8], 3)]
     # print(increasing_subsequences([1, 2, 4, 3], 2))  # "Not enough subsequences!"
     # print(increasing_subsequences([1, 2, 4, 0], 0))  # []
