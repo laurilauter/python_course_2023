@@ -497,8 +497,8 @@ class Competition:
             for judge in self.judges:
                 if contestant.favorite_song.genre in judge.preferences:
                     judge_like = 10
-            rankings[contestant.favorite_song] = contestant.favorite_song.difficulty * contestant.vocals + judge_like
-        print(rankings)
+            rankings[contestant.favorite_song.name] = contestant.favorite_song.difficulty * contestant.vocals + judge_like
+        print("rankings", rankings)
         return rankings
 
     def get_suitable_genres(self) -> list:
