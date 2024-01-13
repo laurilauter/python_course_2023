@@ -497,7 +497,7 @@ class Competition:
             for judge in self.judges:
                 if contestant.favorite_song.genre in judge.preferences:
                     judge_like = 10
-            rankings[contestant.favorite_song.name] = contestant.favorite_song.difficulty * contestant.vocals + judge_like
+            rankings[contestant.favorite_song] = contestant.favorite_song.difficulty * contestant.vocals + judge_like
         print("rankings", rankings)
         return rankings
 
@@ -507,7 +507,6 @@ class Competition:
 
         :return: Sorted genres.
         """
-        print("gen ", sorted(self.suitable_genres, key=lambda genre: genre, reverse=False))
         return sorted(self.suitable_genres, key=lambda genre: genre, reverse=False)
 
     def get_contestants(self) -> list:
@@ -516,6 +515,7 @@ class Competition:
 
         :return: Sorted contestants.
         """
+        print("get contestants ", sorted(self.contestants, key=lambda contestant: contestant.name, reverse=False))
         return sorted(self.contestants, key=lambda contestant: contestant.name, reverse=False)
 
     def get_judges(self) -> list:
@@ -546,7 +546,9 @@ class Competition:
 
         :return: Winner song.
         """
-        return None
+        ranked_songs = self.get_judges_rankings_in_order()
+        print("ranked 0 ", ranked_songs[0])
+        return ranked_songs[0]
 
 
 if __name__ == '__main__':
@@ -642,8 +644,8 @@ if __name__ == '__main__':
 
     bob = Contestant("bob", "Ernest", 20, 9)
     mari = Contestant("mari", "riisa", 9, 0)
-    #kiur = Contestant("Kiur", "norman", 21, 6)
-    kiur = Contestant("bob", "Ernest2", 21, 6)
+    kiur = Contestant("Kiur", "norman", 21, 6)
+    #kiur = Contestant("bob", "Ernest2", 21, 6)
 
     competition = Competition(10, 35, ["rock", "pop", "aa"])
 
