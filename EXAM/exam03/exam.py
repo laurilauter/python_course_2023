@@ -387,13 +387,14 @@ class Contestant:
 
         for song in match_count:
             if song[1] > match_score:
+                match_score = song[1]
                 max_song = [song[0]]
 
         if not max_song:
             return None
 
         self.favorite_song = max_song[0]
-        print("singer, max_song[0]",self.name,  max_song[0])
+        #print("singer, max_song[0]",self.name,  max_song[0])
         return max_song[0]
 
 
@@ -547,8 +548,9 @@ class Competition:
         :return: Winner song.
         """
         ranked_songs = self.get_judges_rankings_in_order()
-        print("ranked 0 ", ranked_songs[0])
-        return ranked_songs[0]
+        print("ranked0 ", ranked_songs[0])
+        if ranked_songs:
+            return ranked_songs[0]
 
 
 if __name__ == '__main__':
@@ -634,18 +636,13 @@ if __name__ == '__main__':
 
     # Song contest
     song1 = Song("Best day ever", "rock", 3.5, 15)
-    # song1 = Song("Bxxxxxxxxx", "rock", 3.5, 15)
     song2 = Song("My enemy hair", "pop", 2.0, 5)
-    # song2 = Song("bob ErnestX", "pop", 2.0, 5)
     song3 = Song("Kinda normal", "pop", 3.0, 7)
-    #song4 = Song("S1", "pop", 3.0, 7)
     song_list = [song1, song2, song3]
-    #song_list = [song4]
 
     bob = Contestant("bob", "Ernest", 20, 9)
     mari = Contestant("mari", "riisa", 9, 0)
     kiur = Contestant("Kiur", "norman", 21, 6)
-    #kiur = Contestant("bob", "Ernest2", 21, 6)
 
     competition = Competition(10, 35, ["rock", "pop", "aa"])
 
