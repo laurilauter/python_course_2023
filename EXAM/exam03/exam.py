@@ -483,7 +483,7 @@ class Competition:
         """
         # print("cont", self.contestants)
         # print("create_order_of_performances", sorted(self.contestants, key=lambda contestant: (contestant.age, contestant.favorite_song), reverse=False))
-        return sorted(self.contestants, key=lambda contestant: (contestant.age, contestant.favorite_song), reverse=False)
+        return sorted(self.contestants, key=lambda contestant: (contestant.age, contestant.name), reverse=False)
 
     def perform_song_rankings(self) -> dict:
         """
@@ -633,10 +633,10 @@ if __name__ == '__main__':
     # print({next_airing_movie})  # Jurassic Park
 
     # Song contest
-    #song1 = Song("Best day ever", "rock", 3.5, 15)
-    song1 = Song("Bxxxxxxxxx", "rock", 3.5, 15)
-    #song2 = Song("My enemy hair", "pop", 2.0, 5)
-    song2 = Song("bob ErnestX", "pop", 2.0, 5)
+    song1 = Song("Best day ever", "rock", 3.5, 15)
+    # song1 = Song("Bxxxxxxxxx", "rock", 3.5, 15)
+    song2 = Song("My enemy hair", "pop", 2.0, 5)
+    # song2 = Song("bob ErnestX", "pop", 2.0, 5)
     song3 = Song("Kinda normal", "pop", 3.0, 7)
     #song4 = Song("S1", "pop", 3.0, 7)
     song_list = [song1, song2, song3]
@@ -644,7 +644,8 @@ if __name__ == '__main__':
 
     bob = Contestant("bob", "Ernest", 20, 9)
     mari = Contestant("mari", "riisa", 9, 0)
-    kiur = Contestant("Kiur", "norman", 15, 6)
+    #kiur = Contestant("Kiur", "norman", 21, 6)
+    kiur = Contestant("Kiur", "norman", 20, 6)
 
     competition = Competition(10, 35, ["rock", "pop", "aa"])
 
@@ -665,6 +666,7 @@ if __name__ == '__main__':
     print(competition.add_judge(judge1))  # False
     print(competition.add_judge(judge2))  # True
 
+    print("Order of performance")
     print(competition.create_order_of_performances())
     # [Kiur Norman, Bob Ernest]
 
