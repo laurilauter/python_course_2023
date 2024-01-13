@@ -481,9 +481,7 @@ class Competition:
 
         :return: Order of performances.
         """
-        # print("cont", self.contestants)
-        # print("create_order_of_performances", sorted(self.contestants, key=lambda contestant: (contestant.age, contestant.favorite_song), reverse=False))
-        return sorted(self.contestants, key=lambda contestant: (contestant.age, contestant.name), reverse=False)
+        return sorted(self.contestants, key=lambda contestant: (contestant.age, contestant.favorite_song), reverse=False)
 
     def perform_song_rankings(self) -> dict:
         """
@@ -645,7 +643,7 @@ if __name__ == '__main__':
     bob = Contestant("bob", "Ernest", 20, 9)
     mari = Contestant("mari", "riisa", 9, 0)
     #kiur = Contestant("Kiur", "norman", 21, 6)
-    kiur = Contestant("Kiur", "norman", 20, 6)
+    kiur = Contestant("bob", "Ernest2", 21, 6)
 
     competition = Competition(10, 35, ["rock", "pop", "aa"])
 
