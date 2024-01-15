@@ -194,8 +194,8 @@ def increasing_subsequences(nums: list, count: int) -> list or str:
         return "Not enough subsequences!"
     elif not count or not nums or count == 0:
         return []
-    # else:
-    #     return subsequences[:count]
+    else:
+        return subsequences[:count]
 
 
 class Movie:
