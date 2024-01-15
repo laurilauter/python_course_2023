@@ -194,8 +194,8 @@ def increasing_subsequences(nums: list, count: int) -> list or str:
         return "Not enough subsequences!"
     elif not count or not nums or count == 0:
         return []
-    else:
-        return subsequences[:count]
+    # else:
+    #     return subsequences[:count]
 
 
 class Movie:
@@ -448,7 +448,7 @@ class Competition:
         if not isinstance(contestant, Contestant):
             return False
 
-        if self.minimum_age < contestant.age < self.maximum_age:
+        if self.minimum_age <= contestant.age <= self.maximum_age:
             if contestant.favorite_song.genre in self.suitable_genres:
                 self.contestants.append(contestant)
                 return True
@@ -536,7 +536,6 @@ class Competition:
         listed_songs = []
         for entry in sorted_rankings:
             listed_songs.append(entry[0])
-        #print("listed_songs", listed_songs)
         return listed_songs
 
     def get_winner(self) -> Song:
@@ -546,7 +545,6 @@ class Competition:
         :return: Winner song.
         """
         ranked_songs = self.get_judges_rankings_in_order()
-        #print("ranked0 ", ranked_songs[0])
         if ranked_songs:
             return ranked_songs[0]
 
