@@ -449,7 +449,7 @@ class Competition:
             return False
 
         if self.minimum_age <= contestant.age <= self.maximum_age:
-            if contestant.favorite_song.genre in self.suitable_genres:
+            if contestant.favorite_song.genre.lower() in self.suitable_genres:
                 self.contestants.append(contestant)
                 return True
         return False
