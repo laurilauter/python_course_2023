@@ -467,7 +467,7 @@ class Shelter:
 
 if __name__ == '__main__':
     # modify_string
-    print(modify_string("0123456789ing"))  # walking
+    print(modify_string("12355ing"))  # walking
     print(modify_string("walking"))  # walking
     print(modify_string("walk"))  # walking
     print(modify_string("swimming"))  # swimmingly
