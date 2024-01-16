@@ -26,7 +26,6 @@ def modify_string(text: str) -> str:
     if len(text) < 3:
         return text
     elif text[-3:].lower() == "ing":
-        text = text[:-3]
         text += "ly"
         return text
     else:
