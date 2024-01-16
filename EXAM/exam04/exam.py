@@ -46,7 +46,16 @@ def capitalize_first_last_letters(text: str) -> str:
     :param text: Input string in which you want to capitalize the first and last letters of each word. If there is a symbol after the letter, the letter is not capitalized.
     :return: Text where the size of the first and last letter of each word is changed.
     """
-    pass
+    test_list = text.split(" ")
+    second_list = []
+    for word in test_list:
+        first = word[0].capitalize()
+        last = word[-1].capitalize()
+        word = first + word[1:-1] + last
+        second_list.append(word)
+
+    return " ".join(second_list)
+
 
 
 def uno_game(hand: list, table: str) -> str:
@@ -463,9 +472,9 @@ if __name__ == '__main__':
     print(modify_string("go"))  # go
     print(modify_string("skiing"))  # skiingly
 
-    # # capitalize_first_last_letters
-    # print(capitalize_first_last_letters("python exercises practice solution"))  # PythoN ExerciseS PracticE SolutioN
-    # print(capitalize_first_last_letters("IAIB 2023 program"))  # IaiB 2023 PrograM
+    # capitalize_first_last_letters
+    print(capitalize_first_last_letters("python exercises practice solution"))  # PythoN ExerciseS PracticE SolutioN
+    print(capitalize_first_last_letters("IAIB 2023 program"))  # IaiB 2023 PrograM
     #
     # # uno_game
     # print(uno_game(["yellow 3", "red 3"], "red 10"))  # Uno!
