@@ -83,7 +83,27 @@ def uno_game(hand: list, table: str) -> str:
     uno_game(["blue 1"], "blue 5") => "Win!"
     uno_game(["blue 1", "green 2", "yellow 4", "red 2"], "blue 5") => "Continue..."
     """
-    pass
+    cards_hand = {}
+    card_table = []
+    if table:
+        card_table = table.split(" ")
+
+    if hand:
+        for card in hand:
+            split_card = card.split(" ")
+            cards_hand[split_card[0]] = split_card[1]
+
+    # print("hand", cards_hand)
+    # print("table", card_table)
+    for key, value in cards_hand.items():
+        if key == card_table[0] or value == card_table[1]:
+            cards_hand[key] = None
+            if len(cards_hand) == 1:
+                return "Uno!"
+            elif len(cards_hand) == 0:
+                return "Win!"
+        else:
+            return "Continue..."
 
 
 def find_anagrams(words: list[str]) -> dict:
@@ -482,10 +502,10 @@ if __name__ == '__main__':
     print(capitalize_first_last_letters("python exercises practice solution"))  # PythoN ExerciseS PracticE SolutioN
     print(capitalize_first_last_letters("IAIB 2023 program"))  # IaiB 2023 PrograM
     #
-    # # uno_game
-    # print(uno_game(["yellow 3", "red 3"], "red 10"))  # Uno!
-    # print(uno_game(["blue 1"], "blue 5"))  # Win!
-    # print(uno_game(["blue 1", "green 2", "yellow 4", "red 2"], "blue 5"))  # Continue...
+    # uno_game
+    print(uno_game(["yellow 3", "red 3"], "red 10"))  # Uno!
+    print(uno_game(["blue 1"], "blue 5"))  # Win!
+    print(uno_game(["blue 1", "green 2", "yellow 4", "red 2"], "blue 5"))  # Continue...
     #
     # # find_anagrams
     # print(find_anagrams(["listen", "silent", "hello", "person", "nosrep", "world", "nistel"]))
