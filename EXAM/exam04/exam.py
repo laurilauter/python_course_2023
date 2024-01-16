@@ -25,7 +25,7 @@ def modify_string(text: str) -> str:
     # print(text[3:-1])
     if len(text) < 3:
         return text
-    elif text[-3:] == "ing":
+    elif text[-3:].lower() == "ing":
         text = text[:-3]
         text += "ly"
         return text
@@ -49,6 +49,7 @@ def capitalize_first_last_letters(text: str) -> str:
     test_list = text.split(" ")
     second_list = []
     for word in test_list:
+
         first = word[0].capitalize()
         last = word[-1].capitalize()
         word = first + word[1:-1] + last
@@ -466,7 +467,8 @@ class Shelter:
 
 if __name__ == '__main__':
     # modify_string
-    print(modify_string("0123456789"))  # walking
+    print(modify_string("0123456789ing"))  # walking
+    print(modify_string("walking"))  # walking
     print(modify_string("walk"))  # walking
     print(modify_string("swimming"))  # swimmingly
     print(modify_string("go"))  # go
