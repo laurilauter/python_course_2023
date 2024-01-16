@@ -105,6 +105,8 @@ def uno_game(hand: list, table: str) -> str:
         else:
             return "Continue..."
 
+    return "Continue..."
+
 
 def find_anagrams(words: list[str]) -> dict:
     """
