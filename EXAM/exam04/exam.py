@@ -63,7 +63,6 @@ def capitalize_first_last_letters(text: str) -> str:
     return " ".join(second_list)
 
 
-
 def uno_game(hand: list, table: str) -> str:
     """
     Determine the outcome of a player's move in an UNO game based on the cards in hand and the card on the table.
