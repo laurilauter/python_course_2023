@@ -45,14 +45,20 @@ def capitalize_first_last_letters(text: str) -> str:
     :param text: Input string in which you want to capitalize the first and last letters of each word. If there is a symbol after the letter, the letter is not capitalized.
     :return: Text where the size of the first and last letter of each word is changed.
     """
+    if not text:
+        return ""
     test_list = text.split(" ")
     second_list = []
-    for word in test_list:
 
-        first = word[0].capitalize()
-        last = word[-1].capitalize()
-        word = first + word[1:-1] + last
-        second_list.append(word)
+    for word in test_list:
+        if len(word) > 1:
+            first = word[0].capitalize()
+            last = word[-1].capitalize()
+            word = first + word[1:-1] + last
+            second_list.append(word)
+        else:
+            word = word.upper()
+            second_list.append(word)
 
     return " ".join(second_list)
 
